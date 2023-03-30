@@ -1,0 +1,176 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+                    
+        <head><meta content="application/xhtml+xml; charset=utf-8" http-equiv="Content-Type"/>
+            <meta content="application/xhtml+xml; charset=utf-8" name="content-type"/>
+            <meta content="Developing Your First Application" name="title"/>
+            <meta content="Sebastian Springer" name="author"/>
+            <meta content="Rheinwerk Publishing" name="publisher"/>
+            <meta content="© 2022 by Rheinwerk Publishing Inc., Boston (MA)" name="copyright"/>
+            <meta content="Node.js - The Comprehensive Guide - Developing Your First Application" name="description"/>
+            <meta content="en" name="language"/>
+            <title>Developing Your First Application</title>
+            <link href="common/main.css" rel="stylesheet" type="text/css"/>
+<meta content="urn:uuid:e0000000-0000-0000-0000-000029756394" name="Adept.expected.resource"/>
+        </head>
+    
+
+
+                    <body class="office_us type_kapitel">
+                        <div id="main"><h1 class="t1" id="h3">3    <a id="p73"/>Developing Your First Application</h1><p class="introductorynote indent_chapter_single">Even the longest journey begins with a first step.<br/>—Confucius</p><p class="standard">By the time you get here, you should already have a working installation of the Node.js platform on your system. To run the examples in this chapter, you must use the command line<a class="indexanchor" id="i03_00"/> of your operating system. It doesn’t matter whether you use Windows, Linux, or macOS. The examples work independently of the operating system. You can use Node.js in two different ways. For simple experiments, you can use the interactive shell<a class="indexanchor" id="i03_01"/><a class="indexanchor" id="i03_02"/>. Alternatively, you can run an application by passing the name of the initial file to the <samp class="listingcharacter listingcharacter">node</samp> command. In this case, no further user interaction is usually required.</p>
+        <h2 class="t2" id="h3.1">3.1    Interactive Mode</h2>
+        <p class="standard"><a class="indexanchor" id="i03_03"/>You can reach the interactive mode of Node.js, as you can see in <span class="crossreference "><a href="03_001.html#l3.1">Listing 3.1</a></span>, by entering the <samp class="listingcharacter listingcharacter">node</samp> command in the command line.</p>
+        <div class="listing " id="l3.1"><pre>$ node<br/>&gt; </pre></div>
+        <p class="caption "><b>Listing 3.1</b>    
+            Interactive Mode of Node.js</p>
+        <p class="standard">In interactive mode, you can directly enter JavaScript code on the command line and execute it. This type of user interface is referred to as <span class="italic">read-eval-print loop (REPL)</span><a class="indexanchor" id="i03_04"/>, which means that commands are read on the command line and evaluated, and then the result is output on the command line. The mode isn’t intended to implement and run complete applications. Instead, this interface of Node.js is used to test the behavior and functionality of individual code snippets. <span class="crossreference "><a href="03_001.html#f3.1">Figure 3.1</a></span> shows how the interactive mode works.</p>
+        <div class="imagebox figure-type"><a href="img-f3.1.html" id="f3.1"><img alt="Interactive Mode of Node.js" id="img-f3.1" src="bilderklein/klein03_001.png"/></a></div>
+        <p class="caption "><b>Figure 3.1</b>    
+            <a id="p74"/>Interactive Mode of Node.js</p>
+        
+            <h3 class="t3" id="h3.1.1">3.1.1    General Use</h3>
+            <p class="standard"><span class="crossreference "><a href="03_001.html#l3.2">Listing 3.2</a></span> shows how you can issue commands in the Node.js REPL.</p>
+            <div class="listing " id="l3.2"><pre>$ node<br/>&gt; console.log('Hello World!');<br/>Hello world!<br/>undefined<br/>&gt;  </pre></div>
+            <p class="caption "><b>Listing 3.2</b>    
+            Executing Commands in the Node.js REPL</p>
+            <p class="standard">The JavaScript commands also end with a semicolon in the Node.js REPL. A line break ends the input of the current command and sends the command to the JavaScript engine. In the example, the <samp class="listingcharacter listingcharacter">console.log</samp> method with the <samp class="listingcharacter listingcharacter">Hello World!</samp> argument is evaluated, and the <samp class="listingcharacter listingcharacter">Hello World!</samp> result is output to the command line. As you can see in <span class="crossreference "><a href="03_001.html#l3.2">Listing 3.2</a></span>, the value <samp class="listingcharacter listingcharacter">undefined</samp> is output in addition to the expected <samp class="listingcharacter listingcharacter">Hello World!</samp>. This is because the return value<a class="indexanchor" id="i03_05"/> of the <samp class="listingcharacter listingcharacter">console.log</samp> function is represented; in this case, it’s <samp class="listingcharacter listingcharacter">undefined</samp>. Apart from executing output, in REPL, you can also execute all JavaScript commands available under Node.js, as shown in <span class="crossreference "><a href="03_001.html#l3.3">Listing 3.3</a></span>.</p>
+            <div class="listing " id="l3.3"><pre>&gt; function greet(name) {<br/>... console.log(`Hello ${name}`);<br/>... }; greet('world');<br/>Hello world<br/>undefined<br/>&gt; </pre></div>
+            <p class="caption "><b>Listing 3.3</b>    
+            Definition of a Simple Node.js REPL Function</p>
+            <p class="standard"><span class="crossreference "><a href="03_001.html#l3.3">Listing 3.3</a></span><a id="p75"/> shows how to define a function in Node.js REPL that gets a name as a parameter and how to output it to the console as the function progresses. After the definition, the function <samp class="listingcharacter listingcharacter">greet</samp> is called with the argument <samp class="listingcharacter listingcharacter">world</samp> as name. The output consists of <samp class="listingcharacter listingcharacter">Hello world</samp> and <samp class="listingcharacter listingcharacter">undefined</samp>. If you want to run different commands in the Node.js REPL that build on each other, you can easily do so because the context<a class="indexanchor" id="i03_06"/> is preserved within a session. For example, if you define functions or perform a variable assignment, these will be preserved even after the command line is evaluated. In <span class="crossreference "><a href="03_001.html#l3.4">Listing 3.4</a></span>, you can see how this works in concrete terms.</p>
+            <div class="listing " id="l3.4"><pre>$ node<br/>&gt; const sayHello = 'Hello world!';<br/>undefined<br/>&gt; console.log(sayHello);<br/>Hello world!<br/>undefined<br/>&gt; </pre></div>
+            <p class="caption "><b>Listing 3.4</b>    
+            Interdependent Command Lines</p>
+            <p class="standard">In the example in <span class="crossreference "><a href="03_001.html#l3.4">Listing 3.4</a></span>, you assign a value to the <samp class="listingcharacter listingcharacter">sayHello</samp> constant. This constant is used again in the output in the subsequent statement. Among the most important features of the Node.js REPL is the auto-completion function. If you press the <span class="keyboard">(Tab)</span> key without entering anything else, you’ll get a list of all available objects. If you use the auto-complete<a class="indexanchor" id="i03_07"/> function in conjunction with one or more letters, only the matching suggestions will be displayed. Another feature worth mentioning is the multiline commands. As you can see in <span class="crossreference "><a href="03_001.html#l3.3">Listing 3.3</a></span>, the function code isn’t entered on a single line but on several lines. An uncompleted command is indicated by three dots instead of the greater-than sign as the command prompt. Multiline commands<a class="indexanchor" id="i03_08"/> can be achieved, for example, by unfinished code blocks or a plus operator for calculation or string concatenation at the end of the line.</p>
+        
+        
+            <h3 class="t3" id="h3.1.2">3.1.2    Other REPL Commands</h3>
+            <p class="standard">One of the special features of the Node.js REPL is that it provides you with a few more commands to control the REPL in addition to the JavaScript command set. The commands<a class="indexanchor" id="i03_09"/> always start with a period and don’t have to end with a semicolon. <span class="crossreference "><a href="03_001.html#t3.1">Table 3.1</a></span> contains an overview of these commands.</p>
+            <table class="standardtable" id="t3.1">
+                <thead>
+                    <tr>
+                        <th class="tablehead tablecell_first top_border_cell">
+                            <p class="standard first-item last-item">Command</p>
+                        </th>
+                        <th class="tablehead tablecell_last top_border_cell">
+                            <p class="standard first-item last-item">Description</p>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="tablecell tablecell_first top_border_cell">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">.break</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last top_border_cell">
+                            <p class="standard first-item last-item">Terminates the current input. <samp class="listingcharacter listingcharacter">.break</samp> is especially useful for multiline commands.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">.clear</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Serves as alias for <samp class="listingcharacter listingcharacter">.break</samp>.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter"><a id="p76"/>.exit</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Terminates the Node.js REPL.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">.help</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Outputs a list of available commands.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">.load &lt;file&gt;</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Loads a saved session from a file into the current REPL.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">.save &lt;file&gt;</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Saves the commands of the current REPL session to a file.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">.editor</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Opens the editor mode where you can define a block of instructions. <span class="keyboard">(Ctrl)</span>+<span class="keyboard">(D)</span> executes the block, and <span class="keyboard">(Ctrl)</span>+<span class="keyboard">(C)</span> exits the editor mode without executing anything.</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="caption "><b>Table 3.1</b>    
+            Available REPL Commands</p>
+            <p class="standard">There are two options available to exit the REPL: using the <samp class="listingcharacter listingcharacter">.exit</samp> command or pressing <span class="keyboard">(Ctrl)</span>+<span class="keyboard">(D)</span>, which will also terminate the process immediately<a class="indexanchor" id="i03_10"/>. Alternatively, you can press <span class="keyboard">(Ctrl)</span>+<span class="keyboard">(C)</span> twice.</p>
+            <p class="standard">The <samp class="listingcharacter listingcharacter">.break</samp><a class="indexanchor" id="i03_11"/> and <samp class="listingcharacter listingcharacter">.clear</samp> commands are used when the command line is blocked by incorrect input. <span class="crossreference "><a href="03_001.html#l3.5">Listing 3.5</a></span> shows a use case for these commands.</p>
+            <div class="listing " id="l3.5"><pre>&gt; function greet(name) {<br/>... .break<br/>&gt; </pre></div>
+            <p class="caption "><b>Listing 3.5</b>    
+            Use of “.break”</p>
+            <p class="standard">In the example in <span class="crossreference "><a href="03_001.html#l3.5">Listing 3.5</a></span>, you’ve started to formulate a function, but you don’t want to finish writing it, you would rather cancel the entry. You can’t terminate the current input by pressing the <span class="keyboard">(Enter)</span> key, as this would merely insert a line break. If you find that you’ve made a similar mistake in your input, you can terminate the current input by using the <samp class="listingcharacter listingcharacter">.break</samp> command and enter your command again. The same effect can be achieved via the shortcut <span class="keyboard">(Ctrl)</span>+<span class="keyboard">(C)</span>. The Node.js REPL provides the option to navigate through the history<a class="indexanchor" id="i03_12"/> of the most recent commands. With this feature, you don’t have to retype your command, but you can use the <span class="keyboard">(Up)</span> and <span class="keyboard">(Down)</span> arrow keys to navigate through the history of entered commands, retrieve the corresponding command line, correct it, and enter it again.</p>
+        
+        
+            <h3 class="t3" id="h3.1.3">3.1.3    Saving and Loading in the REPL</h3>
+            <p class="standard"><a class="indexanchor" id="i03_13"/>If you want to run more extensive tests in REPL or record the results, you can use the <samp class="listingcharacter listingcharacter">.save</samp> and <samp class="listingcharacter listingcharacter">.load</samp> commands to save the previously executed commands to a file or load a file with JavaScript instructions into the current REPL.</p>
+            <p class="standard"><span class="crossreference "><a href="03_001.html#l3.6">Listing 3.6</a></span> shows how you can use the <samp class="listingcharacter listingcharacter">.load</samp> and <samp class="listingcharacter listingcharacter">.save</samp> commands. To illustrate their usage, you should first enter the <samp class="listingcharacter listingcharacter">console.log</samp> command. After that, the current session <a id="p77"/>is saved to the <span class="italic">myShell.js</span> file. This file then contains the command line as you entered it in the REPL, but not the associated output. Next, you must load this file back into the session using the <samp class="listingcharacter listingcharacter">.load</samp> statement. The file is read line by line, each command is executed, and the corresponding output gets displayed. You can also use the <samp class="listingcharacter listingcharacter">.load</samp> command to prepare a specific initial situation for an experiment. For this purpose, you can formulate a set of commands in a file, for example, to define variables or functions that you need in the course of a session in the Node.js REPL.</p>
+            <div class="listing " id="l3.6"><pre>&gt; console.log('Hello World!');<br/>Hello world!<br/>undefined<br/>&gt; .save myShell.js<br/>Session saved to:myShell.js<br/>&gt; .load myShell.js<br/>&gt; console.log('Hello World!');<br/>Hello world!<br/>undefined<br/>&gt; </pre></div>
+            <p class="caption "><b>Listing 3.6</b>    
+            Using “.load” and “.save”</p>
+        
+        
+            <h3 class="t3" id="h3.1.4">3.1.4    Context of the REPL<a class="indexanchor" id="i03_14"/></h3>
+            <p class="standard">As is common in JavaScript, the Node.js REPL provides a global context that you can access anywhere in your program. In the REPL, some variables are already registered at the beginning in this global context<a class="indexanchor" id="i03_15"/>, which facilitate your work as a developer. This way, all Node.js core modules<a class="indexanchor" id="i03_16"/> are available to you without having to load them separately via the module system. For example, you can use <samp class="listingcharacter listingcharacter">http.STATUS_CODES</samp> to print the predefined list of HTTP status codes. Besides these modules, you can load files or Node Package Manager (npm) packages via the module system by using the <samp class="listingcharacter listingcharacter">require</samp> function. In the global scope of the Node.js REPL, the <samp class="listingcharacter listingcharacter">_</samp> variable provides you with another special feature: this variable always contains the value of the most recent command. For example, if you enter the command <samp class="listingcharacter listingcharacter">1 + 1</samp>, <samp class="listingcharacter listingcharacter">_</samp> will contain the value <samp class="listingcharacter listingcharacter">2</samp> afterwards. If you call a method such as <samp class="listingcharacter listingcharacter">process.uptime()</samp>, <samp class="listingcharacter listingcharacter">_</samp> contains its return value afterwards.</p>
+        
+        
+            <h3 class="t3" id="h3.1.5">3.1.5    REPL History<a class="indexanchor" id="i03_17"/></h3>
+            <p class="standard">The Node.js REPL has some special environment variables. Two of them concern historicizing entries. You probably already know this feature from the command prompt of your operating system. In the case of Bash on Unix systems, there is a file called <span class="italic">.bash_history</span>, which stores all the commands that were entered. A similar functionality exists for the Node.js REPL. In the default configuration, the input is stored in the <span class="italic">.node_repl_history</span><a class="indexanchor" id="i03_18"/> file in the user’s root directory. You can use two environment variables from your operating system to control the history functionality. With <samp class="listingcharacter listingcharacter">NODE_REPL_<a id="p78"/>HISTORY</samp>, you can change the location<a class="indexanchor" id="i03_19"/> of the history. If no value is specified, the default is used. The second environment variable, <samp class="listingcharacter listingcharacter">NODE_REPL_HISTORY_SIZE</samp>, determines how many lines the history file can hold before overwriting older commands. The default value is <samp class="listingcharacter listingcharacter">1000</samp>.</p>
+        
+        
+            <h3 class="t3" id="h3.1.6">3.1.6    REPL Mode<a class="indexanchor" id="i03_20"/></h3>
+            <p class="standard">You can use the <samp class="listingcharacter listingcharacter">NODE_REPL_MODE</samp> environment variable to determine in which mode you want to run the Node.js REPL. The three possible values are as follows:</p>
+            <ul>
+                <li>
+                    <p class="standard first-item last-item"><span class="bold"><samp class="listingcharacter listingcharacter">sloppy</samp></span><a class="indexanchor" id="i03_21"/><br/>The REPL is set to nonstrict mode. The rules of JavaScript strict mode are overridden. This is the default mode for running the REPL.</p>
+                </li>
+                <li>
+                    <p class="standard first-item last-item"><span class="bold"><samp class="listingcharacter listingcharacter">strict</samp></span><a class="indexanchor" id="i03_22"/><br/>The <samp class="listingcharacter listingcharacter">strict</samp> value activates the strict mode. In this case, for example, you can no longer create multiple properties with the same name in an object, and changing a constant returns an error. A very good and detailed description of the strict mode<a class="indexanchor" id="i03_23"/> can be found at <span class="url"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode</a></span>.</p>
+                </li>
+                <li>
+                    <p class="standard first-item last-item"><span class="bold"><samp class="listingcharacter listingcharacter">magic</samp></span><a class="indexanchor" id="i03_24"/><br/>This value is now deprecated and is used as an alias of <samp class="listingcharacter listingcharacter">sloppy</samp>.</p>
+                </li>
+            </ul>
+            <p class="standard">You can also run Node.js directly in strict mode via the <samp class="listingcharacter listingcharacter">--use_strict</samp> command-line option. In most cases, this makes sense because you can save the <samp class="listingcharacter listingcharacter">use strict</samp> specifications, and strict mode prohibits many antipatterns in JavaScript.</p>
+            <p class="standard">Using the Node.js REPL as a tool, you can easily test source code to interactively see how the Node.js platform behaves in certain situations. The Node.js REPL isn’t suitable for extensive applications. In this case, a different way of running Node.js is used.</p>
+        
+        
+            <h3 class="t3" id="h3.1.7">3.1.7    Searching in the REPL</h3>
+            <p class="standard">The Node.js REPL allows you to not only navigate within the history using the arrow keys, but also to search for specific lines. You can use <span class="keyboard">(Ctrl)</span>+<span class="keyboard">(R)</span> and <span class="keyboard">(Ctrl)</span>+<span class="keyboard">(S)</span> to perform backward and forward search runs in the history.</p>
+            <p class="standard">You access this feature mainly when you want to execute a certain line again but don’t want to enter it a second time. The search finds the entered code whether it occurs at the beginning or anywhere within the line. A found match is displayed at the command prompt, and you have the option to adjust the code and then execute it by pressing the <span class="keyboard">(Enter)</span> key. If a certain text is found several times, you can jump to the next hit by pressing the respective shortcut again or go to the previous hit by pressing the other shortcut.</p>
+        
+        
+            <h3 class="t3" id="h3.1.8">3.1.8    <a id="p79"/>Asynchronous Operations in the REPL<a class="indexanchor" id="i03_25"/></h3>
+            <p class="standard">JavaScript provides various means of handling asynchrony, such as <span class="italic">callbacks</span> or <span class="italic">promises</span>. A few years ago, the <samp class="listingcharacter listingcharacter">async-await</samp> concept was introduced, which will be discussed in greater detail later in this book. You can use the <samp class="listingcharacter listingcharacter">await</samp> keyword to wait for an asynchronous operation without registering a callback function. The engine pauses the execution of the current code block until the result is available. The rest of the application remains responsive and can continue its work undisturbed.</p>
+            <p class="standard">Normally, you must mark a function in which you want to use the <samp class="listingcharacter listingcharacter">await</samp> keyword with the <samp class="listingcharacter listingcharacter">async</samp> keyword. Newer versions of the ECMAScript standard provide for a feature called <span class="italic">top-level await</span><a class="indexanchor" id="i03_26"/>, which allows you to use <samp class="listingcharacter listingcharacter">await</samp> even at the top level of your application and thus without a surrounding <samp class="listingcharacter listingcharacter">async</samp> function. This feature is also available in the Node.js REPL, and, since version 16.6, it’s also enabled by default and no longer hidden behind the <samp class="listingcharacter listingcharacter">--experimental-repl-await</samp> flag.</p>
+            <p class="standard"><span class="crossreference "><a href="03_001.html#l3.7">Listing 3.7</a></span> shows the example of a <samp class="listingcharacter listingcharacter">promise</samp> object created with <samp class="listingcharacter listingcharacter">Promise.resolve</samp> to demonstrate how you can launch REPL with the <samp class="listingcharacter listingcharacter">--experimental-repl-await</samp> option and how you can use the <samp class="listingcharacter listingcharacter">await</samp> keyword. <samp class="listingcharacter listingcharacter">Promise.resolve</samp> is one of the simplest ways to simulate an asynchronous operation by creating a <samp class="listingcharacter listingcharacter">promise</samp> object and resolving it immediately.</p>
+            <div class="listing " id="l3.7"><pre>$ node <br/>Welcome to Node.js v16.8.0.<br/>Type ".help" for more information.<br/>&gt; await Promise.resolve('Hello world');<br/>'Hello world' </pre></div>
+            <p class="caption "><b>Listing 3.7</b>    
+            Using a Top-Level Await in the REPL</p>
+        
+    </div><p class="signatur"/>
+                    </body>
+                </html>

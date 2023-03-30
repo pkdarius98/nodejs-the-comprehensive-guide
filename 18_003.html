@@ -1,0 +1,211 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+                    
+        <head><meta content="application/xhtml+xml; charset=utf-8" http-equiv="Content-Type"/>
+            <meta content="application/xhtml+xml; charset=utf-8" name="content-type"/>
+            <meta content="Streams" name="title"/>
+            <meta content="Sebastian Springer" name="author"/>
+            <meta content="Rheinwerk Publishing" name="publisher"/>
+            <meta content="© 2022 by Rheinwerk Publishing Inc., Boston (MA)" name="copyright"/>
+            <meta content="Node.js - The Comprehensive Guide - Streams" name="description"/>
+            <meta content="en" name="language"/>
+            <title>Streams</title>
+            <link href="common/main.css" rel="stylesheet" type="text/css"/>
+<meta content="urn:uuid:e0000000-0000-0000-0000-000029756394" name="Adept.expected.resource"/>
+        </head>
+    
+
+
+                    <body class="office_us type_kapitel">
+                        <div id="main">
+        <h2 class="t2" id="h18.3">18.3    Writable Streams<a class="indexanchor" id="i18_54"/></h2>
+        <p class="standard">While readable streams are the data source, writable streams are the destination of a stream chain<a class="indexanchor" id="i18_55"/>. One of the most common use cases is writing data to a file. But numerous other targets such as databases, external interfaces, or remote systems are also conceivable. For most cases, proven solutions are available for you to use, so that no <a id="p560"/>further effort is required on your part. However, if an existing implementation isn’t sufficient or if there is none yet, you can create a writable stream yourself.</p>
+        
+            <h3 class="t3" id="h18.3.1">18.3.1    Creating a Writable Stream<a class="indexanchor" id="i18_56"/></h3>
+            <p class="standard">Before you start creating your own writable streams, you should first learn about the API. To do that, you should take a look at a concrete example. In <span class="crossreference "><a href="18_003.html#l18.10">Listing 18.10</a></span>, you write the contents of an array to a file using a writable stream.</p>
+            <div class="listing " id="l18.10"><pre><span class="rot">import</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"> createWriteStream </span><span class="schwarz">}</span><span class="schwarz"> </span><span class="rot">from</span><span class="schwarz"> </span><span class="hellblau">'fs'</span><span class="schwarz">;</span><span class="schwarz"><br/></span> <br/><span class="rot">const</span><span class="schwarz"> writeStream </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="schwarz">createWriteStream(</span><span class="hellblau">'output.txt'</span><span class="schwarz">);</span><span class="schwarz"><br/></span> <br/><span class="rot">const</span><span class="schwarz"> data </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="schwarz">[</span><span class="hellblau">'Hello'</span><span class="schwarz">,</span><span class="schwarz"> </span><span class="hellblau">'World'</span><span class="schwarz">];</span><span class="schwarz"><br/></span> <br/>data<span class="schwarz">.forEach((</span><span class="schwarz">item</span><span class="schwarz">)</span><span class="schwarz"> </span><span class="dunkelblau">=&gt;</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>  writeStream<span class="schwarz">.write(</span><span class="schwarz">item </span><span class="dunkelblau">+</span><span class="schwarz"> </span><span class="hellblau">'\n'</span><span class="schwarz">);</span><span class="schwarz"><br/></span><span class="schwarz">});</span><span class="schwarz"><br/></span> <br/>writeStream<span class="schwarz">.end(</span><span class="rot">null</span><span class="schwarz">);</span><span class="schwarz"> </span></pre></div>
+            <p class="caption "><b>Listing 18.10</b>    
+            Writing Files with Writable Streams</p>
+            <p class="standard">To use a writable stream, you first need a way to create an instance of the stream. In this case, it’s the <samp class="listingcharacter listingcharacter">createWriteStream</samp> function of the <samp class="listingcharacter listingcharacter">fs</samp> module that helps you. On this instance, you then call the <samp class="listingcharacter listingcharacter">write</samp> method with the data you want to write. Once all data has been written, a call of the <samp class="listingcharacter listingcharacter">end</samp> method terminates the stream.</p>
+            <p class="standard">In addition to the two methods you’ve learned about so far, writable streams provide several other methods and events you can use to control the stream or respond to events.</p>
+        
+        
+            <h3 class="t3" id="h18.3.2">18.3.2    Events<a class="indexanchor" id="i18_57"/></h3>
+            <p class="standard">The writable stream represents the endpoint of a stream chain. This means the area’s uses are somewhat more limited than those for the readable stream. However, there are more events you can use to respond to the interaction with the writable stream. <span class="crossreference "><a href="18_003.html#t18.3">Table 18.3</a></span> summarizes them for you.</p>
+            <table class="standardtable" id="t18.3">
+                <thead>
+                    <tr>
+                        <th class="tablehead tablecell_first top_border_cell">
+                            <p class="standard first-item last-item">Event</p>
+                        </th>
+                        <th class="tablehead tablecell_last top_border_cell">
+                            <p class="standard first-item last-item">Description</p>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="tablecell tablecell_first top_border_cell">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">finish</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last top_border_cell">
+                            <p class="standard first-item last-item">An event is triggered when the <samp class="listingcharacter listingcharacter">end</samp> method is called.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">pipe</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">The handlers of this event are executed when a readable stream pipes into this stream.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter"><a id="p561"/>unpipe</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">If a pipe is removed, the <samp class="listingcharacter listingcharacter">unpipe</samp> event gets triggered.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">error</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">The <samp class="listingcharacter listingcharacter">error</samp> event is used for error handling in a writable stream.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">drain</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">This signals when a stream is ready to accept data again.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">close</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">This gets triggered when the stream or an underlying resource is closed.</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="caption "><b>Table 18.3</b>    
+            Events of Writable Streams</p>
+            <p class="standard"><span class="crossreference "><a href="18_003.html#l18.11">Listing 18.11</a></span> shows how you can use some of the event handlers. The example is based on the piping concept you already know from <span class="crossreference "><a href="18_002.html#l18.5">Listing 18.5</a></span>.</p>
+            <div class="listing " id="l18.11"><pre><span class="rot">import</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"> createReadStream</span><span class="schwarz">,</span><span class="schwarz"> createWriteStream </span><span class="schwarz">}</span><span class="schwarz"> </span><span class="rot">from</span><span class="schwarz"> </span><span class="hellblau">'fs'</span><span class="schwarz">;</span><span class="schwarz"><br/></span> <br/><span class="rot">const</span><span class="schwarz"> readable </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="schwarz">createReadStream(</span><span class="hellblau">'input.txt'</span><span class="schwarz">);</span><span class="schwarz"><br/></span><span class="rot">const</span><span class="schwarz"> writable </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="schwarz">createWriteStream(</span><span class="hellblau">'output.txt'</span><span class="schwarz">);</span><span class="schwarz"><br/></span> <br/>writable<span class="schwarz">.on(</span><span class="hellblau">'pipe'</span><span class="schwarz">,</span><span class="schwarz"> </span><span class="schwarz">(</span><span class="schwarz">readstream</span><span class="schwarz">)</span><span class="schwarz"> </span><span class="dunkelblau">=&gt;</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>  <span class="magenta">console</span><span class="schwarz">.log(</span><span class="hellblau">'pipe handler called'</span><span class="schwarz">);</span><span class="schwarz"><br/></span><span class="schwarz">});</span><span class="schwarz"><br/></span> <br/>writable<span class="schwarz">.on(</span><span class="hellblau">'unpipe'</span><span class="schwarz">,</span><span class="schwarz"> </span><span class="schwarz">(</span><span class="schwarz">readstream</span><span class="schwarz">)</span><span class="schwarz"> </span><span class="dunkelblau">=&gt;</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>  <span class="magenta">console</span><span class="schwarz">.log(</span><span class="hellblau">'unpipe handler called'</span><span class="schwarz">);</span><span class="schwarz"><br/></span><span class="schwarz">});</span><span class="schwarz"><br/></span> <br/>writable<span class="schwarz">.on(</span><span class="hellblau">'finish'</span><span class="schwarz">,</span><span class="schwarz"> </span><span class="schwarz">()</span><span class="schwarz"> </span><span class="dunkelblau">=&gt;</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>  <span class="magenta">console</span><span class="schwarz">.log(</span><span class="hellblau">'finish handler called'</span><span class="schwarz">);</span><span class="schwarz"><br/></span><span class="schwarz">});</span><span class="schwarz"><br/></span> <br/>readable<span class="schwarz">.pipe(</span><span class="schwarz">writable</span><span class="schwarz">);</span><span class="schwarz"><br/></span> <span class="gruen"><br/></span>/* Output:<br/>pipe handler called<br/>finish handler called<br/>unpipe handler called<br/>*/<span class="schwarz"> </span></pre></div>
+            <p class="caption "><b>Listing 18.11</b>    
+            Events of a Writable Stream</p>
+            <p class="standard">When you run the example from <span class="crossreference "><a href="18_003.html#l18.11">Listing 18.11</a></span>, the callback function for the <samp class="listingcharacter listingcharacter">pipe</samp> event is executed first. The reason is the connection<a class="indexanchor" id="i18_58"/> of the readable stream to the writable stream via the <samp class="listingcharacter listingcharacter">pipe</samp> method. In this callback function, you have access to the instance of the readable stream. Once the data of the stream is consumed, the <samp class="listingcharacter listingcharacter">finish</samp> event gets <a id="p562"/>triggered and the connection terminates. This callback function doesn’t provide any other arguments. The last event that gets triggered is the <samp class="listingcharacter listingcharacter">unpipe</samp> event. This event signals that the pipe connection between the two streams has been terminated. Here again, you get a reference to the readable stream. In addition to these events, which are mainly used to respond to external interactions with the writable stream, there is another very important event—the <samp class="listingcharacter listingcharacter">error</samp> event.</p>
+        
+        
+            <h3 class="t3" id="h18.3.3">18.3.3    Error Handling<a class="indexanchor" id="i18_59"/> in Writable Streams</h3>
+            <p class="standard">As does the readable stream, the writable stream also has the <samp class="listingcharacter listingcharacter">error</samp> event, which you can use to respond to various errors during the runtime of the stream. A possible error could be a missing permission<a class="indexanchor" id="i18_60"/> in the case of a file system stream.</p>
+            <p class="standard">If you don’t handle a triggered <samp class="listingcharacter listingcharacter">error</samp> event, it will have the same effect as an uncaught exception and will cause your application to terminate. For this reason, you should always register a handler for the <samp class="listingcharacter listingcharacter">error</samp> event. <span class="crossreference "><a href="18_003.html#l18.12">Listing 18.12</a></span> contains a corresponding example.</p>
+            <div class="listing " id="l18.12"><pre><span class="rot">import</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"> createWriteStream </span><span class="schwarz">}</span><span class="schwarz"> </span><span class="rot">from</span><span class="schwarz"> </span><span class="hellblau">'fs'</span><span class="schwarz">;</span><span class="schwarz"><br/></span> <br/><span class="rot">const</span><span class="schwarz"> writeStream </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="schwarz">createWriteStream(</span><span class="hellblau">'/usr/sbin/test.txt'</span><span class="schwarz">);</span><span class="schwarz"><br/></span> <br/>writeStream<span class="schwarz">.on(</span><span class="hellblau">'error'</span><span class="schwarz">,</span><span class="schwarz"> </span><span class="schwarz">(</span><span class="schwarz">err</span><span class="schwarz">)</span><span class="schwarz"> </span><span class="dunkelblau">=&gt;</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>  <span class="magenta">console</span><span class="schwarz">.error(</span><span class="hellblau">'An error has occurred: '</span><span class="schwarz">,</span><span class="schwarz"> err</span><span class="schwarz">);</span><span class="schwarz"><br/></span><span class="schwarz">});</span><span class="schwarz"> </span></pre></div>
+            <p class="caption "><b>Listing 18.12</b>    
+            Error Handling in Writable Streams</p>
+            <p class="standard">On a Unix system, this code example causes an error because it attempts to create the <span class="italic">test.txt</span> file in the <span class="italic">/usr/sbin</span> directory. However, this directory is reserved for the system administrator. Normal user accounts don’t have write permission<a class="indexanchor" id="i18_61"/> for it. The result is the following error message: <samp class="listingcharacter listingcharacter">Error: EPERM: operation not permitted, open '/usr/sbin/test.txt'</samp>. </p>
+            <p class="standard">In addition to the events you’ve already learned about in connection with writable streams, there are also some methods that allow you to use the stream.</p>
+        
+        
+            <h3 class="t3" id="h18.3.4">18.3.4    Methods<a class="indexanchor" id="i18_62"/></h3>
+            <p class="standard">The most important method in dealing with writable streams is the <samp class="listingcharacter listingcharacter">write</samp> method, which you use to write data to the stream. You also need the <samp class="listingcharacter listingcharacter">end</samp> method to end the write operation. However, the writable stream provides a few other methods as well, as listed in <span class="crossreference "><a href="18_003.html#t18.4">Table 18.4</a></span>.</p>
+            <table class="standardtable" id="t18.4">
+                <thead>
+                    <tr>
+                        <th class="tablehead tablecell_first top_border_cell">
+                            <p class="standard first-item last-item"><a id="p563"/>Method</p>
+                        </th>
+                        <th class="tablehead tablecell_last top_border_cell">
+                            <p class="standard first-item last-item">Description</p>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="tablecell tablecell_first top_border_cell">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">write(<br/>  chunk<br/>  [, encoding]<br/>  [, callback])</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last top_border_cell">
+                            <p class="standard first-item last-item">Writes the specified data to the stream. Optionally, you can pass the encoding and a callback function. The callback is executed as soon as the data has been written.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">end(<br/>  [chunk]<br/>  [, encoding]<br/>  [, callback])</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">The signature of the <samp class="listingcharacter listingcharacter">end</samp> method is similar to that of the <samp class="listingcharacter listingcharacter">write</samp> method, except that no further write operation is possible after calling the <samp class="listingcharacter listingcharacter">end</samp> method. The callback function is executed as soon as the writable stream is finished.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">setDefaultEncoding(encoding)</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">This sets the encoding for the entire stream.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">cork()</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">The data isn’t written directly, but buffered.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">uncork()</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">The data written to the buffer by the call of the <samp class="listingcharacter listingcharacter">cork</samp> method is finally written by a call of the <samp class="listingcharacter listingcharacter">uncork</samp> method, and the buffer is thus emptied.</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="caption "><b>Table 18.4</b>    
+            Methods of a Writable Stream</p>
+        
+        
+            <h3 class="t3" id="h18.3.5">18.3.5    Buffering Write Operations<a class="indexanchor" id="i18_63"/></h3>
+            <p class="standard">The <samp class="listingcharacter listingcharacter">cork</samp> and <samp class="listingcharacter listingcharacter">uncork</samp> methods enable you to execute the write operations of a writable stream not immediately, but to store them in a buffer first and then to empty this buffer at a later time. <span class="crossreference "><a href="18_003.html#l18.13">Listing 18.13</a></span> shows an example of this.</p>
+            <div class="listing " id="l18.13"><pre><span class="rot">import</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"> createWriteStream </span><span class="schwarz">}</span><span class="schwarz"> </span><span class="rot">from</span><span class="schwarz"> </span><span class="hellblau">'fs'</span><span class="schwarz">;</span><span class="schwarz"><br/></span> <br/><span class="rot">const</span><span class="schwarz"> writeStream </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="schwarz">createWriteStream(</span><span class="hellblau">'output.txt'</span><span class="schwarz">);</span><span class="schwarz"><br/></span> <br/>writeStream<span class="schwarz">.write(</span><span class="hellblau">'Hello\n'</span><span class="schwarz">);</span><span class="schwarz"><br/></span>writeStream<span class="schwarz">.cork();</span><span class="schwarz"><br/></span>writeStream<span class="schwarz">.write(</span><span class="hellblau">'World\n'</span><span class="schwarz">);</span><span class="schwarz"><br/></span><span class="schwarz">setTimeout(()</span><span class="schwarz"> </span><span class="dunkelblau">=&gt;</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>  writeStream<span class="schwarz">.uncork();</span><span class="schwarz"><br/></span>  writeStream<span class="schwarz">.write(</span><span class="hellblau">'!'</span><span class="schwarz">);</span><span class="schwarz"><br/></span>  writeStream<span class="schwarz">.end();</span><span class="schwarz"><br/></span><span class="schwarz">},</span><span class="schwarz"> </span><span class="schwarz">5000);</span><span class="schwarz"> </span></pre></div>
+            <p class="caption "><b>Listing 18.13</b>    
+            Buffering Write Operations with the “cork” Method</p>
+            <p class="standard">When you run the source code, you won’t see a result directly because the application doesn’t generate any output on the command line, but only writes to the <span class="italic">output.txt</span> file. For example, to see the effects of the source code, you can observe the file in real time on a Unix system on the command line via the <samp class="listingcharacter listingcharacter">tail -f output.txt</samp> command. The <a id="p564"/>result is that you initially see only the <samp class="listingcharacter listingcharacter">Hello</samp> line because the first write operation is unbuffered. Then you use the <samp class="listingcharacter listingcharacter">cork</samp><a class="indexanchor" id="i18_64"/> method to activate the buffer and write into it. After five seconds, you use the <samp class="listingcharacter listingcharacter">uncork</samp> method to clear the buffer and end the stream.</p>
+            <p class="standard">You can use buffered write operations, for example, to group write operations and thus improve the write performance of your application.</p>
+        
+        
+            <h3 class="t3" id="h18.3.6">18.3.6    Flow Control<a class="indexanchor" id="i18_65"/></h3>
+            <p class="standard">When using writable streams, you usually use the <samp class="listingcharacter listingcharacter">write</samp> and <samp class="listingcharacter listingcharacter">end</samp> methods. In most cases, you rely on the fact that data is received and written immediately. However, the <samp class="listingcharacter listingcharacter">write</samp> method may be called too frequently, and your system may not keep up with the writing process. For this reason, the <samp class="listingcharacter listingcharacter">write</samp> method has a return value. This value is set to <samp class="listingcharacter listingcharacter">true</samp> in most cases, which means that the write operation was successful and writing can continue. The value <samp class="listingcharacter listingcharacter">false</samp> means that you should wait with the next call of the <samp class="listingcharacter listingcharacter">write</samp> method. Once the writable stream is ready again, the <samp class="listingcharacter listingcharacter">drain</samp><a class="indexanchor" id="i18_66"/> event gets triggered, and you can continue writing. <span class="crossreference "><a href="18_003.html#l18.14">Listing 18.14</a></span> contains an example of using flow control with writable streams.</p>
+            <div class="listing " id="l18.14"><pre><span class="rot">import</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"> createWriteStream </span><span class="schwarz">}</span><span class="schwarz"> </span><span class="rot">from</span><span class="schwarz"> </span><span class="hellblau">'fs'</span><span class="schwarz">;</span><span class="schwarz"><br/></span> <br/><span class="rot">const</span><span class="schwarz"> writeStream </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="schwarz">createWriteStream(</span><span class="hellblau">'output.txt'</span><span class="schwarz">);</span><span class="schwarz"><br/></span> <br/><span class="rot">const</span><span class="schwarz"> data </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="hellblau">'Node.js is great'</span><span class="schwarz">;</span><span class="schwarz"><br/></span> <br/><span class="rot">let</span><span class="schwarz"> i </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="schwarz">1000000;</span><span class="schwarz"><br/></span> <br/><span class="schwarz">write();</span><span class="schwarz"><br/></span> <br/><span class="rot">function</span><span class="schwarz"> </span><span class="schwarz">write()</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>  <span class="rot">let</span><span class="schwarz"> ok </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="rot">true</span><span class="schwarz">;</span><span class="schwarz"><br/></span>  <span class="rot">do</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>    i <span class="dunkelblau">-=</span><span class="schwarz"> </span><span class="schwarz">1;</span><span class="schwarz"><br/></span>    <span class="rot">if</span><span class="schwarz"> </span><span class="schwarz">(</span><span class="schwarz">i </span><span class="dunkelblau">===</span><span class="schwarz"> </span><span class="schwarz">0)</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>      writeStream<span class="schwarz">.end(</span><span class="schwarz">data</span><span class="schwarz">);</span><span class="schwarz"><br/></span>    <span class="schwarz">}</span><span class="schwarz"> </span><span class="rot">else</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>      ok <span class="dunkelblau">=</span><span class="schwarz"> writeStream</span><span class="schwarz">.write(</span><span class="schwarz">data</span><span class="schwarz">);</span><span class="schwarz"><br/></span>    <span class="schwarz">}</span><span class="schwarz"><br/></span>  <span class="schwarz">}</span><span class="schwarz"> </span><span class="rot">while</span><span class="schwarz"> </span><span class="schwarz">(</span><span class="schwarz">i </span><span class="dunkelblau">&gt;</span><span class="schwarz"> </span><span class="schwarz">0</span><span class="schwarz"> </span><span class="dunkelblau">&amp;&amp;</span><span class="schwarz"> ok</span><span class="schwarz">);</span><span class="schwarz"><br/></span>  <span class="rot">if</span><span class="schwarz"> </span><span class="schwarz">(</span><span class="schwarz">i </span><span class="dunkelblau">&gt;</span><span class="schwarz"> </span><span class="schwarz">0)</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>    <span class="magenta">console</span><span class="schwarz">.log(</span><span class="hellblau">'wait'</span><span class="schwarz">);</span><span class="schwarz"><br/></span>    writeStream<span class="schwarz">.once(</span><span class="hellblau">'drain'</span><span class="schwarz">,</span><span class="schwarz"> write</span><span class="schwarz">);</span><span class="schwarz"><br/></span>  <span class="schwarz">}</span><span class="schwarz"><br/></span><span class="schwarz">}</span><span class="schwarz"> </span></pre></div>
+            <p class="caption "><b>Listing 18.14</b>    
+            Flow Control in Writable Streams</p>
+            <p class="standard"><a id="p565"/>The source code in <span class="crossreference "><a href="18_003.html#l18.14">Listing 18.14</a></span> ensures that a string is written to the file a million times. If the <samp class="listingcharacter listingcharacter">write</samp> method returns the value <samp class="listingcharacter listingcharacter">false</samp>, the write operation gets interrupted. You first write the <samp class="listingcharacter listingcharacter">wait</samp> string to the standard output. As soon as the <samp class="listingcharacter listingcharacter">drain</samp> event gets triggered, you call the <samp class="listingcharacter listingcharacter">write</samp> function once again.</p>
+            <p class="standard">In total, this example will generate about 16 MB of data in a very short time and write it to a file. Normally, quite a few <samp class="listingcharacter listingcharacter">drain</samp> events get triggered in the course of this process because the processing of the source code is faster than writing the information to disk. If this isn’t the case, for example, because you have a very fast hard disk, you can also increase the number of data to be written until you’ve generated enough workload. However, be careful not to overdo it at this point and fill your hard drive too much, as this can cause problems with the operating system.</p>
+        
+        
+            <h3 class="t3" id="h18.3.7">18.3.7    Custom Writable Streams<a class="indexanchor" id="i18_67"/></h3>
+            <p class="standard">If you get into the situation that the existing writable stream implementations aren’t sufficient for you, you can create your own writable streams using the <samp class="listingcharacter listingcharacter">stream</samp> module. For this purpose, Node.js already provides you with the framework implementation<a class="indexanchor" id="i18_68"/>, and you just need to take care of the details. This is similar to readable streams.</p>
+            <p class="standard">In this example, as is the case with the readable stream, you use the <samp class="listingcharacter listingcharacter">writable</samp> base class of the <samp class="listingcharacter listingcharacter">stream</samp> module as the basis for your own implementation. By overriding the <samp class="listingcharacter listingcharacter">_write</samp> method, which triggers an exception in the base implementation<a class="indexanchor" id="i18_69"/>, you have a working implementation. The parameter list of this method consists of the data to be written, the encoding of this data, and a callback function. In the sample code, you write the passed data to standard output by calling <samp class="listingcharacter listingcharacter">console.log</samp>. No matter what logic you implement for your writable stream, to complete the write operation, you must call the callback function you receive as the third argument.</p>
+            <p class="standard">In <span class="crossreference "><a href="18_003.html#l18.15">Listing 18.15</a></span>, you then create an instance of your class, write information to the stream in a loop, and finally end it by calling the <samp class="listingcharacter listingcharacter">end</samp> method.</p>
+            <div class="listing " id="l18.15"><pre><span class="rot">import</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"> Writable </span><span class="schwarz">}</span><span class="schwarz"> </span><span class="rot">from</span><span class="schwarz"> </span><span class="hellblau">'stream'</span><span class="schwarz">;</span><span class="schwarz"><br/></span> <br/><span class="rot">class WriteStream</span><span class="schwarz"> </span><span class="rot">extends Writable</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>  <span class="schwarz">_write(</span><span class="schwarz">chunk</span><span class="schwarz">,</span><span class="schwarz"> enc</span><span class="schwarz">,</span><span class="schwarz"> done</span><span class="schwarz">)</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>    <span class="magenta">console</span><span class="schwarz">.log(</span><span class="hellblau">'WRITE: '</span><span class="schwarz">,</span><span class="schwarz"> chunk</span><span class="schwarz">.toString());</span><span class="schwarz"><br/></span>    <span class="schwarz">done();</span><span class="schwarz"><br/></span>  <span class="schwarz">}</span><span class="schwarz"><br/></span><span class="schwarz">}</span><span class="schwarz"><br/></span> <br/><span class="rot">const</span><span class="schwarz"> ws </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="rot">new </span><span class="schwarz">WriteStream();</span><span class="schwarz"><br/></span><span class="rot">for</span><span class="schwarz"> </span><span class="schwarz">(</span><span class="rot">let</span><span class="schwarz"> i </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="schwarz">0;</span><span class="schwarz"> i </span><span class="dunkelblau">&lt;</span><span class="schwarz"> </span><span class="schwarz">10;</span><span class="schwarz"> i</span><span class="dunkelblau">++</span><span class="schwarz">)</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>  ws<span class="schwarz">.write(</span><span class="hellblau">'Hello '</span><span class="schwarz"> </span><span class="dunkelblau">+</span><span class="schwarz"> i</span><span class="schwarz">);</span><span class="schwarz"><br/></span><span class="schwarz">}</span><span class="schwarz"><br/></span>ws<span class="schwarz">.end();</span><span class="schwarz"> </span></pre></div>
+            <p class="caption "><b>Listing 18.15</b>    
+            Custom Writable Streams</p>
+        
+        
+            <h3 class="t3" id="h18.3.8">18.3.8    <a id="p566"/>Writable Shortcut<a class="indexanchor" id="i18_70"/></h3>
+            <p class="standard">As is the case with readable streams, there is also a short notation for writable streams. Using the source code from <span class="crossreference "><a href="18_003.html#l18.16">Listing 18.16</a></span>, you directly create an object of the <samp class="listingcharacter listingcharacter">writable</samp> class and pass an object to the constructor. This object has the <samp class="listingcharacter listingcharacter">write</samp> property, which then overrides the <samp class="listingcharacter listingcharacter">_write</samp> method.</p>
+            <div class="listing " id="l18.16"><pre><span class="rot">import</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"> Writable </span><span class="schwarz">}</span><span class="schwarz"> </span><span class="rot">from</span><span class="schwarz"> </span><span class="hellblau">'stream'</span><span class="schwarz">;</span><span class="schwarz"><br/></span> <br/><span class="bold"><span class="schwarz"/><samp class="listingcharacter listingcharacter"><span class="rot">const</span><span class="schwarz"> ws </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="rot">new </span><span class="schwarz">Writable({</span><br/>  write: (chunk, encoding, done) <span class="dunkelblau">=&gt;</span><span class="schwarz"> {</span><br/>    <span class="magenta">console</span><span class="schwarz">.log(</span><span class="hellblau">'WRITE: '</span><span class="schwarz">, chunk.toString());</span><br/>    done();<br/>  },<br/>});<br/> </samp></span><br/><span class="rot">for</span><span class="schwarz"> (</span><span class="rot">let</span><span class="schwarz"> i </span><span class="dunkelblau">=</span><span class="schwarz"> 0; i </span><span class="dunkelblau">&lt;</span><span class="schwarz"> 10; i</span><span class="dunkelblau">++</span><span class="schwarz">) {</span><br/>  ws.write(<span class="hellblau">'Hello '</span><span class="schwarz"> </span><span class="dunkelblau">+</span><span class="schwarz"> i);</span><br/>}<br/>ws.end(); <span class="schwarz"/></pre></div>
+            <p class="caption "><b>Listing 18.16</b>    
+            Short Notation for Writable Streams</p>
+            <p class="standard">With this information, you now know everything you need to know about both the readable and writable streams of Node.js. In addition to these two, there are two other manifestations of streams, which will be described in the following sections.</p>
+        
+    </div><p class="signatur"/>
+                    </body>
+                </html>

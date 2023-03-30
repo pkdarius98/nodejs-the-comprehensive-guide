@@ -1,0 +1,22 @@
+tr.tablehead2 td,
+tr.tablehead2 th,
+td.tablehead2,
+th.tablehead2 {
+  background-color: #71a0be;
+}
+
+p.formula {
+  font-style: italic;
+}
+
+table.boxtable td, table.boxtable th {
+  border-color: #ececec;
+  border-left: none;
+}
+
+table.boxtable td.tablehead, table.listingtable td.tablehead,
+table.boxtable th.tablehead,
+table.listingtable th.tablehead {
+  background-color: #2f6489;
+  color: white;
+}

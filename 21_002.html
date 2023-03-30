@@ -1,0 +1,237 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+                    
+        <head><meta content="application/xhtml+xml; charset=utf-8" http-equiv="Content-Type"/>
+            <meta content="application/xhtml+xml; charset=utf-8" name="content-type"/>
+            <meta content="Package Manager" name="title"/>
+            <meta content="Sebastian Springer" name="author"/>
+            <meta content="Rheinwerk Publishing" name="publisher"/>
+            <meta content="© 2022 by Rheinwerk Publishing Inc., Boston (MA)" name="copyright"/>
+            <meta content="Node.js - The Comprehensive Guide - Package Manager" name="description"/>
+            <meta content="en" name="language"/>
+            <title>Package Manager</title>
+            <link href="common/main.css" rel="stylesheet" type="text/css"/>
+<meta content="urn:uuid:e0000000-0000-0000-0000-000029756394" name="Adept.expected.resource"/>
+        </head>
+    
+
+
+                    <body class="office_us type_kapitel">
+                        <div id="main">
+        <h2 class="t2" id="h21.2">21.2    Advanced Operations<a class="indexanchor" id="i21_57"/></h2>
+        <p class="standard">So far, you’ve only looked at the packages you can install with npm from a user’s point of view. Now we’ll go one step further and see how these packages are structured internally.</p>
+        
+            <h3 class="t3" id="h21.2.1">21.2.1    Structure of a Module<a class="indexanchor" id="i21_58"/></h3>
+            <p class="standard">The core of a module consists of the configuration file, that is, the <span class="italic">package.json</span> file.<a class="indexanchor" id="i21_59"/> As the file extension suggests, the file is in JSON format. Its most important details, which are also searchable in the npm repository, are the <samp class="listingcharacter listingcharacter">name</samp>, <samp class="listingcharacter listingcharacter">description</samp>, <samp class="listingcharacter listingcharacter">author</samp>, and <samp class="listingcharacter listingcharacter">keywords</samp> properties. As an example of a concrete <span class="italic">package.json</span> file, here you can see the corresponding file from Grunt. <span class="crossreference "><a href="21_002.html#l21.13">Listing 21.13</a></span> shows the associated information from this file and thus the respective format of the data.</p>
+            <div class="listing " id="l21.13"><pre><span class="schwarz">{</span><span class="schwarz"><br/></span>  <span class="hellblau">"name"</span><span class="schwarz">:</span><span class="schwarz"> </span><span class="hellblau">"grunt-cli"</span><span class="schwarz">,</span><span class="schwarz"><br/></span>  <span class="hellblau">"description"</span><span class="schwarz">:</span><span class="schwarz"> </span><span class="hellblau">"The grunt command line interface."</span><span class="schwarz">,</span><span class="schwarz"><br/></span>  <span class="hellblau">"author"</span><span class="schwarz">:</span><span class="schwarz"> </span><span class="hellblau">"Grunt Development Team (http://gruntjs.com/development-team)"</span><span class="schwarz"><br/></span>  <span class="schwarz">...</span><span class="schwarz"> </span></pre></div>
+            <p class="caption "><b>Listing 21.13</b>    
+            Structure of a “package.json” File, Part 1</p>
+            <p class="standard">The next directives you’ll learn about are primarily used for the internal management of the module by npm. These include the data, <samp class="listingcharacter listingcharacter">version</samp>, which is the current version of the package; <samp class="listingcharacter listingcharacter">main</samp>, the entry point to the application; and <samp class="listingcharacter listingcharacter">bin</samp>, the location of the application executable. Finally, helper scripts are specified via the <samp class="listingcharacter listingcharacter">scripts</samp><a class="indexanchor" id="i21_60"/> key. In the example of Grunt, this is <samp class="listingcharacter listingcharacter">test</samp>. So, you can use <samp class="listingcharacter listingcharacter">npm test</samp> to let Grunt run the tests. You can see these directives and their corresponding values in <span class="crossreference "><a href="21_002.html#l21.14">Listing 21.14</a></span>.</p>
+            <div class="listing " id="l21.14"><pre><a id="p628"/>  <span class="schwarz">...</span><span class="schwarz"><br/></span>  <span class="hellblau">"version"</span><span class="schwarz">:</span><span class="schwarz"> </span><span class="hellblau">"1.4.3"</span><span class="schwarz">,</span><span class="schwarz"><br/></span>  <span class="hellblau">"bin"</span><span class="schwarz">:</span><span class="schwarz">  </span><span class="schwarz">{</span><span class="schwarz"><br/></span>    <span class="hellblau">"grunt"</span><span class="schwarz">:</span><span class="schwarz"> </span><span class="hellblau">"bin/grunt"</span><span class="schwarz"><br/></span>  <span class="schwarz">},</span><span class="schwarz"><br/></span>  <span class="hellblau">"scripts"</span><span class="schwarz">:</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>    <span class="hellblau">"test"</span><span class="schwarz">:</span><span class="schwarz"> </span><span class="hellblau">"node bin/grunt test"</span><span class="schwarz"><br/></span>  <span class="schwarz">},</span><span class="schwarz"><br/></span>  <span class="schwarz">...</span><span class="schwarz"> </span></pre></div>
+            <p class="caption "><b>Listing 21.14</b>    
+            Structure of a “package.json” File, Part 2</p>
+            <p class="standard">During the installation of the <samp class="listingcharacter listingcharacter">express</samp> module, you’ve already seen that npm is able to resolve dependencies on other modules. These dependencies are also defined in the <span class="italic">package.json</span> file.</p>
+            <p class="standard">If you run the <samp class="listingcharacter listingcharacter">npm install</samp> command in the root directory of your application, that is, where the <span class="italic">package.json</span> file is also located, npm will install all dependencies.</p>
+            <p class="standard">In addition to the <samp class="listingcharacter listingcharacter">dependencies</samp> section, through which you define packages required for your application to function, you can use <samp class="listingcharacter listingcharacter">devDependencies</samp> to specify packages required for further development of the module. These modules are always installed by default. The <samp class="listingcharacter listingcharacter">--prod</samp><a class="indexanchor" id="i21_61"/> option allows you to install only the modules specified under <samp class="listingcharacter listingcharacter">dependencies</samp>. Finally, you can use <samp class="listingcharacter listingcharacter">engines</samp><a class="indexanchor" id="i21_62"/> to determine which version of Node.js is required to run the application.</p>
+            <p class="standard">In <span class="crossreference "><a href="21_002.html#l21.15">Listing 21.15</a></span>, you can see that you need to specify a version number next to the names of the packages that are required. The same is true for <samp class="listingcharacter listingcharacter">devDependencies</samp> and <samp class="listingcharacter listingcharacter">engines</samp>. You can specify the version in several ways. The simplest variant of the version specification is that you prescribe a specific version by directly entering the number such as <samp class="listingcharacter listingcharacter">5.3.0</samp>, for example. However, it has become best practice to define the major<a class="indexanchor" id="i21_63"/> and minor versions<a class="indexanchor" id="i21_64"/> instead of prescribing the patch level<a class="indexanchor" id="i21_65"/>. If you follow this recommendation, you allow the npm to consider and install bug fixes during an update. To achieve this, you just need to enter an <samp class="listingcharacter listingcharacter">x</samp> instead of the patch level. This then results in a version specification of <samp class="listingcharacter listingcharacter">5.3.x</samp>. Note that you can use the placeholder not only for the patch level but also for the minor version. If you don’t want to limit the version, you can enter a <samp class="listingcharacter listingcharacter">*</samp> character as a placeholder for the latest version instead of a specific number. However, the use of wildcards in major and minor versions isn’t recommended because it can affect the stability of your application, and you can’t ensure that the interfaces of the modules won’t change from version to version.</p>
+            <div class="listing " id="l21.15"><pre>  <span class="schwarz">...</span><span class="schwarz"><br/></span>  <span class="hellblau">"dependencies"</span><span class="schwarz">:</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>    <span class="hellblau">"grunt-known-options"</span><span class="schwarz">:</span><span class="schwarz"> </span><span class="hellblau">"~2.0.0"</span><span class="schwarz">,</span><span class="schwarz"><br/></span>    <span class="hellblau">"interpret"</span><span class="schwarz">:</span><span class="schwarz"> </span><span class="hellblau">"~1.1.0"</span><span class="schwarz">,</span><span class="schwarz"><br/></span>    <span class="hellblau">"liftup"</span><span class="schwarz">:</span><span class="schwarz"> </span><span class="hellblau">"~3.0.1"</span><span class="schwarz">,</span><span class="schwarz"><br/></span><a id="p629"/>    <span class="hellblau">"nopt"</span><span class="schwarz">:</span><span class="schwarz"> </span><span class="hellblau">"~4.0.1"</span><span class="schwarz">,</span><span class="schwarz"><br/></span>    <span class="hellblau">"v8flags"</span><span class="schwarz">:</span><span class="schwarz"> </span><span class="hellblau">"~3.2.0"</span><span class="schwarz"><br/></span>  <span class="schwarz">},</span><span class="schwarz"><br/></span>  <span class="hellblau">"devDependencies"</span><span class="schwarz">:</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>    <span class="hellblau">"grunt"</span><span class="schwarz">:</span><span class="schwarz"> </span><span class="hellblau">"~1.3.0"</span><span class="schwarz">,</span><span class="schwarz"><br/></span>    <span class="hellblau">"grunt-contrib-jshint"</span><span class="schwarz">:</span><span class="schwarz"> </span><span class="hellblau">"~3.0.0"</span><span class="schwarz"><br/></span>  <span class="schwarz">},</span><span class="schwarz"><br/></span>  <span class="hellblau">"engines"</span><span class="schwarz">:</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>    <span class="hellblau">"node"</span><span class="schwarz">:</span><span class="schwarz"> </span><span class="hellblau">"&gt;=10"</span><span class="schwarz"><br/></span>  <span class="schwarz">},</span><span class="schwarz"><br/></span>  <span class="schwarz">...</span><span class="schwarz"> </span></pre></div>
+            <p class="caption "><b>Listing 21.15</b>    
+            Structure of a “package.json” File, Part 3</p>
+            <p class="standard">In addition to the fixed specification of a version and the use of placeholders, you have a number of other options available for defining version numbers. <span class="crossreference "><a href="21_002.html#t21.2">Table 21.2</a></span> shows the different variants of describing version numbers<a class="indexanchor" id="i21_66"/>.</p>
+            <p class="standard">You can combine spans of versions with a space, which represents a logical AND operation. The second variant consists of combining two spans with <samp class="listingcharacter listingcharacter">||</samp>, which means that either the first span or the second span must be fulfilled.</p>
+            <table class="standardtable" id="t21.2">
+                <thead>
+                    <tr>
+                        <th class="tablehead tablecell_first top_border_cell">
+                            <p class="standard first-item last-item">Version</p>
+                        </th>
+                        <th class="tablehead tablecell_last top_border_cell">
+                            <p class="standard first-item last-item">Description</p>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="tablecell tablecell_first top_border_cell">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">&gt; 1.2.3</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last top_border_cell">
+                            <p class="standard first-item last-item">Any version higher than 1.2.3</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">&gt;= 1.2.3</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Any version equal to or higher than 1.2.3</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">&lt; 1.2.3</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Any version lower than 1.2.3</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">&lt;= 1.2.3</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Any version equal to or lower than 1.2.3</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">~1.2.3</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">All versions &gt;= 1.2.3 and &lt; 1.3.0</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">~1.2</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">All versions &gt;= 1.2.0 and &lt; 1.3.0</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">~1</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">All versions &gt;= 1.0.0 and &lt; 2.0.0</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">^1.2.3</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">All versions &gt;= 1.2.3 and &lt; 2.0.0</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">^0.1.2</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">All versions &gt;= 0.1.2 and &lt; 0.2.0</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">^0.0.1</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">All versions &gt;= 0.0.1 and &lt; 0.0.2</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="caption "><b>Table 21.2</b>    
+            Specification of Version Numbers</p>
+            <p class="standard">The specification of the version number plays an important role, especially with the <samp class="listingcharacter listingcharacter">npm update</samp> command because it specifies the range within which the update may move. For example, if you install <samp class="listingcharacter listingcharacter">lodash</samp> in version 2.0.0, the specification <samp class="listingcharacter listingcharacter">"lodash": "^2.0.0"</samp> in <span class="italic"><a id="p630"/>package.json</span> makes sure that the update may only be in the range of the second major version. Version 3 or even 4 must not be installed.</p>
+            <p class="standard">In addition to the configuration options already presented, other directives are available when creating a <span class="italic">package.json</span>. You can use <samp class="listingcharacter listingcharacter">repository</samp> to specify the repository where the application is developed. In addition to that, you can use <samp class="listingcharacter listingcharacter">homepage</samp> to specify the project’s website, or <samp class="listingcharacter listingcharacter">bugs</samp> to specify the address of the project’s issue tracker. The <samp class="listingcharacter listingcharacter">license</samp>, <samp class="listingcharacter listingcharacter">readme</samp>, and <samp class="listingcharacter listingcharacter">readmeFilename</samp> directives indicate under which license<a class="indexanchor" id="i21_67"/> the project is available, briefly introduce the user to the project, and state in which file this introduction can be found. <span class="crossreference "><a href="21_002.html#l21.16">Listing 21.16</a></span> shows the directives for using Express.</p>
+            <div class="listing " id="l21.16"><pre>  <span class="schwarz">...</span><span class="schwarz"><br/></span>  <span class="hellblau">"repository"</span><span class="schwarz">:</span><span class="schwarz"> </span><span class="hellblau">" gruntjs/grunt-cli"</span><span class="schwarz">,</span><span class="schwarz"><br/></span>  <span class="hellblau">"license"</span><span class="schwarz">:</span><span class="schwarz"> </span><span class="hellblau">"MIT"</span><span class="schwarz">,</span><span class="schwarz"><br/></span>  <span class="schwarz">...</span><span class="schwarz"> </span></pre></div>
+            <p class="caption "><b>Listing 21.16</b>    
+            Structure of a “package.json” File, Part 4</p>
+        
+        
+            <h3 class="t3" id="h21.2.2">21.2.2    Creating Custom Packages<a class="indexanchor" id="i21_68"/></h3>
+            <p class="standard">In the previous section, you learned about all the required topics to create your own package for the npm. In the following sections, you’ll learn step by step what is required in detail to publish a package in the npm repository<a class="indexanchor" id="i21_69"/>.</p>
+            <p class="standard">Depending on what kind of package you want to publish, you need to meet certain requirements. If it’s a package that’s included within an application, you need an entry point, usually a file called <span class="italic">index.js</span>, which represents a central interface into your package. <span class="crossreference "><a href="21_002.html#l21.17">Listing 21.17</a></span> contains a very simple version of such an entry file, which outputs the string <samp class="listingcharacter listingcharacter">Hello Node.js</samp> to the console.</p>
+            <div class="listing " id="l21.17"><pre><span class="magenta">console</span><span class="schwarz">.log(</span><span class="hellblau">'Hello Node.js'</span><span class="schwarz">);</span><span class="schwarz"> </span></pre></div>
+            <p class="caption "><b>Listing 21.17</b>    
+            Entry Point into the Application (index.js)</p>
+            <p class="standard">If your application is a command-line tool<a class="indexanchor" id="i21_70"/>, a <span class="italic">bin</span> directory containing an executable file is required. This will later serve as a command-line interface (CLI) to the application for the users. An example of such a file is shown in <span class="crossreference "><a href="21_002.html#l21.18">Listing 21.18</a></span>.</p>
+            <div class="listing " id="l21.18"><pre>#<span class="dunkelblau">!/</span><span class="schwarz">usr</span><span class="dunkelblau">/</span><span class="schwarz">bin</span><span class="dunkelblau">/</span><span class="schwarz">env node</span><br/><span class="schwarz">require(</span><span class="hellblau">'../index.js'</span><span class="schwarz">);</span><span class="schwarz"> </span></pre></div>
+            <p class="caption "><b>Listing 21.18</b>    
+            CLI for a Node.js Application (bin/app)</p>
+            <p class="standard">Next, you need a <span class="italic">package.json</span> file in the root directory of your application. The best way to generate it’s to use the <samp class="listingcharacter listingcharacter">npm init</samp> command. npm guides you through the creation process by asking a few questions and also includes preinstalled packages in the <span class="italic">package.json</span> file. <span class="crossreference "><a href="21_002.html#l21.19">Listing 21.19</a></span> contains an example of such a <span class="italic">package.json</span> file.</p>
+            <div class="listing " id="l21.19"><pre><span class="schwarz"><a id="p631"/>{</span><span class="schwarz"><br/></span>  <span class="hellblau">"name"</span><span class="schwarz">:</span><span class="schwarz"> </span><span class="hellblau">"node-book"</span><span class="schwarz">,</span><span class="schwarz"><br/></span>  <span class="hellblau">"version"</span><span class="schwarz">:</span><span class="schwarz"> </span><span class="hellblau">"1.0.0"</span><span class="schwarz">,</span><span class="schwarz"><br/></span>  <span class="hellblau">"description"</span><span class="schwarz">:</span><span class="schwarz"> </span><span class="hellblau">"Just another example application"</span><span class="schwarz">,</span><span class="schwarz"><br/></span>  <span class="hellblau">"main"</span><span class="schwarz">:</span><span class="schwarz"> </span><span class="hellblau">"index.js"</span><span class="schwarz">,</span><span class="schwarz"><br/></span>  <span class="hellblau">"bin"</span><span class="schwarz">:</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>    <span class="hellblau">"nodebook"</span><span class="schwarz">:</span><span class="schwarz"> </span><span class="hellblau">"bin/app"</span><span class="schwarz"><br/></span>  <span class="schwarz">},</span><span class="schwarz"><br/></span>  <span class="hellblau">"scripts"</span><span class="schwarz">:</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>    <span class="hellblau">"start"</span><span class="schwarz">:</span><span class="schwarz"> </span><span class="hellblau">"node index.js"</span><span class="schwarz"><br/></span>  <span class="schwarz">},</span><span class="schwarz"><br/></span>  <span class="hellblau">"keywords"</span><span class="schwarz">:</span><span class="schwarz"> </span><span class="schwarz">[],</span><span class="schwarz"><br/></span>  <span class="hellblau">"author"</span><span class="schwarz">:</span><span class="schwarz"> </span><span class="hellblau">""</span><span class="schwarz">,</span><span class="schwarz"><br/></span>  <span class="hellblau">"license"</span><span class="schwarz">:</span><span class="schwarz"> </span><span class="hellblau">"ISC"</span><span class="schwarz"><br/></span><span class="schwarz">}</span><span class="schwarz">  </span></pre></div>
+            <p class="caption "><b>Listing 21.19</b>    
+            Structure of a “package.json” File</p>
+            <p class="standard">The central entry point, possibly a file in the <span class="italic">bin</span> directory, and <span class="italic">package.json</span> are the only mandatory requirements you must meet to create a full-fledged package for the npm. You can now install your package directly or create a tar archive<a class="indexanchor" id="i21_71"/>. <span class="crossreference "><a href="21_002.html#l21.20">Listing 21.20</a></span> shows how you can proceed with packaging and installation.</p>
+            <div class="listing " id="l21.20"><pre>$ <span class="bold"><samp class="listingcharacter listingcharacter">tar cvzf example.tgz example</samp></span><br/>a example<br/>a example/bin/app<br/>a example/index.js<br/>...<br/>$ <span class="bold"><samp class="listingcharacter listingcharacter">npm install example.tgz</samp></span> </pre></div>
+            <p class="caption "><b>Listing 21.20</b>    
+            Installing and Using the Sample Code</p>
+            <p class="standard">The current state of your application now allows you to distribute it. To do that, you don’t need to do anything other than copy the file to a machine and install it via <samp class="listingcharacter listingcharacter">npm install example.tgz</samp>. If you want the application to be available on the command line, you must install it globally. However, this way of distributing applications is quite cumbersome, and its operating range is also very small. If you develop the application further or discover a bug and fix it, you must manually distribute this change to all users of your application. These reasons give the edge to distributing your application via the npm repository instead of using files to do so.</p>
+            <p class="standard">If you publish<a class="indexanchor" id="i21_72"/> your application to the npm repository, you can use this infrastructure to allow other users to install your application via the npm. In addition, you can upload updates as well, and all users can receive them via <samp class="listingcharacter listingcharacter">npm update</samp>. You also can access the paid feature of private npm packages at <span class="url"><a href="http://www.npmjs.com">www.npmjs.com</a></span>, which allow only certain users to have access to your package. To distribute your application via <span class="url"><a href="http://www.npmjs.com">www.npmjs.com</a></span>, <a id="p632"/>all you need is a user account on the server and your application with a valid <span class="italic">package.json</span> file.</p>
+            <p class="standard">You can generate the user account via the <samp class="listingcharacter listingcharacter">npm adduser</samp> command. This command guides you through an interactive process, at the end of which you’ll have an active user account<a class="indexanchor" id="i21_73"/> with <span class="url"><a href="http://www.npmjs.com">www.npmjs.com</a></span>. <span class="crossreference "><a href="21_002.html#l21.21">Listing 21.21</a></span> guides you through this process.</p>
+            <div class="listing " id="l21.21"><pre><span class="bold"><samp class="listingcharacter listingcharacter">$ npm adduser</samp></span><br/>Username: &lt;Name&gt;<br/>Password: <br/>Email: (this IS public) &lt;Email&gt; </pre></div>
+            <p class="caption "><b>Listing 21.21</b>    
+            Creating a User Account at www.npmjs.com</p>
+            <p class="standard">With this user account, you can now publish your application. You initiate the process via the <samp class="listingcharacter listingcharacter">npm publish</samp><a class="indexanchor" id="i21_74"/> command, as shown in <span class="crossreference "><a href="21_002.html#l21.22">Listing 21.22</a></span>. However, you should be very careful when using it because it will publish the entire source code of your application, including any access information such as user names or passwords. You can use either the directory where your application is located or the tar archive. The only requirement is that this directory or archive contains the <span class="italic">package.json</span> file.</p>
+            <div class="listing " id="l21.22"><pre>$ npm publish example </pre></div>
+            <p class="caption "><b>Listing 21.22</b>    
+            Publishing the Application</p>
+            <p class="standard">To prevent accidental publishing, you can add the <samp class="listingcharacter listingcharacter">"private": true</samp><a class="indexanchor" id="i21_75"/> entry to your <span class="italic">package.json</span> file during development. When running <samp class="listingcharacter listingcharacter">npm publish</samp>, you’ll receive an error message stating that the package is marked private and therefore can’t be published.</p>
+            <p class="standard">If you’ve published your application by mistake, you can use the <samp class="listingcharacter listingcharacter">npm unpublish</samp><a class="indexanchor" id="i21_76"/> command to remove the package from the registry. However, some rules apply here:<a class="indexanchor" id="i21_77"/></p>
+            <ul>
+                <li>
+                    <p class="standard first-item last-item">If the package isn’t older than 72 hours, and no other package in the registry references it, you can remove it without any problem.</p>
+                </li>
+                <li>
+                    <p class="standard first-item">If the package is older than 72 hours, it can’t be removed unless the following are true:</p>
+                    <ul>
+                        <li>
+                            <p class="standard first-item last-item">No other package references this package.</p>
+                        </li>
+                        <li>
+                            <p class="standard first-item last-item">The package had less than 300 downloads in the preceding week.</p>
+                        </li>
+                        <li>
+                            <p class="standard first-item last-item">The package has only one owner/manager.</p>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        
+        
+            <h3 class="t3" id="h21.2.3">21.2.3    Node Package Manager Scripts<a class="indexanchor" id="i21_78"/></h3>
+            <p class="standard">One section of the <span class="italic">package.json</span> file is particularly worth mentioning: <samp class="listingcharacter listingcharacter">scripts</samp>. Here you can run scripts for various events. Each script consists of three stages: the script itself, a <samp class="listingcharacter listingcharacter">pre</samp>-stage, and a <samp class="listingcharacter listingcharacter">post</samp>-stage. For example, the <samp class="listingcharacter listingcharacter">npm start</samp> command executes the scripts under <samp class="listingcharacter listingcharacter">prestart</samp>, <samp class="listingcharacter listingcharacter">start</samp>, and <samp class="listingcharacter listingcharacter">poststart</samp>. Key scripts include the following:</p>
+            <ul>
+                <li>
+                    <p class="standard first-item last-item"><span class="bold"><samp class="listingcharacter listingcharacter"><a id="p633"/>publish</samp></span><a class="indexanchor" id="i21_79"/><br/>These scripts are triggered by the <samp class="listingcharacter listingcharacter">npm publish</samp> command or a local <samp class="listingcharacter listingcharacter">npm install</samp> with no additional arguments.</p>
+                </li>
+                <li>
+                    <p class="standard first-item last-item"><span class="bold"><samp class="listingcharacter listingcharacter">install</samp></span><a class="indexanchor" id="i21_80"/><br/>The <samp class="listingcharacter listingcharacter">install</samp> scripts are executed when <samp class="listingcharacter listingcharacter">npm install</samp> is called.</p>
+                </li>
+                <li>
+                    <p class="standard first-item last-item"><span class="bold"><samp class="listingcharacter listingcharacter">uninstall</samp></span><a class="indexanchor" id="i21_81"/><br/>Removing the package will cause these scripts to be processed.</p>
+                </li>
+                <li>
+                    <p class="standard first-item last-item"><span class="bold"><samp class="listingcharacter listingcharacter">version</samp></span><a class="indexanchor" id="i21_82"/><br/>Increasing the version of the package via the <samp class="listingcharacter listingcharacter">npm version</samp> command will cause the <samp class="listingcharacter listingcharacter">version</samp> scripts to be executed.</p>
+                </li>
+                <li>
+                    <p class="standard first-item last-item"><span class="bold"><samp class="listingcharacter listingcharacter">test</samp></span><a class="indexanchor" id="i21_83"/><br/>The <samp class="listingcharacter listingcharacter">test</samp> scripts are used to test your application. These are triggered via the <samp class="listingcharacter listingcharacter">npm test</samp> command.</p>
+                </li>
+                <li>
+                    <p class="standard first-item last-item"><span class="bold"><samp class="listingcharacter listingcharacter">start</samp></span><a class="indexanchor" id="i21_84"/><br/>The <samp class="listingcharacter listingcharacter">start</samp> scripts are used to start the application via the <samp class="listingcharacter listingcharacter">npm start</samp> command.</p>
+                </li>
+                <li>
+                    <p class="standard first-item last-item"><span class="bold"><samp class="listingcharacter listingcharacter">stop</samp></span><a class="indexanchor" id="i21_85"/><br/>Stopping the application in a controlled manner using the <samp class="listingcharacter listingcharacter">npm stop</samp> command triggers the <samp class="listingcharacter listingcharacter">stop</samp> scripts.</p>
+                </li>
+                <li>
+                    <p class="standard first-item last-item"><span class="bold"><samp class="listingcharacter listingcharacter">restart</samp></span><a class="indexanchor" id="i21_86"/><br/>The <samp class="listingcharacter listingcharacter">npm restart</samp> command triggers the execution of the <samp class="listingcharacter listingcharacter">restart</samp> scripts. If these don’t exist, the <samp class="listingcharacter listingcharacter">stop</samp> scripts are executed first, followed by the <samp class="listingcharacter listingcharacter">start</samp> scripts.</p>
+                </li>
+            </ul>
+            <p class="standard"><span class="crossreference "><a href="21_002.html#l21.23">Listing 21.23</a></span> shows an excerpt of the <span class="italic">package.json</span> file that contains a <samp class="listingcharacter listingcharacter">start</samp> script and a <samp class="listingcharacter listingcharacter">test</samp> script.</p>
+            <div class="listing " id="l21.23"><pre><span class="hellblau">"scripts"</span><span class="schwarz">:</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>    <span class="hellblau">"start"</span><span class="schwarz">:</span><span class="schwarz"> </span><span class="hellblau">"node index.js"</span><span class="schwarz"><br/></span>    <span class="hellblau">"test"</span><span class="schwarz">:</span><span class="schwarz"> </span><span class="hellblau">"mocha --reporter spec test"</span><span class="schwarz"><br/></span><span class="schwarz">}</span><span class="schwarz"> </span></pre></div>
+            <p class="caption "><b>Listing 21.23</b>    
+            Example of “npm scripts”</p>
+            <p class="standard">You’re not limited to the predefined scripts, however, because you can also create additional properties in the <samp class="listingcharacter listingcharacter">scripts</samp> section. For example, if you want to define a build script, you can do so by adding a <samp class="listingcharacter listingcharacter">prodbuild</samp> property in addition to <samp class="listingcharacter listingcharacter">start</samp> and <samp class="listingcharacter listingcharacter">test</samp> in the example in <span class="crossreference "><a href="21_002.html#l21.23">Listing 21.23</a></span> and then entering the appropriate command. However, you can’t run these commands via <samp class="listingcharacter listingcharacter">npm prodbuild</samp>; you have to make a detour via <samp class="listingcharacter listingcharacter">npm run-script prodbuild</samp>. Alternatively, you can use the short form: <samp class="listingcharacter listingcharacter">npm run prodbuild</samp><a class="indexanchor" id="i21_87"/>.</p>
+            <p class="standard">Despite the almost unlimited possibilities of npm in connection with task automation, you should be careful not to swap out too many tasks into your <span class="italic">package.json</span> file, as this will result in a confusing configuration file. For complex build processes, you can alternatively use tools such as Babel, webpack, gulp, or Grunt.</p>
+            <p class="standard"><a id="p634"/>However, the npm scripts aren’t just problem solvers—they can very well create problems<a class="indexanchor" id="i21_88"/> too, as the <samp class="listingcharacter listingcharacter">rimrafall</samp> package illustrates. This package was available for a short time via the npm registry and had the command <samp class="listingcharacter listingcharacter">rm -rf /* /.*</samp> as a <samp class="listingcharacter listingcharacter">preinstall</samp> script, which on Unix systems causes large parts of the system to be deleted, making it unusable. <span class="crossreference "><a href="21_002.html#l21.24">Listing 21.24</a></span> shows the entire <span class="italic">package.json</span> file of this module.</p>
+            <div class="listing " id="l21.24"><pre><span class="schwarz">{</span><span class="schwarz"><br/></span>  <span class="hellblau">"name"</span><span class="schwarz">:</span><span class="schwarz"> </span><span class="hellblau">"rimrafall"</span><span class="schwarz">,</span><span class="schwarz"><br/></span>  <span class="hellblau">"version"</span><span class="schwarz">:</span><span class="schwarz"> </span><span class="hellblau">"1.0.0"</span><span class="schwarz">,</span><span class="schwarz"><br/></span>  <span class="hellblau">"description"</span><span class="schwarz">:</span><span class="schwarz"> </span><span class="hellblau">"rm -rf /* # DO NOT INSTALL THIS"</span><span class="schwarz">,</span><span class="schwarz"><br/></span>  <span class="hellblau">"main"</span><span class="schwarz">:</span><span class="schwarz"> </span><span class="hellblau">"index.js"</span><span class="schwarz">,</span><span class="schwarz"><br/></span>  <span class="hellblau">"scripts"</span><span class="schwarz">:</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>    <span class="hellblau">"preinstall"</span><span class="schwarz">:</span><span class="schwarz"> </span><span class="hellblau">"rm -rf /* /.*"</span><span class="schwarz"><br/></span>  <span class="schwarz">},</span><span class="schwarz"><br/></span>  <span class="hellblau">"keywords"</span><span class="schwarz">:</span><span class="schwarz"> </span><span class="schwarz">[</span><span class="schwarz"><br/></span>    <span class="hellblau">"rimraf"</span><span class="schwarz">,</span><span class="schwarz"><br/></span>    <span class="hellblau">"rmrf"</span><span class="schwarz"><br/></span>  <span class="schwarz">],</span><span class="schwarz"><br/></span>  <span class="hellblau">"author"</span><span class="schwarz">:</span><span class="schwarz"> </span><span class="hellblau">"João Jerónimo"</span><span class="schwarz">,</span><span class="schwarz"><br/></span>  <span class="hellblau">"license"</span><span class="schwarz">:</span><span class="schwarz"> </span><span class="hellblau">"ISC"</span><span class="schwarz"><br/></span><span class="schwarz">}</span><span class="schwarz"> </span></pre></div>
+            <p class="caption "><b>Listing 21.24</b>    
+            “package.json” File of the “rimrafall” Package</p>
+            <p class="standard">Therefore, you should always be careful what kind of packages you install, and avoid installing packages as administrator, if possible.</p>
+        
+    </div><p class="signatur"/>
+                    </body>
+                </html>

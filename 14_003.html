@@ -1,0 +1,128 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+                    
+        <head><meta content="application/xhtml+xml; charset=utf-8" http-equiv="Content-Type"/>
+            <meta content="application/xhtml+xml; charset=utf-8" name="content-type"/>
+            <meta content="Web Applications with Nest" name="title"/>
+            <meta content="Sebastian Springer" name="author"/>
+            <meta content="Rheinwerk Publishing" name="publisher"/>
+            <meta content="© 2022 by Rheinwerk Publishing Inc., Boston (MA)" name="copyright"/>
+            <meta content="Node.js - The Comprehensive Guide - Web Applications with Nest" name="description"/>
+            <meta content="en" name="language"/>
+            <title>Web Applications with Nest</title>
+            <link href="common/main.css" rel="stylesheet" type="text/css"/>
+<meta content="urn:uuid:e0000000-0000-0000-0000-000029756394" name="Adept.expected.resource"/>
+        </head>
+    
+
+
+                    <body class="office_us type_kapitel">
+                        <div id="main">
+        <h2 class="t2" id="h14.3">14.3    Structure of the Application<a class="indexanchor" id="i14_39"/></h2>
+        <p class="standard">The <samp class="listingcharacter listingcharacter">nest new</samp> command creates a fully functional application with a base structure on which you can build your own implementation. To help you find your way around here, let’s first take a look at the directories and files the Nest CLI has created for you.</p>
+        
+            <h3 class="t3" id="h14.3.1">14.3.1    Root Directory with the Configuration Files<a class="indexanchor" id="i14_40"/></h3>
+            <p class="standard">In many JavaScript environments, it has become best practice to store mainly the central configuration files in the root directory of an application and to arrange the actual source code in a hierarchy below, so there are a number of files in your Nest application here as well. The description of these files is shown in <span class="crossreference "><a href="14_003.html#t14.3">Table 14.3</a></span>.<a class="indexanchor" id="i14_41"/></p>
+            <table class="standardtable" id="t14.3">
+                <thead>
+                    <tr>
+                        <th class="tablehead tablecell_first top_border_cell">
+                            <p class="standard first-item last-item">File Name</p>
+                        </th>
+                        <th class="tablehead tablecell_last top_border_cell">
+                            <p class="standard first-item last-item">Description</p>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="tablecell tablecell_first top_border_cell">
+                            <p class="standard first-item last-item"><span class="italic">.eslintrc</span></p>
+                        </td>
+                        <td class="tablecell tablecell_last top_border_cell">
+                            <p class="standard first-item last-item">This file contains the configuration for ESLint. Nest uses a number of standard plug-ins and customizes some of the rules they contain. For more information on ESLint, see <span class="crossreference "><a href="22_001.html#h22">Chapter 22</a></span>.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><span class="italic">.gitignore</span></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Nest defines a <span class="italic">.gitignore</span> file for you that exempts some files and directories from version control. These are mainly metafiles for editors, log files, or build artifacts.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><span class="italic"><a id="p420"/>.perttierrc</span></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Prettier is a code formatter that automatically formats your source code according to certain rules. This file contains some rules for this tool.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><span class="italic">nest-cli.json</span></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">This file contains metadata that Nest needs to organize, build, and deploy your application.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><span class="italic">package-lock.json</span></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">If you use npm as a package manager, the exact version numbers of the installed packages are recorded here. For more information on this topic, refer to <span class="crossreference "><a href="21_001.html#h21">Chapter 21</a></span>.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><span class="italic">package.json</span></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">The <span class="italic">package.json</span> file is the central configuration file of your application. For example, it contains a set of preconfigured scripts you can use to run, build, or test your application.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><span class="italic">README.md</span></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">The readme file contains a description of your application. In most cases, important information for the developers is stored here, such as how you can start the application or which special features you need to pay attention to.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><span class="italic">tsconfig.build.json</span></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">This file contains the TypeScript configuration for the build of the application and extends the basic version of <span class="italic">tsconfig.json</span>.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><span class="italic">tsconfig.json</span></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">The <span class="italic">tsconfig.json</span> file contains information for the TypeScript compiler and specifies how it should convert the application’s TypeScript source code into JavaScript.</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="caption "><b>Table 14.3</b>    
+            Files in the Base Directory of the Application</p>
+        
+        
+            <h3 class="t3" id="h14.3.2">14.3.2    src Directory: Core of the Application<a class="indexanchor" id="i14_42"/></h3>
+            <p class="standard">When working with Nest, you spend most of your time in the <span class="italic">src</span> directory because it contains the source code of your application. The entry point to the application is the <span class="italic">main.ts</span> file. This file makes sure that the Nest application gets created, registers the base module, and binds the application to port 3000. From here, you move through a tree of interdependent modules, starting with the app module.</p>
+            <p class="standard">The Nest CLI initially creates a module, a controller, and a service for you. The following sections describe these structures and their significance in greater detail. At this point, the only important thing for you to know is that these are the most important structures of an application and that you can already implement a simple application with them.</p>
+        
+        
+            <h3 class="t3" id="h14.3.3">14.3.3    Other Directories of the Application</h3>
+            <p class="standard">In addition to these directories and files, your application contains two more directories. The <span class="italic">node_modules</span> directory contains the installed dependencies, while the <span class="italic">dist</span> directory<a class="indexanchor" id="i14_43"/> contains the built version of your application. Both directories aren’t subject <a id="p421"/>to version control and are created after your initial loading of the source code from the repository.</p>
+            <p class="standard">You can create the <span class="italic">node_modules</span> directory by running the <samp class="listingcharacter listingcharacter">npm install</samp> command on the command line. The package manager then downloads all dependencies and stores them in this directory.</p>
+            <p class="standard">The <span class="italic">dist</span> directory creates Nest as soon as you run <samp class="listingcharacter listingcharacter">nest start</samp> or <samp class="listingcharacter listingcharacter">nest build</samp>. This directory contains the built version of your application, that is, the JavaScript source code generated by the TypeScript compiler<a class="indexanchor" id="i14_44"/>. You can run the JavaScript source code directly with Node.js.</p>
+            <p class="standard">Based on all this information, you can now start developing your application.</p>
+        
+    </div><p class="signatur"/>
+                    </body>
+                </html>

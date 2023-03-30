@@ -1,0 +1,119 @@
+table.standardtable {
+  border-collapse: collapse;
+  border-right-style: hidden;
+  border-left-style: hidden;
+}
+table.standardtable td, table.standardtable th {
+  border-width: 1px;
+  border-style: solid;
+}
+
+/*
+@font-face {
+    font-family: 'Bariol';
+    src: url('../keys/bariol_regular-webfont.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Bariol';
+    src: url('../keys/bariol_regular_italic-webfont.ttf');
+    font-weight: normal;
+    font-style: italic;
+}
+@font-face {
+    font-family: 'Bariol';
+    src: url('../keys/bariol_bold-webfont.ttf');
+    font-weight: bold;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Bariol';
+    src: url('../keys/bariol_bold_italic-webfont.ttf');
+    font-weight: bold;
+    font-style: italic;
+}
+*/
+body,
+div.box,
+h1, h2, h3, h4, h5, h6,
+table.normal, table.standardtable,
+.listingcomment,
+td.step-list-counter,
+table.table_schritt span.schritt,
+p.indexnav, p.acronym,
+div.glossary_entry > strong {
+  font-family: "Bariol", sans-serif;
+}
+
+h1.t1, .h1-like {
+  font-weight: bold;
+}
+
+h1.t1, .h1-like,
+h2.t2, .h2-like,
+h1.content1 {
+  color: #4698cb;
+}
+
+h3.t3, .h3-like,
+h4.t4, .h4-like {
+  color: black;
+}
+
+h1.content1 {
+  border: none;
+}
+
+span.screenelement {
+  font-weight: bold;
+  color: black;
+  font-variant: normal;
+}
+
+span.callout {
+  color: #4698cb;
+  vertical-align: baseline;
+}
+
+div.box {
+  border: none;
+  background-color: #daeaf5;
+  border-radius: 0.5em;
+}
+
+h6.boxheading {
+  color: black;
+}
+
+span.box_icon {
+  color: #4698cb;
+}
+
+ol {
+  margin-left: 0.25em;
+}
+ol > li {
+  color: #4698cb;
+}
+ol > li > * {
+  color: black;
+}
+
+div.imagebox {
+  text-align: center;
+}
+
+table.standardtable th.tablehead {
+  border-color: #4698cb;
+  background-color: #daeaf5;
+  color: black;
+}
+table.standardtable td.tablecell {
+  border-color: #4698cb;
+  background-color: transparent;
+}
+
+img.inline_image {
+  max-height: 1.2em;
+}

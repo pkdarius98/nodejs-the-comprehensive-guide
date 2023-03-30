@@ -1,0 +1,68 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+                    
+        <head><meta content="application/xhtml+xml; charset=utf-8" http-equiv="Content-Type"/>
+            <meta content="application/xhtml+xml; charset=utf-8" name="content-type"/>
+            <meta content="Web Applications with Nest" name="title"/>
+            <meta content="Sebastian Springer" name="author"/>
+            <meta content="Rheinwerk Publishing" name="publisher"/>
+            <meta content="© 2022 by Rheinwerk Publishing Inc., Boston (MA)" name="copyright"/>
+            <meta content="Node.js - The Comprehensive Guide - Web Applications with Nest" name="description"/>
+            <meta content="en" name="language"/>
+            <title>Web Applications with Nest</title>
+            <link href="common/main.css" rel="stylesheet" type="text/css"/>
+<meta content="urn:uuid:e0000000-0000-0000-0000-000029756394" name="Adept.expected.resource"/>
+        </head>
+    
+
+
+                    <body class="office_us type_kapitel">
+                        <div id="main">
+        <h2 class="t2" id="h14.4">14.4    Modules: Logical Units in the Source Code<a class="indexanchor" id="i14_45"/></h2>
+        <p class="standard">The largest unit in a Nest application is the module. You can think of a module as a kind of container<a class="indexanchor" id="i14_46"/> that contains various other structures such as controllers or services. An application consists of at least one module—the app module—but it can consist of any number of modules. Modules are usually designed thematically. In our case, the MovieDB application consists of three self-implemented modules: the central app module<a class="indexanchor" id="i14_47"/>; the movie module, which deals with all matters related to a movie; and the auth module, which ensures that users can log in to the application and is responsible for securing the application’s endpoints.</p>
+        <p class="standard"><span class="crossreference "><a href="14_004.html#f14.2">Figure 14.2</a></span> illustrates the modular structure of a Nest application. In this figure, you can also see that you can nest the hierarchy of modules as deeply as you like. Each module integrates a number of structures, such as controllers or services, and can make these available to other modules via <samp class="listingcharacter listingcharacter">exports</samp>. Thus, one module can integrate another one and use its functionality. On the one hand, you can use this principle to divide your application into different logical units, and on the other hand, modules are often used in the implementation of libraries<a class="indexanchor" id="i14_48"/> to encapsulate their functionality.</p>
+        <div class="imagebox figure-type"><a href="img-f14.2.html" id="f14.2"><img alt="Modular Structure of a Nest Application" id="img-f14.2" src="bilderklein/klein14_002.png"/></a></div>
+        <p class="caption "><b>Figure 14.2</b>    
+            Modular Structure of a Nest Application</p>
+        
+            <h3 class="t3" id="h14.4.1">14.4.1    <a id="p422"/>Creating Modules<a class="indexanchor" id="i14_49"/></h3>
+            <p class="standard">The first module after the already pregenerated app module is the movie module, which you create on the command line via the <samp class="listingcharacter listingcharacter">nest generate module movie</samp><a class="indexanchor" id="i14_50"/> command. Each Nest command also provides you with an output that briefly explains what the command has done. In the case of module generation, you’ll get an output like the one shown in <span class="crossreference "><a href="14_004.html#l14.3">Listing 14.3</a></span>.</p>
+            <div class="listing " id="l14.3"><pre><span class="bold"><samp class="listingcharacter listingcharacter">$ nest generate module movie</samp></span><br/>CREATE src/movie/movie.module.ts (82 bytes)<br/>UPDATE src/app.module.ts (312 bytes) </pre></div>
+            <p class="caption "><b>Listing 14.3</b>    
+            Output after Creating a Module</p>
+            <p class="standard">Nest creates the <span class="italic">movie</span> directory in the <span class="italic">src</span> directory for the new module and generates the <span class="italic">movie.module.ts</span> file there. As a convention for naming files, Nest recommends that in addition to the name of the structure, the type, in this case <span class="italic">module</span>, is also included in the file name. In addition to the creation of the module, it’s also automatically registered<a class="indexanchor" id="i14_51"/> in the central app module, hence the second line with the <samp class="listingcharacter listingcharacter">UPDATE</samp> information. <span class="crossreference "><a href="14_004.html#l14.4">Listing 14.4</a></span> shows the source code of the app module.</p>
+            <div class="listing " id="l14.4"><pre><span class="rot">import</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"> Module </span><span class="schwarz">}</span><span class="schwarz"> </span><span class="rot">from</span><span class="schwarz"> </span><span class="hellblau">'@nestjs/common'</span><span class="schwarz">;</span><span class="schwarz"><br/></span><span class="rot">import</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"> AppController </span><span class="schwarz">}</span><span class="schwarz"> </span><span class="rot">from</span><span class="schwarz"> </span><span class="hellblau">'./app.controller'</span><span class="schwarz">;</span><span class="schwarz"><br/></span><span class="rot">import</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"> AppService </span><span class="schwarz">}</span><span class="schwarz"> </span><span class="rot">from</span><span class="schwarz"> </span><span class="hellblau">'./app.service'</span><span class="schwarz">;</span><span class="schwarz"><br/></span><span class="bold"><span class="schwarz"/><samp class="listingcharacter listingcharacter"><span class="rot">import</span><span class="schwarz"> { MovieModule } </span><span class="rot">from</span><span class="schwarz"> </span><span class="hellblau">'./movie/movie.module'</span><span class="schwarz">;</span><br/> </samp></span><br/>@Module({<br/>  <span class="bold"><samp class="listingcharacter listingcharacter">imports: [MovieModule],</samp></span><br/>  controllers: [AppController],<br/>  providers: [AppService],<br/>})<br/><span class="rot">export</span><span class="schwarz"> </span><span class="rot">class AppModule</span><span class="schwarz"> {} </span><span class="schwarz"/></pre></div>
+            <p class="caption "><b>Listing 14.4</b>    
+            Import of the Movie Module in the App Module (src/app.module.ts)</p>
+            <p class="standard"><span class="crossreference "><a href="14_004.html#l14.5">Listing 14.5</a></span> contains the slightly modified source code of the movie module.</p>
+            <div class="listing " id="l14.5"><pre><span class="rot">import</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"> Module </span><span class="schwarz">}</span><span class="schwarz"> </span><span class="rot">from</span><span class="schwarz"> </span><span class="hellblau">'@nestjs/common'</span><span class="schwarz">;</span><span class="schwarz"><br/></span> <br/>@<span class="schwarz">Module({</span><span class="schwarz"><br/></span>  imports<span class="schwarz">:</span><span class="schwarz"> </span><span class="schwarz">[],</span><span class="schwarz"><br/></span>  controllers<span class="schwarz">:</span><span class="schwarz"> </span><span class="schwarz">[],</span><span class="schwarz"><br/></span>  providers<span class="schwarz">:</span><span class="schwarz"> </span><span class="schwarz">[],</span><span class="schwarz"><br/></span>  exports<span class="schwarz">:</span><span class="schwarz"> </span><span class="schwarz">[],</span><span class="schwarz"><br/></span><span class="schwarz">})</span><span class="schwarz"><br/></span><span class="rot">export</span><span class="schwarz"> </span><span class="rot">class MovieModule</span><span class="schwarz"> </span><span class="schwarz">{}</span><span class="schwarz"> </span></pre></div>
+            <p class="caption "><b>Listing 14.5</b>    
+            Source Code of the Movie Module (src/movie/movie.module.ts)</p>
+        
+        
+            <h3 class="t3" id="h14.4.2">14.4.2    <a id="p423"/>Module Decorator<a class="indexanchor" id="i14_52"/></h3>
+            <p class="standard">A module usually consists of an empty TypeScript class that is exported and the <samp class="listingcharacter listingcharacter">module</samp> decorator that binds additional information to the class. This means there are four different pieces of information:</p>
+            <ul>
+                <li>
+                    <p class="standard first-item last-item"><span class="bold"><samp class="listingcharacter listingcharacter">imports</samp></span><a class="indexanchor" id="i14_53"/><br/>Here you can specify references to other modules whose features are then available in the current module.</p>
+                </li>
+                <li>
+                    <p class="standard first-item last-item"><span class="bold"><samp class="listingcharacter listingcharacter">controllers</samp></span><a class="indexanchor" id="i14_54"/><br/>At this point, you reference the controllers of the module. This step activates the endpoints the controller defines.</p>
+                </li>
+                <li>
+                    <p class="standard first-item last-item"><span class="bold"><samp class="listingcharacter listingcharacter">providers</samp></span><a class="indexanchor" id="i14_55"/><br/>In the <samp class="listingcharacter listingcharacter">providers</samp> array, you add the providers, such as, for example, services of the module. This information is important for Nest’s dependency injection to load the required structures. You can find more information about providers and dependency injection in <span class="crossreference "><a href="14_006.html#h14.6">Section 14.6</a></span>.</p>
+                </li>
+                <li>
+                    <p class="standard first-item last-item"><span class="bold"><samp class="listingcharacter listingcharacter">exports</samp></span><a class="indexanchor" id="i14_56"/><br/>Under <samp class="listingcharacter listingcharacter">exports</samp>, you specify the structures to be made available to a module when it embeds your module.</p>
+                </li>
+            </ul>
+            <div class="box box_standard">
+                <h6 class="boxheading">Decorators<a class="indexanchor" id="i14_57"/></h6>
+                <p class="standard first">When using Nest, you’ll come across the <span class="italic">decorators</span> early on. This is a TypeScript feature that allows you to bind additional features to specific structures via an annotation<a class="indexanchor" id="i14_58"/>. In the case of a module, for example, you can register the controllers.</p>
+                <p class="standard">However, decorators are available not only for classes, but also for functions and variables. In the course of this chapter, you’ll see more uses for decorators. At its core, a decorator is simply a function that is run for a structure, a class in this case. For more information about decorators and how to create them, go to <span class="url"><a href="http://www.typescriptlang.org/docs/handbook/decorators.html">www.typescriptlang.org/docs/handbook/decorators.html</a></span>.</p>
+                <p class="standard last">The decorators feature also exists as a proposal for the ECMAScript standard, but has been in the process for quite some time at level 2 of a total of 4, which means that integration into the JavaScript language core will still take some time. Until then, if you want to use decorators, you’ll have to resort to tools such as TypeScript.</p>
+            </div>
+            <p class="standard">The newly created module is entered by Nest into the <samp class="listingcharacter listingcharacter">imports</samp> of the app module, and thus a connection between the two modules is established. With this, you can move on to creating a new controller in the next step.</p>
+        
+    </div><p class="signatur"/>
+                    </body>
+                </html>

@@ -1,0 +1,238 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+                    
+        <head><meta content="application/xhtml+xml; charset=utf-8" http-equiv="Content-Type"/>
+            <meta content="application/xhtml+xml; charset=utf-8" name="content-type"/>
+            <meta content="Developing Your First Application" name="title"/>
+            <meta content="Sebastian Springer" name="author"/>
+            <meta content="Rheinwerk Publishing" name="publisher"/>
+            <meta content="© 2022 by Rheinwerk Publishing Inc., Boston (MA)" name="copyright"/>
+            <meta content="Node.js - The Comprehensive Guide - Developing Your First Application" name="description"/>
+            <meta content="en" name="language"/>
+            <title>Developing Your First Application</title>
+            <link href="common/main.css" rel="stylesheet" type="text/css"/>
+<meta content="urn:uuid:e0000000-0000-0000-0000-000029756394" name="Adept.expected.resource"/>
+        </head>
+    
+
+
+                    <body class="office_us type_kapitel">
+                        <div id="main">
+        <h2 class="t2" id="h3.3">3.3    Debugging<a class="indexanchor" id="i03_80"/> Node.js Applications</h2>
+        <p class="standard">Even when implementing smaller applications, sooner or later, you’ll reach the point at which you need to find and fix a bug in your own source code. Most of these errors are caused by incorrectly assigned variables or logic errors within the application. For this reason, when troubleshooting, you’re usually concerned with the values of certain variables and the flow of the application logic.</p>
+        <p class="standard">In the simplest case, you insert <samp class="listingcharacter listingcharacter">console.log</samp> statements at certain points in the source code, which helps you output the values of the variables and check the individual flow steps of your source code. In <span class="crossreference "><a href="03_003.html#l3.14">Listing 3.14</a></span>, you can see what the web server example can look like with such debug outputs<a class="indexanchor" id="i03_81"/>. In addition, as you can see in the code, <samp class="listingcharacter listingcharacter">console.log</samp> is quite flexible. You can pass either one or more arguments to this method. If you pass <a id="p89"/>multiple arguments, <samp class="listingcharacter listingcharacter">console.log</samp> takes care of the joining and the output.</p>
+        <div class="listing " id="l3.14"><pre><span class="rot">import</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"> createServer </span><span class="schwarz">}</span><span class="schwarz"> </span><span class="rot">from</span><span class="schwarz"> </span><span class="hellblau">'http'</span><span class="schwarz">;</span><span class="schwarz"><br/></span> <br/><span class="bold"><span class="magenta">console</span><span class="schwarz">.log(</span><span class="hellblau">'createServer'</span><span class="schwarz">);</span></span><br/><span class="rot">const</span><span class="schwarz"> server </span><span class="dunkelblau">=</span><span class="schwarz"> createServer((request, response) </span><span class="dunkelblau">=&gt;</span><span class="schwarz"> {</span><br/>  <span class="bold"><span class="magenta">console</span><span class="schwarz">.log(</span><span class="hellblau">'createServer callback'</span><span class="schwarz">);</span><br/> </span><br/>  response.writeHead(200, { <span class="hellblau">'content-type'</span><span class="schwarz">: </span><span class="hellblau">'text/html; charset=utf-8'</span><span class="schwarz"> });</span><br/> <br/>  <span class="rot">const</span><span class="schwarz"> url </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="rot">new </span><span class="schwarz">URL(request.url, </span><span class="hellblau">'http://localhost:8080'</span><span class="schwarz">);</span><br/> <br/>  <span class="bold"><span class="magenta">console</span><span class="schwarz">.log(url);</span><br/>  <span class="magenta">console</span><span class="schwarz">.log(</span><span class="hellblau">'Name: '</span><span class="schwarz">, url.searchParams.get(</span><span class="hellblau">'name'</span><span class="schwarz">));</span><br/> </span><br/>  <span class="rot">const</span><span class="schwarz"> body </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="violett">`...`</span><span class="schwarz">;</span><br/> <br/>  response.end(body);<br/>});<br/> <br/><span class="bold"><span class="magenta">console</span><span class="schwarz">.log(</span><span class="hellblau">'listen'</span><span class="schwarz">);</span></span><br/>server.listen(8080, () <span class="dunkelblau">=&gt;</span><span class="schwarz"> {</span><br/>  <span class="magenta">console</span><span class="schwarz">.log(</span><br/>    <span class="violett">`Server is listening to http://localhost:${server.address().port}`</span><span class="schwarz">,</span><br/>  );<br/>}); <span class="schwarz"/></pre></div>
+        <p class="caption "><b>Listing 3.14</b>    
+            Debugging with “console.log”</p>
+        <p class="standard">When you run the source code from <span class="crossreference "><a href="03_003.html#l3.14">Listing 3.14</a></span>, you’ll see that first <samp class="listingcharacter listingcharacter">createServer</samp>, <samp class="listingcharacter listingcharacter">listen</samp>, and the string <samp class="listingcharacter listingcharacter">Server is listening to http://localhost:8080</samp> are output to the console. As soon as you start a query with your browser, the <samp class="listingcharacter listingcharacter">createServer callback</samp> string, the URL object, and the name from the query string<a class="indexanchor" id="i03_82"/> are output.</p>
+        <p class="standard">This way of debugging an application has several problems at the same time. To receive output, you need to actively edit the source code and include the statements in the relevant places. This means that you’ll have to make additional adjustments to the source code for error analysis<a class="indexanchor" id="i03_83"/>, and for this reason, you’ll have to modify it further, which makes it vulnerable for additional problems. Another difficulty of this method of debugging is that by using the <samp class="listingcharacter listingcharacter">console.log</samp> statements,<a class="indexanchor" id="i03_84"/> at runtime of the application, you don’t get an image of the whole environment but only of a very specific section, which can be even further distorted by certain influences.</p>
+        <p class="standard">The Node.js debugger<a class="indexanchor" id="i03_85"/> provides a remedy for these problems. The advantage of the debugger is that it’s an integral part of the Node.js platform, so you don’t need to install <a id="p90"/>any other software. To start the debugger, save your source code to a file, which in this example is the <span class="italic">server.mjs</span> file, with the source code from <span class="crossreference "><a href="03_002.html#l3.13">Listing 3.13</a></span>, and run the <samp class="listingcharacter listingcharacter">node inspect server.mjs</samp><a class="indexanchor" id="i03_86"/> command in the command line. <span class="crossreference "><a href="03_003.html#l3.15">Listing 3.15</a></span> shows the output of the command.</p>
+        <div class="listing " id="l3.15"><pre><span class="bold">$ node inspect server.mjs </span><br/>&lt; Debugger listening on ws://127.0.0.1:9229/63f3a320-4d08-48ab-847f-300688e54760<br/>&lt; For help, see: https://nodejs.org/en/docs/inspector<br/>&lt; <br/>connecting to 127.0.0.1:9229 ... ok<br/>&lt; Debugger attached.<br/>&lt; <br/>Break on start in server.mjs:1<br/>&gt; 1 import { createServer } from 'http';<br/>  2 <br/>  3 const server = createServer((request, response) =&gt; {<br/>debug&gt; </pre></div>
+        <p class="caption "><b>Listing 3.15</b>    
+            Debugging with Node.js</p>
+        <p class="standard">If you add the <samp class="listingcharacter listingcharacter">inspect</samp> option when calling your application, the application will start in interactive debug mode<a class="indexanchor" id="i03_87"/>. The first information you get is that the debugger is waiting for incoming connections via a WebSocket<a class="indexanchor" id="i03_88"/> connection. Furthermore, the display tells you in which file and line the debugger has interrupted the execution. Finally, the first three lines of the application code are output. The statement at which the debugger stopped is highlighted in green.</p>
+        
+            <h3 class="t3" id="h3.3.1">3.3.1    Navigating<a class="indexanchor" id="i03_89"/> in the Debugger</h3>
+            <p class="standard">The <samp class="listingcharacter listingcharacter">debug&gt;</samp> prompt signals that the debugger is now waiting for your input. You can see which commands<a class="indexanchor" id="i03_90"/> are available to you in <span class="crossreference "><a href="03_003.html#t3.2">Table 3.2</a></span>.</p>
+            <p class="standard">In the example shown in <span class="crossreference "><a href="03_003.html#l3.15">Listing 3.15</a></span>, you use the <samp class="listingcharacter listingcharacter">n</samp> or <samp class="listingcharacter listingcharacter">next</samp> command, respectively, to jump to the next statement with the debugger. This is marked by the fact that the <samp class="listingcharacter listingcharacter">createServer</samp> function is highlighted in green in line 3.</p>
+            <table class="standardtable" id="t3.2">
+                <thead>
+                    <tr>
+                        <th class="tablehead tablecell_first top_border_cell">
+                            <p class="standard first-item last-item">Command</p>
+                        </th>
+                        <th class="tablehead tablecell_middle top_border_cell">
+                            <p class="standard first-item last-item">Description</p>
+                        </th>
+                        <th class="tablehead tablecell_last top_border_cell">
+                            <p class="standard first-item last-item">Description</p>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="tablecell tablecell_first top_border_cell">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">c</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_middle top_border_cell">
+                            <p class="standard first-item last-item">Continue</p>
+                        </td>
+                        <td class="tablecell tablecell_last top_border_cell">
+                            <p class="standard first-item last-item">Continues the execution of the application until the next breakpoint</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">n</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_middle">
+                            <p class="standard first-item last-item">Step next</p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Skips a subroutine</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">Add</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_middle">
+                            <p class="standard first-item last-item">Step in</p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Jumps to a subroutine</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter"><a id="p91"/>o</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_middle">
+                            <p class="standard first-item last-item">Step out</p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Jumps back from a subroutine to the next higher level</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">pause</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_middle">
+                            <p class="standard first-item last-item">Pause</p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Pauses the execution</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="caption "><b>Table 3.2</b>    
+            Commands for the Debugger</p>
+        
+        
+            <h3 class="t3" id="h3.3.2">3.3.2    Information<a class="indexanchor" id="i03_91"/> in the Debugger</h3>
+            <p class="standard">If you jump further in the debugger to the second line, you can display the value of the <samp class="listingcharacter listingcharacter">http</samp> constant. To do so, you must enter the <samp class="listingcharacter listingcharacter">repl</samp> command in the debugger. This command launches an interactive shell<a class="indexanchor" id="i03_92"/> from which you can access the debugger environment. For example, you can then enter the string <samp class="listingcharacter listingcharacter">http</samp> and get the structure of this variable. The shortcut <span class="keyboard">(Ctrl)</span>+<span class="keyboard">(C)</span> enables you to switch from the interactive shell back to the debugger. After that, you can use the commands from <span class="crossreference "><a href="03_003.html#t3.2">Table 3.2</a></span> for navigation purposes as usual.</p>
+            <p class="standard">If you’ve created an output in the interactive shell and then jumped back to the debug mode<a class="indexanchor" id="i03_93"/>, you can no longer see where you are in your source code. The <samp class="listingcharacter listingcharacter">list</samp> command helps you to solve this problem. This function ensures that the debugger shows you the currently executed line of source code and a certain number of lines before and after this line. You can specify the number of lines you want to see as an argument. If you don’t specify a number, the value <samp class="listingcharacter listingcharacter">5</samp> is assumed. <span class="crossreference "><a href="03_003.html#l3.16">Listing 3.16</a></span> shows an example of how to use the <samp class="listingcharacter listingcharacter">list</samp> command.</p>
+            <div class="listing " id="l3.16"><pre>debug&gt; list(1)<br/>&gt; 1 import { createServer } from 'http';<br/>  2 </pre></div>
+            <p class="caption "><b>Listing 3.16</b>    
+            “list” Function of the Debugger</p>
+            <p class="standard">Another function the debugger offers you is the output of a backtrace<a class="indexanchor" id="i03_94"/>. This is especially helpful if you’ve jumped to various subroutines using the <samp class="listingcharacter listingcharacter">s</samp> command and now want to find out how you got to the current location. The <samp class="listingcharacter listingcharacter">backtrace</samp> function, or its shorter variant <samp class="listingcharacter listingcharacter">bt</samp>, enables you to display the backtrace of the current execution. <span class="crossreference "><a href="03_003.html#l3.17">Listing 3.17</a></span> shows the output of the backtrace in case you’ve jumped into the callback function of the <samp class="listingcharacter listingcharacter">createServer</samp> function in the web server example.</p>
+            <div class="listing " id="l3.17"><pre>debug&gt; bt<br/>#0 (anonymous) server.mjs:4:2<br/>#1 emit node:events:394:27<br/>#2 parserOnIncoming node:_http_server:924:11<br/>#3 parserOnHeadersComplete node:_http_common:127:16 </pre></div>
+            <p class="caption "><b>Listing 3.17</b>    
+            Backtraces with the Debugger</p>
+            <p class="standard"><a id="p92"/>When you run through the source code of your application with the debugger, you’re usually interested in the values of certain variables. You can easily determine these values via the <samp class="listingcharacter listingcharacter">repl</samp> command and the interactive shell. However, in many cases, this variant isn’t very handy because you have to switch back to the shell each time and can only read the values there. Another way to find out the values of variables is to use the <samp class="listingcharacter listingcharacter">watch</samp> function of the debugger. In this case, you pass the name of the variable whose value you want to observe as a string to this function. If you now step through your application, you’ll see the value of this variable in each step.</p>
+            <p class="standard"><span class="crossreference "><a href="03_003.html#l3.18">Listing 3.18</a></span> shows how you can use the <samp class="listingcharacter listingcharacter">watch</samp> function. The output of the structure in this case only provides the hint that the watch expression is the <samp class="listingcharacter listingcharacter">createServer</samp> function. However, you can not only monitor native structures but also observe any variables during debugging. But if you set a watcher on a more extensive object with many properties, the output isn’t structured. Watchers therefore offer an advantage mainly for variables with scalar values or small objects. For more extensive objects, we recommend using the <samp class="listingcharacter listingcharacter">repl</samp> command.</p>
+            <div class="listing " id="l3.18"><pre>debug&gt; watch('createServer')<br/>debug&gt; n<br/>break in server.mjs:3<br/>Watchers:<br/>  0: createServer = [Function: createServer]<br/><br/>  1 import { createServer } from 'http';<br/>  2 <br/>&gt; 3 const server = createServer((request, response) =&gt; {<br/>  4   debugger;<br/>  5   response.writeHead(200, { 'content-type': 'text/html; charset=utf-8' });<br/>debug&gt; </pre></div>
+            <p class="caption "><b>Listing 3.18</b>    
+            Watcher with Node.js</p>
+            <p class="standard">In addition to the <samp class="listingcharacter listingcharacter">watch</samp> function, there are two other functions you can use for monitoring structures. The <samp class="listingcharacter listingcharacter">unwatch</samp><a class="indexanchor" id="i03_95"/> function allows you to remove watchers that have already been set. For this purpose, you only have to pass the name of the variable as a string to the function, and the watcher will be removed. The second <samp class="listingcharacter listingcharacter">watchers</samp> function takes no arguments and lists the existing watchers and the associated values of the corresponding variables. <span class="crossreference "><a href="03_003.html#t3.3">Table 3.3</a></span> summarizes the debugger commands for you again.</p>
+            <table class="standardtable" id="t3.3">
+                <thead>
+                    <tr>
+                        <th class="tablehead tablecell_first top_border_cell">
+                            <p class="standard first-item last-item">Command</p>
+                        </th>
+                        <th class="tablehead tablecell_last top_border_cell">
+                            <p class="standard first-item last-item">Description</p>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="tablecell tablecell_first top_border_cell">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">repl</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last top_border_cell">
+                            <p class="standard first-item last-item">Opens an interactive shell in the debugger</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">list, list(n)</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Displays the current source code of the debugger</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">backtrace, bt</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Outputs the backtrace of the current execution</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter"><a id="p93"/>watch(exp)</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Displays the value of the specified expression at each debugger step</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">unwatch(exp)</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Removes a watcher</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">watchers</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Lists all active watchers</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="caption "><b>Table 3.3</b>    
+            Commands in the Debugger</p>
+        
+        
+            <h3 class="t3" id="h3.3.3">3.3.3    Breakpoints<a class="indexanchor" id="i03_96"/></h3>
+            <p class="standard">With the current state, it’s only possible for you to go through the source code of your application step by step<a class="indexanchor" id="i03_97"/> from the beginning to the point where you suspect a problem. This can be difficult with extensive applications, as it may take a long time to get to the relevant location. For these cases, the Node.js debugger provides the breakpoints feature. A breakpoint represents a marker in the source code at which the debugger automatically stops<a class="indexanchor" id="i03_98"/>.</p>
+            <p class="standard">With the <samp class="listingcharacter listingcharacter">setBreakpoint</samp><a class="indexanchor" id="i03_99"/> function (or <samp class="listingcharacter listingcharacter">sb</samp> in the short form) of the debugger, you can define a breakpoint. In the case of <span class="crossreference "><a href="03_003.html#l3.19">Listing 3.19</a></span>, you use <samp class="listingcharacter listingcharacter">setBreakpoint</samp> to set a breakpoint in line 7 at the start of the run. You can use the <samp class="listingcharacter listingcharacter">c</samp> command to continue execution, which then stops at the breakpoint.</p>
+            <p class="standard"><samp class="listingcharacter listingcharacter">setBreakpoint</samp> allows you to set breakpoints in several different ways. As you’ve already seen, you can specify a particular line in which you want to set the breakpoint. If you don’t specify a value, the breakpoint is set in the current line. In addition, you can specify a function as a string at whose first statement the execution will stop. Finally, in the last variant, you specify a file name and a line number. When the execution of the application reaches this file and line, the execution will be interrupted. The <samp class="listingcharacter listingcharacter">clearBreakpoint</samp> or <samp class="listingcharacter listingcharacter">cb</samp> command enables you to remove a set breakpoint by specifying the file name and the line number.</p>
+            <div class="listing " id="l3.19"><pre>$ <span class="bold">node inspect server.mjs</span><br/>&lt; Debugger listening on ws://127.0.0.1:9229/92b7f273-d2ec-4134-a700-a4b69e90a4f2<br/>&lt; For help, see: https://nodejs.org/en/docs/inspector<br/>&lt; <br/>connecting to 127.0.0.1:9229 ... ok<br/>&lt; Debugger attached.<br/>&lt; <br/>Break on start in server.mjs:1<br/>&gt; 1 import { createServer } from 'http';<br/>  2 <br/>  3 const server = createServer((request, response) =&gt; {<br/>debug&gt; <span class="bold">setBreakpoint(8)</span><br/>  3 const server = createServer((request, response) =&gt; {<br/>  4   response.writeHead(200, { 'content-type': 'text/html; charset=utf-8' });<br/><a id="p94"/>  5 <br/>  6   const url = new URL(request.url, 'http://localhost:8080');<br/>  7 <br/>&gt; 8   const body = `&lt;!DOCTYPE html&gt;<br/>  9     &lt;html&gt;<br/> 10       &lt;head&gt;<br/> 11         &lt;meta charset="utf-8"&gt;<br/> 12         &lt;title&gt;Node.js Demo&lt;/title&gt;<br/> 13       &lt;/head&gt;<br/>debug&gt; <span class="bold">c</span><br/>&lt; Server is listening to http://localhost:8080<br/>&lt; <br/>break in server.mjs:8<br/>  6   const url = new URL(request.url, 'http://localhost:8080');<br/>  7 <br/>&gt; 8   const body = `&lt;!DOCTYPE html&gt;<br/>  9     &lt;html&gt;<br/> 10       &lt;head&gt;<br/>debug&gt; </pre></div>
+            <p class="caption "><b>Listing 3.19</b>    
+            Breakpoints in Node.js</p>
+            <p class="standard">Alternatively, you can set a breakpoint directly in your source code by inserting the <samp class="listingcharacter listingcharacter">debugger</samp> statement. However, the disadvantage is that you have to modify your source code for debugging. In any case, you must make sure to remove all <samp class="listingcharacter listingcharacter">debugger</samp> statements<a class="indexanchor" id="i03_100"/> after debugging. <span class="crossreference "><a href="03_003.html#l3.20">Listing 3.20</a></span> shows how you can use the <samp class="listingcharacter listingcharacter">debugger</samp> statement in the web server example.</p>
+            <div class="listing " id="l3.20"><pre><span class="rot">import</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"> createServer </span><span class="schwarz">}</span><span class="schwarz"> </span><span class="rot">from</span><span class="schwarz"> </span><span class="hellblau">'http'</span><span class="schwarz">;</span><span class="schwarz"><br/></span> <br/><span class="rot">const</span><span class="schwarz"> server </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="schwarz">createServer((</span><span class="schwarz">request</span><span class="schwarz">,</span><span class="schwarz"> response</span><span class="schwarz">)</span><span class="schwarz"> </span><span class="dunkelblau">=&gt;</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>  response<span class="schwarz">.writeHead(200,</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"> </span><span class="hellblau">'content-type'</span><span class="schwarz">:</span><span class="schwarz"> </span><span class="hellblau">'text/html; charset=utf-8'</span><span class="schwarz"> </span><span class="schwarz">});</span><span class="schwarz"><br/></span> <br/>  <span class="rot">const</span><span class="schwarz"> url </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="rot">new </span><span class="schwarz">URL(</span><span class="schwarz">request</span><span class="schwarz">.</span><span class="schwarz">url</span><span class="schwarz">,</span><span class="schwarz"> </span><span class="hellblau">'http://localhost:8080'</span><span class="schwarz">);</span><span class="schwarz"><br/></span>  <span class="bold"><span class="rot">debugger</span><span class="schwarz">;</span></span><br/>  <span class="rot">const</span><span class="schwarz"> body </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="violett">`&lt;!DOCTYPE html&gt;</span><br/>    &lt;html&gt;<br/>      &lt;head&gt;<br/>        &lt;meta charset=<span class="hellblau">"utf-8"</span><span class="violett">&gt;</span><br/>        &lt;title&gt;Node.js Demo&lt;/title&gt;<br/>      &lt;/head&gt;<br/>      &lt;body&gt;<br/>        &lt;h1 style=<span class="hellblau">"color:green"</span><span class="violett">&gt;Hello ${url.searchParams.get(</span><span class="hellblau">'name'</span><span class="violett">)}&lt;/h1&gt;</span><br/>      &lt;/body&gt;<br/>    &lt;/html&gt;`<span class="schwarz">;</span><br/> <br/><a id="p95"/>  response.end(body);<br/>});<br/>server.listen(8080, () <span class="dunkelblau">=&gt;</span><span class="schwarz"> {</span><br/>  <span class="magenta">console</span><span class="schwarz">.log(</span><br/>    <span class="violett">`Server is listening to http://localhost:${server.address().port}`</span><span class="schwarz">,</span><br/>  );<br/>}); <span class="schwarz"/></pre></div>
+            <p class="caption "><b>Listing 3.20</b>    
+            Using the “debugger” Statement</p>
+            <p class="standard">If you start your script now, as shown in <span class="crossreference "><a href="03_003.html#l3.21">Listing 3.21</a></span>, and continue the execution using the <samp class="listingcharacter listingcharacter">c</samp> command, the application is ready to accept requests from clients.</p>
+            <div class="listing " id="l3.21"><pre>$ <span class="bold">node inspect server.mjs</span><br/>&lt; Debugger listening on ws://127.0.0.1:9229/5a149c3f-d4c3-4529-bc84-045a72f49357<br/>&lt; For help, see: https://nodejs.org/en/docs/inspector<br/>&lt; <br/>&lt; Debugger attached.<br/>&lt; <br/> OK<br/>Break on start in server.mjs:1<br/>&gt; 1 import { createServer } from 'http';<br/>  2 <br/>  3 const server = createServer((request, response) =&gt; {<br/>debug&gt; <span class="bold">c</span><br/>&lt; Server is listening to http://localhost:8080<br/>&lt; <br/>break in server.mjs:7<br/>  5 <br/>  6   const url = new URL(request.url, 'http://localhost:8080');<br/>&gt; 7   debugger;<br/>  8   const body = `&lt;!DOCTYPE html&gt;<br/>  9     &lt;html&gt;<br/>debug&gt; </pre></div>
+            <p class="caption "><b>Listing 3.21</b>    
+            Running an Application in Debug Mode</p>
+            <p class="standard">If you now access the web server via a web browser using the URL <span class="italic">http://localhost:8080/?name=user</span>, the execution will be interrupted within the callback function. Then the familiar features of the debugger will be available.</p>
+            <p class="standard">If you start your application in debug mode<a class="indexanchor" id="i03_101"/>, it will run until the debugger hits the first breakpoint. During initial execution, you thus only have the option of setting a breakpoint via a <samp class="listingcharacter listingcharacter">debugger</samp> statement in the code. The <samp class="listingcharacter listingcharacter">--inspect-brk</samp> option provides help here by ensuring that the debugger stops at the first line; you can then connect to your developer tools, set breakpoints, and run the application.</p>
+        
+        
+            <h3 class="t3" id="h3.3.4">3.3.4    <a id="p96"/>Debugging with Chrome Developer Tools<a class="indexanchor" id="i03_102"/></h3>
+            <p class="standard">The V8 inspector<a class="indexanchor" id="i03_103"/> is integrated in the Node.js debugger and is responsible for opening a WebSocket to the outside world through which you can connect various tools to your debugging session. This makes it possible for you not only to debug on the command line but also to use graphical tools. The most convenient variant is to use Chrome in this context. The connection is established via the <span class="italic">Chrome DevTools Protocol</span>.</p>
+            <p class="standard">Instead of starting the debugger via the <samp class="listingcharacter listingcharacter">inspect</samp> option as before, you must use the <samp class="listingcharacter listingcharacter">--inspect</samp> option for remote debugging. <span class="crossreference "><a href="03_003.html#l3.22">Listing 3.22</a></span> shows the corresponding output.</p>
+            <div class="listing " id="l3.22"><pre>$ <span class="bold">node --inspect server.mjs</span><br/>Debugger listening on ws://127.0.0.1:9229/53dc01a4-d65e-47a9-bb88-bc38b4e059d5<br/>For help, see: https://nodejs.org/en/docs/inspector<br/>Server is listening to http://localhost:8080 </pre></div>
+            <p class="caption "><b>Listing 3.22</b>    
+            Remote Debugging</p>
+            <p class="standard">As you can see in the output, the application doesn’t stop; it just waits for incoming debugging connections as well as regular client requests. To be able to connect your browser to the running debug process<a class="indexanchor" id="i03_104"/>, you should now enter “chrome://inspect” in the address bar of the browser. You’ll then see an overview of all available remote targets<a class="indexanchor" id="i03_105"/>, as shown in <span class="crossreference "><a href="03_003.html#f3.5">Figure 3.5</a></span>.</p>
+            <div class="imagebox figure-type"><a href="img-f3.5.html" id="f3.5"><img alt="List of Debugging Sessions in Chrome" id="img-f3.5" src="bilderklein/klein03_005.png"/></a></div>
+            <p class="caption "><b>Figure 3.5</b>    
+            List of Debugging Sessions in Chrome</p>
+            <p class="standard"><a id="p97"/>When you now click on the <span class="screenelement">inspect</span> link, another browser window will open, consisting only of the developer tools. These are associated with your Node.js process. You’ll now see all console messages<a class="indexanchor" id="i03_106"/> in the <span class="screenelement">Console</span> tab of the Chrome DevTools as well. To inspect your source code, go to the <span class="screenelement">Sources</span> tab. There you can make selections from the files of your application in the left-hand pane. Clicking on one of these files displays the source code. At this point, you can set breakpoints<a class="indexanchor" id="i03_107"/> by clicking on the corresponding line number. As soon as the execution of the application reaches this line, the process stops, and you have control over the runtime environment. <span class="crossreference "><a href="03_003.html#f3.6">Figure 3.6</a></span> shows an example of such a debugging session.</p>
+            <p class="standard">In this mode, just like on the console, you can create watch expressions<a class="indexanchor" id="i03_108"/>, navigate through your application with the debugger, or manipulate the environment via the console. You also have access to all available variable scopes<a class="indexanchor" id="i03_109"/> and the current backtrace. In addition to these functions, you can use the profiler to create CPU profiles and use the <span class="screenelement">Memory</span> tab to analyze the memory utilization<a class="indexanchor" id="i03_110"/> of your application.</p>
+            <div class="imagebox figure-type"><a href="img-f3.6.html" id="f3.6"><img alt="Active Debugging Session" id="img-f3.6" src="bilderklein/klein03_006.png"/></a></div>
+            <p class="caption "><b>Figure 3.6</b>    
+            Active Debugging Session</p>
+        
+        
+            <h3 class="t3" id="h3.3.5">3.3.5    Debugging in the Development Environment<a class="indexanchor" id="i03_111"/></h3>
+            <p class="standard">However, the actual development process takes place neither on the command line nor in the browser, but in your development environment. Most development environments used in web development, such as Visual Studio Code<a class="indexanchor" id="i03_112"/> or the development environments of JetBrains (e.g., WebStorm)<a class="indexanchor" id="i03_113"/>, help you debug Node.js applications. The corresponding plug-ins are either included by default or can be easily installed later. For information on how to configure the debugger in your development environment, <a id="p98"/>you should refer to the documentation for your development environment, which usually contains detailed step-by-step instructions.</p>
+            <p class="standard">If you use the debugger in your development environment, you can access the same features of the debugger as has already been possible on the command line. Thus, you can skip subroutines or dive deeper into the structures. But you also have the option to set breakpoints or to read the values of certain variables.</p>
+            <p class="standard">These features, combined with the capabilities of a graphical development environment, increase the level of convenience during the development and maintenance of Node.js applications.</p>
+        
+    </div><p class="signatur"/>
+                    </body>
+                </html>

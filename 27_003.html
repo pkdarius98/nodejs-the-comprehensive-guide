@@ -1,0 +1,39 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+                    
+        <head><meta content="application/xhtml+xml; charset=utf-8" http-equiv="Content-Type"/>
+            <meta content="application/xhtml+xml; charset=utf-8" name="content-type"/>
+            <meta content="Microservices with Node.js" name="title"/>
+            <meta content="Sebastian Springer" name="author"/>
+            <meta content="Rheinwerk Publishing" name="publisher"/>
+            <meta content="© 2022 by Rheinwerk Publishing Inc., Boston (MA)" name="copyright"/>
+            <meta content="Node.js - The Comprehensive Guide - Microservices with Node.js" name="description"/>
+            <meta content="en" name="language"/>
+            <title>Microservices with Node.js</title>
+            <link href="common/main.css" rel="stylesheet" type="text/css"/>
+<meta content="urn:uuid:e0000000-0000-0000-0000-000029756394" name="Adept.expected.resource"/>
+        </head>
+    
+
+
+                    <body class="office_us type_kapitel">
+                        <div id="main">
+        <h2 class="t2" id="h27.3">27.3    Infrastructure<a class="indexanchor" id="i27_27"/></h2>
+        <p class="standard">The following describe the implementation of a version of the movie database based on microservices. The architecture is outlined in <span class="crossreference "><a href="27_003.html#f27.4">Figure 27.4</a></span>.</p>
+        <p class="standard">The API gateway<a class="indexanchor" id="i27_28"/> serves as the entry point to the application. It takes care of central issues such as user registration. This ensures that not every service needs to authenticate the users themselves. The API gateway communicates with the various services, requests the information, and generates the response to the client.</p>
+        <div class="imagebox figure-type"><a href="img-f27.4.html" id="f27.4"><img alt="Architecture of the Sample Application" id="img-f27.4" src="bilderklein/klein27_004.png"/></a></div>
+        <p class="caption "><b>Figure 27.4</b>    
+            Architecture of the Sample Application</p>
+        <p class="standard">The movie service is connected via a synchronous communication link. It’s implemented with Express<a class="indexanchor" id="i27_29"/> and a MySQL backend<a class="indexanchor" id="i27_30"/>. The user service is implemented as an <a id="p759"/>asynchronous service with a connection to a message queue. MongoDB<a class="indexanchor" id="i27_31"/> is used here as the backend.</p>
+        <p class="standard">Both the services and the API gateway each run in a Docker<a class="indexanchor" id="i27_32"/> container. For this application, we assume that it’s a single-page application and that the services only need to render JavaScript Object Notation (JSON) data. You can use Postman or cURL as a frontend. These tools fulfill the role of the browser in which the frontend of the application is executed.</p>
+        
+            <h3 class="t3" id="h27.3.1">27.3.1    Docker Compose<a class="indexanchor" id="i27_33"/></h3>
+            <p class="standard">The application you implement below consists of several independent services; to better control them, you use Docker Compose here. This utility allows you to configure an application consisting of several containers via a file and start it with one command.</p>
+            <p class="standard">To use Docker Compose, you need a central <span class="italic">docker-compose.yml</span> file<a class="indexanchor" id="i27_34"/> where you configure each container. From this file, you can either point to Dockerfiles<a class="indexanchor" id="i27_35"/> or to ready-made images. <span class="crossreference "><a href="27_003.html#l27.1">Listing 27.1</a></span> shows an example of such a configuration file.</p>
+            <div class="listing " id="l27.1"><pre>version<span class="schwarz">: </span><span class="hellblau">'3'</span><span class="schwarz"><br/></span>services:<br/>  user:<br/>    build:<br/>      context: user <span class="schwarz"/></pre></div>
+            <p class="caption "><b>Listing 27.1</b>    
+            Simple Example of a docker-compose.yml File</p>
+            <p class="standard">You can start the application you describe with this configuration using the <samp class="listingcharacter listingcharacter">docker-compose up</samp> command. All containers that are started are listed under the <samp class="listingcharacter listingcharacter">services</samp> item. In the example, this is just a container that’s specified in more detail by a Dockerfile in the <span class="italic">user</span> directory. You use the <samp class="listingcharacter listingcharacter">docker-compose stop</samp> command to shut down the container again.</p>
+        
+    </div><p class="signatur"/>
+                    </body>
+                </html>

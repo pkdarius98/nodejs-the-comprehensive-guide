@@ -1,0 +1,84 @@
+table.standardtable {
+  border-collapse: collapse;
+  border-right-style: hidden;
+  border-left-style: hidden;
+}
+table.standardtable td, table.standardtable th {
+  border-width: 1px;
+  border-style: solid;
+}
+
+table.standardtable thead th.tablehead {
+  border-top-width: thick;
+}
+
+h1.t1, .h1-like,
+h2.t2, .h2-like,
+h3.t3, .h3-like,
+h4.t4, .h4-like,
+h5.t5, .h5-like,
+h1.content1,
+p.acronym {
+  color: #00709f;
+}
+
+h1.content1,
+p.acronym {
+  border-color: #00709f;
+}
+
+span.callout, span.calloutTS {
+  color: #53a7ca;
+}
+
+div.box.box_standard {
+  border: none;
+  background-color: transparent;
+  padding: 0;
+}
+div.box.box_standard .inner_container {
+  background-color: #e3f0f7;
+  padding: 0.35em 0.5em 0.67em;
+}
+div.box.box_standard .inner_container .first {
+  margin-top: 0;
+}
+div.box.box_standard h6.boxheading {
+  padding: 0.35em 0.5em 0.67em;
+  background-color: #53a7ca;
+  color: white;
+}
+
+table.standardtable thead,
+table.standardtable .tablehead,
+table.standardtable td.tablehead,
+table.standardtable tr.tablehead td.tablecell {
+  color: black;
+  background-color: #e3f0f7;
+}
+table.standardtable th, table.standardtable td {
+  border-color: #00709f;
+}
+table.standardtable td {
+  background-color: #e7f5f7;
+}
+
+.t3.step-list-heading {
+  margin-top: 1.34em;
+  color: #dd7400;
+}
+
+div.step-list-item span.counter {
+  color: #dd7400;
+  font-size: 1.75em;
+  padding-right: 0.2em;
+}
+div.step-list-item p.first-item {
+  font-weight: bold;
+  color: #dd7400;
+}
+
+body.type_teil {
+  background-color: #00709f;
+  color: white;
+}

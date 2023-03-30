@@ -1,0 +1,88 @@
+table.standardtable {
+  border-collapse: collapse;
+  border-right-style: hidden;
+  border-left-style: hidden;
+}
+table.standardtable td, table.standardtable th {
+  border-width: 1px;
+  border-style: solid;
+}
+
+h1.t1, .h1-like,
+h2.t2, .h2-like, h2.t2.intro,
+h3.t3, .h3-like,
+h4.t4, .h4-like,
+h5.t5, .h5-like {
+  color: black;
+}
+
+h1.content1 {
+  border: none;
+  background-color: #216c96;
+  padding: 0.05em 0.25em;
+  color: white;
+}
+
+h1.content1,
+h2.content2 {
+  font-weight: bold;
+}
+
+.section_intro,
+.section_aufgabe,
+.section_loesung {
+  background-color: #ecf2f6;
+  padding: 0.25em 0.75em;
+}
+
+.section_aufgabe,
+.section_loesung {
+  border-right: 5px solid #216c96;
+}
+
+div.box {
+  background-color: #d7e4ed;
+  border: none;
+}
+div.box h6.boxheading {
+  color: black;
+}
+
+p.question {
+  font-style: inherit;
+  text-align: inherit;
+}
+
+table.standardtable thead,
+table.standardtable .tablehead,
+table.standardtable tr.tablehead td.tablecell {
+  color: black;
+  background-color: #b1cadc;
+}
+table.standardtable td {
+  background-color: #ecf2f6;
+}
+table.standardtable td.tablehead {
+  font-weight: normal;
+}
+table.standardtable tr.light td.tablecell {
+  background-color: #d7e4ed;
+}
+
+table.gitter {
+  border-collapse: collapse;
+}
+table.gitter td, table.gitter tr.light td.tablecell {
+  border-color: white;
+  background-color: #ecf2f6;
+}
+
+p.acronym {
+  color: white;
+  border: none;
+}
+p.acronym a {
+  display: table-cell;
+  background-color: #216c96;
+  padding: 0.1em 0.1em;
+}

@@ -1,0 +1,28 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+                    
+        <head><meta content="application/xhtml+xml; charset=utf-8" http-equiv="Content-Type"/>
+            <meta content="application/xhtml+xml; charset=utf-8" name="content-type"/>
+            <meta content="Quality Assurance" name="title"/>
+            <meta content="Sebastian Springer" name="author"/>
+            <meta content="Rheinwerk Publishing" name="publisher"/>
+            <meta content="© 2022 by Rheinwerk Publishing Inc., Boston (MA)" name="copyright"/>
+            <meta content="Node.js - The Comprehensive Guide - Quality Assurance" name="description"/>
+            <meta content="en" name="language"/>
+            <title>Quality Assurance</title>
+            <link href="common/main.css" rel="stylesheet" type="text/css"/>
+<meta content="urn:uuid:e0000000-0000-0000-0000-000029756394" name="Adept.expected.resource"/>
+        </head>
+    
+
+
+                    <body class="office_us type_kapitel">
+                        <div id="main">
+        <h2 class="t2" id="h22.5">22.5    Husky<a class="indexanchor" id="i22_42"/></h2>
+        <p class="standard">The last tool we want to introduce you to in this chapter is called Husky, which helps you integrate your tools into the version control process<a class="indexanchor" id="i22_43"/>. Husky is a tool that specializes in Git as a version control system and can be used to create Git hooks<a class="indexanchor" id="i22_44"/>. The tool itself is written in TypeScript and implemented as a Node.js application.</p>
+        <p class="standard">Husky is installed locally in your application as <samp class="listingcharacter listingcharacter">devDependency</samp> via the <samp class="listingcharacter listingcharacter">npm install -save-dev husky</samp> command. After that, you must enable Husky for your project using the <samp class="listingcharacter listingcharacter">npx husky install</samp> command.</p>
+        <p class="standard">An optional additional step is to include Husky in your application installation process as well. This then causes developers who download the application source code to their system to run an <samp class="listingcharacter listingcharacter">npm install</samp> to install the dependencies to automatically enable the preconfigured Git hooks. You can do this by issuing the <samp class="listingcharacter listingcharacter">npm set-script prepare "husky install"</samp> command. This command adds a <samp class="listingcharacter listingcharacter">prepare</samp> entry to the <samp class="listingcharacter listingcharacter">scripts</samp> section of the <span class="italic">package.json</span> file and sets the value to <samp class="listingcharacter listingcharacter">husky install</samp>.</p>
+        <p class="standard">Having done these preparations, you can include actual hooks in the next step. To do that, you use the <samp class="listingcharacter listingcharacter">npx husky add .husky/pre-commit "npm run lint"</samp> command and a subsequent <samp class="listingcharacter listingcharacter">git add .husky/pre-commit</samp>. The first command inserts a pre-commit hook<a class="indexanchor" id="i22_45"/> that executes the <samp class="listingcharacter listingcharacter">npm run lint</samp> command. The second command activates the hook in the version control system. Subsequently, the specified command is executed before each commit. If this fails because, for example, ESLint reports violations of the coding standard in this case, the commit won’t be performed.</p>
+        <p class="standard">Similar to pre-commit, you can also define pre-push hooks that can be committed but not pushed. This allows Husky to bring your tools into one central location and integrate them naturally into your development process. It also ensures that no source code enters the repository that doesn’t meet the quality criteria of your application.</p>
+    </div><p class="signatur"/>
+                    </body>
+                </html>

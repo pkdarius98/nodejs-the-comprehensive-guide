@@ -1,0 +1,44 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+                    
+        <head><meta content="application/xhtml+xml; charset=utf-8" http-equiv="Content-Type"/>
+            <meta content="application/xhtml+xml; charset=utf-8" name="content-type"/>
+            <meta content="Deno" name="title"/>
+            <meta content="Sebastian Springer" name="author"/>
+            <meta content="Rheinwerk Publishing" name="publisher"/>
+            <meta content="© 2022 by Rheinwerk Publishing Inc., Boston (MA)" name="copyright"/>
+            <meta content="Node.js - The Comprehensive Guide - Deno" name="description"/>
+            <meta content="en" name="language"/>
+            <title>Deno</title>
+            <link href="common/main.css" rel="stylesheet" type="text/css"/>
+<meta content="urn:uuid:e0000000-0000-0000-0000-000029756394" name="Adept.expected.resource"/>
+        </head>
+    
+
+
+                    <body class="office_us type_kapitel">
+                        <div id="main">
+        <h2 class="t2" id="h28.3">28.3    Execution<a class="indexanchor" id="i28_20"/></h2>
+        <p class="standard">Deno usually works with a fairly recent version of the V8 engine<a class="indexanchor" id="i28_21"/>, so you can basically develop modern JavaScript without any restrictions. As an example of how to work with Deno, you should use the source code shown in <span class="crossreference "><a href="28_003.html#l28.4">Listing 28.4</a></span>.</p>
+        <div class="listing " id="l28.4"><pre><span class="rot">class Person</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>  #firstname <span class="dunkelblau">=</span><span class="schwarz"> </span><span class="hellblau">''</span><span class="schwarz">;</span><span class="schwarz"><br/></span>  #lastname <span class="dunkelblau">=</span><span class="schwarz"> </span><span class="hellblau">''</span><span class="schwarz">;</span><span class="schwarz"><br/></span><br/>  <span class="schwarz">constructor(</span><span class="schwarz">firstname</span><span class="schwarz">,</span><span class="schwarz"> lastname</span><span class="schwarz">)</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>    <span class="rot">this</span><span class="schwarz">.</span><span class="schwarz">#firstname </span><span class="dunkelblau">=</span><span class="schwarz"> firstname</span><span class="schwarz">;</span><span class="schwarz"><br/></span>    <span class="rot">this</span><span class="schwarz">.</span><span class="schwarz">#lastname </span><span class="dunkelblau">=</span><span class="schwarz"> lastname</span><span class="schwarz">;</span><span class="schwarz"><br/></span>  <span class="schwarz">}</span><span class="schwarz"><br/></span><br/>  <span class="schwarz">greet()</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>    <span class="rot">return</span><span class="schwarz"> </span><span class="violett">`Hello ${this.#firstname} ${this.#lastname}!`</span><span class="schwarz">;</span><span class="schwarz"><br/></span>  <span class="schwarz">}</span><span class="schwarz"><br/></span><span class="schwarz">}</span><span class="schwarz"><br/></span><br/><span class="rot">const</span><span class="schwarz"> lisa </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="rot">new </span><span class="schwarz">Person(</span><span class="hellblau">'Lisa'</span><span class="schwarz">,</span><span class="schwarz"> </span><span class="hellblau">'Miller'</span><span class="schwarz">);</span><span class="schwarz"><br/></span><span class="magenta">console</span><span class="schwarz">.log(</span><span class="schwarz">lisa</span><span class="schwarz">.greet());</span><span class="gruen"> // Output: Hello Lisa Miller!</span><span class="schwarz"> </span></pre></div>
+        <p class="caption "><b>Listing 28.4</b>    
+            A Simple Example for Deno</p>
+        <p class="standard">When you save the source code from <span class="crossreference "><a href="28_003.html#l28.4">Listing 28.4</a></span> in a file named <span class="italic">index.js</span>, you can run the application via the command shown in <span class="crossreference "><a href="28_003.html#l28.5">Listing 28.5</a></span>.</p>
+        <div class="listing " id="l28.5"><pre>$ <span class="bold"><samp class="listingcharacter listingcharacter">deno run index.js </samp></span><br/>Hello Lisa Miller! </pre></div>
+        <p class="caption "><b>Listing 28.5</b>    
+            Running an Application in Deno</p>
+        <p class="standard"><a id="p796"/>Like Node.js, Deno reads the source code at the beginning and keeps the application in memory so that changes to the source code won’t take effect. To avoid having to restart your application process manually every time a change is made, the <samp class="listingcharacter listingcharacter">run</samp> subcommand supports the <samp class="listingcharacter listingcharacter">--watch</samp><a class="indexanchor" id="i28_22"/> option, which ensures that the process is automatically restarted when changes are made to the file system. You don’t need to install any additional package for this.</p>
+        
+            <h3 class="t3" id="h28.3.1">28.3.1    Running a TypeScript Application<a class="indexanchor" id="i28_23"/></h3>
+            <p class="standard">With regard to TypeScript source code, Deno works in the same way as it does with JavaScript. <span class="crossreference "><a href="28_003.html#l28.6">Listing 28.6</a></span> contains an example that is structured similarly to the one in <span class="crossreference "><a href="28_003.html#l28.4">Listing 28.4</a></span>, but contains a few TypeScript-specific elements that would cause syntax errors in JavaScript.</p>
+            <div class="listing " id="l28.6"><pre><span class="rot">class Person</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>  <span class="schwarz">constructor(</span><span class="bold"><samp class="listingcharacter listingcharacter"><span class="rot">private</span><span class="schwarz"> firstname: string, </span><span class="rot">private</span><span class="schwarz"> lastname: string</span></samp></span>) {}<br/> <br/>  greet()<span class="bold"><samp class="listingcharacter listingcharacter">: string</samp></span> {<br/>    <span class="rot">return</span><span class="schwarz"> </span><span class="violett">`Hello ${this.firstname} ${this.lastname}!`</span><span class="schwarz">;</span><br/>  }<br/>}<br/> <br/><span class="rot">const</span><span class="schwarz"> lisa</span><span class="bold"><samp class="listingcharacter listingcharacter">: Person</samp></span> <span class="dunkelblau">=</span><span class="schwarz"> </span><span class="rot">new </span><span class="schwarz">Person(</span><span class="hellblau">'Lisa'</span><span class="schwarz">, </span><span class="hellblau">'Miller'</span><span class="schwarz">);</span><br/><span class="magenta">console</span><span class="schwarz">.log(lisa.greet());</span><span class="gruen"> // Output: Hello Lisa Miller!</span><span class="schwarz"> </span><span class="schwarz"/></pre></div>
+            <p class="caption "><b>Listing 28.6</b>    
+            Initial Example in TypeScript</p>
+            <p class="standard">When you save the source code in a file named <span class="italic">index.ts</span>, you can run the application via the <samp class="listingcharacter listingcharacter">deno run index.ts</samp> command, as shown in <span class="crossreference "><a href="28_003.html#l28.7">Listing 28.7</a></span>.</p>
+            <div class="listing " id="l28.7"><pre>$ <span class="bold"><samp class="listingcharacter listingcharacter">deno run index.ts</samp></span><br/>Check file:///srv/node-buch/index.ts<br/>Hello Lisa Miller! </pre></div>
+            <p class="caption "><b>Listing 28.7</b>    
+            Running TypeScript in Deno</p>
+            <p class="standard">Deno runs TypeScript directly without an explicit compilation step<a class="indexanchor" id="i28_24"/>. However, the platform checks the source code before running it and reports any errors back to you on the command line.</p>
+        
+    </div><p class="signatur"/>
+                    </body>
+                </html>

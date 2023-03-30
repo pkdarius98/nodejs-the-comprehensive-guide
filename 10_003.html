@@ -1,0 +1,28 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+                    
+        <head><meta content="application/xhtml+xml; charset=utf-8" http-equiv="Content-Type"/>
+            <meta content="application/xhtml+xml; charset=utf-8" name="content-type"/>
+            <meta content="REST Server" name="title"/>
+            <meta content="Sebastian Springer" name="author"/>
+            <meta content="Rheinwerk Publishing" name="publisher"/>
+            <meta content="© 2022 by Rheinwerk Publishing Inc., Boston (MA)" name="copyright"/>
+            <meta content="Node.js - The Comprehensive Guide - REST Server" name="description"/>
+            <meta content="en" name="language"/>
+            <title>REST Server</title>
+            <link href="common/main.css" rel="stylesheet" type="text/css"/>
+<meta content="urn:uuid:e0000000-0000-0000-0000-000029756394" name="Adept.expected.resource"/>
+        </head>
+    
+
+
+                    <body class="office_us type_kapitel">
+                        <div id="main">
+        <h2 class="t2" id="h10.3">10.3    Adaptations to the Application Structure<a class="indexanchor" id="i10_15"/></h2>
+        <p class="standard">Currently, your movie database works with several HTML templates and view structures. You can delete them at this point because a REST interface doesn’t use HTML and usually uses other formats<a class="indexanchor" id="i10_16"/> instead, such as JSON or XML, to format the resources. Specifically, this means that you can delete the following from the <span class="italic">movie</span> directory: the <span class="italic">views</span> directory and the <span class="italic">form.js</span> and <span class="italic">view.js</span> files. The <span class="italic">templates</span> and <span class="italic">public</span> directories as well as the <span class="italic">auth.js</span> file in the root directory of the application are also no longer needed <a id="p298"/>at this point. Furthermore, you must customize the initial file of your application as shown in <span class="crossreference "><a href="10_003.html#l10.2">Listing 10.2</a></span>.</p>
+        <div class="listing " id="l10.2"><pre><span class="rot">import</span><span class="schwarz"> express </span><span class="rot">from</span><span class="schwarz"> </span><span class="hellblau">'express'</span><span class="schwarz">;</span><br/><span class="rot">import</span><span class="schwarz"> morgan </span><span class="rot">from</span><span class="schwarz"> </span><span class="hellblau">'morgan'</span><span class="schwarz">;</span><br/><span class="rot">import</span><span class="schwarz"> { router </span><span class="rot">as</span><span class="schwarz"> movieRouter } </span><span class="rot">from</span><span class="schwarz"> </span><span class="hellblau">'./movie/index.js'</span><span class="schwarz">;</span><br/> <br/><span class="rot">const</span><span class="schwarz"> app </span><span class="dunkelblau">=</span><span class="schwarz"> express();</span><br/> <br/>app.use(morgan(<span class="hellblau">'common'</span><span class="schwarz">, { immediate: </span><span class="rot">true</span><span class="schwarz"> }));</span><br/> <br/>app.use(express.urlencoded({ extended: <span class="rot">false</span><span class="schwarz"> }));</span><br/> <br/>app.use(<span class="hellblau">'/movie'</span><span class="schwarz">, movieRouter);</span><br/> <br/>app.get(<span class="hellblau">'/'</span><span class="schwarz">, (request, response) </span><span class="dunkelblau">=&gt;</span><span class="schwarz"> response.redirect(</span><span class="hellblau">'/movie'</span><span class="schwarz">));</span><br/> <br/>app.listen(8080, () <span class="dunkelblau">=&gt;</span><span class="schwarz"> {</span><br/>  <span class="magenta">console</span><span class="schwarz">.log(</span><span class="hellblau">'Server is listening to http://localhost:8080'</span><span class="schwarz">);</span><br/>});  <span class="schwarz"/></pre></div>
+        <p class="caption "><b>Listing 10.2</b>    
+            Customized Entry into the Application (index.js)</p>
+        <p class="standard">Because a REST interface is intended to be stateless<a class="indexanchor" id="i10_17"/>, you must remove the previous Passport-based authentication that kept user data in a session across multiple requests. Later in this chapter, you’ll learn about JSON web tokens<a class="indexanchor" id="i10_18"/> as an alternative way to authenticate users. In addition, in the initial file, you must remove the view engine configuration and the use of static middleware. Finally, you delete the call of the <samp class="listingcharacter listingcharacter">auth</samp> function and the inclusion of the <samp class="listingcharacter listingcharacter">ensureLoggedIn</samp> function. What remains after the restructuring is the integration of the Morgan logger and the body parser as well as the integration of the movie router and the redirection from <span class="italic">/</span> to <span class="italic">/movie</span>.</p>
+    </div><p class="signatur"/>
+                    </body>
+                </html>

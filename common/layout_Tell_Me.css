@@ -1,0 +1,146 @@
+body p.standard + p.standard {
+  margin-top: 0;
+  text-indent: 1em;
+}
+body .step-list-item p.standard + p.standard,
+body div.box_standard p.standard + p.standard,
+body table.standardtable p.standard + p.standard,
+body li p.standard + p.standard {
+  text-indent: 0;
+}
+body div#extra-leser div.footer p.standard,
+body div#service p.standard,
+body div#recht p.standard,
+body div#autor p.standard,
+body div#extra-hinweise p.standard,
+body div#imprint p.standard {
+  text-indent: 0;
+  margin-top: 0.67em;
+}
+
+h1.t1, h1.content1 {
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+h1.contentextra, h1.content1 {
+  border: none;
+  color: #5d5581;
+  text-align: center;
+}
+
+h2.content2,
+h2.contentextra {
+  text-align: center;
+}
+
+span.content_subtitle {
+  font-size: smaller;
+  font-style: italic;
+  text-transform: none;
+}
+
+h1.t1 {
+  color: #5d5581;
+  text-align: center;
+}
+h1.t1 + p.subtitle {
+  font-weight: bold;
+  font-style: italic;
+}
+
+p.subtitle {
+  color: #5d5581;
+  text-align: center;
+}
+
+h2.t2, h2.t2.intro {
+  color: #5d5581;
+  text-align: center;
+  font-size: 125%;
+  font-weight: bold;
+}
+h2.t2 + p.subtitle, h2.t2.intro + p.subtitle {
+  margin-top: 0;
+}
+
+h3.t3 {
+  color: #5d5581;
+  text-align: center;
+}
+
+h4.t4 {
+  color: black;
+}
+
+h5.t5 {
+  color: black;
+}
+
+p.introductorynote {
+  color: #5d5581;
+  text-align: center;
+}
+
+h1#bildschirm {
+  padding: 0.67em;
+}
+
+div#extra-leser p.standard + p.standard, div#service p.standard + p.standard, div#recht p.standard + p.standard, div#extra-hinweise p.standard + p.standard, body p.standard + p.standard {
+  margin-top: 0.335em;
+}
+
+div#extra-leser p.standard, div#service p.standard, div#recht p.standard, div#extra-hinweise p.standard {
+  text-indent: 0;
+}
+
+p.acronym {
+  color: #5d5581;
+  border-color: #5d5581;
+}
+
+li p {
+  margin-left: 0.2em;
+}
+
+hr {
+  margin: 1.67em 33% 1em;
+  outline: none;
+  border-color: lightgray;
+  border-width: 1px;
+  margin-bottom: 3em;
+}
+
+body div.box {
+  border: none !important;
+  color: #5d5581;
+  background-color: #e6e3eb;
+}
+body div.box p.standard {
+  margin-top: 0.67em;
+}
+body div.box p.standard + p.standard {
+  text-indent: 0;
+}
+body div.box h6.boxheading {
+  color: #5d5581;
+}
+
+div.box.box_praxis {
+  background-color: transparent;
+  margin: 1em 0;
+  color: #5d5581;
+}
+
+table tr.tablehead2 td,
+table td.tablehead2 {
+  background-color: #dbdbdb;
+}
+table tr.double_colored_row td {
+  background-color: #a2a2a2;
+}
+table.standardtable {
+  border-collapse: collapse;
+  border-right-style: hidden;
+  border-left-style: hidden;
+}

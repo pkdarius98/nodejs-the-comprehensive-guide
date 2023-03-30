@@ -1,0 +1,201 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+                    
+        <head><meta content="application/xhtml+xml; charset=utf-8" http-equiv="Content-Type"/>
+            <meta content="application/xhtml+xml; charset=utf-8" name="content-type"/>
+            <meta content="Deno" name="title"/>
+            <meta content="Sebastian Springer" name="author"/>
+            <meta content="Rheinwerk Publishing" name="publisher"/>
+            <meta content="© 2022 by Rheinwerk Publishing Inc., Boston (MA)" name="copyright"/>
+            <meta content="Node.js - The Comprehensive Guide - Deno" name="description"/>
+            <meta content="en" name="language"/>
+            <title>Deno</title>
+            <link href="common/main.css" rel="stylesheet" type="text/css"/>
+<meta content="urn:uuid:e0000000-0000-0000-0000-000029756394" name="Adept.expected.resource"/>
+        </head>
+    
+
+
+                    <body class="office_us type_kapitel">
+                        <div id="main">
+        <h2 class="t2" id="h28.2">28.2    Installing Deno<a class="indexanchor" id="i28_13"/></h2>
+        <p class="standard">Before you can start using Deno, you need to install the platform on your system. The easiest way to do this is to install Deno on the command line. On Linux<a class="indexanchor" id="i28_14"/> and macOS<a class="indexanchor" id="i28_15"/>, you can use cURL to do that, as shown in <span class="crossreference "><a href="28_002.html#l28.1">Listing 28.1</a></span>.</p>
+        <div class="listing " id="l28.1"><pre>$ curl -fsSL https://deno.land/x/install/install.sh | sh </pre></div>
+        <p class="caption "><b>Listing 28.1</b>    
+            Installing Deno on Linux and macOS</p>
+        <p class="standard">On a Windows system<a class="indexanchor" id="i28_16"/>, you can install Deno using the command from <span class="crossreference "><a href="28_002.html#l28.2">Listing 28.2</a></span> on the PowerShell.</p>
+        <div class="listing " id="l28.2"><pre>$ iwr https://deno.land/x/install/install.ps1 -useb | iex </pre></div>
+        <p class="caption "><b>Listing 28.2</b>    
+            Installing Deno on a Windows System</p>
+        <p class="standard"><a id="p794"/>As an alternative to these options, you can also install Deno using package managers such as Homebrew<a class="indexanchor" id="i28_17"/> or Chocolatey<a class="indexanchor" id="i28_18"/>.</p>
+        <p class="standard">To check whether your installation was successful, you can enter the <samp class="listingcharacter listingcharacter">deno --version</samp> command on the command line. <span class="crossreference "><a href="28_002.html#l28.3">Listing 28.3</a></span> shows an example of the output.</p>
+        <div class="listing " id="l28.3"><pre>deno 1.14.1 (release, x86_64-apple-darwin)<br/>v8 9.4.146.15<br/>typescript 4.4.2 </pre></div>
+        <p class="caption "><b>Listing 28.3</b>    
+            Output of “deno --version”</p>
+        <p class="standard">As you can see, this command provides information about the V8 engine and TypeScript used, in addition to the version of Deno. The TypeScript version is interesting in that Deno natively supports both JavaScript and TypeScript.</p>
+        
+            <h3 class="t3" id="h28.2.1">28.2.1    Deno Command-Line Interface<a class="indexanchor" id="i28_19"/></h3>
+            <p class="standard">If you have Deno installed on your system, you have access to the <samp class="listingcharacter listingcharacter">deno</samp> command-line tool. Similar to npm, you can pass commands to Deno. <span class="crossreference "><a href="28_002.html#t28.1">Table 28.1</a></span> provides an overview of the available commands.</p>
+            <table class="standardtable" id="t28.1">
+                <thead>
+                    <tr>
+                        <th class="tablehead tablecell_first top_border_cell">
+                            <p class="standard first-item last-item">Command</p>
+                        </th>
+                        <th class="tablehead tablecell_last top_border_cell">
+                            <p class="standard first-item last-item">Description</p>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="tablecell tablecell_first top_border_cell">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">bundle</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last top_border_cell">
+                            <p class="standard first-item last-item">Creates a file from the source code and all dependencies</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">cache</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Stores the dependencies in a cache</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">compile</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Compiles the source code into an executable file</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">completions</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Creates the auto-completion for the shell</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">coverage</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Displays the coverage reports</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">doc</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Displays the documentation for a module</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">eval</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Evaluates a script</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">fmt</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Formats the source code</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">help</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Outputs all available commands</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">info</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Outputs information about the cache or a specified file</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">install</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Installs a script as an executable file</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">lint</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Checks the source code</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">lsp</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Starts the language server</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter"><a id="p795"/>repl</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Starts the Deno shell</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">run</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Runs an application</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">test</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Runs the tests of an application</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">types</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Outputs the TypeScript declarations</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">upgrade</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Updates Deno to the specified version</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="caption "><b>Table 28.1</b>    
+            Deno Commands</p>
+        
+    </div><p class="signatur"/>
+                    </body>
+                </html>

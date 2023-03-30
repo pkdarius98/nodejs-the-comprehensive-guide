@@ -1,0 +1,195 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+                    
+        <head><meta content="application/xhtml+xml; charset=utf-8" http-equiv="Content-Type"/>
+            <meta content="application/xhtml+xml; charset=utf-8" name="content-type"/>
+            <meta content="Basic Principles" name="title"/>
+            <meta content="Sebastian Springer" name="author"/>
+            <meta content="Rheinwerk Publishing" name="publisher"/>
+            <meta content="© 2022 by Rheinwerk Publishing Inc., Boston (MA)" name="copyright"/>
+            <meta content="Node.js - The Comprehensive Guide - Basic Principles" name="description"/>
+            <meta content="en" name="language"/>
+            <title>Basic Principles</title>
+            <link href="common/main.css" rel="stylesheet" type="text/css"/>
+<meta content="urn:uuid:e0000000-0000-0000-0000-000029756394" name="Adept.expected.resource"/>
+        </head>
+    
+
+
+                    <body class="office_us type_kapitel">
+                        <div id="main">
+        <h2 class="t2" id="h1.3">1.3    Versioning<a class="indexanchor" id="i01_52"/> of Node.js</h2>
+        <p class="standard">One of the biggest points of criticism concerning Node.js before the fork of io.js was that its development was very slow. Regular and predictable releases are an important selection criterion, especially in enterprise usage. For this reason, after merging Node.js and io.js, the developers of Node.js agreed on a transparent release schedule<a class="indexanchor" id="i01_53"/> with regular <a id="p39"/>releases and an LTS version that is provided with updates over a longer period of time. The release schedule provides for one major release<a class="indexanchor" id="i01_54"/> per half year.</p>
+        <p class="standard"><span class="crossreference "><a href="01_003.html#t1.1">Table 1.1</a></span> shows the release schedule of Node.js.</p>
+        <table class="standardtable" id="t1.1">
+            <thead>
+                <tr>
+                    <th class="tablehead tablecell_first top_border_cell">
+                        <p class="standard first-item last-item">Release</p>
+                    </th>
+                    <th class="tablehead tablecell_middle top_border_cell">
+                        <p class="standard first-item last-item">Status</p>
+                    </th>
+                    <th class="tablehead tablecell_middle top_border_cell">
+                        <p class="standard first-item last-item">Initial Release</p>
+                    </th>
+                    <th class="tablehead tablecell_middle top_border_cell">
+                        <p class="standard first-item last-item">Active LTS Start</p>
+                    </th>
+                    <th class="tablehead tablecell_middle top_border_cell">
+                        <p class="standard first-item last-item">Maintenance LTS Start</p>
+                    </th>
+                    <th class="tablehead tablecell_last top_border_cell">
+                        <p class="standard first-item last-item">End of Line</p>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="tablecell tablecell_first top_border_cell">
+                        <p class="standard first-item last-item"><span class="url"><a href="https://nodejs.org/download/release/latest-v14.x/">https://nodejs.org/download/release/latest-v14.x/</a></span></p>
+                    </td>
+                    <td class="tablecell tablecell_middle top_border_cell">
+                        <p class="standard first-item last-item">Maintenance LTS</p>
+                    </td>
+                    <td class="tablecell tablecell_middle top_border_cell">
+                        <p class="standard first-item last-item">4/21/2020</p>
+                    </td>
+                    <td class="tablecell tablecell_middle top_border_cell">
+                        <p class="standard first-item last-item">10/27/2020</p>
+                    </td>
+                    <td class="tablecell tablecell_middle top_border_cell">
+                        <p class="standard first-item last-item">10/19/2021</p>
+                    </td>
+                    <td class="tablecell tablecell_last top_border_cell">
+                        <p class="standard first-item last-item">4/30/2023</p>
+                    </td>
+                </tr>
+                <tr class="light">
+                    <td class="tablecell tablecell_first">
+                        <p class="standard first-item last-item"><span class="url"><a href="https://nodejs.org/download/release/latest-v16.x/">https://nodejs.org/download/release/latest-v16.x/</a></span></p>
+                    </td>
+                    <td class="tablecell tablecell_middle">
+                        <p class="standard first-item last-item">Active LTS</p>
+                    </td>
+                    <td class="tablecell tablecell_middle">
+                        <p class="standard first-item last-item">4/20/2021</p>
+                    </td>
+                    <td class="tablecell tablecell_middle">
+                        <p class="standard first-item last-item">10/26/2021</p>
+                    </td>
+                    <td class="tablecell tablecell_middle">
+                        <p class="standard first-item last-item">10/18/2022</p>
+                    </td>
+                    <td class="tablecell tablecell_last">
+                        <p class="standard first-item last-item">4/30/2024</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tablecell tablecell_first">
+                        <p class="standard first-item last-item"><span class="url"><a href="https://nodejs.org/download/release/latest-v17.x/">https://nodejs.org/download/release/latest-v17.x/</a></span></p>
+                    </td>
+                    <td class="tablecell tablecell_middle">
+                        <p class="standard first-item last-item">Current</p>
+                    </td>
+                    <td class="tablecell tablecell_middle">
+                        <p class="standard first-item last-item">10/19/2021</p>
+                    </td>
+                    <td class="tablecell tablecell_middle"/>
+                    <td class="tablecell tablecell_middle">
+                        <p class="standard first-item last-item">4/1/2022</p>
+                    </td>
+                    <td class="tablecell tablecell_last">
+                        <p class="standard first-item last-item">6/1/2022</p>
+                    </td>
+                </tr>
+                <tr class="light">
+                    <td class="tablecell tablecell_first">
+                        <p class="standard first-item last-item"><span class="url"><a href="https://nodejs.org/download/release/latest-v18.x/">https://nodejs.org/download/release/latest-v18.x/</a></span></p>
+                    </td>
+                    <td class="tablecell tablecell_middle">
+                        <p class="standard first-item last-item">Pending</p>
+                    </td>
+                    <td class="tablecell tablecell_middle">
+                        <p class="standard first-item last-item">4/19/2022</p>
+                    </td>
+                    <td class="tablecell tablecell_middle">
+                        <p class="standard first-item last-item">10/25/2022</p>
+                    </td>
+                    <td class="tablecell tablecell_middle">
+                        <p class="standard first-item last-item">10/18/2023</p>
+                    </td>
+                    <td class="tablecell tablecell_last">
+                        <p class="standard first-item last-item">4/30/2025</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tablecell tablecell_first">
+                        <p class="standard first-item last-item">v19</p>
+                    </td>
+                    <td class="tablecell tablecell_middle">
+                        <p class="standard first-item last-item">Pending</p>
+                    </td>
+                    <td class="tablecell tablecell_middle">
+                        <p class="standard first-item last-item">10/18/2022</p>
+                    </td>
+                    <td class="tablecell tablecell_middle"/>
+                    <td class="tablecell tablecell_middle">
+                        <p class="standard first-item last-item">4/1/2023</p>
+                    </td>
+                    <td class="tablecell tablecell_last">
+                        <p class="standard first-item last-item">6/1/2023</p>
+                    </td>
+                </tr>
+                <tr class="light">
+                    <td class="tablecell tablecell_first">
+                        <p class="standard first-item last-item">v20</p>
+                    </td>
+                    <td class="tablecell tablecell_middle">
+                        <p class="standard first-item last-item">Pending</p>
+                    </td>
+                    <td class="tablecell tablecell_middle">
+                        <p class="standard first-item last-item">4/18/2023</p>
+                    </td>
+                    <td class="tablecell tablecell_middle">
+                        <p class="standard first-item last-item">10/24/2023</p>
+                    </td>
+                    <td class="tablecell tablecell_middle">
+                        <p class="standard first-item last-item">10/22/2024</p>
+                    </td>
+                    <td class="tablecell tablecell_last">
+                        <p class="standard first-item last-item">4/30/2026</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="caption "><b>Table 1.1</b>    
+            Node.js Release Schedule</p>
+        <p class="standard">As you can see from the release schedule, versions with an even version number are LTS releases, while odd ones are releases with a shortened support period<a class="indexanchor" id="i01_55"/>.</p>
+        
+            <h3 class="t3" id="h1.3.1">1.3.1    Long-Term Support Releases<a class="indexanchor" id="i01_56"/></h3>
+            <p class="standard">A Node.js version with an even version number is transitioned to an LTS release as soon as the next odd version is released. The LTS release is then actively maintained over a period of 12 months. During this time, the version receives the following:</p>
+            <ul>
+                <li>
+                    <p class="standard first-item last-item">Bug fixes<a class="indexanchor" id="i01_57"/></p>
+                </li>
+                <li>
+                    <p class="standard first-item last-item">Security updates<a class="indexanchor" id="i01_58"/></p>
+                </li>
+                <li>
+                    <p class="standard first-item last-item">npm minor updates</p>
+                </li>
+                <li>
+                    <p class="standard first-item last-item">Documentation updates</p>
+                </li>
+                <li>
+                    <p class="standard first-item last-item">Performance improvements that don’t compromise existing applications</p>
+                </li>
+                <li>
+                    <p class="standard first-item last-item">Changes to the source code that simplify the integration of future improvements</p>
+                </li>
+            </ul>
+            <p class="standard">After this phase, the version enters a 12-month maintenance phase during which the version will continue to receive security updates. In this case, however, only critical bugs and security gaps are fixed. In total, the developers of the Node.js platform support an LTS release over a period of 30 months.</p>
+        
+    </div><p class="signatur"/>
+                    </body>
+                </html>

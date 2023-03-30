@@ -1,0 +1,26 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+                    
+        <head><meta content="application/xhtml+xml; charset=utf-8" http-equiv="Content-Type"/>
+            <meta content="application/xhtml+xml; charset=utf-8" name="content-type"/>
+            <meta content="Authentication and Session Handling" name="title"/>
+            <meta content="Sebastian Springer" name="author"/>
+            <meta content="Rheinwerk Publishing" name="publisher"/>
+            <meta content="© 2022 by Rheinwerk Publishing Inc., Boston (MA)" name="copyright"/>
+            <meta content="Node.js - The Comprehensive Guide - Authentication and Session Handling" name="description"/>
+            <meta content="en" name="language"/>
+            <title>Authentication and Session Handling</title>
+            <link href="common/main.css" rel="stylesheet" type="text/css"/>
+<meta content="urn:uuid:e0000000-0000-0000-0000-000029756394" name="Adept.expected.resource"/>
+        </head>
+    
+
+
+                    <body class="office_us type_kapitel">
+                        <div id="main"><h1 class="t1" id="h9">9    <a id="p273"/>Authentication and Session Handling</h1><p class="introductorynote indent_chapter_single">Without security there is no freedom.<br/>—Wilhelm von Humboldt</p><p class="standard">If<a class="indexanchor" id="i09_00"/><a class="indexanchor" id="i09_01"/> you use Node.js as a server on the web, one of the most common problems is authenticating users. For both read and write accesses, it’s important which user is accessing the information and whether or not the user is authorized for this operation. Because this is a standard problem, there are also several established solutions you can deploy in your application. Passport<a class="indexanchor" id="i09_02"/> has proven itself in the area of Express applications. In this chapter, you’ll learn how to use this tool to secure your server and assign data to specific users.</p><p class="standard">This chapter is based on the movie database you developed in the previous chapters. Pug is used as the template engine in this chapter, and we use SQLite as the database. To use the application, users must first log on via a login<a class="indexanchor" id="i09_03"/> screen with their user name<a class="indexanchor" id="i09_04"/> and corresponding password<a class="indexanchor" id="i09_05"/>. After this, they can access the data they have generated. As an additional feature, during this chapter, you’ll implement the publishing of movie records so that all users can access them, as well as a system for rating movies.</p>
+        <h2 class="t2" id="h9.1">9.1    Passport<a class="indexanchor" id="i09_06"/></h2>
+        <p class="standard">In an Express application, Passport performs most of the authentication tasks for you. Passport is managed as an open-source project on GitHub<a class="indexanchor" id="i09_07"/> at <span class="url"><a href="https://github.com/jaredhanson/passport">https://github.com/jaredhanson/passport</a></span>. The official website with comprehensive documentation can be found at <span class="url"><a href="http://www.passportjs.org/">www.passportjs.org/</a></span>. Passport is implemented as a middleware<a class="indexanchor" id="i09_08"/> component, so it integrates like a logger or other standard components. This design makes Passport relatively tightly coupled to its use with Express.</p>
+        <p class="standard">The specific feature of Passport that distinguishes it from other solutions is its structure. Passport is designed as a modular authentication system<a class="indexanchor" id="i09_09"/> where the actual authentication mechanism<a class="indexanchor" id="i09_10"/> can be registered as a plug-in<a class="indexanchor" id="i09_11"/>. Currently, more than 500 of those plug-ins, also referred to as strategies<a class="indexanchor" id="i09_12"/>, are available. For example, you can have your users authenticate against Facebook, Twitter, or a local database. Both Passport and all strategy plug-ins are available as Node Package Manager (npm) packages, making them easy to integrate into your application.</p>
+        <p class="standard"><a id="p274"/>In this chapter, you’ll use the <samp class="listingcharacter listingcharacter">local</samp> strategy to authenticate your users using a user name and password without involving third-party services.</p>
+    </div><p class="signatur"/>
+                    </body>
+                </html>

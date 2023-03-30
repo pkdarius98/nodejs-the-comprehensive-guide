@@ -1,0 +1,1247 @@
+/* --- Reset and Normalize --- */
+html, body, div, span, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, dfn, em, img, kbd, q, s, samp, small, strike, strong, b, u, i, center, dl, dt, dd, ol, ul, li, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  text-indent: 0;
+  text-align: left;
+  white-space: normal;
+  word-spacing: normal;
+  letter-spacing: normal;
+}
+
+article, aside, figcaption, figure, footer, header, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+  margin: 0;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after, q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+*, p, ul, ol, li, table, tr, td, th {
+  text-indent: 0;
+  text-align: left;
+}
+
+hr, input {
+  overflow: visible;
+}
+
+html {
+  font-family: sans-serif;
+  line-height: 1.15;
+}
+
+figcaption, article, aside, figure, footer, header, main, section {
+  display: block;
+}
+
+audio, canvas, progress, video {
+  display: inline-block;
+}
+
+audio:not([controls]) {
+  display: none;
+  height: 0;
+}
+
+a {
+  background-color: transparent;
+  color: inherit;
+  text-decoration: none;
+}
+
+a:active, a:hover {
+  outline-width: 0;
+}
+
+b, strong {
+  font-weight: bold;
+}
+
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+mark {
+  background-color: #ff0;
+  color: black;
+}
+
+small {
+  font-size: 80%;
+}
+
+img {
+  border-style: none;
+}
+
+svg:not(:root) {
+  overflow: hidden;
+}
+
+code, kbd, pre, samp {
+  font-family: monospace, monospace;
+  font-size: 1em;
+}
+
+figure {
+  margin: 1em 40px;
+}
+
+hr {
+  box-sizing: content-box;
+  height: 0;
+}
+
+textarea {
+  overflow: auto;
+}
+
+table {
+  display: table;
+}
+
+caption {
+  display: table-caption;
+}
+
+colgroup {
+  display: table-column-group;
+}
+
+col {
+  display: table-column;
+}
+
+thead {
+  display: table-header-group;
+}
+
+tbody {
+  display: table-row-group;
+}
+
+tr {
+  display: table-row;
+}
+
+td {
+  display: table-cell;
+}
+
+li {
+  display: list-item;
+}
+
+td > p.standard, th > p.standard, li > p.standard {
+  margin-top: 0;
+}
+td > p.standard.middle-item, th > p.standard.middle-item, li > p.standard.middle-item, td > p.standard.last-item, th > p.standard.last-item, li > p.standard.last-item {
+  margin-top: 0.67em;
+}
+td > p.first-item.last-item, th > p.first-item.last-item, li > p.first-item.last-item {
+  margin-top: 0;
+}
+
+@font-face {
+  font-family: TheAntiquaB;
+  src: url(../keys/TheAntiquaB-W4SemiLight.otf);
+  font-style: normal;
+  font-weight: normal;
+}
+@font-face {
+  font-family: TheAntiquaB;
+  src: url(../keys/TheAntiquaB-W4SemiLightItalic.otf);
+  font-style: italic;
+  font-weight: normal;
+}
+@font-face {
+  font-family: TheAntiquaB;
+  src: url(../keys/TheAntiquaB-W6SemiBold.otf);
+  font-style: normal;
+  font-weight: bold;
+}
+@font-face {
+  font-family: TheAntiquaB;
+  src: url(../keys/TheAntiquaB-W6SemiBoldItalic.otf);
+  font-style: italic;
+  font-weight: bold;
+}
+@font-face {
+  font-family: Callout;
+  src: url(../keys/RheinwerkCallout.otf);
+  font-weight: normal;
+}
+@font-face {
+  font-family: CalloutTS;
+  src: url(../keys/RheinwerkCalloutTS2.otf);
+  font-weight: normal;
+}
+@font-face {
+  font-family: KeyboardUniversal;
+  src: url(../keys/KeyboardUniversal.otf);
+  font-weight: normal;
+}
+body {
+  font-family: sans-serif;
+  font-size: 1em;
+  line-height: 1.35;
+  padding: 1em;
+}
+body.Kamera_layout {
+  line-height: 1.45;
+}
+
+.antiqua-font {
+  font-family: TheAntiquaB, sans-serif;
+}
+
+span.magenta {
+  color: #A60885;
+}
+
+span.hellblau {
+  color: #3880C3;
+}
+
+span.dunkelblau {
+  color: #316299;
+}
+
+span.violett {
+  color: #674193;
+}
+
+span.gruen {
+  color: #179131;
+}
+
+span.orange {
+  color: #FF7530;
+}
+
+span.braun {
+  color: #C95A0C;
+}
+
+span.gelbgruen {
+  color: #A1AA20;
+}
+
+span.rot {
+  color: #AC0B0F;
+}
+
+span.schwarz {
+  color: black;
+}
+
+li.content0, h1.content0 {
+  margin-top: 1em;
+  font-size: 2em;
+  color: #727272;
+}
+
+h1.contentextra, h1.content1, li.content1 > a {
+  font-size: 2em;
+  font-weight: normal;
+}
+
+li.content1 {
+  padding-top: 2em;
+}
+li.content1 > a {
+  color: #8d1f41;
+  border-bottom: medium solid #8d1f41;
+}
+
+h1.content1 {
+  color: #8d1f41;
+  border-bottom: medium solid #8d1f41;
+}
+h2.contentextra + h1.content1 {
+  margin-top: 1.5em;
+}
+
+#epubtoc li.contentextra + li.content2, #epubtoc li.content1 + li.contentextra {
+  margin-top: 1.5em;
+}
+
+h1.contentextra {
+  color: #8d1f41;
+}
+
+li.content2 > a, h2.content2 {
+  color: initial;
+  font-size: 1.5em;
+  font-weight: normal;
+}
+
+h1.content1 + h2.content2, h2.contentextra + h2.content2 {
+  margin-top: 2em;
+}
+
+li.content2 {
+  color: initial;
+  padding-top: 1em;
+}
+li.content2 + li.content2 {
+  padding-top: 0.5em;
+}
+li.contentextra + li.content2 {
+  margin-top: 1em;
+}
+
+#epubtoc li.contentextra, h3.content3, li.content3 > a {
+  color: initial;
+  font-size: 1.2em;
+  font-weight: normal;
+}
+
+li.content3 {
+  padding-left: 1.5em;
+}
+h3.content3 {
+  padding-left: 1em;
+}
+
+span.content_subtitle {
+  font-size: smaller;
+  font-style: italic;
+  text-transform: none;
+}
+
+#epubtoc, #epubtoc * {
+  list-style-type: none;
+  margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: sans-serif;
+  font-weight: bold;
+  page-break-inside: avoid;
+  page-break-after: avoid;
+}
+h1 span.footnote_anchor a, h2 span.footnote_anchor a, h3 span.footnote_anchor a, h4 span.footnote_anchor a, h5 span.footnote_anchor a, h6 span.footnote_anchor a {
+  color: inherit;
+}
+
+h1.t1, .h1-like, h2.t2.intro {
+  color: #8d1f41;
+  font-size: 2em;
+  font-weight: normal;
+  margin-bottom: 2em;
+  margin-top: 0.5em;
+}
+h1.t1 + h2.t2, .h1-like + h2.t2, h2.t2.intro + h2.t2 {
+  margin-top: -1.25em;
+}
+p + h1.t1, p + .h1-like, p + h2.t2.intro {
+  margin-top: 3em;
+}
+
+h2.t2, .h2-like, h3.t3.intro {
+  color: #8d1f41;
+  font-size: 1.5em;
+  margin-top: 1em;
+}
+p + h2.t2, table + h2.t2, ul + h2.t2, ol + h2.t2, div + h2.t2, p + .h2-like, p + h3.t3.intro, table + .h2-like, table + h3.t3.intro, ul + .h2-like, ul + h3.t3.intro, ol + .h2-like, ol + h3.t3.intro, div + .h2-like, div + h3.t3.intro {
+  margin-top: 2em;
+}
+
+h3.t3, .h3-like, p.step-list-heading, h4.t4.intro {
+  color: #8d1f41;
+  font-size: 1.2em;
+  margin-top: 2em;
+}
+
+h4.t4, .h4-like, h5.t5.intro {
+  color: black;
+  font-size: 1em;
+  margin-top: 2em;
+}
+h3.t3 + h4.t4, h3.t3 + .h4-like, h3.t3 + h5.t5.intro {
+  margin-top: 1em;
+}
+
+body div#main p.standard.h4-heading-container {
+  margin-top: 0.67em;
+  text-indent: 0;
+}
+
+span.h4-heading-style {
+  color: #8d1f41;
+  font-weight: bold;
+}
+
+h5.t5, .h5-like {
+  font-size: 1em;
+  margin-top: 2em;
+  font-style: italic;
+}
+h4.t4 + h5.t5, h4.t4 + .h5-like {
+  margin-top: 1em;
+}
+
+h6 {
+  page-break-before: avoid;
+}
+
+body.type_teil > * {
+  margin-left: 15%;
+  text-align: left;
+  padding-right: 1em;
+}
+body.type_teil h1.t0 {
+  font-size: 2.2em;
+  margin-top: 20%;
+  margin-bottom: 1em;
+  text-transform: uppercase;
+}
+body.type_teil p.parttext {
+  font-size: 1.8em;
+  margin-bottom: 2em;
+}
+body.type_teil p.part_page_text,
+body.type_teil p.part_page_text + * {
+  margin-top: 0.67em;
+}
+
+p.standard {
+  orphans: 2;
+  widows: 2;
+  margin-top: 0.67em;
+}
+
+p.introductorynote {
+  margin-top: -1em;
+  margin-left: 0;
+  margin-right: 0;
+  margin-bottom: 2.5em;
+  font-style: italic;
+}
+h2 + p.introductorynote {
+  margin-top: 1em;
+}
+p.introductorynote.indent_appendix {
+  margin-left: 2.8em;
+}
+p.introductorynote.indent_chapter_single {
+  margin-left: 2.6em;
+}
+p.introductorynote.indent_chapter_double {
+  margin-left: 3.5em;
+}
+
+p.dedication {
+  margin-top: 3em;
+  font-style: italic;
+  text-align: right;
+}
+
+p.formula {
+  orphans: 2;
+  widows: 2;
+  margin-top: 0.67em;
+  margin-left: 1em;
+}
+
+blockquote > p, blockquote > ul, blockquote > ol, blockquote > table, blockquote > div.box_standard {
+  orphans: 2;
+  widows: 2;
+  margin-top: 0.67em;
+  margin-left: 1.33em;
+  font-style: italic;
+}
+
+p.alternativetext {
+  font-size: 0.85em;
+  color: gray;
+  border: 1px solid gray;
+  padding: 0.75em;
+}
+
+div.listing {
+  margin-top: 0.67em;
+  margin-bottom: 1.005em;
+}
+div.listing.last_item {
+  margin-bottom: 0.335em;
+}
+div.listing + p.standard, div.listing + p.formula, div.listing + blockquote > p, div.listing + div.listing {
+  margin-top: 0;
+}
+
+div.listing_no_margin_bottom {
+  margin-bottom: 0;
+}
+
+div.listing > * {
+  font-family: monospace;
+  white-space: pre-wrap;
+  font-size: 0.9em;
+}
+
+.listingcomment {
+  font-family: sans-serif;
+  font-size: inherit;
+  font-style: normal;
+  font-weight: normal;
+  color: black;
+}
+
+div.listing_output > * {
+  font-size: 0.75em;
+  font-weight: bold;
+}
+
+div.listing_input > * {
+  font-weight: bold;
+}
+
+div.listing_api, div.listing_border_black {
+  border-width: 0.1em;
+  border-style: solid;
+  padding: 0.25em;
+}
+
+div.listing_border_black {
+  border-color: black;
+}
+
+div.listing_api {
+  border-color: #828282;
+  padding: 0.5em;
+}
+
+div.listing_line_gray {
+  display: block;
+  padding: 0.2em 0;
+  background-color: #e1eeff;
+}
+
+div.box {
+  font-family: sans-serif;
+  background-color: #ececec;
+  border-style: solid;
+  border-color: #1f5689;
+  border-top-width: thick;
+  margin-top: 1em;
+  padding: 0.35em 0.5em 0.67em;
+}
+div.box.box_todobox, div.box.box_black_border {
+  border-width: thin;
+  border-color: black;
+  margin: 1em 0;
+  padding: 0.5em;
+}
+div.box.box_todobox {
+  border-top-width: medium;
+}
+div.box.box_lesson span.box_icon {
+  display: none;
+}
+div.box.box_bar, div.box.box_lesson {
+  border-top: none;
+  border-left: 4px solid #1f5689;
+  padding-left: 1em;
+  background-color: transparent;
+}
+div.box.box_no_line {
+  border-top: none;
+  border-bottom: none;
+  padding-top: 0.3em;
+}
+div.box h6.boxheading {
+  color: #1f5689;
+  margin-top: 0.25em;
+}
+body.Computing_Einsteiger_4c_layout div.box h6.boxheading, div.realworldscenario div.box h6.boxheading {
+  color: black;
+}
+
+ul, ol {
+  margin-bottom: 0.67em;
+  list-style-position: outside;
+}
+
+ul {
+  list-style-type: disc;
+}
+ul.apiliste {
+  list-style-type: square;
+}
+ul > li > ul {
+  list-style-type: circle;
+}
+
+ol {
+  list-style-type: decimal;
+  margin-left: 0.8em;
+}
+ol.double_digit {
+  margin-left: 1.3em;
+}
+ol.alphabetical {
+  list-style-type: lower-alpha;
+}
+ol.alphabetical > li {
+  padding-left: 0.5em;
+}
+ol > li > ol {
+  list-style-type: lower-alpha;
+}
+
+li {
+  margin-left: 1.1em;
+  margin-top: 0.5em;
+}
+li table.standardtable, li table.standardtable + p.caption, li div.box_standard {
+  margin-left: -1em;
+}
+li > * > li table.standardtable, li > * > li table.standardtable + p.caption, li > * > li div.box_standard {
+  margin-left: -2em;
+}
+
+ul.checkliste2, ul.checkliste {
+  background-color: #e7b97f;
+  padding: 0.3em 1em 1em;
+  font-family: monospace;
+  font-size: 1.2em;
+}
+ul.checkliste2 li, ul.checkliste li {
+  border-bottom: 1px solid black;
+  padding-bottom: 0.35em;
+}
+
+ul.checkliste {
+  list-style-type: square;
+}
+
+ul.checkliste2 {
+  list-style-type: none;
+}
+
+span.step_title_color {
+  color: green;
+}
+
+span.step_heading_numbering {
+  color: green;
+  font-size: 1.3em;
+}
+
+table.step-list-table td p.standard, table.step-list-table td div.box, table.step-list-table td div.imagebox {
+  margin-bottom: 0.67em;
+}
+table.step-list-table td p.first-item {
+  margin-top: 0;
+}
+table.step-list-table td.step-list-counter {
+  min-width: 2em;
+  font-family: sans-serif;
+}
+table.step-list-table td.step-list-counter p {
+  margin-bottom: 0;
+  font-weight: bold;
+  font-size: 1.4em;
+}
+
+table.table_schritt span.schritt {
+  font-family: sans-serif;
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #4d4d4d;
+  position: relative;
+  top: 1px;
+}
+
+.megaziffer {
+  font-size: 2em;
+  vertical-align: top;
+  margin-top: -0.2em;
+  margin-right: 0.2em;
+}
+
+div.step-list-container > div.step-list-item > p.first-item {
+  font-weight: bold;
+}
+div.step-list-container > div.step-list-item > p.first-item span.counter {
+  font-size: 1.4em;
+}
+div.step-list-container > div.step-list-item > p.first-item + p.standard {
+  margin-top: 0;
+}
+
+p.step-list-superscription {
+  page-break-after: avoid;
+  margin-top: 2em;
+  margin-bottom: 0;
+}
+
+p.step-list-heading {
+  page-break-before: avoid;
+  page-break-after: avoid;
+  color: black;
+  font-weight: bold;
+  margin-top: 0.33em;
+  margin-bottom: 1em;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin-top: 0.67em;
+  max-width: 100%;
+}
+table.normal, table.standardtable {
+  font-family: sans-serif;
+}
+table.informaltable {
+  color: inherit;
+  background-color: transparent;
+  page-break-inside: auto;
+}
+table.informaltable tbody tr.light td.tablecell {
+  background-color: transparent;
+}
+table.informaltable div.imagebox {
+  margin: 0;
+}
+div.listingtable_container > table {
+  margin: 0;
+  border-left: 1px solid black;
+  background-color: transparent;
+}
+
+tr {
+  page-break-inside: avoid;
+}
+
+td, th {
+  page-break-inside: avoid;
+  vertical-align: top;
+  padding: 0.33em;
+  border-width: 2px;
+  border-style: solid;
+}
+table.standardtable td, table.standardtable th {
+  border-color: white;
+}
+table.boxtable td, table.boxtable th {
+  border-color: #777777;
+  border-left: none;
+}
+table.boxtable td.tablecell_last, table.boxtable th.tablecell_last {
+  border-right: none;
+}
+table.informaltable td, div.listingtable_container > table td, table.informaltable th, div.listingtable_container > table th {
+  border: none;
+  padding-top: 0;
+  padding-left: 0;
+  padding-bottom: 0;
+}
+table.informaltable.table_callout td, table.informaltable.table_callout th {
+  padding-bottom: 0.33em;
+}
+td.text-align-justify *, th.text-align-justify * {
+  text-align: justify;
+}
+td.text-align-center *, th.text-align-center * {
+  text-align: center;
+}
+td.text-align-right *, th.text-align-right * {
+  text-align: right;
+}
+td.text-align-left *, th.text-align-left * {
+  text-align: left;
+}
+td.vertical-align-top, th.vertical-align-top {
+  vertical-align: top;
+}
+td.vertical-align-middle, th.vertical-align-middle {
+  vertical-align: middle;
+}
+td.vertical-align-bottom, th.vertical-align-bottom {
+  vertical-align: bottom;
+}
+
+table.table_callout td p.standard, table.table_callout th p.standard {
+  margin: 0;
+}
+table.table_callout td p.standard:not(.first-item), table.table_callout th p.standard:not(.first-item) {
+  margin-top: 0.67em;
+}
+
+table.step-list-table td.step-list-counter p {
+  margin-top: -0.1em;
+}
+
+thead, thead a,
+.tablehead,
+tr.tablehead td,
+tr.tablehead a {
+  font-weight: bold;
+}
+table.standardtable thead, table.standardtable thead a,
+table.standardtable .tablehead,
+table.standardtable tr.tablehead td,
+table.standardtable tr.tablehead a {
+  color: white;
+}
+table.boxtable thead, table.boxtable thead a,
+table.boxtable .tablehead,
+table.boxtable tr.tablehead td,
+table.boxtable tr.tablehead a {
+  color: black;
+}
+
+tr.tablehead2 td,
+tr.tablehead2 th,
+td.tablehead2,
+th.tablehead2 {
+  background-color: #ababab;
+  color: white;
+  font-weight: bold;
+}
+
+td.tablecell {
+  background-color: #ececec;
+}
+
+th.tablehead, td.tablehead {
+  background-color: #2f6489;
+}
+
+table.boxtable td.tablecell, table.listingtable td.tablecell,
+table.boxtable td.tablehead,
+table.listingtable td.tablehead,
+table.boxtable th.tablehead,
+table.listingtable th.tablehead {
+  background-color: white;
+}
+table.informaltable td.tablecell,
+table.informaltable td.tablehead,
+table.informaltable th.tablehead {
+  background-color: transparent;
+}
+table.informaltable td.tablecell p.first-item,
+table.informaltable td.tablehead p.first-item,
+table.informaltable th.tablehead p.first-item {
+  margin-top: 0;
+}
+table.informaltable td.tablecell p.last-item,
+table.informaltable td.tablehead p.last-item,
+table.informaltable th.tablehead p.last-item {
+  margin-bottom: 0.67em;
+}
+
+tr.double_colored_row td {
+  background-color: #a2a2a2;
+}
+
+div.listingtable_container {
+  margin-top: 0.67em;
+  width: 100%;
+  border: 1px solid black;
+  border-left: 0;
+}
+div.listingtable_container > table div.listing {
+  margin: 0;
+}
+
+div#cover-image img {
+  max-width: 100%;
+}
+
+div.imagebox {
+  page-break-inside: avoid;
+  page-break-after: avoid;
+  page-break-before: avoid;
+  margin-top: 0.67em;
+}
+div.imagebox img {
+  max-width: 100%;
+}
+div.imagebox.type-menu {
+  max-width: 300px;
+}
+
+div.imagebox_chapter_entry img {
+  max-height: 18em;
+}
+.specialcharacter img {
+  vertical-align: baseline;
+}
+
+div.image_full_size {
+  page-break-inside: avoid;
+  margin-top: 3em;
+}
+
+img.inline_image {
+  vertical-align: text-bottom;
+  max-height: 2em;
+}
+body.Kamera_layout img.inline_image {
+  vertical-align: middle;
+  max-height: 1.5em;
+  padding-bottom: 0.3em;
+}
+
+img.formula-inline-type {
+  vertical-align: bottom;
+  padding-bottom: 0.3em;
+}
+
+div.image-container.image-row > * {
+  clear: both;
+}
+div.image-container.image-row div.imagebox {
+  float: left;
+  clear: none;
+  margin-left: 1em;
+}
+div.image-container.image-row div.imagebox.first-image-item {
+  margin-left: 0;
+}
+div.image-container p.caption,
+div.image-container p.exposure_data {
+  margin-top: 0;
+  padding-top: 0.67em;
+}
+
+p.exposure_data, p.caption {
+  font-family: sans-serif;
+  page-break-before: avoid;
+  page-break-inside: avoid;
+  font-size: 0.85em;
+  margin-top: 0.67em;
+  margin-bottom: 1.33em;
+}
+p.last.exposure_data, p.last.caption {
+  margin-bottom: 0.33em;
+}
+div.image_full_size p.exposure_data, div.image_full_size p.caption {
+  font-size: 1.2em;
+}
+
+p.caption + p.exposure_data {
+  margin-top: -1em;
+}
+
+span.thinspace {
+  font-size: 0.5em;
+}
+
+.smallcaps, .screenelement {
+  font-weight: bold;
+  color: #666666;
+}
+.tablehead .smallcaps, .tablehead .screenelement {
+  color: inherit;
+}
+
+.smallcaps {
+  font-variant: small-caps;
+}
+body.Kamera_layout .smallcaps {
+  font-variant: normal;
+  color: inherit;
+}
+
+.listingcharacter {
+  font-family: monospace;
+  word-spacing: -4px;
+}
+
+.url {
+  font-style: italic;
+}
+
+span.keyboard,
+div.listing > pre span.keyboard, span.calloutTS,
+div.listing > pre span.calloutTS, span.callout,
+div.listing > pre span.callout {
+  font-style: normal;
+  color: black;
+}
+
+span.calloutTS,
+div.listing > pre span.calloutTS, span.callout,
+div.listing > pre span.callout {
+  vertical-align: baseline;
+  position: relative;
+}
+
+span.callout,
+div.listing > pre span.callout {
+  font-family: Callout, sans-serif;
+  font-size: 1.1em;
+  top: -2px;
+}
+
+span.calloutTS,
+div.listing > pre span.calloutTS {
+  font-family: CalloutTS, sans-serif;
+  font-size: 1.2em;
+  top: -4px;
+}
+
+span.keyboard,
+div.listing > pre span.keyboard {
+  font-family: KeyboardUniversal, sans-serif;
+}
+
+.underlined {
+  text-decoration: underline;
+}
+
+.strikethrough {
+  text-decoration: line-through;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.upright {
+  font-style: normal;
+}
+
+span.crossreference > a {
+  color: #17365d;
+  text-decoration: underline;
+}
+h1 span.crossreference > a, h2 span.crossreference > a, h3 span.crossreference > a, h4 span.crossreference > a, h5 span.crossreference > a, h6 span.crossreference > a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a.footnote {
+  text-decoration: underline;
+}
+
+span.footnote_anchor {
+  color: #333333;
+  font-size: smaller;
+}
+
+/* a.indexanchor {
+  visibility: hidden;
+} */
+
+p.indexnav {
+  font-family: sans-serif;
+  margin-bottom: 2em;
+}
+p.indexnav a {
+  display: inline-block;
+}
+
+p.acronym {
+  font-family: sans-serif;
+  border-bottom: medium solid #8d1f41;
+  margin-top: 1em;
+  color: #8d1f41;
+  font-size: 140%;
+}
+
+p.index1 {
+  font-size: 100%;
+  margin: 0.67em 1.33em 0;
+}
+
+p.index2 {
+  font-style: italic;
+  margin: 0.35em 1.67em 0em 3em;
+}
+p.index2 > a {
+  font-style: normal;
+}
+
+p.index3 {
+  font-style: italic;
+  margin: 0.35em 1.67em 0em 6em;
+}
+p.index3 > a {
+  font-style: normal;
+}
+
+div.glossary_entry {
+  margin-bottom: 1.33em;
+  font-size: 90%;
+}
+
+div.glossary_entry > strong {
+  font-family: sans-serif;
+  font-size: larger;
+}
+
+body.imprint {
+  text-align: left;
+}
+body.imprint h1.t1 {
+  margin-top: 0.33em;
+}
+body.imprint p {
+  margin-top: 0.5em;
+}
+
+p.author {
+  font-size: 100%;
+  margin-top: 1em;
+}
+
+h1.maintitle {
+  font-size: 140%;
+  margin-top: 3em;
+}
+body.office_us h1.maintitle {
+  color: #1f5689;
+}
+
+p.description {
+  font-weight: bold;
+  font-size: 100%;
+  margin-top: 0.5em;
+}
+
+p.edition {
+  font-size: 100%;
+  padding-top: 1.5em;
+}
+
+div.img_container {
+  margin-top: 10em;
+  text-align: right;
+}
+
+h1#bildschirm {
+  padding-top: 1.1em;
+}
+
+#author, #autor {
+  margin-top: 0.13em;
+}
+
+p.standard span.authorname {
+  color: #17365d;
+  font-weight: 700;
+}
+p.standard img.authorimage {
+  float: left;
+  padding-right: 0.67em;
+}
+
+div#extra-leser span.bold {
+  font-family: sans-serif;
+}
+
+div#autor a {
+  font-style: italic;
+}
+
+div#service a {
+  font-style: italic;
+}
+div#service span.crossreference a {
+  font-style: normal;
+}
+
+div.pageturn {
+  page-break-after: always;
+}
+
+p.signaturgross, p.signatur {
+  color: #666666;
+  font-weight: bold;
+}
+
+p.signatur {
+  margin-top: 3em;
+  text-align: center;
+}
+
+p.signaturgross {
+  margin-top: 1em;
+  text-align: left;
+}
+
+h6.step_title {
+  margin-top: 1.33em;
+}
+
+h6.step_heading {
+  margin-top: 1em;
+}
+
+p.subtitle {
+  margin-top: -2em;
+  margin-bottom: 2em;
+  color: #8d1f41;
+  font-size: 100%;
+}
+
+p.capterheading {
+  font-size: 140%;
+  color: green;
+  font-weight: bold;
+  margin-top: 0.75em;
+}
+
+h5.checkliste {
+  font-style: normal;
+  background-color: #e7b97f;
+  font-family: monospace;
+  padding-left: 2em;
+  padding-top: 0.75em;
+  padding-bottom: 0.5em;
+  border-bottom: 1px solid;
+  font-size: 1.2em;
+}
+
+hr {
+  margin-top: 1.67em;
+}
+
+p.question {
+  margin-top: 0.67em;
+  font-style: italic;
+  text-align: right;
+}
+
+.section_loesung.RWComputingStandardOhneMarg {
+  border-left: 10px solid #808080;
+  padding-left: 1em;
+}
+.section_loesung.RWComputingStandardOhneMarg span.crossreference {
+  text-decoration: underline;
+}

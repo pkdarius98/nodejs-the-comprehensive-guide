@@ -1,0 +1,330 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+                    
+        <head><meta content="application/xhtml+xml; charset=utf-8" http-equiv="Content-Type"/>
+            <meta content="application/xhtml+xml; charset=utf-8" name="content-type"/>
+            <meta content="Asynchronous Programming" name="title"/>
+            <meta content="Sebastian Springer" name="author"/>
+            <meta content="Rheinwerk Publishing" name="publisher"/>
+            <meta content="© 2022 by Rheinwerk Publishing Inc., Boston (MA)" name="copyright"/>
+            <meta content="Node.js - The Comprehensive Guide - Asynchronous Programming" name="description"/>
+            <meta content="en" name="language"/>
+            <title>Asynchronous Programming</title>
+            <link href="common/main.css" rel="stylesheet" type="text/css"/>
+<meta content="urn:uuid:e0000000-0000-0000-0000-000029756394" name="Adept.expected.resource"/>
+        </head>
+    
+
+
+                    <body class="office_us type_kapitel">
+                        <div id="main">
+        <h2 class="t2" id="h16.2">16.2    Running External Commands<a class="indexanchor" id="i16_29"/> Asynchronously</h2>
+        <p class="standard">You can use the <samp class="listingcharacter listingcharacter">spawn</samp><a class="indexanchor" id="i16_30"/>, <samp class="listingcharacter listingcharacter">exec</samp><a class="indexanchor" id="i16_31"/>, and <samp class="listingcharacter listingcharacter">execFile</samp><a class="indexanchor" id="i16_32"/> methods of the <samp class="listingcharacter listingcharacter">child_process</samp> module to execute commands independently of Node.js. Via these methods, you can use all the commands available to you on the command line of your operating system as well.</p>
+        <p class="standard">Using these running commands has the advantage that you can directly access the functionality of the operating system or utilities<a class="indexanchor" id="i16_33"/> without laboriously implementing the functionality in JavaScript first. In Node.js, you can control the behavior via options and get access to the output of each executed command.</p>
+        
+            <h3 class="t3" id="h16.2.1">16.2.1    <a id="p487"/>The exec<a class="indexanchor" id="i16_34"/> Method</h3>
+            <p class="standard">The simpler of the two variants for executing external commands is to use the two <samp class="listingcharacter listingcharacter">exec</samp> commands. <span class="crossreference "><a href="16_002.html#l16.5">Listing 16.5</a></span> shows an example of running the <samp class="listingcharacter listingcharacter">exec</samp> method to find the Node.js executable file in your system.</p>
+            <div class="listing " id="l16.5"><pre><span class="rot">import</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"> exec </span><span class="schwarz">}</span><span class="schwarz"> </span><span class="rot">from</span><span class="schwarz"> </span><span class="hellblau">'child_process'</span><span class="schwarz">;</span><span class="schwarz"><br/></span> <br/><span class="rot">const</span><span class="schwarz"> cmd </span><span class="dunkelblau">=</span><span class="schwarz"> 'find </span><span class="dunkelblau">/</span><span class="schwarz">usr</span><span class="dunkelblau">/</span><span class="schwarz">local </span><span class="dunkelblau">-</span><span class="schwarz">iname </span><span class="hellblau">"node"</span><span class="schwarz">'</span><span class="schwarz">;</span><span class="schwarz"><br/></span> <br/><span class="schwarz">exec(</span><span class="schwarz">cmd</span><span class="schwarz">,</span><span class="schwarz"> </span><span class="schwarz">(</span><span class="schwarz">err</span><span class="schwarz">,</span><span class="schwarz"> stdout</span><span class="schwarz">,</span><span class="schwarz"> stderr</span><span class="schwarz">)</span><span class="schwarz"> </span><span class="dunkelblau">=&gt;</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>  <span class="rot">if</span><span class="schwarz"> </span><span class="schwarz">(</span><span class="schwarz">err</span><span class="schwarz">)</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>    <span class="rot">throw</span><span class="schwarz"> err</span><span class="schwarz">;</span><span class="schwarz"><br/></span>  <span class="schwarz">}</span><span class="schwarz"><br/></span> <br/>  <span class="magenta">console</span><span class="schwarz">.log(</span><span class="schwarz">stdout</span><span class="schwarz">);</span><span class="schwarz"><br/></span><span class="schwarz">});</span><span class="schwarz"> </span></pre></div>
+            <p class="caption "><b>Listing 16.5</b>    
+            Running an External Command via “exec” on a Unix System</p>
+            <p class="standard">In the first step, you need the <samp class="listingcharacter listingcharacter">exec</samp> method, which you get directly from the <samp class="listingcharacter listingcharacter">child_process</samp> module using an <samp class="listingcharacter listingcharacter">import</samp> statement. Then you formulate the command you want to issue; in the example, this involves searching for files and directories named <span class="italic">node</span> under the <span class="italic">/usr/local</span> directory. This string serves as the first argument for calling the <samp class="listingcharacter listingcharacter">exec</samp> method. In this context, you should note that commands such as <samp class="listingcharacter listingcharacter">rm -rf /</samp> can also be passed, which will potentially cause significant damage on your system. The final argument of the <samp class="listingcharacter listingcharacter">exec</samp> call is always a callback function<a class="indexanchor" id="i16_35"/> that will be executed as soon as the result of the command is available. The arguments available to you within the callback function are an error object that has a value if an error occurred during the execution of the command; a <samp class="listingcharacter listingcharacter">buffer</samp> object as a second argument, which contains the standard output of the command; and, finally, as a third argument, another <samp class="listingcharacter listingcharacter">buffer</samp><a class="indexanchor" id="i16_36"/> object that contains the values of the standard error output.</p>
+            <p class="standard">The specified command is executed by calling <samp class="listingcharacter listingcharacter">exec</samp> in a subshell, that is, on a separate command line. Its output is buffered, and the result is finally made available in the <samp class="listingcharacter listingcharacter">buffer</samp> object of the callback function just described. The execution is asynchronous, which means that your application isn’t blocked by the processing of the external command.</p>
+            <p class="standard">If you specify an object as the second argument in addition to the command and the callback function, you can affect the execution by specifying various options. The individual options<a class="indexanchor" id="i16_37"/>, their meanings, and their default values are listed in <span class="crossreference "><a href="16_002.html#t16.1">Table 16.1</a></span>.</p>
+            <table class="standardtable" id="t16.1">
+                <thead>
+                    <tr>
+                        <th class="tablehead tablecell_first top_border_cell">
+                            <p class="standard first-item last-item">Option</p>
+                        </th>
+                        <th class="tablehead tablecell_middle top_border_cell">
+                            <p class="standard first-item last-item">Default Value</p>
+                        </th>
+                        <th class="tablehead tablecell_last top_border_cell">
+                            <p class="standard first-item last-item">Description</p>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="tablecell tablecell_first top_border_cell">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">cwd</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_middle top_border_cell">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">null</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last top_border_cell">
+                            <p class="standard first-item last-item">Current working directory for the child process.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">encoding</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_middle">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">utf8</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Character encoding for the output.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter"><a id="p488"/>env</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_middle">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">null</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Environment variables for the child process as key-value pairs.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">signal</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_middle">
+                            <p class="standard first-item last-item">—</p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">If a value is specified, the child process can be terminated using an <samp class="listingcharacter listingcharacter">AbortController</samp>.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">killSignal</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_middle">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">SIGTERM</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Signal used to terminate the child process if it runs longer than the specified time-out value, for example.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">maxBuffer</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_middle">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">1024 * 1024</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Maximum size for standard output and standard error output. If this size is exceeded, the child process gets terminated.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">timeout</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_middle">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">0</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Number of milliseconds after which the child process is forcibly terminated with the signal specified under <samp class="listingcharacter listingcharacter">killSignal</samp>.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">uid</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_middle">
+                            <p class="standard first-item last-item">—</p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">User under which the process is executed.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">gid</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_middle">
+                            <p class="standard first-item last-item">—</p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Group under which the process is executed.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">windowsHide</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_middle">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">false</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Hides the console window the command would open on a Windows system.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">shell</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_middle">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">bin/sh</samp> (Unix) or <samp class="listingcharacter listingcharacter"> process.env.ComSpec</samp> (Windows)</p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Specification of a specific shell on which the command is to be run.</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="caption "><b>Table 16.1</b>    
+            Options for Configuring the “exec” Method</p>
+            <p class="standard">The <samp class="listingcharacter listingcharacter">exec</samp> method allows you not only to execute typical shell commands but also run whatever programs you want, including, for example, a full-fledged Node.js application that runs in a child process of the parent application.</p>
+            <p class="standard">In addition to the <samp class="listingcharacter listingcharacter">exec</samp> method, the somewhat more lightweight <samp class="listingcharacter listingcharacter">execFile</samp><a class="indexanchor" id="i16_38"/> method is available that allows you to run the contents of a file directly. <span class="crossreference "><a href="16_002.html#l16.6">Listing 16.6</a></span> shows the contents of such an executable file.</p>
+            <div class="listing " id="l16.6"><pre>#<span class="dunkelblau">!/</span><span class="schwarz">usr</span><span class="dunkelblau">/</span><span class="schwarz">local</span><span class="dunkelblau">/</span><span class="schwarz">bin</span><span class="dunkelblau">/</span><span class="schwarz">node</span><br/><span class="magenta">console</span><span class="schwarz">.log(</span><span class="hellblau">'Hello World'</span><span class="schwarz">);</span><span class="schwarz"> </span></pre></div>
+            <p class="caption "><b>Listing 16.6</b>    
+            Executable File as Input for “execFile” (input.js)</p>
+            <p class="standard">By saving this source code as <span class="italic">input.js</span> in the same directory as your Node.js application, you can run the source code from <span class="crossreference "><a href="16_002.html#l16.7">Listing 16.7</a></span> and get the <samp class="listingcharacter listingcharacter">Hello World</samp> output on the command line.</p>
+            <div class="listing " id="l16.7"><pre><span class="rot"><a id="p489"/>import</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"> execFile </span><span class="schwarz">}</span><span class="schwarz"> </span><span class="rot">from</span><span class="schwarz"> </span><span class="hellblau">'child_process'</span><span class="schwarz">;</span><span class="schwarz"><br/></span> <br/><span class="schwarz">execFile(</span><span class="hellblau">'./input.js'</span><span class="schwarz">,</span><span class="schwarz"> </span><span class="schwarz">(</span><span class="schwarz">err</span><span class="schwarz">,</span><span class="schwarz"> stdout</span><span class="schwarz">,</span><span class="schwarz"> stderr</span><span class="schwarz">)</span><span class="schwarz"> </span><span class="dunkelblau">=&gt;</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>  <span class="magenta">console</span><span class="schwarz">.log(</span><span class="schwarz">stdout</span><span class="schwarz">);</span><span class="schwarz"><br/></span><span class="schwarz">});</span><span class="schwarz"> </span></pre></div>
+            <p class="caption "><b>Listing 16.7</b>    
+            Running a File with “execFile”</p>
+            <p class="standard">In the input file<a class="indexanchor" id="i16_39"/> from <span class="crossreference "><a href="16_002.html#l16.6">Listing 16.6</a></span> you can see that you can also execute JavaScript code with this method. All you have to do is specify in the first line of the input file which application should be used to run the file. In this particular case, that’s <span class="italic">/usr/local/bin/node</span>, which you can determine on a Unix system via the <samp class="listingcharacter listingcharacter">which node</samp> command. However, you can also execute normal shell commands<a class="indexanchor" id="i16_40"/> such as <samp class="listingcharacter listingcharacter">find</samp>. You don’t need to start the file with <samp class="listingcharacter listingcharacter">#!/bin/bash</samp>, just specify the commands to be executed one after the other.</p>
+            <p class="standard">The actual application, whose source code you can find in <span class="crossreference "><a href="16_002.html#l16.7">Listing 16.7</a></span>, merely ensures that the file is executed and the results are output as standard output. In the example, you must note that the executed file must have the extension <span class="italic">.js</span> if you use the ECMAScript module system in conjunction with <samp class="listingcharacter listingcharacter">"type": "module"</samp> in <span class="italic">package.json</span>. Otherwise, Node.js will throw an <samp class="listingcharacter listingcharacter">ERR_UNKNOWN_FILE_EXTENSION</samp> error.</p>
+            <p class="standard">The second option available to you for executing external commands is the <samp class="listingcharacter listingcharacter">spawn</samp> method. The following section describes this method in greater detail.</p>
+        
+        
+            <h3 class="t3" id="h16.2.2">16.2.2    The spawn<a class="indexanchor" id="i16_41"/> Method</h3>
+            <p class="standard">Unlike the two <samp class="listingcharacter listingcharacter">exec</samp> methods, <samp class="listingcharacter listingcharacter">spawn</samp> doesn’t use a buffer of the command output. Instead, both the inputs and outputs of the process are available as data streams<a class="indexanchor" id="i16_42"/>. This means the data you can access here isn’t a one-time image, but a continuous stream of data. This has a couple advantages in that you’re not limited to a maximum output<a class="indexanchor" id="i16_43"/> size when using <samp class="listingcharacter listingcharacter">spawn</samp>, you get access to the data at the time it’s created, not when the command is finished.</p>
+            <p class="standard"><span class="crossreference "><a href="16_002.html#l16.8">Listing 16.8</a></span> shows a simple variant of using the <samp class="listingcharacter listingcharacter">spawn</samp> method.</p>
+            <div class="listing " id="l16.8"><pre><span class="rot">import</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"> spawn </span><span class="schwarz">}</span><span class="schwarz"> </span><span class="rot">from</span><span class="schwarz"> </span><span class="hellblau">'child_process'</span><span class="schwarz">;</span><span class="schwarz"><br/></span> <br/><span class="rot">const</span><span class="schwarz"> find </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="schwarz">spawn(</span><span class="hellblau">'find'</span><span class="schwarz">,</span><span class="schwarz"> </span><span class="schwarz">[</span><span class="hellblau">'.'</span><span class="schwarz">,</span><span class="schwarz"> </span><span class="hellblau">'-iname'</span><span class="schwarz">,</span><span class="schwarz"> </span><span class="hellblau">'node'</span><span class="schwarz">],</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"> cwd</span><span class="schwarz">:</span><span class="schwarz"> </span><span class="hellblau">'/usr/local'</span><span class="schwarz"> </span><span class="schwarz">});</span><span class="schwarz"><br/></span> <br/>find<span class="schwarz">.</span><span class="schwarz">stdout</span><span class="schwarz">.on(</span><span class="hellblau">'data'</span><span class="schwarz">,</span><span class="schwarz"> </span><span class="schwarz">(</span><span class="schwarz">data</span><span class="schwarz">)</span><span class="schwarz"> </span><span class="dunkelblau">=&gt;</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>  <span class="magenta">console</span><span class="schwarz">.log(</span><span class="schwarz">data</span><span class="schwarz">.toString());</span><span class="schwarz"><br/></span><span class="schwarz">});</span><span class="schwarz"> </span></pre></div>
+            <p class="caption "><b>Listing 16.8</b>    
+            “spawn” Method in Use</p>
+            <p class="standard"><a id="p490"/>As in the example for the <samp class="listingcharacter listingcharacter">exec</samp> method, a search is performed again for files and directories named <span class="italic">node</span>. You can already see the differences between <samp class="listingcharacter listingcharacter">spawn</samp> and <samp class="listingcharacter listingcharacter">exec</samp> in the specification of the command itself. Whereas with <samp class="listingcharacter listingcharacter">exec</samp> you provided the command and all associated options as a character string, with the second argument of <samp class="listingcharacter listingcharacter">spawn</samp>, you pass an array of options for the command. As with <samp class="listingcharacter listingcharacter">exec</samp>, you can additionally affect the <samp class="listingcharacter listingcharacter">spawn</samp> method by specifying further options in the third argument. In the example shown in <span class="crossreference "><a href="16_002.html#l16.8">Listing 16.8</a></span>, this is the current working directory of the process, which you specify via the <samp class="listingcharacter listingcharacter">cwd</samp> option. All other possible options are shown in <span class="crossreference "><a href="16_002.html#t16.2">Table 16.2</a></span>. Note here that the options<a class="indexanchor" id="i16_44"/> are different from those available under the <samp class="listingcharacter listingcharacter">exec</samp> method.</p>
+            <table class="standardtable" id="t16.2">
+                <thead>
+                    <tr>
+                        <th class="tablehead tablecell_first top_border_cell">
+                            <p class="standard first-item last-item">Option</p>
+                        </th>
+                        <th class="tablehead tablecell_last top_border_cell">
+                            <p class="standard first-item last-item">Description</p>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="tablecell tablecell_first top_border_cell">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">argv0</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last top_border_cell">
+                            <p class="standard first-item last-item">Explicitly sets the value for the first element of <samp class="listingcharacter listingcharacter">argv</samp> that is sent to the child process.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">cwd</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Current working directory for the process.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">detached</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">If this option is set to <samp class="listingcharacter listingcharacter">true</samp>, the child process is executed independently of the parent process. This means the child process isn’t necessarily terminated when the parent process is terminated.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">env</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Allows you to specify the values of environment variables as key-value pairs.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">gid</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Group ID under which the child process is to be executed. Note that you must have the relevant permissions for this operation.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">killSignal</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Signal that is sent to the child process in the event of a time-out or <samp class="listingcharacter listingcharacter">AbortSignal</samp>. The default value is <samp class="listingcharacter listingcharacter">SIGTERM</samp>.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">serialization</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Allows you to specify the type of serialization of messages between processes. The standard value is <samp class="listingcharacter listingcharacter">json</samp>.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">shell</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Possibility to set a shell on which the command will be executed.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">signal</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Allows canceling the child process with an <samp class="listingcharacter listingcharacter">AbortSignal</samp>.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">stdio</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Configuration options for the inputs and outputs.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">timeout</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Maximum time the child process is allowed to run. The default value is <samp class="listingcharacter listingcharacter">undefined</samp>.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">uid</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">ID of the user under which the child process is to be executed. Again, as with <samp class="listingcharacter listingcharacter">gid</samp>, you need to have the relevant permissions.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter"><a id="p491"/>WindowsHide</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Hides the console window that would be opened for the child process on a Windows system.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">WindowsVerbatimArguments</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">No quoting and escaping for command-line options on a Windows system.</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="caption "><b>Table 16.2</b>    
+            Options for the “spawn” Method</p>
+            <p class="standard">Because you have access to both standard input and standard output, you can also combine two commands. You can do this on the Unix command line using the <samp class="listingcharacter listingcharacter">pipe</samp><a class="indexanchor" id="i16_45"/>. The example shown in <span class="crossreference "><a href="16_002.html#l16.9">Listing 16.9</a></span> is supposed to have the same effect as the following command line: <samp class="listingcharacter listingcharacter">find /usr/local -iname 'node' | grep 'bin'</samp>. This means you search for files and directories named <span class="italic">node</span> in the <span class="italic">/usr/local</span> directory and then filter the found hits for the character string <samp class="listingcharacter listingcharacter">bin</samp>.</p>
+            <div class="listing " id="l16.9"><pre><span class="rot">import</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"> spawn </span><span class="schwarz">}</span><span class="schwarz"> </span><span class="rot">from</span><span class="schwarz"> </span><span class="hellblau">'child_process'</span><span class="schwarz">;</span><span class="schwarz"><br/></span><span class="rot">const</span><span class="schwarz"> find </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="schwarz">spawn(</span><span class="hellblau">'find'</span><span class="schwarz">,</span><span class="schwarz"> </span><span class="schwarz">[</span><span class="hellblau">'.'</span><span class="schwarz">,</span><span class="schwarz"> </span><span class="hellblau">'-iname'</span><span class="schwarz">,</span><span class="schwarz"> </span><span class="hellblau">'node'</span><span class="schwarz">],</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"> cwd</span><span class="schwarz">:</span><span class="schwarz"> </span><span class="hellblau">'/usr/local'</span><span class="schwarz"> </span><span class="schwarz">});</span><span class="schwarz"><br/></span><span class="rot">const</span><span class="schwarz"> grep </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="schwarz">spawn(</span><span class="hellblau">'grep'</span><span class="schwarz">,</span><span class="schwarz"> </span><span class="schwarz">[</span><span class="hellblau">'bin'</span><span class="schwarz">]);</span><span class="schwarz"><br/></span> <br/>find<span class="schwarz">.</span><span class="schwarz">stdout</span><span class="schwarz">.pipe(</span><span class="schwarz">grep</span><span class="schwarz">.</span><span class="schwarz">stdin</span><span class="schwarz">);</span><span class="schwarz"><br/></span> <br/>find<span class="schwarz">.on(</span><span class="hellblau">'exit'</span><span class="schwarz">,</span><span class="schwarz"> </span><span class="schwarz">(</span><span class="schwarz">code</span><span class="schwarz">)</span><span class="schwarz"> </span><span class="dunkelblau">=&gt;</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>  grep<span class="schwarz">.</span><span class="schwarz">stdin</span><span class="schwarz">.end();</span><span class="schwarz"><br/></span><span class="schwarz">});</span><span class="schwarz"><br/></span> <br/>grep<span class="schwarz">.</span><span class="schwarz">stdout</span><span class="schwarz">.on(</span><span class="hellblau">'data'</span><span class="schwarz">,</span><span class="schwarz"> </span><span class="schwarz">(</span><span class="schwarz">data</span><span class="schwarz">)</span><span class="schwarz"> </span><span class="dunkelblau">=&gt;</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>  <span class="magenta">console</span><span class="schwarz">.log(</span><span class="hellblau">''</span><span class="schwarz"> </span><span class="dunkelblau">+</span><span class="schwarz"> data</span><span class="schwarz">);</span><span class="schwarz"><br/></span><span class="schwarz">});</span><span class="schwarz"> </span></pre></div>
+            <p class="caption "><b>Listing 16.9</b>    
+            Combining Two Commands with “spawn”</p>
+            <p class="standard">For each command in the chain<a class="indexanchor" id="i16_46"/>, you must call the <samp class="listingcharacter listingcharacter">spawn</samp> method. You’ll receive an object of the <samp class="listingcharacter listingcharacter">ChildProcess</samp> type as a return value, which you’ll continue to use in the following steps. Using the <samp class="listingcharacter listingcharacter">pipe</samp> method of the standard output of the <samp class="listingcharacter listingcharacter">find</samp> child process, you connect the two child processes so that the standard output of the <samp class="listingcharacter listingcharacter">find</samp> process writes to the standard input of the <samp class="listingcharacter listingcharacter">grep</samp> process. Alternatively, you could bind a callback function to the <samp class="listingcharacter listingcharacter">data</samp> event of the standard output of the <samp class="listingcharacter listingcharacter">find</samp> process. This event is called as soon as this process writes data to the standard output<a class="indexanchor" id="i16_47"/>. You then write this data to the standard input of the <samp class="listingcharacter listingcharacter">grep</samp> process using the <samp class="listingcharacter listingcharacter">write</samp> method. Irrespective of whether you’ve chosen the short or the verbose variant, as soon as the output of the <samp class="listingcharacter listingcharacter">find</samp> process is completed, that is, the <samp class="listingcharacter listingcharacter">exit</samp> event is triggered, you should terminate the standard input of the <samp class="listingcharacter listingcharacter">grep</samp> process by calling the <samp class="listingcharacter listingcharacter">end</samp> method of the object representing the standard input of this process. Finally, as was the case with the <samp class="listingcharacter listingcharacter">find</samp> process, you <a id="p492"/>can bind a callback function to the <samp class="listingcharacter listingcharacter">data</samp> event of the standard output of the <samp class="listingcharacter listingcharacter">grep</samp> process, in which you can present the obtained information to the user on the standard output.</p>
+            <p class="standard">As you’ve seen, you can execute commands with <samp class="listingcharacter listingcharacter">spawn</samp> as well as with <samp class="listingcharacter listingcharacter">exec</samp>, just as you would enter them in the command line of your system. You can use commands of the operating system directly or run specially created shell scripts<a class="indexanchor" id="i16_48"/>. As you know, such a shell script can also contain JavaScript code. However, with this variant of execution, you have hardly any possibilities to communicate between the processes. You can only use standard input and standard output as communication medium in a rather awkward way. A better way to execute JavaScript code in a child process is to use the <samp class="listingcharacter listingcharacter">fork</samp> method, which will be described in greater detail in the following section.</p>
+        
+    </div><p class="signatur"/>
+                    </body>
+                </html>

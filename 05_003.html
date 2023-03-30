@@ -1,0 +1,44 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+                    
+        <head><meta content="application/xhtml+xml; charset=utf-8" http-equiv="Content-Type"/>
+            <meta content="application/xhtml+xml; charset=utf-8" name="content-type"/>
+            <meta content="HTTP" name="title"/>
+            <meta content="Sebastian Springer" name="author"/>
+            <meta content="Rheinwerk Publishing" name="publisher"/>
+            <meta content="© 2022 by Rheinwerk Publishing Inc., Boston (MA)" name="copyright"/>
+            <meta content="Node.js - The Comprehensive Guide - HTTP" name="description"/>
+            <meta content="en" name="language"/>
+            <title>HTTP</title>
+            <link href="common/main.css" rel="stylesheet" type="text/css"/>
+<meta content="urn:uuid:e0000000-0000-0000-0000-000029756394" name="Adept.expected.resource"/>
+        </head>
+    
+
+
+                    <body class="office_us type_kapitel">
+                        <div id="main">
+        <h2 class="t2" id="h5.3">5.3    Secure Communication with HTTPS<a class="indexanchor" id="i05_89"/></h2>
+        <p class="standard">HTTP is an unencrypted protocol that poses the risk of a potential attacker eavesdropping on the communication between client and server and thus gaining possession of sensitive data. For this reason, most browsers also show in the address bar when a form is delivered over HTTP, especially with password entry. To switch a Node.js server from HTTP to HTTPS, only a few adjustments are required. In the following sections, you’ll learn how to secure the address book example step by step.</p>
+        
+            <h3 class="t3" id="h5.3.1">5.3.1    Creating Certificates<a class="indexanchor" id="i05_90"/></h3>
+            <p class="standard">First, you need a certificate for encryption. For a product application, you should obtain a certificate from a trusted certificate authority. Alternatively, you can use a Let’s Encrypt<a class="indexanchor" id="i05_91"/> certificate. Let’s Encrypt is a free and open certification authority. However, for the example, you can also issue a self-signed certificate yourself. In this case, you need the command-line tool <samp class="listingcharacter listingcharacter">openssl</samp><a class="indexanchor" id="i05_92"/>. <span class="crossreference "><a href="05_003.html#l5.29">Listing 5.29</a></span> contains the commands needed to create a certificate for your web server.</p>
+            <div class="listing " id="l5.29"><pre>openssl genrsa -out localhost.key 2048<br/>openssl req -new -x509 -key localhost.key -out localhost.cert -days 9999 -subj <br/>/CN=localhost </pre></div>
+            <p class="caption "><b>Listing 5.29</b>    
+            Generating Certificates</p>
+            <p class="standard">Using these two commands, you’ve created two files: <span class="italic">localhost.key</span> and <span class="italic">localhost.cert</span>.</p>
+        
+        
+            <h3 class="t3" id="h5.3.2">5.3.2    <a id="p169"/>Using HTTPS in the Web Server<a class="indexanchor" id="i05_93"/></h3>
+            <p class="standard">For secure communication, you need to use the <samp class="listingcharacter listingcharacter">https</samp> module of Node.js instead of <samp class="listingcharacter listingcharacter">http</samp>. Both are application programming interface (API) compatible, so changes are kept to a minimum. You can see the necessary changes in <span class="crossreference "><a href="05_003.html#l5.30">Listing 5.30</a></span>.</p>
+            <div class="listing " id="l5.30"><pre><span class="bold"><span class="schwarz"/><samp class="listingcharacter listingcharacter"><span class="rot">import</span><span class="schwarz"> { createServer } </span><span class="rot">from</span><span class="schwarz"> </span><span class="hellblau">'https'</span><span class="schwarz">;</span></samp></span><br/><span class="rot">import</span><span class="schwarz"> { readFile, </span><span class="bold"><samp class="listingcharacter listingcharacter">readFileSync</samp></span>, rename } <span class="rot">from</span><span class="schwarz"> </span><span class="hellblau">'fs'</span><span class="schwarz">;</span><br/>...<br/><span class="bold"><samp class="listingcharacter listingcharacter"><span class="rot">const</span><span class="schwarz"> options </span><span class="dunkelblau">=</span><span class="schwarz"> {</span><br/>  <span class="magenta">key</span><span class="schwarz">: readFileSync(</span><span class="hellblau">'./localhost.key'</span><span class="schwarz">),</span><br/>  cert: readFileSync(<span class="hellblau">'./localhost.cert'</span><span class="schwarz">),</span><br/>};<br/> </samp></span><br/>createServer(<span class="bold"><samp class="listingcharacter listingcharacter">options,</samp></span> (request, response) <span class="dunkelblau">=&gt;</span><span class="schwarz"> {</span><br/>  ...<br/>}).listen(8080, () <span class="dunkelblau">=&gt;</span><span class="schwarz"><br/></span>  <span class="magenta">console</span><span class="schwarz">.log(</span><span class="hellblau">'Address book reachable at </span><span class="bold"><samp class="listingcharacter listingcharacter">https://localhost:8080</samp></span>'<span class="schwarz">),</span><br/>);<br/>...  <span class="schwarz"/></pre></div>
+            <p class="caption "><b>Listing 5.30</b>    
+            Secure Communication via HTTPS</p>
+            <p class="standard">When you create the server, you pass a configuration object that contains the key<a class="indexanchor" id="i05_94"/> and the certificate. You can read both files from the file system using the <samp class="listingcharacter listingcharacter">readFileSync</samp> function of the <samp class="listingcharacter listingcharacter">fs</samp> module. In this case, synchronous processing is fine because it only happens once when the application starts. Finally, you should adjust the output on the command line after the server starts so that the correct protocol is displayed to the user.</p>
+            <div class="imagebox figure-type"><a href="img-f5.10.html" id="f5.10"><img alt="Security Warning in Chrome" id="img-f5.10" src="bilderklein/klein05_010.png"/></a></div>
+            <p class="caption "><b>Figure 5.10</b>    
+            Security Warning in Chrome</p>
+            <p class="standard"><a id="p170"/>When you start your server now, you can access the address book through your browser via URL <span class="italic">https://localhost:8080</span>. Because the certificate is self-signed<a class="indexanchor" id="i05_95"/> and therefore untrusted, you’ll receive a warning in the browser that you must acknowledge before you can access the page.</p>
+        
+    </div><p class="signatur"/>
+                    </body>
+                </html>

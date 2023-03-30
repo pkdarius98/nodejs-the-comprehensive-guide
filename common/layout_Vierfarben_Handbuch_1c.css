@@ -1,0 +1,47 @@
+table.standardtable {
+  border-collapse: collapse;
+  border-right-style: hidden;
+  border-left-style: hidden;
+}
+table.standardtable td, table.standardtable th {
+  border-width: 1px;
+  border-style: solid;
+}
+
+table.standardtable {
+  border-color: #afafaf;
+  border-width: 4px;
+  border-top-style: solid;
+  border-bottom-style: solid;
+}
+table.standardtable th, table.standardtable td.tablehead, table.standardtable .tablehead, table.standardtable tr.tablehead td {
+  background-color: #e6e6e6;
+  color: black;
+}
+table.standardtable td, table.standardtable th {
+  border-color: #afafaf;
+  border-width: 2px;
+}
+table.standardtable td.tablecell, table.standardtable tr.light td.tablecell {
+  background-color: white;
+}
+
+div.box {
+  border-top: none;
+  background-color: #e6e6e6;
+}
+
+body h3.t3.step-list-heading {
+  color: black;
+}
+body p.step-list-superscription {
+  color: #4d4d4d;
+}
+body table.step-list-table td.step-list-counter {
+  color: #4d4d4d;
+  min-width: 1.8em;
+}
+body table.step-list-table td.step-list-counter p {
+  font-size: 140%;
+  margin-top: -7px;
+}

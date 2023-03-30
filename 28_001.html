@@ -1,0 +1,58 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+                    
+        <head><meta content="application/xhtml+xml; charset=utf-8" http-equiv="Content-Type"/>
+            <meta content="application/xhtml+xml; charset=utf-8" name="content-type"/>
+            <meta content="Deno" name="title"/>
+            <meta content="Sebastian Springer" name="author"/>
+            <meta content="Rheinwerk Publishing" name="publisher"/>
+            <meta content="© 2022 by Rheinwerk Publishing Inc., Boston (MA)" name="copyright"/>
+            <meta content="Node.js - The Comprehensive Guide - Deno" name="description"/>
+            <meta content="en" name="language"/>
+            <title>Deno</title>
+            <link href="common/main.css" rel="stylesheet" type="text/css"/>
+<meta content="urn:uuid:e0000000-0000-0000-0000-000029756394" name="Adept.expected.resource"/>
+        </head>
+    
+
+
+                    <body class="office_us type_kapitel">
+                        <div id="main"><h1 class="t1" id="h28">28    <a id="p791"/>Deno</h1><p class="introductorynote indent_chapter_double">If you want to be happy all the time, you often have to change.<br/>—Confucius</p><p class="standard">Node.js<a class="indexanchor" id="i28_00"/> isn’t the only server-side JavaScript platform, but it’s by far the most widely used. However, one solution clearly stands out from the competition for several reasons. For example, there is the developer of the competing platform: Ryan Dahl<a class="indexanchor" id="i28_01"/>. This name should sound familiar from <span class="crossreference "><a href="01_001.html#h1">Chapter 1</a></span>. Correct—that’s the guy who invented Node.js. Dahl announced Deno in a speech called “10 Things I Regret about Node.js.” Interestingly, Dahl gave this speech at the same jsconf.eu event as his announcement of Node.js years earlier<a class="indexanchor" id="i28_02"/>. So Deno is the attempt to make the problem that is also addressed by Node.js better. A new platform naturally has a much easier time because it can learn from the mistakes of its predecessor and doesn’t have to bother about backward compatibility. In this chapter, we’ll take a look at Deno and see where the platform’s differences and similarities when compared to Node.js. You’ll also learn how to solve various problems with Deno based on some concrete examples. The official website with extensive documentation, examples, and numerous further resources can be found at <span class="url"><a href="https://deno.land/">https://deno.land/</a></span>. But before we dive into the development, let’s take a quick look at the origins and background of Deno.</p>
+        <h2 class="t2" id="h28.1">28.1    The Ten Things Ryan Dahl Regrets about Node.js</h2>
+        <p class="standard">The idea behind Deno is the same as behind Node.js: It’s supposed to be a server-side JavaScript platform that allows you to implement both command-line tools and web backends. However, according to Dahl, Node.js has some bugs, that is, errors. These bugs aren’t so much actual errors in the source code that can be easily corrected by a patch, but rather weaknesses in the architecture that he wants to fix. So, Dahl picked out the biggest problems and is now trying to address them with Deno.</p>
+        
+            <h3 class="t3" id="h28.1.1">28.1.1    Promises<a class="indexanchor" id="i28_03"/></h3>
+            <p class="standard">Promises support was integrated into the core of Node.js in June 2009, but it was removed again in February 2010. This step has led to the fact that many interfaces of Node.js can’t be developed optimally.</p>
+        
+        
+            <h3 class="t3" id="h28.1.2">28.1.2    <a id="p792"/>Security<a class="indexanchor" id="i28_04"/></h3>
+            <p class="standard">Client-side JavaScript is executed in a sandbox. A script in the browser has only a very limited environment and can’t leave it. This mainly affects the use of system resources<a class="indexanchor" id="i28_05"/> such as hard disk space or the network. While taking into account current user permissions<a class="indexanchor" id="i28_06"/>, Node.js on the other hand, provides you with more or less unrestricted access. For example, Dahl describes that the linter of your project doesn’t really need access to the entire system and the network, and he is absolutely right about that.</p>
+        
+        
+            <h3 class="t3" id="h28.1.3">28.1.3    The Generate Your Projects Build System<a class="indexanchor" id="i28_07"/></h3>
+            <p class="standard">The Generate Your Projects (GYP) build system is used for modules based on C libraries to compile these libraries and connect them to Node.js. GYP used to be the standard for Chrome at the time, so the Node.js development team used this tool. Shortly after that, the Chrome team replaced GYP with a new build system called GN. Node.js still uses GYP to build C modules. Therefore, the platform is based on a system that is no longer natively supported by the V8 engine so that additional abstraction layers are required. The problem is solved with the <samp class="listingcharacter listingcharacter">node-gyp</samp> tool, which performs this task. This decision results in the system becoming significantly more complex.</p>
+        
+        
+            <h3 class="t3" id="h28.1.4">28.1.4    Package.json<a class="indexanchor" id="i28_08"/></h3>
+            <p class="standard">The central configuration file of a Node.js application—the <span class="italic">package.json</span> file—originates from the Node Package Manager (npm), but it has also been integrated into Node.js itself; for example, to find the entry point you specify via the <span class="italic">main</span> property. This file has now become the standard for almost all JavaScript applications, irrespective of whether we’re talking about frontend or backend.</p>
+            <p class="standard">The biggest problems Dahl sees with this file is that module loading is too unspecific and modules become too large. When you load npm packages, you just specify the name of the module, when in fact, you should only reference a JavaScript file. In this case, you’re also directly required to select a specific version. In addition, the <span class="italic">package.json</span> file contains a lot of additional information that is relevant but not in the context of the module system.</p>
+        
+        
+            <h3 class="t3" id="h28.1.5">28.1.5    Node_modules<a class="indexanchor" id="i28_09"/></h3>
+            <p class="standard">The basic idea of implementing the CommonJS module system in Node.js was good and should ensure that everything can be resolved explicitly. However, the architecture and structure of the <span class="italic">node_modules</span> directory make the module resolution algorithm much more complicated, according to Dahl. In addition, the CommonJS module system is seriously different from the way browsers handle JavaScript, for example.</p>
+        
+        
+            <h3 class="t3" id="h28.1.6">28.1.6    <a id="p793"/>Optional File Extension When Loading Modules<a class="indexanchor" id="i28_10"/></h3>
+            <p class="standard">The CommonJS module system with the <samp class="listingcharacter listingcharacter">require</samp> function allows you to omit the file extension. This is less explicit and leaves a lot of room for interpretation for the module loader. It has to figure out what you really want to load, which in turn affects performance.</p>
+        
+        
+            <h3 class="t3" id="h28.1.7">28.1.7    Index.js<a class="indexanchor" id="i28_11"/></h3>
+            <p class="standard">If you specify only a directory when loading a module, the module system automatically searches for an <span class="italic">index.js</span> file. Again, the specification isn’t particularly explicit and creates room for error.</p>
+        
+        
+            <h3 class="t3" id="h28.1.8">28.1.8    What’s Going on Now with Node.js</h3>
+            <p class="standard">If you’ve counted carefully, you’ve probably noticed that there aren’t 10 things Dahl regrets about Node.js, but only 7. Besides, the world of Node.js isn’t that bad. The Node.js development team is already working on some of the issues mentioned. Still others can be avoided in other ways. Thus, the platform converts more and more interfaces to promises. Security and the build system are still issues that haven’t been addressed yet, and the same is true for the <span class="italic">package.json</span> file. You can get rid of the <span class="italic">node_modules</span> directory using Yarn’s Plug’n’Play feature, for example. In Node.js, the optional file name extension and <span class="italic">index.js</span> file support aren’t important due to the ECMAScript module system<a class="indexanchor" id="i28_12"/>, so these two issues will have been done away with in future releases.</p>
+            <p class="standard">Despite all the improvements in Node.js, Deno is a platform that brings many good new ideas into play. The hope is that it will be similar to the package manager competition and that the platforms will inspire and learn from each other.</p>
+        
+    </div><p class="signatur"/>
+                    </body>
+                </html>

@@ -1,0 +1,41 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+                    
+        <head><meta content="application/xhtml+xml; charset=utf-8" http-equiv="Content-Type"/>
+            <meta content="application/xhtml+xml; charset=utf-8" name="content-type"/>
+            <meta content="Quality Assurance" name="title"/>
+            <meta content="Sebastian Springer" name="author"/>
+            <meta content="Rheinwerk Publishing" name="publisher"/>
+            <meta content="© 2022 by Rheinwerk Publishing Inc., Boston (MA)" name="copyright"/>
+            <meta content="Node.js - The Comprehensive Guide - Quality Assurance" name="description"/>
+            <meta content="en" name="language"/>
+            <title>Quality Assurance</title>
+            <link href="common/main.css" rel="stylesheet" type="text/css"/>
+<meta content="urn:uuid:e0000000-0000-0000-0000-000029756394" name="Adept.expected.resource"/>
+        </head>
+    
+
+
+                    <body class="office_us type_kapitel">
+                        <div id="main">
+        <h2 class="t2" id="h22.3">22.3    Prettier<a class="indexanchor" id="i22_30"/></h2>
+        <p class="standard">Prettier follows a similar approach to the <samp class="listingcharacter listingcharacter">--fix</samp> option of ESLint. This tool is a code formatter<a class="indexanchor" id="i22_31"/>. The job of Prettier is to format the source code according to the rules of your style guide. Often, Prettier is used as a save or commit hook<a class="indexanchor" id="i22_32"/>, ensuring that only correctly formatted code enters the repository.</p>
+        
+            <h3 class="t3" id="h22.3.1">22.3.1    <a id="p649"/>Installation<a class="indexanchor" id="i22_33"/></h3>
+            <p class="standard">Prettier can be installed from the command line with npm via the <samp class="listingcharacter listingcharacter">npm install prettier</samp> command. Once the installation is complete, you can directly use the tool.</p>
+        
+        
+            <h3 class="t3" id="h22.3.2">22.3.2    Execution<a class="indexanchor" id="i22_34"/></h3>
+            <p class="standard">You can run Prettier using the <samp class="listingcharacter listingcharacter">npx prettier [options] [filenames]</samp> command. Using the source code shown in <span class="crossreference "><a href="22_002.html#l22.5">Listing 22.5</a></span>, you can have most problems fixed automatically. The command from <span class="crossreference "><a href="22_003.html#l22.7">Listing 22.7</a></span> ensures that the lines are correctly indented, missing semicolons are inserted, and double quotes are replaced by single quotes.</p>
+            <div class="listing " id="l22.7"><pre>$ npx prettier --single-quote --write index.js </pre></div>
+            <p class="caption "><b>Listing 22.7</b>    
+            Code Formatting with Prettier</p>
+            <p class="standard">As you can see in this example, you can pass the formatting rules to Prettier as command-line options. However, this variant isn’t very practical for everyday use, and you should use a configuration file instead. This file must be named <span class="italic">.prettierrc</span><a class="indexanchor" id="i22_35"/><a class="indexanchor" id="i22_36"/>. The tool supports the JavaScript, JSON, and YAML formats.</p>
+            <p class="standard">Using the configuration from , you can have the file automatically formatted via the <samp class="listingcharacter listingcharacter">npx prettier --write index.js</samp> command. The more rules you want to implement with Prettier, the more worthwhile it is to use an appropriate configuration.</p>
+            <div class="listing " id="l22.8"><pre><span class="schwarz">{</span><span class="schwarz"><br/></span>  <span class="hellblau">"singleQuote"</span><span class="schwarz">:</span><span class="schwarz"> </span><span class="rot">true</span><span class="schwarz"><br/></span><span class="schwarz">}</span><span class="schwarz"> </span></pre></div>
+            <p class="caption "><b>Listing 22.8</b>    
+            <span class="italic">.prettierrc</span> File</p>
+            <p class="standard">You can use Prettier not only on the command line but also in your development environment. For this purpose, as is the case with Visual Studio Code, either plug-ins exist, or you integrate the command-line tool directly into the development environment, as is recommended for WebStorm.</p>
+        
+    </div><p class="signatur"/>
+                    </body>
+                </html>

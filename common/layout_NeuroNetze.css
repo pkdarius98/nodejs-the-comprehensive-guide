@@ -1,0 +1,78 @@
+table.standardtable {
+  border-collapse: collapse;
+  border-right-style: hidden;
+  border-left-style: hidden;
+}
+table.standardtable td, table.standardtable th {
+  border-width: 1px;
+  border-style: solid;
+}
+
+body,
+div.box,
+table {
+  font-family: "Cambria", serif;
+}
+
+p.parttext,
+p.introductorynote,
+h6.boxheading {
+  font-family: sans-serif;
+}
+
+h1.t1,
+h1.t0, p.parttext,
+p.acronym {
+  color: #166b99;
+  border-bottom-color: #166b99;
+}
+
+h1.t0 {
+  text-transform: none;
+  font-weight: normal;
+}
+
+p.parttext {
+  font-weight: bold;
+}
+
+h2.t2, h3.t3, h4.t4, h5.t5 {
+  color: black;
+}
+
+h1.content1, h2.content2 {
+  font-weight: bold;
+}
+
+h1.content1 {
+  border: none;
+  color: #2f80ab;
+  background-color: #dae9f1;
+  padding: 0.3em 0.3em 0.3em 0.5em;
+  border-radius: 0.8em;
+}
+
+p.part_page_text {
+  font-style: italic;
+}
+
+div.box_standard {
+  border-top: none;
+  background-color: #dae9f1;
+}
+div.box_standard h6.boxheading {
+  color: black;
+}
+
+table.standardtable thead,
+table.standardtable .tablehead,
+table.standardtable tr.tablehead td.tablecell {
+  color: black;
+  background-color: #b0cadb;
+}
+table.standardtable td {
+  background-color: #ebf1f6;
+}
+table.standardtable tr.light td.tablecell {
+  background-color: #d7e3ed;
+}

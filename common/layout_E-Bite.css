@@ -1,0 +1,95 @@
+.ebite_color,
+div#main > h2.ebite_color {
+  color: #005ca8;
+}
+
+#main div.box_ebite {
+  overflow: auto;
+}
+
+a.ebite_link, span.url {
+  text-decoration: underline;
+  color: #005ca8;
+  font-style: normal;
+}
+
+p.ebite_ad {
+  orphans: 2;
+  widows: 2;
+  text-indent: 0;
+}
+body.type_part p.ebite_ad {
+  margin-top: 1.67em;
+  margin-bottom: 0.67em;
+}
+body.type_werbung p.ebite_ad {
+  margin-top: 0.67em;
+}
+
+p.ebite_ad_end {
+  font-size: 85%;
+}
+
+body.type_werbung h1 {
+  margin-bottom: 1.5em;
+}
+body.type_werbung div.ebite-ad-image {
+  margin: 0 1em 1em 0;
+}
+body.type_werbung div.ebite-ad-image img {
+  max-width: none;
+  height: 170px;
+  max-height: 170px;
+  margin-top: 0.25em;
+}
+body.type_werbung table.informaltable {
+  margin-top: 0;
+  margin-bottom: 1em;
+}
+body.type_werbung table.informaltable td {
+  padding-bottom: 0;
+}
+body.type_werbung table.informaltable td * {
+  font-size: 90%;
+}
+
+div.ebite-recommendation-image {
+  float: left;
+  margin-right: 1em;
+}
+
+div.front-matter-ebite-notice {
+  border: 1px solid black;
+  padding: 0.5em;
+  margin-top: 10em;
+  margin-bottom: -7em;
+  font-size: 85%;
+}
+
+p.ebite_toc {
+  margin-top: 0.33em;
+}
+p.ebite_toc span > a {
+  color: #005ca8;
+  text-decoration: none;
+}
+p.ebite_toc span.toc1 > a {
+  font-weight: bold;
+}
+p.ebite_toc span.toc2 {
+  margin-left: 1.2em;
+}
+p.ebite_toc.locked, p.ebite_toc.locked span > a {
+  color: #666666;
+}
+
+div.ebite_trademarks {
+  margin-top: 2em;
+  -webkit-column-count: 2;
+  -moz-column-count: 2;
+  column-count: 2;
+}
+div.ebite_trademarks p.standard {
+  font-size: 70%;
+  margin-top: 0.67em;
+}

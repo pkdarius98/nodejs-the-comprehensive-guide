@@ -1,0 +1,176 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+                    
+        <head><meta content="application/xhtml+xml; charset=utf-8" http-equiv="Content-Type"/>
+            <meta content="application/xhtml+xml; charset=utf-8" name="content-type"/>
+            <meta content="Asynchronous Programming" name="title"/>
+            <meta content="Sebastian Springer" name="author"/>
+            <meta content="Rheinwerk Publishing" name="publisher"/>
+            <meta content="© 2022 by Rheinwerk Publishing Inc., Boston (MA)" name="copyright"/>
+            <meta content="Node.js - The Comprehensive Guide - Asynchronous Programming" name="description"/>
+            <meta content="en" name="language"/>
+            <title>Asynchronous Programming</title>
+            <link href="common/main.css" rel="stylesheet" type="text/css"/>
+<meta content="urn:uuid:e0000000-0000-0000-0000-000029756394" name="Adept.expected.resource"/>
+        </head>
+    
+
+
+                    <body class="office_us type_kapitel">
+                        <div id="main">
+        <h2 class="t2" id="h16.3">16.3    Creating Node.js Child Processes<a class="indexanchor" id="i16_49"/> with fork Method<a class="indexanchor" id="i16_50"/></h2>
+        <p class="standard">In your Node.js application, you probably not only want to run external programs, but more importantly, you want to swap out parts of the application logic<a class="indexanchor" id="i16_51"/> into your own child processes. Code fragments with very time-consuming processing are particularly well suited for such measures. With this approach, you follow the same approach that the developers have envisioned for the entire Node.js platform. Basically, this means that you swap out CPU-intensive functions to prevent the processing of your application from being blocked. Once the result of the function is available, your application continues to work with this result within a callback function.</p>
+        <p class="standard">To allow you to swap out<a class="indexanchor" id="i16_52"/> functionality from the main thread of your application, the Node.js platform provides the <samp class="listingcharacter listingcharacter">fork</samp> method from the <samp class="listingcharacter listingcharacter">child_process</samp> module. Calling the <samp class="listingcharacter listingcharacter">fork</samp> method is similar to calling the <samp class="listingcharacter listingcharacter">spawn</samp> and <samp class="listingcharacter listingcharacter">exec</samp> methods, where the first argument is the name of the module to be run. The module denotes the file containing the JavaScript source code that forms the basis of the child process. The second argument contains the values to be passed to the child process, and finally the third argument is a configuration object. In the configuration object<a class="indexanchor" id="i16_53"/>, you have various options for affecting the behavior of the child process, as is the case with the other methods of the <samp class="listingcharacter listingcharacter">child_process</samp> module. <span class="crossreference "><a href="16_003.html#t16.3">Table 16.3</a></span> lists the available options you can use when processing the call.</p>
+        <table class="standardtable" id="t16.3">
+            <thead>
+                <tr>
+                    <th class="tablehead tablecell_first top_border_cell">
+                        <p class="standard first-item last-item">Option</p>
+                    </th>
+                    <th class="tablehead tablecell_last top_border_cell">
+                        <p class="standard first-item last-item">Description</p>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="tablecell tablecell_first top_border_cell">
+                        <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">cwd</samp></p>
+                    </td>
+                    <td class="tablecell tablecell_last top_border_cell">
+                        <p class="standard first-item last-item">Current working directory of the child process.</p>
+                    </td>
+                </tr>
+                <tr class="light">
+                    <td class="tablecell tablecell_first">
+                        <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">env</samp></p>
+                    </td>
+                    <td class="tablecell tablecell_last">
+                        <p class="standard first-item last-item">Environment variables for the child process in the form of key-value pairs.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tablecell tablecell_first">
+                        <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">execPath</samp></p>
+                    </td>
+                    <td class="tablecell tablecell_last">
+                        <p class="standard first-item last-item">Executable file used to create the child process.</p>
+                    </td>
+                </tr>
+                <tr class="light">
+                    <td class="tablecell tablecell_first">
+                        <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">execArgv</samp></p>
+                    </td>
+                    <td class="tablecell tablecell_last">
+                        <p class="standard first-item last-item">Arguments for the executable file.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tablecell tablecell_first">
+                        <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter"><a id="p493"/>silent</samp></p>
+                    </td>
+                    <td class="tablecell tablecell_last">
+                        <p class="standard first-item last-item">If this value is set to <samp class="listingcharacter listingcharacter">true</samp>, the default outputs of the parent process aren’t used.</p>
+                    </td>
+                </tr>
+                <tr class="light">
+                    <td class="tablecell tablecell_first">
+                        <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">stdio</samp></p>
+                    </td>
+                    <td class="tablecell tablecell_last">
+                        <p class="standard first-item last-item">Standard input, standard output, and standard error output for the process. If nothing is specified here, the streams of the parent process are used.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tablecell tablecell_first">
+                        <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">windowsVerbatimArguments</samp></p>
+                    </td>
+                    <td class="tablecell tablecell_last">
+                        <p class="standard first-item last-item">No quoting and escaping of arguments on Windows.</p>
+                    </td>
+                </tr>
+                <tr class="light">
+                    <td class="tablecell tablecell_first">
+                        <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">uid</samp></p>
+                    </td>
+                    <td class="tablecell tablecell_last">
+                        <p class="standard first-item last-item">User under which the child process is to be executed.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tablecell tablecell_first">
+                        <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">gid</samp></p>
+                    </td>
+                    <td class="tablecell tablecell_last">
+                        <p class="standard first-item last-item">Group under which the child process is to be executed.</p>
+                    </td>
+                </tr>
+                <tr class="light">
+                    <td class="tablecell tablecell_first">
+                        <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">detached</samp></p>
+                    </td>
+                    <td class="tablecell tablecell_last">
+                        <p class="standard first-item last-item">Allows the child process to be run independently from the parent process with.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tablecell tablecell_first">
+                        <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">serialization</samp></p>
+                    </td>
+                    <td class="tablecell tablecell_last">
+                        <p class="standard first-item last-item">Specifies how messages are serialized between processes. The default value is <samp class="listingcharacter listingcharacter">json</samp>.</p>
+                    </td>
+                </tr>
+                <tr class="light">
+                    <td class="tablecell tablecell_first">
+                        <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">signal</samp></p>
+                    </td>
+                    <td class="tablecell tablecell_last">
+                        <p class="standard first-item last-item">Allows the child process to be terminated with an <samp class="listingcharacter listingcharacter">AbortSignal</samp>.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tablecell tablecell_first">
+                        <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">killSignal</samp></p>
+                    </td>
+                    <td class="tablecell tablecell_last">
+                        <p class="standard first-item last-item">Specifies the type of signal if the child process is to be terminated by a time-out or <samp class="listingcharacter listingcharacter">AbortSignal</samp>. The default value is <samp class="listingcharacter listingcharacter">SIGTERM</samp>.</p>
+                    </td>
+                </tr>
+                <tr class="light">
+                    <td class="tablecell tablecell_first">
+                        <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">timeout</samp></p>
+                    </td>
+                    <td class="tablecell tablecell_last">
+                        <p class="standard first-item last-item">Specifies after how many milliseconds the child process terminates.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="caption "><b>Table 16.3</b>    
+            Options for the “fork” Method</p>
+        <p class="standard">The source code in <span class="crossreference "><a href="16_003.html#l16.10">Listing 16.10</a></span> forms the basis for the further examples related to the <samp class="listingcharacter listingcharacter">fork</samp> method.</p>
+        <div class="listing " id="l16.10"><pre><span class="rot">import</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"> fork </span><span class="schwarz">}</span><span class="schwarz"> </span><span class="rot">from</span><span class="schwarz"> </span><span class="hellblau">'child_process'</span><span class="schwarz">;</span><span class="schwarz"><br/></span> <br/><span class="rot">if</span><span class="schwarz"> </span><span class="schwarz">(</span><span class="schwarz">process</span><span class="schwarz">.</span><span class="schwarz">argv</span><span class="schwarz">[2]</span><span class="schwarz"> </span><span class="dunkelblau">&amp;&amp;</span><span class="schwarz"> process</span><span class="schwarz">.</span><span class="schwarz">argv</span><span class="schwarz">[2]</span><span class="schwarz"> </span><span class="dunkelblau">===</span><span class="schwarz"> </span><span class="hellblau">'child'</span><span class="schwarz">)</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>  <span class="magenta">console</span><span class="schwarz">.log(</span><span class="hellblau">'Child Process'</span><span class="schwarz">);</span><span class="schwarz"><br/></span><span class="schwarz">}</span><span class="schwarz"> </span><span class="rot">else</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>  <span class="magenta">console</span><span class="schwarz">.log(</span><span class="hellblau">'Parent Process'</span><span class="schwarz">);</span><span class="schwarz"><br/></span>  <span class="schwarz">fork(</span><span class="schwarz">process</span><span class="schwarz">.</span><span class="schwarz">argv</span><span class="schwarz">[1],</span><span class="schwarz"> </span><span class="schwarz">[</span><span class="hellblau">'child'</span><span class="schwarz">]);</span><span class="schwarz"><br/></span><span class="schwarz">}</span><span class="schwarz"> </span></pre></div>
+        <p class="caption "><b>Listing 16.10</b>    
+            Sample Application Containing the “fork” Method (index.js)</p>
+        <p class="standard">If you save the source code in a new file named <span class="italic">index.js</span> and execute it using the <samp class="listingcharacter listingcharacter">node index.js</samp> command, the output you’ll get is first the <samp class="listingcharacter listingcharacter">parent process</samp> and then the <samp class="listingcharacter listingcharacter">child process</samp> string. This type of application allows you to manage the source code of the parent process<a class="indexanchor" id="i16_54"/> together with the code of the child process<a class="indexanchor" id="i16_55"/> in a single file. You use both the ability to provide additional arguments to the child process via the <samp class="listingcharacter listingcharacter">fork</samp> method <a id="p494"/>and the ability to access those arguments via <samp class="listingcharacter listingcharacter">process.argv</samp><a class="indexanchor" id="i16_56"/>. In this example, you pass an argument named <samp class="listingcharacter listingcharacter">child</samp> to the child process. Thus, you can now use the <samp class="listingcharacter listingcharacter">process.argv[2]</samp> property to check whether it exists and contains the <samp class="listingcharacter listingcharacter">child</samp> value, and thus determine whether you’re in the parent or child process when currently executing the source code. However, in a production environment, you should swap out the code blocks for the parent and the child process into separate files, as this supports the maintainability<a class="indexanchor" id="i16_57"/> and readability<a class="indexanchor" id="i16_58"/> of your application. In the sample code, you can also see another special characteristic: In the call of the <samp class="listingcharacter listingcharacter">fork</samp> method, you normally specify the name of the file to be executed in the child process as the first argument. In the example, you use the <samp class="listingcharacter listingcharacter">process.argv[1]</samp> property to specify the name of the current file, ensuring that the same file is loaded in the child process.</p>
+        <p class="standard">Calling <samp class="listingcharacter listingcharacter">fork</samp> causes a new Node.js process<a class="indexanchor" id="i16_59"/> to be launched. The file specified as an argument in the call is loaded and interpreted as JavaScript code. Because every use of <samp class="listingcharacter listingcharacter">fork</samp> results in a new process being created, you shouldn’t create an unlimited number of child processes, as they also take up a considerable number of resources. Specifically, this affects mainly the memory and some processing power, depending on the operations you want to have performed.</p>
+        <p class="standard">So far, the example from <span class="crossreference "><a href="16_003.html#l16.10">Listing 16.10</a></span> still makes relatively little sense because the child process has no logic, and both the parent and child processes don’t communicate with each other yet. <span class="crossreference "><a href="16_003.html#l16.11">Listing 16.11</a></span> shows how you can extend the code of this example to see the <samp class="listingcharacter listingcharacter">fork</samp> method in action.</p>
+        <div class="listing " id="l16.11"><pre><span class="rot">import</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"> fork </span><span class="schwarz">}</span><span class="schwarz"> </span><span class="rot">from</span><span class="schwarz"> </span><span class="hellblau">'child_process'</span><span class="schwarz">;</span><span class="schwarz"><br/></span> <br/><span class="rot">if</span><span class="schwarz"> </span><span class="schwarz">(</span><span class="schwarz">process</span><span class="schwarz">.</span><span class="schwarz">argv</span><span class="schwarz">[2]</span><span class="schwarz"> </span><span class="dunkelblau">&amp;&amp;</span><span class="schwarz"> process</span><span class="schwarz">.</span><span class="schwarz">argv</span><span class="schwarz">[2]</span><span class="schwarz"> </span><span class="dunkelblau">===</span><span class="schwarz"> </span><span class="hellblau">'child'</span><span class="schwarz">)</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>  <span class="bold"><span class="schwarz"/><samp class="listingcharacter listingcharacter"><span class="magenta">console</span><span class="schwarz">.log(</span><span class="hellblau">'child'</span><span class="schwarz">);</span><br/>  <span class="rot">let</span><span class="schwarz"> n </span><span class="dunkelblau">=</span><span class="schwarz"> 1;</span><br/>  <span class="rot">let</span><span class="schwarz"> results </span><span class="dunkelblau">=</span><span class="schwarz"> 0;</span><br/>  outerLoop: <span class="rot">while</span><span class="schwarz"> (results </span><span class="dunkelblau">&lt;=</span><span class="schwarz"> 1000) {</span><br/>    n <span class="dunkelblau">+=</span><span class="schwarz"> 1;</span><br/>    <span class="rot">for</span><span class="schwarz"> (</span><span class="rot">let</span><span class="schwarz"> i </span><span class="dunkelblau">=</span><span class="schwarz"> 2; i </span><span class="dunkelblau">&lt;=</span><span class="schwarz"> Math.sqrt(n); i </span><span class="dunkelblau">+=</span><span class="schwarz"> 1) {</span><br/>      <span class="rot">if</span><span class="schwarz"> (n </span><span class="dunkelblau">%</span><span class="schwarz"> i </span><span class="dunkelblau">===</span><span class="schwarz"> 0) {</span><br/>        <span class="rot">continue</span><span class="schwarz"> outerLoop;</span><br/>      }<br/>    }<br/>    process.send({ prime: n });<br/>    results <span class="dunkelblau">+=</span><span class="schwarz"> 1;</span><br/>  }<br/>  process.exit();</samp></span><br/>} <span class="rot">else</span><span class="schwarz"> {</span><br/>  <span class="bold"><samp class="listingcharacter listingcharacter"><span class="rot">const</span><span class="schwarz"> child1 </span><span class="dunkelblau">=</span><span class="schwarz"> fork(process.argv[1], [</span><span class="hellblau">'child'</span><span class="schwarz">]);</span><br/>  <span class="rot">const</span><span class="schwarz"> child2 </span><span class="dunkelblau">=</span><span class="schwarz"> fork(process.argv[1], [</span><span class="hellblau">'child'</span><span class="schwarz">]);</span><br/>  <span class="rot">const</span><span class="schwarz"> child3 </span><span class="dunkelblau">=</span><span class="schwarz"> fork(process.argv[1], [</span><span class="hellblau">'child'</span><span class="schwarz">]);</span><br/> <br/><a id="p495"/>  child1.on(<span class="hellblau">'message'</span><span class="schwarz">, (data) </span><span class="dunkelblau">=&gt;</span><span class="schwarz"> {</span><br/>    <span class="magenta">console</span><span class="schwarz">.log(</span><span class="hellblau">'child1: '</span><span class="schwarz"> </span><span class="dunkelblau">+</span><span class="schwarz"> data.prime);</span><br/>  });<br/>  child2.on(<span class="hellblau">'message'</span><span class="schwarz">, (data) </span><span class="dunkelblau">=&gt;</span><span class="schwarz"> {</span><br/>    <span class="magenta">console</span><span class="schwarz">.log(</span><span class="hellblau">'child2: '</span><span class="schwarz"> </span><span class="dunkelblau">+</span><span class="schwarz"> data.prime);</span><br/>  });<br/>  child3.on(<span class="hellblau">'message'</span><span class="schwarz">, (data) </span><span class="dunkelblau">=&gt;</span><span class="schwarz"> {</span><br/>    <span class="magenta">console</span><span class="schwarz">.log(</span><span class="hellblau">'child3: '</span><span class="schwarz"> </span><span class="dunkelblau">+</span><span class="schwarz"> data.prime);</span><br/>  });</samp></span><br/>} <span class="schwarz"/></pre></div>
+        <p class="caption "><b>Listing 16.11</b>    
+            Extended “fork” Example</p>
+        <p class="standard">The source code in <span class="crossreference "><a href="16_003.html#l16.11">Listing 16.11</a></span> makes sure that 1,000 prime numbers<a class="indexanchor" id="i16_60"/> are calculated in each of three independent child processes and returned to the parent process, which is responsible for processing the output.</p>
+        <p class="standard">To achieve this result, in the first step, you start three child processes via three respective calls of the <samp class="listingcharacter listingcharacter">fork</samp> method, as you already know from <span class="crossreference "><a href="16_003.html#l16.10">Listing 16.10</a></span>. The logic for the child process is located in the first part of the <samp class="listingcharacter listingcharacter">if</samp> statement. Here, a loop is used to check whether a number is a prime number. This process is run until the required total number of prime numbers has been found. The feedback to the parent process is done via the <samp class="listingcharacter listingcharacter">send</samp> method<a class="indexanchor" id="i16_61"/> of the <samp class="listingcharacter listingcharacter">process</samp> object. The message to the parent process that you pass to this method as the first argument exists in the form of an object.</p>
+        <p class="standard">On the parent process side, you handle messages from the child processes by registering one callback function to the <samp class="listingcharacter listingcharacter">message</samp> event<a class="indexanchor" id="i16_62"/> per instantiated child process. To help you distinguish which child process each prime number originates from, you should prefix an identifier to the output, such as <samp class="listingcharacter listingcharacter">child1</samp> for the first child process.</p>
+        <p class="standard">However, communication<a class="indexanchor" id="i16_63"/> isn’t limited to one-way communication from the child process to the parent process, as a transfer of data in the other direction is also possible. <span class="crossreference "><a href="16_003.html#l16.12">Listing 16.12</a></span> shows how you can send messages from the parent process to the child process.</p>
+        <div class="listing " id="l16.12"><pre><span class="rot">import</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"> fork </span><span class="schwarz">}</span><span class="schwarz"> </span><span class="rot">from</span><span class="schwarz"> </span><span class="hellblau">'child_process'</span><span class="schwarz">;</span><span class="schwarz"><br/></span> <br/><span class="rot">if</span><span class="schwarz"> </span><span class="schwarz">(</span><span class="schwarz">process</span><span class="schwarz">.</span><span class="schwarz">argv</span><span class="schwarz">[2]</span><span class="schwarz"> </span><span class="dunkelblau">&amp;&amp;</span><span class="schwarz"> process</span><span class="schwarz">.</span><span class="schwarz">argv</span><span class="schwarz">[2]</span><span class="schwarz"> </span><span class="dunkelblau">===</span><span class="schwarz"> </span><span class="hellblau">'child'</span><span class="schwarz">)</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>  process<span class="schwarz">.on(</span><span class="hellblau">'message'</span><span class="schwarz">,</span><span class="schwarz"> </span><span class="schwarz">(</span><span class="schwarz">data</span><span class="schwarz">)</span><span class="schwarz"> </span><span class="dunkelblau">=&gt;</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>    <span class="magenta">console</span><span class="schwarz">.log(</span><span class="hellblau">'in child process:'</span><span class="schwarz">,</span><span class="schwarz"> data</span><span class="schwarz">);</span><span class="schwarz"><br/></span>  <span class="schwarz">});</span><span class="schwarz"><br/></span>  process<span class="schwarz">.send(</span><span class="hellblau">'ready'</span><span class="schwarz">);</span><span class="schwarz"><br/></span><span class="schwarz">}</span><span class="schwarz"> </span><span class="rot">else</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>  <span class="rot">const</span><span class="schwarz"> child </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="schwarz">fork(</span><span class="schwarz">process</span><span class="schwarz">.</span><span class="schwarz">argv</span><span class="schwarz">[1],</span><span class="schwarz"> </span><span class="schwarz">[</span><span class="hellblau">'child'</span><span class="schwarz">]);</span><span class="schwarz"><br/></span> <br/>  child<span class="schwarz">.on(</span><span class="hellblau">'message'</span><span class="schwarz">,</span><span class="schwarz"> </span><span class="schwarz">(</span><span class="schwarz">data</span><span class="schwarz">)</span><span class="schwarz"> </span><span class="dunkelblau">=&gt;</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span><a id="p496"/>    <span class="rot">if</span><span class="schwarz"> </span><span class="schwarz">(</span><span class="schwarz">data </span><span class="dunkelblau">===</span><span class="schwarz"> </span><span class="hellblau">'ready'</span><span class="schwarz">)</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>      <span class="rot">for</span><span class="schwarz"> </span><span class="schwarz">(</span><span class="rot">let</span><span class="schwarz"> i </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="schwarz">0;</span><span class="schwarz"> i </span><span class="dunkelblau">&lt;</span><span class="schwarz"> </span><span class="schwarz">10;</span><span class="schwarz"> i </span><span class="dunkelblau">+=</span><span class="schwarz"> </span><span class="schwarz">1)</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>        child<span class="schwarz">.send(</span><span class="schwarz">i</span><span class="schwarz">);</span><span class="schwarz"><br/></span>      <span class="schwarz">}</span><span class="schwarz"><br/></span>    <span class="schwarz">}</span><span class="schwarz"><br/></span>  <span class="schwarz">});</span><span class="schwarz"><br/></span><span class="schwarz">}</span><span class="schwarz"> </span></pre></div>
+        <p class="caption "><b>Listing 16.12</b>    
+            Communication from the Parent Process to the Child Process</p>
+        <p class="standard">In this example, you can see that both processes can send messages back and forth equally. To do this, you first use the <samp class="listingcharacter listingcharacter">fork</samp> method in the <samp class="listingcharacter listingcharacter">else</samp> branch of the <samp class="listingcharacter listingcharacter">if</samp> statement to create the child process. In the child process, you register a <samp class="listingcharacter listingcharacter">message</samp> handler that writes the received data to the console. Then you send a message with the content <samp class="listingcharacter listingcharacter">ready</samp> to the parent process.</p>
+        <p class="standard">In the parent process, you first take care of creating the child process using the <samp class="listingcharacter listingcharacter">fork</samp> method and also register a <samp class="listingcharacter listingcharacter">message</samp> handler<a class="indexanchor" id="i16_64"/>. Once the child process sends the <samp class="listingcharacter listingcharacter">ready</samp> message, the parent process starts sending the numbers from 0 to 9 in a loop to the child process, resulting in an output on the console as shown in <span class="crossreference "><a href="16_003.html#l16.13">Listing 16.13</a></span>.</p>
+        <div class="listing " id="l16.13"><pre>$ <span class="bold"><samp class="listingcharacter listingcharacter">node index.js</samp></span><br/>in child process: 0<br/>in child process: 1<br/>in child process: 2<br/>in child process: 3<br/>in child process: 4<br/>in child process: 5<br/>in child process: 6<br/>in child process: 7<br/>in child process: 8<br/>in child process: 9 </pre></div>
+        <p class="caption "><b>Listing 16.13</b>    
+            Output of the Communication between the Parent and Child Processes</p>
+        <p class="standard">To terminate the application, you must disconnect the parent and child processes. You can do this by calling the <samp class="listingcharacter listingcharacter">disconnect</samp> method of the child process in the parent process. The <samp class="listingcharacter listingcharacter">disconnect</samp> method cuts the connection between the two processes and makes the child process terminate if no more connections exist.</p>
+    </div><p class="signatur"/>
+                    </body>
+                </html>

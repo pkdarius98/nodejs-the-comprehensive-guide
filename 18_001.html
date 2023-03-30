@@ -1,0 +1,84 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+                    
+        <head><meta content="application/xhtml+xml; charset=utf-8" http-equiv="Content-Type"/>
+            <meta content="application/xhtml+xml; charset=utf-8" name="content-type"/>
+            <meta content="Streams" name="title"/>
+            <meta content="Sebastian Springer" name="author"/>
+            <meta content="Rheinwerk Publishing" name="publisher"/>
+            <meta content="© 2022 by Rheinwerk Publishing Inc., Boston (MA)" name="copyright"/>
+            <meta content="Node.js - The Comprehensive Guide - Streams" name="description"/>
+            <meta content="en" name="language"/>
+            <title>Streams</title>
+            <link href="common/main.css" rel="stylesheet" type="text/css"/>
+<meta content="urn:uuid:e0000000-0000-0000-0000-000029756394" name="Adept.expected.resource"/>
+        </head>
+    
+
+
+                    <body class="office_us type_kapitel">
+                        <div id="main"><h1 class="t1" id="h18">18    <a id="p545"/>Streams</h1><p class="introductorynote indent_chapter_double">If you want to get to the source, you have to swim against the current.<br/>—Hermann Hesse</p><p class="standard">When<a class="indexanchor" id="i18_00"/> you work with Node.js, it’s hard to avoid coming across the stream application programming interface (API), and for good reason. Streams in Node.js can be used to solve numerous asynchronous problems in application development elegantly and with little effort. Node.js provides you with the framework implementation of the streams, so you only need to bother with the implementation details of your problem solution. This chapter introduces you to some tasks where streams can be useful. You’ll also learn how to create streams yourself and combine them in a useful way.</p>
+        <h2 class="t2" id="h18.1">18.1    Introduction</h2>
+        <p class="standard">“We should have some ways of connecting programs like garden hose—screw in another segment when it becomes necessary to massage data in another way.” With this quote, Douglas McIlroy describes in one sentence the Unix pipes he invented in 1972. And this is exactly the concept underlying streams in Node.js. In this way, the native streams of Node.js work in a very similar way to the observables in Reactive Extensions for JavaScript (RxJS)<a class="indexanchor" id="i18_01"/>, which were introduced in <span class="crossreference "><a href="17_001.html#h17">Chapter 17</a></span>.</p>
+        
+            <h3 class="t3" id="h18.1.1">18.1.1    What Is a Stream?</h3>
+            <p class="standard">With both Unix pipes<a class="indexanchor" id="i18_02"/> and streams, you have a data source to which you can connect any number of modules, ultimately directing the data stream<a class="indexanchor" id="i18_03"/> to a specific destination. What may sound a bit abstract at first glance can be illustrated quite clearly on the basis of Unix pipes. In <span class="crossreference "><a href="18_001.html#l18.1">Listing 18.1</a></span>, the <samp class="listingcharacter listingcharacter">ls</samp> command, which creates a list of files and directories pertaining to the specified directory, serves as the data source<a class="indexanchor" id="i18_04"/>. The output of this command is passed as input into the <samp class="listingcharacter listingcharacter">grep</samp> command, which is used to display only entries that match a specific pattern. This filtered list is finally the input for the text viewer <samp class="listingcharacter listingcharacter">less</samp>. Applied to Node.js, the three commands each represent a stream, and the output of each stream is associated with the input of the subsequent stream.</p>
+            <div class="listing " id="l18.1"><pre>$ ls -l /usr/local/lib/node_modules | grep 'js' | less </pre></div>
+            <p class="caption "><b>Listing 18.1</b>    
+            Unix Pipes in Use</p>
+        
+        
+            <h3 class="t3" id="h18.1.2">18.1.2    <a id="p546"/>Stream Usages</h3>
+            <p class="standard">Simply put, streams are used to handle input<a class="indexanchor" id="i18_05"/> and output<a class="indexanchor" id="i18_06"/>. In this context, both are considered as a continuous data stream. The defined interface on which all streams are based allows you to combine streams very flexibly. This, in turn, corresponds to the modular concept of Node.js. Each module—each individual stream implementation in this case—is supposed to perform only one specific task and leave everything else to the next stream in the chain.</p>
+            <p class="standard">Streams can therefore be used wherever you’re dealing with a continuous flow of data, that is, almost anywhere. You can see this when you take a closer look at the Node.js platform. Almost all important modules implement the stream API. Both the file system<a class="indexanchor" id="i18_07"/> module and the web server have data streams, and most database drivers also provide you with the ability to stream information out of or into the database.</p>
+            <p class="standard">Streams show their strength, especially when it comes to manipulating data streams. As an example, let’s suppose you have a database from which you read information. That would be the first stream in the chain. The second stream is responsible for transforming the information in such a way that your application can process it further. In a third step, you can then encrypt the information and finally send it in the last stream to another computer through a Transmission Control Protocol (TCP) connection. The advantage at this point is that you don’t use the entire contents of the database at once, but always small chunks, which significantly reduces the memory utilization of your application.</p>
+            <p class="standard">Now, if the way you need to put the data into shape changes, all you have to do is implement that and replace the second stream in the chain<a class="indexanchor" id="i18_08"/>. All other <samp class="listingcharacter listingcharacter">stream</samp> modules remain unchanged. <span class="crossreference "><a href="18_001.html#f18.1">Figure 18.1</a></span> illustrates this.</p>
+            <p class="standard">To enable you to build such a pipeline of individual streams, several types of streams are available for use at different points in a chain.</p>
+            <div class="imagebox figure-type"><a href="img-f18.1.html" id="f18.1"><img alt="Streams as Modular Components of an Application" id="img-f18.1" src="bilderklein/klein18_001.png"/></a></div>
+            <p class="caption "><b>Figure 18.1</b>    
+            Streams as Modular Components of an Application</p>
+        
+        
+            <h3 class="t3" id="h18.1.3">18.1.3    Available Streams</h3>
+            <p class="standard">Node.js provides several types of streams. Each stream serves a specific purpose:</p>
+            <ul>
+                <li>
+                    <p class="standard first-item last-item"><a class="indexanchor" id="i18_09"/><span class="bold"><a id="p547"/>Readable streams<br/></span>A stream of this class represents a data source that can be read from. A typical representative is the <samp class="listingcharacter listingcharacter">request</samp> object of the HTTP server, which represents an incoming request.</p>
+                </li>
+                <li>
+                    <p class="standard first-item last-item"><a class="indexanchor" id="i18_10"/><span class="bold">Writable streams<br/></span>A writable stream accepts data and thus forms the end of a stream chain. Analogous to the <samp class="listingcharacter listingcharacter">request</samp> object, the <samp class="listingcharacter listingcharacter">response</samp> object of the HTTP server is a writable stream.</p>
+                </li>
+                <li>
+                    <p class="standard first-item last-item"><a class="indexanchor" id="i18_11"/><span class="bold">Duplex streams<br/></span>This stream type is both readable and writable. You can use a duplex stream as a step between a readable stream and a writable stream. In most cases, however, you’ll use transform streams.</p>
+                </li>
+                <li>
+                    <p class="standard first-item last-item"><a class="indexanchor" id="i18_12"/><span class="bold">Transform streams<br/></span>Data can be both written to and read from this type of stream. As the name suggests, transform streams are used when the goal is to create a specific output stream from an input stream. Transform streams are based on duplex streams, but their API is simpler.</p>
+                </li>
+            </ul>
+            <p class="standard">If you work with Node.js streams, then sooner or later, you’ll come across the different versions of the stream API.</p>
+        
+        
+            <h3 class="t3" id="h18.1.4">18.1.4    Stream Versions in Node.js<a class="indexanchor" id="i18_13"/></h3>
+            <p class="standard">During the development process of the Node.js platform, the appearance and also the use of the streams have changed. There are now three different versions available, each with its own characteristics:</p>
+            <ul>
+                <li>
+                    <p class="standard first-item last-item"><a class="indexanchor" id="i18_14"/><span class="bold">Version 1 (push streams)</span><br/>Streams have been around in Node.js since the beginning. In this original version, the data source controlled the data flow. The data was written to the stream, and the next stage in the chain had to make sure that it could receive the data accordingly.</p>
+                </li>
+                <li>
+                    <p class="standard first-item last-item"><a class="indexanchor" id="i18_15"/><span class="bold">Version 2 (pull streams)</span><br/>The developers recognized the problems with the lack of control of subsequent stages in a stream chain in the first version of the stream API and developed a concept referred to as pull stream. Here, the subsequent stages in the stream chain are able to actively fetch the data from the preceding stages. This change made its way into the platform with version 0.10 of Node.js.</p>
+                </li>
+                <li>
+                    <p class="standard first-item last-item"><span class="bold">Version 3 (push and pull streams)</span><br/>Until the release of the third version of the stream API, it wasn’t possible to run a stream in both pull and push modes. With io.js and Node.js in version 0.11, this problem was addressed. Today, you can use a stream in both variants without having to generate a new instance.</p>
+                </li>
+            </ul>
+            <p class="standard"><a id="p548"/>Normally, you’ll use the third version of the stream API, which allows for flexible switching between versions. The pull variant is used by default. Throughout this chapter, you’ll learn more about when to use which type of streams and how to switch between the two modes. But we'll cover some information about the internal structure of streams first.</p>
+        
+        
+            <h3 class="t3" id="h18.1.5">18.1.5    Streams Are EventEmitters<a class="indexanchor" id="i18_16"/></h3>
+            <p class="standard">Streams are asynchronous, which means you can’t easily follow a clear flow in your source code but have to use callback functions. For this to work, a stream is based on an <samp class="listingcharacter listingcharacter">EventEmitter</samp> instance.</p>
+            <p class="standard">For you as a developer, this means that all actions in a stream are represented by events to which you can bind callback functions. This also means you can bind multiple callback functions to a single stream event, which gives you a greater degree of flexibility.</p>
+            <p class="standard">Thus, when implementing the stream API, Node.js again follows the familiar pattern of reuse. You can bind callbacks as usual via the <samp class="listingcharacter listingcharacter">on</samp> method<a class="indexanchor" id="i18_17"/>, trigger events using the <samp class="listingcharacter listingcharacter">emit</samp> method<a class="indexanchor" id="i18_18"/>, remove event listeners, or bind callbacks to an event only once.</p>
+            <p class="standard">With this information at hand, you can now move on to using the stream API. First, you’ll learn more about the readable streams of Node.js.</p>
+        
+    </div><p class="signatur"/>
+                    </body>
+                </html>

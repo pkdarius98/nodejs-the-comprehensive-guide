@@ -1,0 +1,176 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+                    
+        <head><meta content="application/xhtml+xml; charset=utf-8" http-equiv="Content-Type"/>
+            <meta content="application/xhtml+xml; charset=utf-8" name="content-type"/>
+            <meta content="Deno" name="title"/>
+            <meta content="Sebastian Springer" name="author"/>
+            <meta content="Rheinwerk Publishing" name="publisher"/>
+            <meta content="© 2022 by Rheinwerk Publishing Inc., Boston (MA)" name="copyright"/>
+            <meta content="Node.js - The Comprehensive Guide - Deno" name="description"/>
+            <meta content="en" name="language"/>
+            <title>Deno</title>
+            <link href="common/main.css" rel="stylesheet" type="text/css"/>
+<meta content="urn:uuid:e0000000-0000-0000-0000-000029756394" name="Adept.expected.resource"/>
+        </head>
+    
+
+
+                    <body class="office_us type_kapitel">
+                        <div id="main">
+        <h2 class="t2" id="h28.4">28.4    Handling Files<a class="indexanchor" id="i28_25"/></h2>
+        <p class="standard">Unlike Node.js, Deno doesn’t know the concept of modules. Instead, Deno offers you a wide range of built-ins, that is, built-in features you can use instead of modules. Deno <a id="p797"/>defines some global variables and functions such as the <samp class="listingcharacter listingcharacter">console</samp> object or the <samp class="listingcharacter listingcharacter">setTimeout</samp> function. These are available globally, so you don’t need to import them, and you can use them without any other additions.</p>
+        <p class="standard">But things are different with regard to more specialized functionalities such as reading and writing files. The functions required for this are located in the Deno namespace. This is also available globally and works without a separate import.</p>
+        
+            <h3 class="t3" id="h28.4.1">28.4.1    The Task: Copying a File<a class="indexanchor" id="i28_26"/></h3>
+            <p class="standard">As an example of a file system operation, you’ll now implement a function that reads an input file and writes its contents to an output file. To make the task a bit more interesting, it should be possible to pass the two file names by means of command-line options.</p>
+        
+        
+            <h3 class="t3" id="h28.4.2">28.4.2    Processing Command-Line Options<a class="indexanchor" id="i28_27"/></h3>
+            <p class="standard">For our example, we assume that the application can be run via the following command: <samp class="listingcharacter listingcharacter">deno run index.js --input=input.txt --output=output.txt</samp>. The first problem you need to solve here is to read the two options. You can achieve this via the <samp class="listingcharacter listingcharacter">Deno.args</samp> array. This array contains the arguments passed to your application on the command line, as shown in <span class="crossreference "><a href="28_004.html#l28.8">Listing 28.8</a></span>.</p>
+            <div class="listing " id="l28.8"><pre><span class="rot">function</span><span class="schwarz"> </span><span class="schwarz">getInputAndOutputFiles()</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>  <span class="rot">const</span><span class="schwarz"> input </span><span class="dunkelblau">=</span><span class="schwarz"> Deno</span><span class="schwarz">.</span><span class="schwarz">args</span><br/>    <span class="schwarz">.find((</span><span class="schwarz">arg</span><span class="schwarz">)</span><span class="schwarz"> </span><span class="dunkelblau">=&gt;</span><span class="schwarz"> arg</span><span class="schwarz">.startsWith(</span><span class="hellblau">'--input='</span><span class="schwarz">))</span><span class="schwarz"><br/></span>    <span class="schwarz">.substr(8);</span><span class="schwarz"><br/></span> <br/>  <span class="rot">const</span><span class="schwarz"> output </span><span class="dunkelblau">=</span><span class="schwarz"> Deno</span><span class="schwarz">.</span><span class="schwarz">args</span><br/>    <span class="schwarz">.find((</span><span class="schwarz">arg</span><span class="schwarz">)</span><span class="schwarz"> </span><span class="dunkelblau">=&gt;</span><span class="schwarz"> arg</span><span class="schwarz">.startsWith(</span><span class="hellblau">'--output='</span><span class="schwarz">))</span><span class="schwarz"><br/></span>    <span class="schwarz">.substr(9);</span><span class="schwarz"><br/></span> <br/>  <span class="magenta">console</span><span class="schwarz">.log(</span><span class="violett">`Input was: ${input}, Output was: ${output}`</span><span class="schwarz">);</span><span class="schwarz"><br/></span> <br/>  <span class="rot">return</span><span class="schwarz"> </span><span class="schwarz">[</span><span class="schwarz">input</span><span class="schwarz">,</span><span class="schwarz"> output</span><span class="schwarz">];</span><span class="schwarz"><br/></span><span class="schwarz">}</span><span class="schwarz"><br/></span> <br/><span class="rot">const</span><span class="schwarz"> </span><span class="schwarz">[</span><span class="schwarz">input</span><span class="schwarz">,</span><span class="schwarz"> output</span><span class="schwarz">]</span><span class="schwarz"> </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="schwarz">getInputAndOutputFiles();</span><span class="schwarz">  </span></pre></div>
+            <p class="caption "><b>Listing 28.8</b>    
+            Access to the Command-Line Options</p>
+            <p class="standard">In two steps, you first search for the name of the input file and then for the name of the output file. To do this, you use the <samp class="listingcharacter listingcharacter">find</samp> method of the <samp class="listingcharacter listingcharacter">Deno.args</samp> array<a class="indexanchor" id="i28_28"/> and then truncate the option name and the equal sign so that you keep only the file name. Finally, you output both file names to the console. You encapsulate these operations <a id="p798"/>in a function called <samp class="listingcharacter listingcharacter">getInputAndOutputFiles</samp>, which returns both pieces of information as an array. Finally, you call this function and use a destructuring statement to store the information in a variable each time.</p>
+            <p class="standard">If you save this source code in a file named <span class="italic">index.js</span> and run it via the preceding command, you’ll get an output like the one shown in <span class="crossreference "><a href="28_004.html#l28.9">Listing 28.9</a></span>.</p>
+            <div class="listing " id="l28.9"><pre>$ <span class="bold"><samp class="listingcharacter listingcharacter">deno run index.js --input=input.txt --output=output.txt</samp></span><br/>Input was: input.txt, Output was: output.txt </pre></div>
+            <p class="caption "><b>Listing 28.9</b>    
+            Output of the Command-Line Options</p>
+            <p class="standard">Now that you have both pieces of information in the form of constants, the next step is to read the input file and output its contents to the command line.</p>
+        
+        
+            <h3 class="t3" id="h28.4.3">28.4.3    Reading Files<a class="indexanchor" id="i28_29"/></h3>
+            <p class="standard">Deno has two functions that you can use to read files. The <samp class="listingcharacter listingcharacter">readFile</samp> method enables you to read the file and receive the contents as an <samp class="listingcharacter listingcharacter">ArrayBuffer</samp><a class="indexanchor" id="i28_30"/>, which you must first decode before you can output it to the console.</p>
+            <p class="standard">In <span class="crossreference "><a href="28_004.html#l28.10">Listing 28.10</a></span>, you extend the previous example by the option to read the content of the file whose name you passed via the <samp class="listingcharacter listingcharacter">--input</samp> option. To do this, you first take two preparatory measures: implement a <samp class="listingcharacter listingcharacter">fileExists</samp> function and create an instance of the <samp class="listingcharacter listingcharacter">TextDecoder</samp> class<a class="indexanchor" id="i28_31"/>. The <samp class="listingcharacter listingcharacter">fileExists</samp> function<a class="indexanchor" id="i28_32"/> is an <samp class="listingcharacter listingcharacter">async</samp> function because most of Deno’s interfaces work with promises. Inside the function—similar to Node.js—you use the <samp class="listingcharacter listingcharacter">Deno.stat</samp> function<a class="indexanchor" id="i28_33"/>, which returns various information about a file. If the specified file doesn’t exist, the <samp class="listingcharacter listingcharacter">stat</samp> function reports an error in the form of a rejected promise. If no error is thrown, you can assume that the file exists and return the value <samp class="listingcharacter listingcharacter">true</samp>.</p>
+            <div class="listing " id="l28.10"><pre><span class="rot">function</span><span class="schwarz"> </span><span class="schwarz">getInputAndOutputFiles()</span><span class="schwarz"> </span><span class="schwarz">{...}</span><span class="schwarz"><br/></span><span class="rot">const</span><span class="schwarz"> </span><span class="schwarz">[</span><span class="schwarz">input</span><span class="schwarz">,</span><span class="schwarz"> output</span><span class="schwarz">]</span><span class="schwarz"> </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="schwarz">getInputAndOutputFiles();</span><span class="schwarz"><br/></span> <br/><span class="bold"><span class="schwarz"/><samp class="listingcharacter listingcharacter"><span class="rot">async</span><span class="schwarz"> </span><span class="rot">function</span><span class="schwarz"> fileExists(filename) {</span><br/>  <span class="rot">try</span><span class="schwarz"> {</span><br/>    <span class="rot">await</span><span class="schwarz"> Deno.stat(</span><span class="violett">`./${filename}`</span><span class="schwarz">);</span><br/>    <span class="rot">return</span><span class="schwarz"> </span><span class="rot">true</span><span class="schwarz">;</span><br/>  } <span class="rot">catch </span><span class="schwarz">(</span><span class="rot">error</span><span class="schwarz">) {</span><br/>    <span class="rot">if</span><span class="schwarz"> (error </span><span class="rot">instanceof Deno</span><span class="schwarz">.</span><span class="rot">errors</span><span class="schwarz">.</span><span class="rot">NotFound</span><span class="schwarz">) {</span><br/>      <span class="rot">return</span><span class="schwarz"> </span><span class="rot">false</span><span class="schwarz">;</span><br/>    }<br/>    <span class="rot">throw</span><span class="schwarz"> error;</span><br/>  }<br/>}<br/> <br/><span class="rot"><a id="p799"/>const</span><span class="schwarz"> decoder </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="rot">new </span><span class="schwarz">TextDecoder();</span><br/> <br/><span class="rot">if</span><span class="schwarz"> (</span><span class="rot">await</span><span class="schwarz"> fileExists(input)) {</span><br/>  <span class="rot">const</span><span class="schwarz"> fileContents </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="rot">await</span><span class="schwarz"> Deno.readFile(</span><span class="violett">`./${input}`</span><span class="schwarz">);</span><br/>  <span class="rot">const</span><span class="schwarz"> text </span><span class="dunkelblau">=</span><span class="schwarz"> decoder.decode(fileContents);</span><br/>  <span class="magenta">console</span><span class="schwarz">.log(text);</span><br/>}</samp></span> <span class="schwarz"/></pre></div>
+            <p class="caption "><b>Listing 28.10</b>    
+            Reading a File with Deno</p>
+            <p class="standard">Because you’re in an <samp class="listingcharacter listingcharacter">async</samp> function here, you can catch the error with a <samp class="listingcharacter listingcharacter">try-catch</samp> statement. Depending on whether it’s a <samp class="listingcharacter listingcharacter">NotFound</samp> error, which says that the file wasn’t found, you either return <samp class="listingcharacter listingcharacter">false</samp> or keep throwing the error.</p>
+            <p class="standard">You need the <samp class="listingcharacter listingcharacter">TextDecoder</samp> to access the contents of the file because the <samp class="listingcharacter listingcharacter">readFile</samp> function you use in this example just returns a promise of the <samp class="listingcharacter listingcharacter">Uint8Array</samp><a class="indexanchor" id="i28_34"/> type. If you write this object to the console, you’ll only see the string representation of this object, that is, a column of numbers.</p>
+            <p class="standard">You initiate the actual implementation of the read operation by checking whether the file exists. Here you use the <samp class="listingcharacter listingcharacter">fileExists</samp> function you created previously. If the check reveals that the file exists, you call the <samp class="listingcharacter listingcharacter">readFile</samp> function via the <samp class="listingcharacter listingcharacter">await</samp> keyword and receive the <samp class="listingcharacter listingcharacter">Uint8Array</samp> mentioned earlier. You then pass this to the <samp class="listingcharacter listingcharacter">decode</samp> method of the <samp class="listingcharacter listingcharacter">TextDecoder</samp>, which converts the <samp class="listingcharacter listingcharacter">Uint8Array</samp> into a human-readable string that you can then output to the console. Before you call your application again using the <samp class="listingcharacter listingcharacter">deno run --input=input.txt --output=output.txt</samp> command, you should define a simple text file with any text content; otherwise, the execution will fail. The output of the command with an existing input file will look like the one shown in <span class="crossreference "><a href="28_004.html#l28.11">Listing 28.11</a></span>.</p>
+            <div class="listing " id="l28.11"><pre>$ <span class="bold"><samp class="listingcharacter listingcharacter">deno run index.js --input=input.txt --output=output.txt </samp></span><br/>Input was: input.txt, Output was: output.txt<br/>error: Uncaught (in promise) PermissionDenied: Requires read access to "./input.txt", run again with the --allow-read flag<br/>    await Deno.stat(`./${filename}`);<br/>    ^<br/>    at deno:core/01_core.js:106:46<br/>    at unwrapOpResult (deno:core/01_core.js:126:13)<br/>    at async Object.stat (deno:runtime/js/30_fs.js:228:17)<br/>    at async fileExists (file:///srv/node-buch/index.js:8:5)<br/>    at async file:///srv/node-buch/index.js:20:5 </pre></div>
+            <p class="caption "><b>Listing 28.11</b>    
+            Output When Reading a File</p>
+            <p class="standard">What you see here isn’t a bug, but actually a notable feature of Deno that is a distinct difference from Node.js. The feature is referred to as <span class="italic">permissions</span><a class="indexanchor" id="i28_35"/>.</p>
+        
+        
+            <h3 class="t3" id="h28.4.4">28.4.4    <a id="p800"/>Permissions in Deno</h3>
+            <p class="standard">Deno claims to be “secure by default”; that is, Deno is basically secure. Actually this is true because Deno follows the sandbox<a class="indexanchor" id="i28_36"/> concept, as you know from the browser, much more strictly than is the case in Node.js. The effect is that you can’t access all the resources of the system, but the access is denied first, and you have to release the resources for your application first. In our example, this is done using the <samp class="listingcharacter listingcharacter">--allow-read</samp><a class="indexanchor" id="i28_37"/> command-line option. You can optionally pass to this option a comma-separated list of file names and directory names that your application is allowed to access. Try to be as restrictive as possible at this point. Because the application only needs to read from the <span class="italic">input.txt</span> file, it’s sufficient to specify this name. <span class="crossreference "><a href="28_004.html#l28.12">Listing 28.12</a></span> shows the command and its effects.</p>
+            <div class="listing " id="l28.12"><pre>$ deno run <span class="bold"><samp class="listingcharacter listingcharacter">--allow-read=input.txt</samp></span> index.js --input=input.txt --output=output.txt<br/><br/>Input was: input.txt, Output was: output.txt<br/>Hello Deno! </pre></div>
+            <p class="caption "><b>Listing 28.12</b>    
+            Output When Reading a File with Correct Permissions</p>
+            <p class="standard">Not only do Deno’s permissions include read access to the file system but also many other aspects that you can manipulate. <span class="crossreference "><a href="28_004.html#t28.2">Table 28.2</a></span> contains an overview of the available options.</p>
+            <table class="standardtable" id="t28.2">
+                <thead>
+                    <tr>
+                        <th class="tablehead tablecell_first top_border_cell">
+                            <p class="standard first-item last-item">Option</p>
+                        </th>
+                        <th class="tablehead tablecell_last top_border_cell">
+                            <p class="standard first-item last-item">Description</p>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="tablecell tablecell_first top_border_cell">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">--allow-env=&lt;env&gt;</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last top_border_cell">
+                            <p class="standard first-item last-item">Allows read and write access to environment variables.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">--allow-hrtime</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Allows highly accurate time measurements. Deno implements the W3C performance application programing interface (API), which you already know from Node.js with the <samp class="listingcharacter listingcharacter">perf_hooks</samp>.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">--allow-net=&lt;net&gt;</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Allows network access. Here you can specify an optional list of host names and ports Deno is allowed to use.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">--allow-ffi</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Allows dynamic libraries to be loaded.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">--allow-read=&lt;read&gt;</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Allows read access to the file system.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">--allow-run=&lt;run&gt;</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Allows the execution of subprocesses.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">--allow-write=&lt;write&gt;</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Serves as counterpart to <samp class="listingcharacter listingcharacter">--allow-read</samp> when it comes to write accesses to the file system.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">-A, --allow-all</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Allows all accesses. As a rule, you shouldn’t use it because it will undermine Deno’s security features.</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="caption "><b>Table 28.2</b>    
+            Options to Manage Permissions in Deno</p>
+            <p class="standard">This first working version of the application now enables you to optimize the source code a bit more.</p>
+        
+        
+            <h3 class="t3" id="h28.4.5">28.4.5    <a id="p801"/>readTextFile Function<a class="indexanchor" id="i28_38"/></h3>
+            <p class="standard">In some cases, using TypedArrays<a class="indexanchor" id="i28_39"/> such as the <samp class="listingcharacter listingcharacter">Uint8Array</samp> is quite useful. In our example, however, this just means one more unnecessary step. To avoid this extra work, Deno provides you with the <samp class="listingcharacter listingcharacter">readTextFile</samp> function. In <span class="crossreference "><a href="28_004.html#l28.13">Listing 28.13</a></span>, you can see the customized source code of the example.</p>
+            <div class="listing " id="l28.13"><pre><span class="rot">function</span><span class="schwarz"> </span><span class="schwarz">getInputAndOutputFiles()</span><span class="schwarz"> </span><span class="schwarz">{...}</span><span class="schwarz"><br/></span><span class="rot">const</span><span class="schwarz"> </span><span class="schwarz">[</span><span class="schwarz">input</span><span class="schwarz">,</span><span class="schwarz"> output</span><span class="schwarz">]</span><span class="schwarz"> </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="schwarz">getInputAndOutputFiles();</span><span class="schwarz"><br/></span> <br/><span class="rot">async</span><span class="schwarz"> </span><span class="rot">function</span><span class="schwarz"> </span><span class="schwarz">fileExists(</span><span class="schwarz">filename</span><span class="schwarz">)</span><span class="schwarz"> </span><span class="schwarz">{...}</span><span class="schwarz"><br/></span> <br/><span class="rot">if</span><span class="schwarz"> </span><span class="schwarz">(</span><span class="rot">await</span><span class="schwarz"> </span><span class="schwarz">fileExists(</span><span class="schwarz">input</span><span class="schwarz">))</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>  <span class="bold"><span class="schwarz"/><samp class="listingcharacter listingcharacter"><span class="rot">const</span><span class="schwarz"> text </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="rot">await</span><span class="schwarz"> Deno.readTextFile(</span><span class="violett">`./${input}`</span><span class="schwarz">);</span></samp></span><br/>  <span class="magenta">console</span><span class="schwarz">.log(text);</span><br/>} <span class="schwarz"/></pre></div>
+            <p class="caption "><b>Listing 28.13</b>    
+            Reading Text Files via the “readTextFile” Function</p>
+            <p class="standard">With this adjustment, both the application call and the result remain the same. They merely reduce the size of the source code. The permissions concept also remains unchanged at this point, so you have to call the application with the <samp class="listingcharacter listingcharacter">--allow-read</samp> option for it to work.</p>
+            <p class="standard">In the next step, we can now turn our attention to writing the target file.</p>
+        
+        
+            <h3 class="t3" id="h28.4.6">28.4.6    Writing Files with Deno<a class="indexanchor" id="i28_40"/></h3>
+            <p class="standard">Analogous to the <samp class="listingcharacter listingcharacter">readFile</samp> and <samp class="listingcharacter listingcharacter">readTextFile</samp> functions, there are also the <samp class="listingcharacter listingcharacter">writeFile</samp> and <samp class="listingcharacter listingcharacter">writeTextFile</samp> functions.</p>
+            <p class="standard">With the source code from <span class="crossreference "><a href="28_004.html#l28.14">Listing 28.14</a></span>, you extend the application so that the content of the input file not only is output to the console but also written to the output file, which you specify with the <samp class="listingcharacter listingcharacter">--output</samp> option.</p>
+            <div class="listing " id="l28.14"><pre><span class="rot">function</span><span class="schwarz"> </span><span class="schwarz">getInputAndOutputFiles()</span><span class="schwarz"> </span><span class="schwarz">{...}</span><span class="schwarz"><br/></span><span class="rot">const</span><span class="schwarz"> </span><span class="schwarz">[</span><span class="schwarz">input</span><span class="schwarz">,</span><span class="schwarz"> output</span><span class="schwarz">]</span><span class="schwarz"> </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="schwarz">getInputAndOutputFiles();</span><span class="schwarz"><br/></span> <br/><span class="rot">async</span><span class="schwarz"> </span><span class="rot">function</span><span class="schwarz"> </span><span class="schwarz">fileExists(</span><span class="schwarz">filename</span><span class="schwarz">)</span><span class="schwarz"> </span><span class="schwarz">{...}</span><span class="schwarz"><br/></span> <br/><span class="bold"><span class="schwarz"/><samp class="listingcharacter listingcharacter"><span class="rot">const</span><span class="schwarz"> encoder </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="rot">new </span><span class="schwarz">TextEncoder();</span><br/> </samp></span><br/><span class="rot">if</span><span class="schwarz"> (</span><span class="rot">await</span><span class="schwarz"> fileExists(input)) {</span><br/>  <span class="rot">const</span><span class="schwarz"> text </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="rot">await</span><span class="schwarz"> Deno.readTextFile(</span><span class="violett">`./${input}`</span><span class="schwarz">);</span><br/>  <span class="magenta">console</span><span class="schwarz">.log(text);</span><br/> <br/><a id="p802"/>  <span class="bold"><samp class="listingcharacter listingcharacter"><span class="rot">const</span><span class="schwarz"> encodedText </span><span class="dunkelblau">=</span><span class="schwarz"> encoder.encode(text);</span><br/>  Deno.writeFile(<span class="violett">`./${output}`</span><span class="schwarz">, encodedText);</span></samp></span><br/>} <span class="schwarz"/></pre></div>
+            <p class="caption "><b>Listing 28.14</b>    
+            Writing a File with Deno and the “writeFile” Function</p>
+            <p class="standard">You can also implement the example using the <samp class="listingcharacter listingcharacter">writeTextFile</samp> function. The only difference here is that you can omit the intermediate step via <samp class="listingcharacter listingcharacter">TextEncoder</samp> and pass the content to be written directly as the second argument to the <samp class="listingcharacter listingcharacter">writeTextFile</samp> function.</p>
+            <div class="box box_standard">
+                <h6 class="boxheading">Synchronous and Asynchronous File System Operations<a class="indexanchor" id="i28_41"/><a class="indexanchor" id="i28_42"/></h6>
+                <p class="standard first">Like Node.js, Deno provides you with synchronous and asynchronous functions for file system operations. For example, you can read a text file synchronously via the <samp class="listingcharacter listingcharacter">readTextFileSync</samp> function. In this case, the function returns the text content directly as a return value without having to work with promises.</p>
+                <p class="standard">Note, however, that this is a blocking operation. As long as your system is busy with the read operation, Deno can’t perform any other operations. This is usually not a problem with small files. However, if the files you want to process are more complex, it may well take some time before your application is able to respond again.</p>
+                <p class="standard last">Especially when reading configuration files at the start of an application, you can use the synchronous functions because your application can’t be started without the corresponding configuration. A blockage can even be useful in this case.</p>
+            </div>
+            <p class="standard">When running the application, you must make sure to specify the <samp class="listingcharacter listingcharacter">--allow-write</samp> option, or Deno will throw an error. You can see the command and its result in <span class="crossreference "><a href="28_004.html#l28.15">Listing 28.15</a></span>. To make the command more readable for you, we wrote it in several lines. If you want to test the application yourself, make sure you write the entire command in one line.</p>
+            <div class="listing " id="l28.15"><pre>$ <span class="bold"><samp class="listingcharacter listingcharacter">deno run <br/>  --allow-read=input.txt <br/>  --allow-write=output.txt index.js <br/>  --input=input.txt <br/>  --output=output.txt<br/></samp></span><br/>Input was: input.txt, Output was: output.txt<br/>Hello Deno! </pre></div>
+            <p class="caption "><b>Listing 28.15</b>    
+            Reading and Writing Files with Deno</p>
+            <p class="standard">The result of the command execution, besides the output on the console, is that a new file named <span class="italic">output.txt</span> has been created in the current directory.</p>
+            <p class="standard"><a id="p803"/>Of course, when we look at Deno, we also have to include the typical example of a server-side JavaScript platform: a web server. And that’s what we’ll do in the following section.</p>
+        
+    </div><p class="signatur"/>
+                    </body>
+                </html>

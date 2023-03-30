@@ -1,0 +1,29 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+                    
+        <head><meta content="application/xhtml+xml; charset=utf-8" http-equiv="Content-Type"/>
+            <meta content="application/xhtml+xml; charset=utf-8" name="content-type"/>
+            <meta content="Type-Safe Applications in Node.js" name="title"/>
+            <meta content="Sebastian Springer" name="author"/>
+            <meta content="Rheinwerk Publishing" name="publisher"/>
+            <meta content="© 2022 by Rheinwerk Publishing Inc., Boston (MA)" name="copyright"/>
+            <meta content="Node.js - The Comprehensive Guide - Type-Safe Applications in Node.js" name="description"/>
+            <meta content="en" name="language"/>
+            <title>Type-Safe Applications in Node.js</title>
+            <link href="common/main.css" rel="stylesheet" type="text/css"/>
+<meta content="urn:uuid:e0000000-0000-0000-0000-000029756394" name="Adept.expected.resource"/>
+        </head>
+    
+
+
+                    <body class="office_us type_kapitel">
+                        <div id="main">
+        <h2 class="t2" id="h13.6">13.6    Type Aliases in TypeScript<a class="indexanchor" id="i13_82"/></h2>
+        <p class="standard">In addition to interfaces, TypeScript also allows you to define type aliases by using the <samp class="listingcharacter listingcharacter">type</samp> keyword<a class="indexanchor" id="i13_83"/>. Type aliases are used in a similar way as interfaces, but are somewhat simpler in structure. <span class="crossreference "><a href="13_006.html#l13.27">Listing 13.27</a></span> shows that you can implement the example with interfaces in a similar way with type aliases. The biggest difference is that a class can’t implement a type alias.</p>
+        <div class="listing " id="l13.27"><pre><span class="bold"><span class="schwarz"/><samp class="listingcharacter listingcharacter">type Movie <span class="dunkelblau">=</span><span class="schwarz"> {</span></samp></span><br/>  id: number;<br/>  title: string;<br/>  year: number;<br/>  rating: number;<br/>  rate(rating: number): <span class="rot">void</span><span class="schwarz">;</span><br/>};<br/> <br/><span class="rot">class ActionMovie</span><span class="schwarz"> {</span><br/>  <span class="rot">public</span><span class="schwarz"> rating </span><span class="dunkelblau">=</span><span class="schwarz"> 0;</span><br/>  constructor(<span class="rot">public</span><span class="schwarz"> id: number, </span><span class="rot">public</span><span class="schwarz"> title: string, </span><span class="rot">public</span><span class="schwarz"> year: number) {}</span><br/> <br/>  rate(rating: number) {<br/>    <span class="rot">this</span><span class="schwarz">.rating </span><span class="dunkelblau">=</span><span class="schwarz"> rating;</span><br/>  }<br/>}<br/> <br/><span class="rot">function</span><span class="schwarz"> show(movie: Movie) {</span><br/>  <span class="magenta">console</span><span class="schwarz">.log(</span><span class="hellblau">'Now showing: '</span><span class="schwarz">, movie.title);</span><br/>}<br/> <br/><span class="rot">const</span><span class="schwarz"> infinityWar </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="rot">new </span><span class="schwarz">ActionMovie(3, </span><span class="hellblau">'Avengers: Infinity War'</span><span class="schwarz">, 2018);</span><br/>show(infinityWar);<span class="gruen"> // Output: Now showing:  Avengers: Infinity War</span><span class="schwarz"> </span><span class="schwarz"/></pre></div>
+        <p class="caption "><b>Listing 13.27</b>    
+            Using Type Aliases</p>
+        <p class="standard">Another important difference between interfaces and type aliases is that with interfaces, <span class="italic">declaration merging</span><a class="indexanchor" id="i13_84"/> is applied. If you define an interface with the same name more than once, the properties get merged.</p>
+        <p class="standard">In general, you can use the simpler type aliases wherever you can do so without declaration merging, such as <samp class="listingcharacter listingcharacter">implements</samp> and <samp class="listingcharacter listingcharacter">extends</samp>.</p>
+    </div><p class="signatur"/>
+                    </body>
+                </html>

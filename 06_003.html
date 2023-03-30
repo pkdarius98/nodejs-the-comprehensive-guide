@@ -1,0 +1,178 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+                    
+        <head><meta content="application/xhtml+xml; charset=utf-8" http-equiv="Content-Type"/>
+            <meta content="application/xhtml+xml; charset=utf-8" name="content-type"/>
+            <meta content="Express" name="title"/>
+            <meta content="Sebastian Springer" name="author"/>
+            <meta content="Rheinwerk Publishing" name="publisher"/>
+            <meta content="© 2022 by Rheinwerk Publishing Inc., Boston (MA)" name="copyright"/>
+            <meta content="Node.js - The Comprehensive Guide - Express" name="description"/>
+            <meta content="en" name="language"/>
+            <title>Express</title>
+            <link href="common/main.css" rel="stylesheet" type="text/css"/>
+<meta content="urn:uuid:e0000000-0000-0000-0000-000029756394" name="Adept.expected.resource"/>
+        </head>
+    
+
+
+                    <body class="office_us type_kapitel">
+                        <div id="main">
+        <h2 class="t2" id="h6.3">6.3    Basic Principles<a class="indexanchor" id="i06_13"/></h2>
+        <p class="standard">The process by which an Express application works always has the same pattern. The Express server receives a request from a client. Based on the chosen <samp class="listingcharacter listingcharacter">http</samp> method and <a id="p180"/>URL path, a suitable route is chosen, and one or more callback functions are executed. Within this callback function, you can access the <samp class="listingcharacter listingcharacter">request</samp> and <samp class="listingcharacter listingcharacter">response</samp> objects, as is the case with the <samp class="listingcharacter listingcharacter">http</samp> module. These two objects, along with the router and middleware components, are the heart of an application.</p>
+        
+            <h3 class="t3" id="h6.3.1">6.3.1    Request<a class="indexanchor" id="i06_14"/></h3>
+            <p class="standard">The <samp class="listingcharacter listingcharacter">request</samp> object is the first argument of the Express routing callback functions and represents the user’s request. You can extend this object by using middleware components such as the body parser<a class="indexanchor" id="i06_15"/> and the cookie parser<a class="indexanchor" id="i06_16"/>, for example, so that you can manage cookies or other aspects of the communication with the client more conveniently. But even in standard mode, it contains a lot of helpful information. <span class="crossreference "><a href="06_003.html#t6.1">Table 6.1</a></span> introduces you to some of the most important properties of the <samp class="listingcharacter listingcharacter">request</samp> object.</p>
+            <table class="standardtable" id="t6.1">
+                <thead>
+                    <tr>
+                        <th class="tablehead tablecell_first top_border_cell">
+                            <p class="standard first-item last-item">Characteristic</p>
+                        </th>
+                        <th class="tablehead tablecell_last top_border_cell">
+                            <p class="standard first-item last-item">Description</p>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="tablecell tablecell_first top_border_cell">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">method</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last top_border_cell">
+                            <p class="standard first-item last-item">Contains the HTTP method used to send the request to the server.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">originalUrl</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Contains the original request URL. This allows the <samp class="listingcharacter listingcharacter">url</samp> property, which contains the same information, to be modified for in-application purposes.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">params</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Contains the value that consists of the variable parts of the URL. You’ll learn how to define and use them in Express later in this chapter.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">path</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Enables you to access the URL path.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">protocol</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Contains the protocol of the request, such as HTTP or HTTPS.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">query</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Accesses the query string is a part of the URL.</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="caption "><b>Table 6.1</b>    
+            Key Properties of the “request” Object</p>
+            <p class="standard">In addition to the properties, you also have access to some methods that allow you to read more information about the incoming request. The <samp class="listingcharacter listingcharacter">get</samp> method enables you to read header<a class="indexanchor" id="i06_17"/> fields from the request. For example, if you’re interested in the <samp class="listingcharacter listingcharacter">Content-Type</samp> field<a class="indexanchor" id="i06_18"/>, the call is <samp class="listingcharacter listingcharacter">req.get('Content-Type')</samp>. It doesn’t matter whether you use uppercase or lowercase letters with this method.</p>
+        
+        
+            <h3 class="t3" id="h6.3.2">6.3.2    Response<a class="indexanchor" id="i06_19"/></h3>
+            <p class="standard">The <samp class="listingcharacter listingcharacter">response</samp> object, which you can access via the second argument of the routing function, represents the response to the client. Because you mainly write to this object, it also provides significantly more methods than properties. The most important property of the object is <samp class="listingcharacter listingcharacter">headersSent</samp>. This Boolean value tells you whether the HTTP headers of the response have already been sent. If this is the case, you can no longer modify it. <span class="crossreference "><a href="06_003.html#t6.2">Table 6.2</a></span> provides an overview of the most important methods of the <samp class="listingcharacter listingcharacter">response</samp> object.</p>
+            <table class="standardtable" id="t6.2">
+                <thead>
+                    <tr>
+                        <th class="tablehead tablecell_first top_border_cell">
+                            <p class="standard first-item last-item"><a id="p181"/>method</p>
+                        </th>
+                        <th class="tablehead tablecell_last top_border_cell">
+                            <p class="standard first-item last-item">Description</p>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="tablecell tablecell_first top_border_cell">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">get(field)</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last top_border_cell">
+                            <p class="standard first-item last-item">Reads the specified header field of the response.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">set(field[, value])</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Sets the value of the specified header field.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">cookie(name, value[, options])</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Sets a cookie value.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">redirect([status, ]path)</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Forwards the request.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">status(code)</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Sets the status code of the response.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">send([body])</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Sends the HTTP response.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">Json([body])</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Sends the HTTP response. The passed object is converted to a JavaScript Object Notation (JSON) object, and the correct response headers are set.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">end([data][, encoding])</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Sends the HTTP response. You should use this method primarily if you don’t send user data such as HTML structures. Otherwise, you should use the <samp class="listingcharacter listingcharacter">send</samp> method.</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="caption "><b>Table 6.2</b>    
+            Key Methods of the “response” Object</p>
+            <p class="standard">After this brief introduction to the request and response handling elements, the following sections deal with the setup and architecture of an Express application.</p>
+        
+    </div><p class="signatur"/>
+                    </body>
+                </html>

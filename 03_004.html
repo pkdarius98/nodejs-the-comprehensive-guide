@@ -1,0 +1,40 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+                    
+        <head><meta content="application/xhtml+xml; charset=utf-8" http-equiv="Content-Type"/>
+            <meta content="application/xhtml+xml; charset=utf-8" name="content-type"/>
+            <meta content="Developing Your First Application" name="title"/>
+            <meta content="Sebastian Springer" name="author"/>
+            <meta content="Rheinwerk Publishing" name="publisher"/>
+            <meta content="© 2022 by Rheinwerk Publishing Inc., Boston (MA)" name="copyright"/>
+            <meta content="Node.js - The Comprehensive Guide - Developing Your First Application" name="description"/>
+            <meta content="en" name="language"/>
+            <title>Developing Your First Application</title>
+            <link href="common/main.css" rel="stylesheet" type="text/css"/>
+<meta content="urn:uuid:e0000000-0000-0000-0000-000029756394" name="Adept.expected.resource"/>
+        </head>
+    
+
+
+                    <body class="office_us type_kapitel">
+                        <div id="main">
+        <h2 class="t2" id="h3.4">3.4    nodemon Development Tool<a class="indexanchor" id="i03_114"/></h2>
+        <p class="standard">While developing a Node.js application, you’ll regularly come across a specific problem: you must get your customized source code into the running process for your changes to take effect. In the simplest case, you write a block of code, save it, switch to the command line, abort the current process using the shortcut <span class="keyboard">(Ctrl)</span>+<span class="keyboard">(C)</span>, and restart it<a class="indexanchor" id="i03_115"/><a class="indexanchor" id="i03_116"/>. Then you switch to the browser and check the effect of your changes. If the frequency of changes<a class="indexanchor" id="i03_117"/> is high, you’ll go through these steps many times. At this point, it’s important to reduce the operations to be performed to a minimum. Restarting the process especially offers the potential for automation. Today, there’s a large number of tools available that can do this job for you. One of the most popular is <samp class="listingcharacter listingcharacter">nodemon</samp>.</p>
+        <div class="box box_standard">
+            <h6 class="boxheading">Warning! Don’t Use Nodemon in Production Mode</h6>
+            <p class="standard first last">Note that tools such as <samp class="listingcharacter listingcharacter">nodemon</samp> should only be used during development, but never in production. An accidental restart while users are connected to your application can cause severe problems.</p>
+        </div>
+        <p class="standard">You can install <samp class="listingcharacter listingcharacter">nodemon</samp> via npm using the <samp class="listingcharacter listingcharacter">npm install -g nodemon</samp> command. This will make <samp class="listingcharacter listingcharacter">nodemon</samp> globally available for use on your system. In the simplest case, to run your application, you should replace the <samp class="listingcharacter listingcharacter">node</samp> command with <samp class="listingcharacter listingcharacter">nodemon</samp>. <span class="crossreference "><a href="03_004.html#l3.23">Listing 3.23</a></span> shows the execution of the web server example via <samp class="listingcharacter listingcharacter">nodemon</samp>.</p>
+        <div class="listing " id="l3.23"><pre>$ <span class="bold">nodemon server.mjs </span><br/>[nodemon] 1.19.3<br/>[nodemon] to restart at any time, enter `rs`<br/>[nodemon] watching dir(s): *.*<br/>[nodemon] watching extensions: js,mjs,json<br/>[nodemon] starting `node server.mjs`<br/>Server is listening to http://localhost:8080 </pre></div>
+        <p class="caption "><b>Listing 3.23</b>    
+            Running an Application with “nodemon”</p>
+        <p class="standard"><a id="p99"/>As soon as <samp class="listingcharacter listingcharacter">nodemon</samp> is started, and you modify a file in your project—in this case, the <span class="italic">server.mjs</span> file—the process will automatically restart. When using <samp class="listingcharacter listingcharacter">nodemon</samp>, however, you should keep in mind that such a restart will cause the current state, that is, all variable assignments<a class="indexanchor" id="i03_118"/>, to be lost.</p>
+        <p class="standard">As is stated in the output of <samp class="listingcharacter listingcharacter">nodemon</samp>, you don’t necessarily have to save a file to cause a restart. You can also enter “rs” in the console where <samp class="listingcharacter listingcharacter">nodemon</samp> is running. In addition to this direct control option, you can also manipulate the behavior of <samp class="listingcharacter listingcharacter">nodemon</samp> via a configuration file<a class="indexanchor" id="i03_119"/>. In this context, it’s recommended to name that file <span class="italic">nodemon.json</span>. This file is passed with the <samp class="listingcharacter listingcharacter">--config nodemon.json</samp> option. <span class="crossreference "><a href="03_004.html#l3.24">Listing 3.24</a></span> contains an example of such a configuration file.</p>
+        <div class="listing " id="l3.24"><pre><span class="schwarz">{</span><span class="schwarz"><br/></span>  <span class="hellblau">"verbose"</span><span class="schwarz">:</span><span class="schwarz"> </span><span class="rot">true</span><span class="schwarz">,</span><span class="schwarz"><br/></span>  <span class="hellblau">"ignore"</span><span class="schwarz">:</span><span class="schwarz"> </span><span class="schwarz">[</span><span class="hellblau">"*.spec.js"</span><span class="schwarz">],</span><span class="schwarz"><br/></span>  <span class="hellblau">"execMap"</span><span class="schwarz">:</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>    <span class="hellblau">"rb"</span><span class="schwarz">:</span><span class="schwarz"> </span><span class="hellblau">"ruby"</span><span class="schwarz"><br/></span>  <span class="schwarz">}</span><span class="schwarz"><br/></span><span class="schwarz">}</span><span class="schwarz"> </span></pre></div>
+        <p class="caption "><b>Listing 3.24</b>    
+            Configuring “nodemon”</p>
+        <p class="standard">The <samp class="listingcharacter listingcharacter">verbose</samp> property activates an additional log output<a class="indexanchor" id="i03_120"/> on the command line. With <samp class="listingcharacter listingcharacter">ignore</samp>, you can specify files whose modification should not lead to an automatic restart of the process. Finally, <samp class="listingcharacter listingcharacter">execMap</samp> is a feature that allows you to automatically start not only JavaScript, but any other scripts, such as Ruby in this case. The <samp class="listingcharacter listingcharacter">execMap</samp> property contains a mapping from the file extension to the executing program. For example, if you call <samp class="listingcharacter listingcharacter">nodemon index.rb</samp> with this configuration, the script will be executed in Ruby.</p>
+        <p class="standard">As an alternative to the <span class="italic">nodemon.json</span> file, you can also store the <samp class="listingcharacter listingcharacter">nodemon</samp> configuration directly in the <span class="italic">package.json</span> file of your project under the <samp class="listingcharacter listingcharacter">nodemonConfig</samp> key.</p>
+        <p class="standard">Last but not least, <samp class="listingcharacter listingcharacter">nodemon</samp> also supports the debugging<a class="indexanchor" id="i03_121"/> of Node.js applications. You can use the <samp class="listingcharacter listingcharacter">--inspect</samp> or <samp class="listingcharacter listingcharacter">--inspect-brk</samp> options for remote debugging or <samp class="listingcharacter listingcharacter">inspect</samp> for interactive debugging on the command line.</p>
+    </div><p class="signatur"/>
+                    </body>
+                </html>

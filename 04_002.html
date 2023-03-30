@@ -1,0 +1,900 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+                    
+        <head><meta content="application/xhtml+xml; charset=utf-8" http-equiv="Content-Type"/>
+            <meta content="application/xhtml+xml; charset=utf-8" name="content-type"/>
+            <meta content="Node.js Modules" name="title"/>
+            <meta content="Sebastian Springer" name="author"/>
+            <meta content="Rheinwerk Publishing" name="publisher"/>
+            <meta content="© 2022 by Rheinwerk Publishing Inc., Boston (MA)" name="copyright"/>
+            <meta content="Node.js - The Comprehensive Guide - Node.js Modules" name="description"/>
+            <meta content="en" name="language"/>
+            <title>Node.js Modules</title>
+            <link href="common/main.css" rel="stylesheet" type="text/css"/>
+<meta content="urn:uuid:e0000000-0000-0000-0000-000029756394" name="Adept.expected.resource"/>
+        </head>
+    
+
+
+                    <body class="office_us type_kapitel">
+                        <div id="main">
+        <h2 class="t2" id="h4.2">4.2    Core Modules<a class="indexanchor" id="i04_24"/></h2>
+        <p class="standard">The basic building blocks of an application are the core modules such as the HTTP or file system module. You can find documentation on these modules at <a id="p104"/><span class="url"><a href="https://nodejs.org/api/">https://nodejs.org/api/</a></span>. This link refers to the documentation of the current Node.js version and covers all interfaces, describes how to use them, and gives you numerous concrete code examples. The documentation is managed using the source code of the platform. You can also download it directly and get access to the description of older versions. Alternatively, you can view these older versions using the <span class="screenelement">View another version link</span> in the header of the documentation page.</p>
+        <p class="standard">If this information isn’t sufficient for you and research on the internet doesn’t provide the expected result, you can still access the source code of the respective module directly. This can be found in the GitHub repository<a class="indexanchor" id="i04_25"/> of the Node.js project at <span class="url"><a href="https://github.com/nodejs/node">https://github.com/nodejs/node</a></span> in the <span class="italic">lib</span> directory. In addition to the source code itself, you can also access a large number of unit tests that further describe the use of the respective interfaces using concrete test cases.</p>
+        <p class="standard">In the early days of Node.js, interfaces changed very frequently, and there were also frequent <span class="italic">breaking changes</span><a class="indexanchor" id="i04_26"/>, that is, changes to interfaces that caused problems for existing applications. Meanwhile, developers try to avoid this phenomenon as much as possible. For a list of changes in a release, you must check the project’s changelog<a class="indexanchor" id="i04_27"/> at <span class="url"><a href="https://github.com/nodejs/node/blob/master/CHANGELOG.md">https://github.com/nodejs/node/blob/master/CHANGELOG.md</a></span>.</p>
+        
+            <h3 class="t3" id="h4.2.1">4.2.1    Stability<a class="indexanchor" id="i04_28"/></h3>
+            <p class="standard">The modular approach in the structure of Node.js also supports the stability of the overall system and helps to avoid errors. If one of the modules contains a malfunction, all other modules can still continue to work. Of course, this doesn’t apply to central components such as the V8 engine<a class="indexanchor" id="i04_29"/>. But, in general, backward compatibility and platform support are very important.</p>
+            <p class="standard">Due to the continuous further development of Node.js, the question arises as to which modules can be used without hesitation, which should no longer be used, and which are better left to wait a while before going live.</p>
+            <p class="standard">For a better overview of the modules and their degree of stability, the stability index<a class="indexanchor" id="i04_30"/> was created. You can find the stability of a module in the application programming interface (API) documentation. For each module, the table of contents and the heading of a documentation page are followed by a colored bar indicating the index value. Originally, this value consisted of six levels, then it was reduced to four levels, then to three, and, currently back to four levels, which you’ll find briefly described in <span class="crossreference "><a href="04_002.html#t4.1">Table 4.1</a></span>.</p>
+            <table class="standardtable" id="t4.1">
+                <thead>
+                    <tr>
+                        <th class="tablehead tablecell_first top_border_cell">
+                            <p class="standard first-item last-item">Index</p>
+                        </th>
+                        <th class="tablehead tablecell_middle top_border_cell">
+                            <p class="standard first-item last-item">Name</p>
+                        </th>
+                        <th class="tablehead tablecell_middle top_border_cell">
+                            <p class="standard first-item last-item">Color code</p>
+                        </th>
+                        <th class="tablehead tablecell_last top_border_cell">
+                            <p class="standard first-item last-item">Description</p>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="tablecell tablecell_first top_border_cell">
+                            <p class="standard first-item last-item">0</p>
+                        </td>
+                        <td class="tablecell tablecell_middle top_border_cell">
+                            <p class="standard first-item last-item">Deprecated<a class="indexanchor" id="i04_31"/></p>
+                        </td>
+                        <td class="tablecell tablecell_middle top_border_cell">
+                            <p class="standard first-item last-item">Red</p>
+                        </td>
+                        <td class="tablecell tablecell_last top_border_cell">
+                            <p class="standard first-item last-item">These modules should no longer be used. They will be removed from future versions. When using these features, warnings may be issued. Backward compatibility of these modules isn’t guaranteed.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><a id="p105"/>1</p>
+                        </td>
+                        <td class="tablecell tablecell_middle">
+                            <p class="standard first-item last-item">Experimental<a class="indexanchor" id="i04_32"/></p>
+                        </td>
+                        <td class="tablecell tablecell_middle">
+                            <p class="standard first-item last-item">Orange</p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Modules with this index value are actively developed further, but production use isn’t recommended. Changes are to be expected. They aren’t subject to semantic versioning; breaking changes can also occur in minor updates.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item">2</p>
+                        </td>
+                        <td class="tablecell tablecell_middle">
+                            <p class="standard first-item last-item">Stable<a class="indexanchor" id="i04_33"/></p>
+                        </td>
+                        <td class="tablecell tablecell_middle">
+                            <p class="standard first-item last-item">Green</p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">There will be hardly any changes in these modules. Compatibility is interrupted only in rare cases. The developers place great emphasis on compatibility with the npm ecosystem.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item">3</p>
+                        </td>
+                        <td class="tablecell tablecell_middle">
+                            <p class="standard first-item last-item">Legacy<a class="indexanchor" id="i04_34"/></p>
+                        </td>
+                        <td class="tablecell tablecell_middle">
+                            <p class="standard first-item last-item">Blue</p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">The use of these features isn’t recommended. They are subject to semantic versioning and will continue to be part of the platform in the near future.</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="caption "><b>Table 4.1</b>    
+            Stability Index</p>
+            <p class="standard">An example of a <span class="italic">deprecated</span> module is the <samp class="listingcharacter listingcharacter">domain</samp> module. It was an attempt to create an error domain for handling errors in one area of an application. This module has proven to be unhelpful over several years and will no longer be supported in the future. The <span class="screenelement">Deprecated</span> status<a class="indexanchor" id="i04_35"/> is also applied to numerous methods of existing modules. For example, you shouldn’t use the <samp class="listingcharacter listingcharacter">exists</samp> method of the <samp class="listingcharacter listingcharacter">fs</samp> module in the future. In most cases, the documentation will give you tips about functionality that you can use instead.</p>
+            <p class="standard">Of the existing functionalities, only the JavaScript Object Notation (JSON) output of the documentation has <span class="screenelement">Experimental</span> status for a longer period of time. New features, such as the <samp class="listingcharacter listingcharacter">async_hooks</samp><a class="indexanchor" id="i04_36"/> module or the <samp class="listingcharacter listingcharacter">diagnostics_channel</samp> module,<a class="indexanchor" id="i04_37"/> are marked as experimental until they are stabilized.</p>
+            <p class="standard">Most modules in the Node.js platform have the index status <span class="screenelement">Stable</span>. This means that while the API may change, developers pay special attention to backward compatibility<a class="indexanchor" id="i04_38"/> with older versions. Typical examples of <span class="screenelement">Stable</span> status modules are the <samp class="listingcharacter listingcharacter">stream</samp>, <samp class="listingcharacter listingcharacter">http</samp>, and <samp class="listingcharacter listingcharacter">fs</samp> modules.</p>
+            <p class="standard">An important goal in Node.js development is to keep the platform organized and manageable. For this reason, there is only a comparatively small number of core modules.</p>
+        
+        
+            <h3 class="t3" id="h4.2.2">4.2.2    List of Core Modules<a class="indexanchor" id="i04_39"/></h3>
+            <p class="standard"><span class="crossreference "><a href="04_002.html#t4.2">Table 4.2</a></span> provides an overview of the core modules of the Node.js platform.</p>
+            <table class="standardtable" id="t4.2">
+                <thead>
+                    <tr>
+                        <th class="tablehead tablecell_first top_border_cell">
+                            <p class="standard first-item last-item">Module</p>
+                        </th>
+                        <th class="tablehead tablecell_last top_border_cell">
+                            <p class="standard first-item last-item">Description</p>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="tablecell tablecell_first top_border_cell">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">assert</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last top_border_cell">
+                            <p class="standard first-item last-item">This is the testing module of Node.js used to cover the platform itself with unit tests.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter"><a id="p106"/>async_hooks</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">This module allows and simplifies the tracking of asynchronous resources during their lifecycle.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">buffer</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">This module helps to handle binary data for the file system or network operations.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">child_process</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">This module allows you to create and control child processes and communicate between processes.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">cluster</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">This module is an extension of the <samp class="listingcharacter listingcharacter">child_process</samp> module for dynamic load balancing between processes.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">console</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">This module represents a wrapper around the standard output.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">crypto</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">This module provides encryption under Node.js.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">dgram</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">This module enables you to establish User Datagram Protocol (UDP) connections and communicate through them.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">dns</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">This module resolves names via Domain Name System (DNS).</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">domain</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">This module deals with grouping operations and handling errors that occur.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">events</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">The <samp class="listingcharacter listingcharacter">events</samp> module provides the infrastructure for registering and triggering events.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">fs</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">The <samp class="listingcharacter listingcharacter">fs</samp> module is used to gain both read and write access to the system’s file system.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">http</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Th<samp class="listingcharacter listingcharacter">is</samp> module helps you create HTTP clients and servers.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">http2</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">With this module, the HTTP/2 protocol is now natively supported by Node.js. HTTP/2 represents a further development of HTTP.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">https</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Th<samp class="listingcharacter listingcharacter">is</samp> module enables encrypted communication both as HTTP client and server.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">inspector</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">This module represents the interface to the V8 inspector.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">modules</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">With this module, the Node.js module system is itself implemented as a module.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">net</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">This module is the basis for network servers and clients.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">os</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">This module allows you to read information about the operating system.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">path</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">This module contains all the important operations for handling directory paths.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter"><a id="p107"/>perf_hooks</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">This module allows you to make highly accurate time measurements in your application.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">process</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">What the <samp class="listingcharacter listingcharacter">os</samp> module is to the operating system, the <samp class="listingcharacter listingcharacter">process</samp> module is to the current Node.js process.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">punycode</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">This module deals with the standard-compliant conversion of Unicode characters to ASCII characters.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">querystring</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">This module greatly simplifies the handling of query strings in URLs.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">readline</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Due to this module, a stream can be consumed line by line.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">repl</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">This module represents the read-eval-print loop (REPL), which is the command line of Node.js.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">stream</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">This module API provides different types of data streams.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">string_decoder</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">This module can be used to convert <samp class="listingcharacter listingcharacter">buffer</samp> objects into strings.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">timers</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">This module contains all time-based functions.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">tls</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">This module is the interface to the public/private key infrastructure for secure communication.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">trace_events</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">With this module, tracing information from the V8 engine, the Node platform as well as customized tracing information from the user can be processed centrally.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">tty</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">This module represents the connection to the terminal, for example, the standard input and output.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">url</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">This module is used to generate or parse URLs.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">util</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">This module collects helpful functions such as type queries, formatting, and the like.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">v8</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">This module enables you to work directly with the V8 engine.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">vm</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">This module provides an environment for executing JavaScript code.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">wasi</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">This module can be used to integrate WebAssembly modules or entire applications into Node.js. The module represents an implementation of the WebAssembly system interface specification.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">worker_threads</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">In addition to the <samp class="listingcharacter listingcharacter">child_process</samp> module, this module helps to offload routines from the main process. The focus of the <samp class="listingcharacter listingcharacter">worker_threads</samp> module is on CPU-intensive calculations.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">zlib</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">This module deals with the compression and decompression of information.</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="caption "><b>Table 4.2</b>    
+            Overview of the Node.js Modules</p>
+            <p class="standard"><a id="p108"/>Some of the modules presented here serve as an interface to the operating system,<a class="indexanchor" id="i04_40"/> such as the <samp class="listingcharacter listingcharacter">net</samp> or <samp class="listingcharacter listingcharacter">fs</samp> modules. Others implement protocols or define commonly used structures such as the <samp class="listingcharacter listingcharacter">http</samp> modules or the <samp class="listingcharacter listingcharacter">events</samp> module. The latter are often used by Node.js itself to build other core modules. Parts of the <samp class="listingcharacter listingcharacter">fs</samp> module, for example, use the <samp class="listingcharacter listingcharacter">stream</samp> module to map data streams; this module in turn is based on the <samp class="listingcharacter listingcharacter">events</samp> module.</p>
+        
+        
+            <h3 class="t3" id="h4.2.3">4.2.3    Loading Core Modules<a class="indexanchor" id="i04_41"/></h3>
+            <p class="standard">The core modules of Node.js are loaded through the platform’s module system, with some exceptions. Currently, the platform is in a state of transition, as the previously used CommonJS<a class="indexanchor" id="i04_42"/> module system is being switched to the ECMAScript modules. Of course, such a drastic change takes time, which is why the transition to the new modular system has already taken years. In the course of this book, we’ll mainly use the ECMAScript module system<a class="indexanchor" id="i04_43"/>. However, in this section, you’ll get to know both module systems and their respective characteristics.</p>
+            
+                <h4 class="t4" id="h4.2.3.1">Loading Core Modules via the CommonJS Module System</h4>
+                <p class="standard">The original Node.js module system uses the <samp class="listingcharacter listingcharacter">require</samp> function to load structures. <span class="crossreference "><a href="04_002.html#l4.1">Listing 4.1</a></span> shows an example of loading the <samp class="listingcharacter listingcharacter">os</samp> module to display the uptime of the system.</p>
+                <div class="listing " id="l4.1"><pre><span class="gruen">// Loading the entire module</span><span class="schwarz"><br/></span><span class="rot">const</span><span class="schwarz"> os </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="schwarz">require(</span><span class="hellblau">'os'</span><span class="schwarz">);</span><span class="schwarz"><br/></span><span class="magenta">console</span><span class="schwarz">.log(</span><span class="schwarz">os</span><span class="schwarz">.uptime());</span><span class="schwarz"><br/></span> <span class="gruen"><br/></span>// Loading the module and extracting certain functions by means of destructuring<span class="schwarz"><br/></span><span class="rot">const</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"> uptime </span><span class="schwarz">}</span><span class="schwarz"> </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="schwarz">require(</span><span class="hellblau">'os'</span><span class="schwarz">);</span><span class="schwarz"><br/></span><span class="magenta">console</span><span class="schwarz">.log(uptime());</span><span class="schwarz"> </span></pre></div>
+                <p class="caption "><b>Listing 4.1</b>    
+            Loading Core Modules</p>
+                <p class="standard">Each of the core modules exports an object through which you can use the functionality of the respective module. Normally, you assign the return value of the <samp class="listingcharacter listingcharacter">require</samp><a class="indexanchor" id="i04_44"/> function to a variable that has the same name as the module and then call the respective required functions. In the code example, you can see both this variant and how you can directly extract the required interfaces with a <span class="italic">destructuring</span> statement.</p>
+                <div class="box box_standard">
+                    <h6 class="boxheading">Destructuring<a class="indexanchor" id="i04_45"/></h6>
+                    <p class="standard first">If you want to store individual properties of objects or elements from arrays in several variables, several operations are necessary, as you can see in <span class="crossreference "><a href="04_002.html#l4.2">Listing 4.2</a></span>.</p>
+                    <div class="listing " id="l4.2"><pre><span class="rot">const</span><span class="schwarz"> person </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>  name<span class="schwarz">:</span><span class="schwarz"> </span><span class="hellblau">'Lisa'</span><span class="schwarz">,</span><span class="schwarz"><br/></span>  age<span class="schwarz">:</span><span class="schwarz"> </span><span class="schwarz">32</span><span class="schwarz"><br/></span><span class="schwarz">};</span><span class="schwarz"><br/></span><br/><span class="rot"><a id="p109"/>const</span><span class="schwarz"> name </span><span class="dunkelblau">=</span><span class="schwarz"> person</span><span class="schwarz">.</span><span class="schwarz">name</span><span class="schwarz">;</span><span class="schwarz"><br/></span><span class="rot">const</span><span class="schwarz"> age </span><span class="dunkelblau">=</span><span class="schwarz"> person</span><span class="schwarz">.</span><span class="schwarz">age</span><span class="schwarz">;</span><span class="schwarz"> </span></pre></div>
+                    <p class="caption "><b>Listing 4.2</b>    
+            Variable Assignment of Object Properties</p>
+                    <p class="standard">For both objects and arrays, you can combine such operations by using destructuring. This feature has been part of the standard version since ECMAScript 2015 and is now available in all modern browsers. You can write the code from <span class="crossreference "><a href="04_002.html#l4.2">Listing 4.2</a></span> in a more compact way using destructuring, as shown in <span class="crossreference "><a href="04_002.html#l4.3">Listing 4.3</a></span>.</p>
+                    <div class="listing " id="l4.3"><pre><span class="rot">const</span><span class="schwarz"> person </span><span class="dunkelblau">=</span><span class="schwarz"> {</span><br/>  name: <span class="hellblau">'Lisa'</span><span class="schwarz">,</span><br/>  age: 32<br/>};<br/><br/><span class="rot">const</span><span class="schwarz"> { name, age } </span><span class="dunkelblau">=</span><span class="schwarz"> person;</span><br/><br/><span class="magenta">console</span><span class="schwarz">.log(</span><span class="hellblau">'Name: '</span><span class="schwarz">, name);</span><span class="gruen"> // Output: Name: Lisa</span><span class="schwarz"><br/></span><span class="magenta">console</span><span class="schwarz">.log(</span><span class="hellblau">'Age: '</span><span class="schwarz">, age);</span><span class="gruen"> // Output: Age: 32</span><span class="schwarz"><br/></span><br/><span class="rot">const</span><span class="schwarz"> person2 </span><span class="dunkelblau">=</span><span class="schwarz"> [</span><span class="hellblau">'John'</span><span class="schwarz">, 17];</span><br/><span class="rot">const</span><span class="schwarz"> [name2, age2] </span><span class="dunkelblau">=</span><span class="schwarz"> person2;</span><br/><br/><span class="magenta">console</span><span class="schwarz">.log(</span><span class="hellblau">'Name: '</span><span class="schwarz">, name2);</span><span class="gruen"> // Output: Name: John</span><span class="schwarz"><br/></span><span class="magenta">console</span><span class="schwarz">.log(</span><span class="hellblau">'Age: '</span><span class="schwarz">, age2);</span><span class="gruen"> // Output: Age: 17</span><span class="schwarz"> </span><span class="schwarz"/></pre></div>
+                    <p class="caption "><b>Listing 4.3</b>    
+            Destructuring Statement</p>
+                    <p class="standard last">The code example also shows that you can use square brackets instead of curly brackets for arrays and thus assign the individual elements to variables. You can also apply destructuring to deeper levels and combine destructuring for objects and arrays as you wish. However, you should be careful not to overdo it, as it can easily get very confusing.</p>
+                </div>
+            
+            
+                <h4 class="t4" id="h4.2.3.2">Loading Core Modules via the ECMAScript Module System</h4>
+                <p class="standard">The official module system of JavaScript takes a slightly different approach than the previously used ECMAScript module system. With regard to loading structures, the most important change is that the <samp class="listingcharacter listingcharacter">import</samp> keyword replaces the <samp class="listingcharacter listingcharacter">require</samp> function. The core modules of Node.js have a default export that is broadly similar to the behavior of the old module system. In addition, each module exports its public interface as named exports<a class="indexanchor" id="i04_46"/>, which you can compare to the destructuring statement we used earlier. <span class="crossreference "><a href="04_002.html#l4.4">Listing 4.4</a></span> shows how you can use the default export of the core modules.</p>
+                <div class="listing " id="l4.4"><pre><span class="rot"><a id="p110"/>import</span><span class="schwarz"> os </span><span class="rot">from</span><span class="schwarz"> </span><span class="hellblau">'os'</span><span class="schwarz">;</span><span class="schwarz"><br/></span> <br/><span class="magenta">console</span><span class="schwarz">.log(</span><span class="schwarz">os</span><span class="schwarz">.uptime());</span><span class="schwarz"> </span></pre></div>
+                <p class="caption "><b>Listing 4.4</b>    
+            Including Core Modules with a Default Import</p>
+                <p class="standard"><span class="crossreference "><a href="04_002.html#l4.5">Listing 4.5</a></span> shows the second variant; that is, using named exports.</p>
+                <div class="listing " id="l4.5"><pre><span class="rot">import</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"> uptime </span><span class="schwarz">}</span><span class="schwarz"> </span><span class="rot">from</span><span class="schwarz"> </span><span class="hellblau">'os'</span><span class="schwarz">;</span><span class="schwarz"><br/></span> <br/><span class="magenta">console</span><span class="schwarz">.log(uptime());</span><span class="schwarz"> </span></pre></div>
+                <p class="caption "><b>Listing 4.5</b>    
+            Including Core Modules with a Named Import</p>
+                <p class="standard">It’s up to you which of the two variants you use in your application, but make sure to implement your source code as consistently as possible and use the same variants throughout, as this significantly increases the readability of the source code.</p>
+                <div class="box box_standard">
+                    <h6 class="boxheading">ECMAScript Module System</h6>
+                    <p class="standard first">Currently, the CommonJS module system is still the standard for Node.js. Although this will change in the future, keep that in mind if you want to work with the ECMAScript module system. There are three ways to enable the ECMAScript module system:</p>
+                    <ul>
+                        <li>
+                            <p class="standard first-item last-item"><span class="bold">File extension .mjs</span><span class="italic"/><a class="indexanchor" id="i04_47"/><br/>You’ve already learned about this variant. If a file name ends with <span class="italic">.mjs</span>, Node.js automatically ensures that the ECMAScript module system is activated.</p>
+                        </li>
+                        <li>
+                            <p class="standard first-item last-item"><span class="bold"><samp class="listingcharacter listingcharacter">type</samp></span><a class="indexanchor" id="i04_48"/> <span class="bold">field in the package.json file</span><br/>Alternatively, you can set the <samp class="listingcharacter listingcharacter">type</samp> field in the <span class="italic">package.json</span> file to the <samp class="listingcharacter listingcharacter">module</samp> value. If you do that, your files can keep the usual <span class="italic">.js</span> extension.</p>
+                        </li>
+                        <li>
+                            <p class="standard first-item last-item"><span class="bold"><samp class="listingcharacter listingcharacter">--input-type</samp></span><a class="indexanchor" id="i04_49"/> <span class="bold">flag</span><br/>The third variant is to start your Node.js process with the command-line option <samp class="listingcharacter listingcharacter">--input-type=module</samp>. Again, if you decide to do that, you can keep using the <span class="italic">.js</span> file extension.</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="box box_standard">
+                    <h6 class="boxheading">package.json<a class="indexanchor" id="i04_50"/> File</h6>
+                    <p class="standard first">You can use the <samp class="listingcharacter listingcharacter">type</samp> field in the <span class="italic">package.json</span> file to enable the ECMAScript module system. But this file can do much more, as you’ll learn in the course of this book. At this point, the only important thing for you to know is that this is the central description file for your application. You store information in it, such as the name or version number of your application. In addition, the file contains a list of all dependencies that your application requires.</p>
+                    <p class="standard last">You can have npm create a <span class="italic">package.json</span> file on the command line by running the <samp class="listingcharacter listingcharacter">npm init</samp><a class="indexanchor" id="i04_51"/> command. You’ll then be asked a series of questions about your project. In addition, you can use the <samp class="listingcharacter listingcharacter">-y</samp> option to have these questions answered with the default answers.</p>
+                </div>
+                <p class="standard"><a id="p111"/>Besides the core modules that you must load explicitly, there are some globally available structures you can use in your application. There are also some differences here between the CommonJS module system and the ECMAScript module system, which we’ll describe in more detail in the following section.</p>
+            
+        
+        
+            <h3 class="t3" id="h4.2.4">4.2.4    Global Objects<a class="indexanchor" id="i04_52"/></h3>
+            <p class="standard">The developers of Node.js have chosen to make individual objects and functions available globally and within the scope of a module, respectively, for several reasons. For some, it’s simply necessary that they are there because without them, you wouldn’t be able to develop your application. This includes, for example, the modular system. Other objects and functions are also globally available in the browser and have been adopted in Node.js, such as the <samp class="listingcharacter listingcharacter">console</samp> object and the timing functions<a class="indexanchor" id="i04_53"/>. The third category provides commonly used functionalities, such as the <samp class="listingcharacter listingcharacter">__filename</samp> constant. <span class="crossreference "><a href="04_002.html#t4.3">Table 4.3</a></span> provides an overview of the global objects in Node.js.</p>
+            <table class="standardtable" id="t4.3">
+                <thead>
+                    <tr>
+                        <th class="tablehead tablecell_first top_border_cell">
+                            <p class="standard first-item last-item">Variable Name</p>
+                        </th>
+                        <th class="tablehead tablecell_last top_border_cell">
+                            <p class="standard first-item last-item">Variable Name</p>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="tablecell tablecell_first top_border_cell">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">__dirname</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last top_border_cell">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">__filename</samp></p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">Buffer</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">clearImmediate()</samp></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">clearInterval()</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">clearTimeout()</samp></p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">console</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">Event</samp></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">EventTarget</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">exports</samp></p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">global</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">MessageChannel</samp></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">MessageEvent</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">MessagePort</samp></p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">module</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">performance</samp></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">process</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">queueMicrotask()</samp></p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">require()</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">setImmediate()</samp></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">setInterval()</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">setTimeout()</samp></p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">TextDecoder</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">TextEncoder</samp></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">URL</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">URLSearcchParams</samp></p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">WebAssembly</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last"/>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="caption "><b>Table 4.3</b>    
+            Global Objects in Node.js</p>
+            <p class="standard">In addition to these Node.js-specific objects, numerous other classes and objects are included in the JavaScript standard, for example, the string and array classes.</p>
+            <p class="standard"><a id="p112"/>In the following sections, we’ll briefly introduce the individual global objects and their possible uses.</p>
+            
+                <h4 class="t4" id="h4.2.4.1">File<a class="indexanchor" id="i04_54"/> and Directory Name<a class="indexanchor" id="i04_55"/></h4>
+                <p class="standard">Two variables that are very useful in application development are <samp class="listingcharacter listingcharacter">__filename</samp><a class="indexanchor" id="i04_56"/> and <samp class="listingcharacter listingcharacter">__dirname</samp><a class="indexanchor" id="i04_57"/>. As the names of these variables already suggest, both contain information about the location of the file, which stores the source code of the currently executed script. The string in <samp class="listingcharacter listingcharacter">__filename</samp> is the absolute path and file name of the script. <samp class="listingcharacter listingcharacter">__dirname</samp> is just the path.</p>
+                <p class="standard">You get the name of the file or directory where the variable is used, even if it’s included elsewhere via the module system.</p>
+                <p class="standard">When used in the REPL, note that neither <samp class="listingcharacter listingcharacter">__filename</samp> nor <samp class="listingcharacter listingcharacter">__dirname</samp> is defined, as there is no script in this case. Accessing these variables will result in a <samp class="listingcharacter listingcharacter">ReferenceError</samp><a class="indexanchor" id="i04_58"/>.</p>
+                <p class="standard">The same restriction applies to the ECMAScript module system<a class="indexanchor" id="i04_59"/><a class="indexanchor" id="i04_60"/>. If you try to access these two variables, the system will return a <samp class="listingcharacter listingcharacter">ReferenceError</samp>. However, there is a way to obtain the information of the current file and directory name, as shown in <span class="crossreference "><a href="04_002.html#l4.6">Listing 4.6</a></span>.</p>
+                <div class="listing " id="l4.6"><pre><span class="rot">import</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"> dirname </span><span class="schwarz">}</span><span class="schwarz"> </span><span class="rot">from</span><span class="schwarz"> </span><span class="hellblau">'path'</span><span class="schwarz">;</span><span class="schwarz"><br/></span><span class="rot">import</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"> fileURLToPath </span><span class="schwarz">}</span><span class="schwarz"> </span><span class="rot">from</span><span class="schwarz"> </span><span class="hellblau">'url'</span><span class="schwarz">;</span><span class="schwarz"><br/></span> <br/><span class="rot">const</span><span class="schwarz"> __filename </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="schwarz">fileURLToPath(</span><span class="rot">import</span><span class="schwarz">.</span><span class="schwarz">meta</span><span class="schwarz">.</span><span class="schwarz">url</span><span class="schwarz">);</span><span class="schwarz"><br/></span><span class="rot">const</span><span class="schwarz"> __dirname </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="schwarz">dirname(</span><span class="schwarz">__filename</span><span class="schwarz">);</span><span class="schwarz"><br/></span> <br/><span class="magenta">console</span><span class="schwarz">.log(</span><span class="schwarz">__filename</span><span class="schwarz">);</span><span class="schwarz"><br/></span><span class="magenta">console</span><span class="schwarz">.log(</span><span class="schwarz">__dirname</span><span class="schwarz">);</span><span class="schwarz"> </span></pre></div>
+                <p class="caption "><b>Listing 4.6</b>    
+            Simulating __filename and __dirname for the ECMAScript Module System</p>
+                <p class="standard">You can use the <samp class="listingcharacter listingcharacter">import.meta.url</samp><a class="indexanchor" id="i04_61"/> property to display the absolute file name of the current script. Here, however, Node.js adds the protocol at the beginning—in this case, the <samp class="listingcharacter listingcharacter">file://</samp> string. To obtain the pure absolute path, you must use the <samp class="listingcharacter listingcharacter">fileURLToPath</samp> function from the <samp class="listingcharacter listingcharacter">url</samp> module. You get the directory name by passing the absolute file name to the <samp class="listingcharacter listingcharacter">dirname</samp> function from the <samp class="listingcharacter listingcharacter">path</samp> module.</p>
+            
+            
+                <h4 class="t4" id="h4.2.4.2">Buffer<a class="indexanchor" id="i04_62"/></h4>
+                <p class="standard">The <samp class="listingcharacter listingcharacter">buffer</samp> class is also available globally because you deal with this type of object very often in Node.js. <samp class="listingcharacter listingcharacter">Buffer</samp> objects are used whenever binary data<a class="indexanchor" id="i04_63"/> handling is involved. <span class="crossreference "><a href="04_002.html#l4.7">Listing 4.7</a></span> contains an example that shows how you can come into contact with <samp class="listingcharacter listingcharacter">buffer</samp> objects—sometimes unintentionally.</p>
+                <div class="listing " id="l4.7"><pre><span class="rot">import</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"> readFile </span><span class="schwarz">}</span><span class="schwarz"> </span><span class="rot">from</span><span class="schwarz"> </span><span class="hellblau">'fs'</span><span class="schwarz">;</span><span class="schwarz"><br/></span> <br/><span class="schwarz">readFile(</span><span class="hellblau">'input.txt'</span><span class="schwarz">,</span><span class="schwarz"> </span><span class="schwarz">(</span><span class="schwarz">err</span><span class="schwarz">,</span><span class="schwarz"> data</span><span class="schwarz">)</span><span class="schwarz"> </span><span class="dunkelblau">=&gt;</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span><a id="p113"/>  <span class="magenta">console</span><span class="schwarz">.log(</span><span class="schwarz">data</span><span class="schwarz">);</span><span class="gruen"> // Output: &lt;Buffer 48 61 6c 6c 6f 20 57 65 6c 74&gt;</span><span class="schwarz"><br/></span>  <span class="magenta">console</span><span class="schwarz">.log(</span><span class="schwarz">data</span><span class="schwarz">.toString());</span><span class="gruen"> // Output: Hello world</span><span class="schwarz"><br/></span><span class="schwarz">});</span><span class="schwarz"> </span></pre></div>
+                <p class="caption "><b>Listing 4.7</b>    
+            Buffer Objects When Reading Files</p>
+                <p class="standard">In this example, you read the contents of the <span class="italic">input.txt</span> file and write it to standard output. However, because you haven’t specified any character encoding<a class="indexanchor" id="i04_64"/> here, Node.js reverts to the default handling, which means that it considers the data as a buffer. The most important methods of <samp class="listingcharacter listingcharacter">buffer</samp> objects are the <samp class="listingcharacter listingcharacter">toString</samp> method for converting to a string and the <samp class="listingcharacter listingcharacter">write</samp> method for writing information to the buffer. So, if you want to output the contents of the <samp class="listingcharacter listingcharacter">buffer</samp> object to the console, you can use the <samp class="listingcharacter listingcharacter">data.toString</samp> method, as shown in the example.</p>
+            
+            
+                <h4 class="t4" id="h4.2.4.3">Timing Functions<a class="indexanchor" id="i04_65"/></h4>
+                <p class="standard">The timing functions <samp class="listingcharacter listingcharacter">setTimeout</samp>, <samp class="listingcharacter listingcharacter">setInterval</samp>, and <samp class="listingcharacter listingcharacter">setImmediate</samp> aren’t part of the ECMAScript language standard. In the browser, they are part of the <samp class="listingcharacter listingcharacter">window</samp> object. Because these functions are essential for implementing time-based features<a class="indexanchor" id="i04_66"/>, they have been ported to Node.js and are available globally. <samp class="listingcharacter listingcharacter">setTimeout</samp> allows you to have a callback function executed after the specified number of milliseconds has elapsed. The <samp class="listingcharacter listingcharacter">setInterval</samp> function executes the specified callback function periodically at intervals, and <samp class="listingcharacter listingcharacter">setImmediate</samp> runs the callback function at the end of the current event loop<a class="indexanchor" id="i04_67"/> cycle. The return value of these three functions can be used in conjunction with the respective <samp class="listingcharacter listingcharacter">clear</samp> function, for example, <samp class="listingcharacter listingcharacter">clearTimeout</samp>, to abort the corresponding operation.</p>
+                <p class="standard">In <span class="crossreference "><a href="04_002.html#l4.8">Listing 4.8</a></span>, you first create a counter variable and then start an interval that generates an output every second. Without any further termination condition, the script would continue to run until you finally terminate it manually on the console. To prevent this effect, you must define a termination condition that ensures that processing is terminated after three runs.</p>
+                <div class="listing " id="l4.8"><pre><span class="rot">let</span><span class="schwarz"> counter </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="schwarz">1;</span><span class="schwarz"><br/></span><span class="rot">const</span><span class="schwarz"> interval </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="schwarz">setInterval(()</span><span class="schwarz"> </span><span class="dunkelblau">=&gt;</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>  <span class="magenta">console</span><span class="schwarz">.log(</span><span class="violett">`${counter} iteration`</span><span class="schwarz">);</span><span class="schwarz"><br/></span>  <span class="rot">if</span><span class="schwarz"> </span><span class="schwarz">(</span><span class="schwarz">counter</span><span class="dunkelblau">++</span><span class="schwarz"> </span><span class="dunkelblau">&gt;</span><span class="schwarz"> </span><span class="schwarz">2)</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>    <span class="schwarz">clearInterval(</span><span class="schwarz">interval</span><span class="schwarz">);</span><span class="schwarz"><br/></span>  <span class="schwarz">}</span><span class="schwarz"><br/></span><span class="schwarz">},</span><span class="schwarz"> </span><span class="schwarz">1000);</span><span class="schwarz"> </span></pre></div>
+                <p class="caption "><b>Listing 4.8</b>    
+            Using the “setInterval” Function</p>
+            
+            
+                <h4 class="t4" id="h4.2.4.4">console<a class="indexanchor" id="i04_68"/></h4>
+                <p class="standard">Another functionality you already know from client-side JavaScript—the <samp class="listingcharacter listingcharacter">console</samp> object—is also available as a global object and is mainly used for output on the <a id="p114"/>command line<a class="indexanchor" id="i04_69"/> during development. Besides the well-known <samp class="listingcharacter listingcharacter">console.log</samp> method, there are numerous other helpful methods in the <samp class="listingcharacter listingcharacter">console</samp> object. <span class="crossreference "><a href="04_002.html#t4.4">Table 4.4</a></span> provides a list of the most important methods.</p>
+                <table class="standardtable" id="t4.4">
+                    <thead>
+                        <tr>
+                            <th class="tablehead tablecell_first top_border_cell">
+                                <p class="standard first-item last-item">Method</p>
+                            </th>
+                            <th class="tablehead tablecell_last top_border_cell">
+                                <p class="standard first-item last-item">Description</p>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="tablecell tablecell_first top_border_cell">
+                                <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">debug</samp>, <samp class="listingcharacter listingcharacter">info</samp>, <samp class="listingcharacter listingcharacter">warn</samp>, <samp class="listingcharacter listingcharacter">error</samp></p>
+                            </td>
+                            <td class="tablecell tablecell_last top_border_cell">
+                                <p class="standard first-item last-item">These methods represent different logging priorities.</p>
+                            </td>
+                        </tr>
+                        <tr class="light">
+                            <td class="tablecell tablecell_first">
+                                <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">group</samp>, <samp class="listingcharacter listingcharacter">groupEnd</samp></p>
+                            </td>
+                            <td class="tablecell tablecell_last">
+                                <p class="standard first-item last-item">These methods are used to visually group console outputs.</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tablecell tablecell_first">
+                                <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">time</samp>, <samp class="listingcharacter listingcharacter">timeEnd</samp></p>
+                            </td>
+                            <td class="tablecell tablecell_last">
+                                <p class="standard first-item last-item">These methods allow for a simple time measurement. With <samp class="listingcharacter listingcharacter">time</samp>, you can set a marker, while <samp class="listingcharacter listingcharacter">timeEnd</samp> ends the time measurement and outputs the result.</p>
+                            </td>
+                        </tr>
+                        <tr class="light">
+                            <td class="tablecell tablecell_first">
+                                <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">trace</samp></p>
+                            </td>
+                            <td class="tablecell tablecell_last">
+                                <p class="standard first-item last-item">This method outputs the current stack trace.</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="caption "><b>Table 4.4</b>    
+            Most Important Methods of the “console” Object</p>
+            
+            
+                <h4 class="t4" id="h4.2.4.5">Global Event API<a class="indexanchor" id="i04_70"/></h4>
+                <p class="standard">The two classes, <samp class="listingcharacter listingcharacter">EventTarget</samp><a class="indexanchor" id="i04_71"/> and <samp class="listingcharacter listingcharacter">Event</samp>, are implementations of the client-side event API. In the broadest sense, you can compare <samp class="listingcharacter listingcharacter">EventTarget</samp> to, for example, a <samp class="listingcharacter listingcharacter">button</samp> element in the browser that a user has clicked. The biggest difference is that the element structure in the browser is hierarchical, which isn’t the case in Node.js. This means that the events aren’t passed through an element tree, but are only triggered at <samp class="listingcharacter listingcharacter">EventTarget</samp>. <span class="crossreference "><a href="04_002.html#l4.9">Listing 4.9</a></span> shows an example of how you can use the two event classes.</p>
+                <div class="listing " id="l4.9"><pre><span class="rot">const</span><span class="schwarz"> target </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="rot">new </span><span class="schwarz">EventTarget();</span><span class="schwarz"><br/></span> <br/>target<span class="schwarz">.addEventListener(</span><span class="hellblau">'customEvent'</span><span class="schwarz">,</span><span class="schwarz"> </span><span class="schwarz">(</span><span class="rot">event</span><span class="schwarz">)</span><span class="schwarz"> </span><span class="dunkelblau">=&gt;</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>  <span class="magenta">console</span><span class="schwarz">.log(</span><span class="violett">`${event.type} was triggered`</span><span class="schwarz">);</span><span class="schwarz"> </span><br/>   <span class="gruen"> // Output: customEvent was triggered</span><span class="schwarz"><br/></span><span class="schwarz">});</span><span class="schwarz"><br/></span> <br/><span class="rot">const</span><span class="schwarz"> </span><span class="rot">event</span><span class="schwarz"> </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="rot">new </span><span class="schwarz">Event(</span><span class="hellblau">'customEvent'</span><span class="schwarz">);</span><span class="schwarz"><br/></span> <br/>target<span class="schwarz">.dispatchEvent(</span><span class="rot">event</span><span class="schwarz">);</span><span class="schwarz"> </span></pre></div>
+                <p class="caption "><b>Listing 4.9</b>    
+            Using the Event API</p>
+                <p class="standard">In the example, you first create an <samp class="listingcharacter listingcharacter">EventTarget</samp> instance on which you register an event handler for the <samp class="listingcharacter listingcharacter">customEvent</samp> type via the <samp class="listingcharacter listingcharacter">addEventListener</samp> method. You can choose these event types yourself. Then you create an <samp class="listingcharacter listingcharacter">event</samp> object of the <samp class="listingcharacter listingcharacter">customEvent</samp> type and trigger it via the <samp class="listingcharacter listingcharacter">dispatchEvent</samp> method of the <samp class="listingcharacter listingcharacter">EventTarget</samp>.</p>
+                <p class="standard">Later in this book, you’ll learn about yet another way to handle events in Node.js via the <samp class="listingcharacter listingcharacter">EventEmitter</samp> class from the <samp class="listingcharacter listingcharacter">events</samp> module. This class forms the basis for numerous internal and external modules in Node.js.</p>
+            
+            
+                <h4 class="t4" id="h4.2.4.6"><a id="p115"/>CommonJS Module System<a class="indexanchor" id="i04_72"/></h4>
+                <p class="standard">You can also access the Node.js-specific functions and objects of the module system from anywhere within your module. The <samp class="listingcharacter listingcharacter">require</samp> function<a class="indexanchor" id="i04_73"/> enables you to load external dependencies, while <samp class="listingcharacter listingcharacter">exports</samp> or the <samp class="listingcharacter listingcharacter">module</samp> object are used to make information available outside your module. You can also use this object<a class="indexanchor" id="i04_74"/> to control other aspects of the module system. We’ll introduce the module system of Node.js in more detail later in <span class="crossreference "><a href="04_003.html#h4.3">Section 4.3</a></span>. More recent versions of Node.js provide the ECMAScript module system with the <samp class="listingcharacter listingcharacter">import</samp><a class="indexanchor" id="i04_75"/> and <samp class="listingcharacter listingcharacter">export</samp> keywords too.</p>
+            
+            
+                <h4 class="t4" id="h4.2.4.7">global: Global Scope<a class="indexanchor" id="i04_76"/></h4>
+                <p class="standard">In client-side JavaScript, you have the global scope<a class="indexanchor" id="i04_77"/> for variables in addition to the block, function, and closure scopes. Node.js doesn’t contain anything like that. If you define a variable in a file, you can only access it within this file, so the variable is only valid within the module. If you add a new property to the <samp class="listingcharacter listingcharacter">global</samp> object, it will be available as a global property in your entire application, that is, even across file boundaries. <span class="crossreference "><a href="04_002.html#l4.10">Listing 4.10</a></span> illustrates how you can use the <samp class="listingcharacter listingcharacter">global</samp> object.</p>
+                <div class="listing " id="l4.10"><pre><span class="rot">function</span><span class="schwarz"> </span><span class="schwarz">createGlobal()</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>  global<span class="schwarz">.</span><span class="schwarz">myName </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="hellblau">'Peter'</span><span class="schwarz">;</span><span class="schwarz"><br/></span><span class="schwarz">}</span><span class="schwarz"><br/></span><span class="schwarz">createGlobal();</span><span class="schwarz"><br/></span><span class="magenta">console</span><span class="schwarz">.log(</span><span class="schwarz">myName</span><span class="schwarz">);</span><span class="schwarz"> </span></pre></div>
+                <p class="caption "><b>Listing 4.10</b>    
+            Using the “global” Object</p>
+                <p class="standard">In <span class="crossreference "><a href="04_002.html#l4.10">Listing 4.10</a></span> you first create a function in which you set the global variable. Then the function is called, and the content of the global variable is output. On a larger scale, setting and accessing global variables also works across file boundaries.</p>
+                <div class="box box_standard">
+                    <h6 class="boxheading">Avoid Using Global Variables<a class="indexanchor" id="i04_78"/>!</h6>
+                    <p class="standard first last">At this point, we strongly advise against the use of global variables. They lead to potential name conflicts<a class="indexanchor" id="i04_79"/> with local variables and generally make your application harder to read and more error-prone.</p>
+                </div>
+            
+            
+                <h4 class="t4" id="h4.2.4.8">Message System<a class="indexanchor" id="i04_80"/> for Communicating with Worker Processes</h4>
+                <p class="standard">You can use three classes, <samp class="listingcharacter listingcharacter">MessageChannel</samp><a class="indexanchor" id="i04_81"/>, <samp class="listingcharacter listingcharacter">MessageEvent</samp><a class="indexanchor" id="i04_82"/>, and <samp class="listingcharacter listingcharacter">MessagePort</samp><a class="indexanchor" id="i04_83"/>, for the communication between worker processes. The <samp class="listingcharacter listingcharacter">MessagePort</samp> class represents the end of a bidirectional communication channel, which in turn is represented by the <samp class="listingcharacter listingcharacter">MessageChannel</samp> class. The implementation is based on the <samp class="listingcharacter listingcharacter">MessagePort</samp> implementation of the browser.</p>
+                <p class="standard"><a id="p116"/>As you can see in <span class="crossreference "><a href="04_002.html#l4.11">Listing 4.11</a></span>, the <samp class="listingcharacter listingcharacter">MessageChannel</samp> class creates a new object with the two properties <samp class="listingcharacter listingcharacter">port1</samp> and <samp class="listingcharacter listingcharacter">port2</samp>, each of which is an instance of the <samp class="listingcharacter listingcharacter">MessagePort</samp> class and represent the two endpoints of the communication channel. You can now use these objects to send messages between both ports. <span class="crossreference "><a href="16_001.html#h16">Chapter 16</a></span> provides further information about worker processes.</p>
+                <div class="listing " id="l4.11"><pre><span class="rot">const</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"> port1</span><span class="schwarz">,</span><span class="schwarz"> port2 </span><span class="schwarz">}</span><span class="schwarz"> </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="rot">new </span><span class="schwarz">MessageChannel();</span><span class="schwarz"><br/></span> <br/>port1<span class="schwarz">.on(</span><span class="hellblau">'message'</span><span class="schwarz">,</span><span class="schwarz"> </span><span class="schwarz">(</span><span class="schwarz">message</span><span class="schwarz">)</span><span class="schwarz"> </span><span class="dunkelblau">=&gt;</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>  <span class="magenta">console</span><span class="schwarz">.log(</span><span class="schwarz">message</span><span class="schwarz">);</span><span class="schwarz"><br/></span><span class="schwarz">});</span><span class="schwarz"><br/></span> <br/>port2<span class="schwarz">.postMessage({</span><span class="schwarz"> data</span><span class="schwarz">:</span><span class="schwarz"> </span><span class="hellblau">'Hello world'</span><span class="schwarz"> </span><span class="schwarz">});</span><span class="schwarz"> </span></pre></div>
+                <p class="caption "><b>Listing 4.11</b>    
+            Using the MessageChannel Class</p>
+            
+            
+                <h4 class="t4" id="h4.2.4.9">performance</h4>
+                <p class="standard">The <samp class="listingcharacter listingcharacter">performance</samp> object is a reference to the <samp class="listingcharacter listingcharacter">perf_hooks</samp><a class="indexanchor" id="i04_84"/> module that you can use to measure performance in your application. For more information on this interface and other performance aspects, see <span class="crossreference "><a href="26_001.html#h26">Chapter 26</a></span>.</p>
+            
+            
+                <h4 class="t4" id="h4.2.4.10">process<a class="indexanchor" id="i04_85"/></h4>
+                <p class="standard">The global <samp class="listingcharacter listingcharacter">process</samp> object isn’t a full-fledged Node.js module; its source code isn’t located in the <span class="italic">lib</span> directory of the Node.js platform. The <samp class="listingcharacter listingcharacter">process</samp> object is your interface to the current Node.js process<a class="indexanchor" id="i04_86"/> running your application. For example, you access standard output, standard input, and standard error output via <samp class="listingcharacter listingcharacter">process.stdout</samp><a class="indexanchor" id="i04_87"/>, <samp class="listingcharacter listingcharacter">process.stdin</samp><a class="indexanchor" id="i04_88"/>, and <samp class="listingcharacter listingcharacter">process.stderr</samp><a class="indexanchor" id="i04_89"/>.</p>
+                <p class="standard">You can also use the <samp class="listingcharacter listingcharacter">process</samp> object to terminate your application in a controlled manner. For example, with a call of the <samp class="listingcharacter listingcharacter">exit</samp> method, to which you optionally pass a status code, you can end the current process, as is shown in <span class="crossreference "><a href="04_002.html#l4.12">Listing 4.12</a></span>.</p>
+                <div class="listing " id="l4.12"><pre><span class="bold">$ node</span> <br/>&gt; process.exit(42);<br/><span class="bold">$ echo $?</span><br/>42 </pre></div>
+                <p class="caption "><b>Listing 4.12</b>    
+            Return Value of Node.js Applications</p>
+                <p class="standard">With <samp class="listingcharacter listingcharacter">echo $?</samp>, you can query the return value<a class="indexanchor" id="i04_90"/> of the last application on the Unix shell. A value other than <samp class="listingcharacter listingcharacter">0</samp> means that an error occurred during execution. Depending on how you choose this value, you can use it to encode more information.</p>
+                <p class="standard">The <samp class="listingcharacter listingcharacter">abort</samp> method is a little more drastic than <samp class="listingcharacter listingcharacter">process.exit</samp>. Here, the shutdown<a class="indexanchor" id="i04_91"/> no longer happens in a controlled manner. Besides these two methods, you can also use the <samp class="listingcharacter listingcharacter"><a id="p117"/>kill</samp> method, which accepts a process ID as the first argument and a signal to be sent as the second, optional argument. Normally, this is <samp class="listingcharacter listingcharacter">SIGTERM</samp><a class="indexanchor" id="i04_92"/>, which leads to the termination of the process. <span class="crossreference "><a href="04_002.html#l4.13">Listing 4.13</a></span> shows how you can use the <samp class="listingcharacter listingcharacter">kill</samp> method.</p>
+                <div class="listing " id="l4.13"><pre><span class="bold">$ node</span><br/><span class="bold">&gt; process.kill(process.pid, 'SIGKILL');</span><br/>Killed: 9<br/><span class="bold">$ echo $?</span><br/>137 </pre></div>
+                <p class="caption "><b>Listing 4.13</b>    
+            Ending Processes with “kill”</p>
+                <p class="standard">You can use the <samp class="listingcharacter listingcharacter">argv</samp> property of the <samp class="listingcharacter listingcharacter">process</samp> object to access the command-line call<a class="indexanchor" id="i04_93"/> of your application. Assuming you call your application via the <samp class="listingcharacter listingcharacter">node server.js --env=debug</samp> command line, <samp class="listingcharacter listingcharacter">argv</samp> contains an array of three elements. The first element is the <samp class="listingcharacter listingcharacter">node</samp> command itself, the second is the absolute path and name of the JavaScript file, and the third is the specified <samp class="listingcharacter listingcharacter">--env=debug</samp> option.</p>
+                <p class="standard">The <samp class="listingcharacter listingcharacter">env</samp> property provides the environment variables<a class="indexanchor" id="i04_94"/> of the current Node.js process. Part of the information is, for example, the user’s name, the <samp class="listingcharacter listingcharacter">PATH</samp> variable, and the user’s home directory.</p>
+                <p class="standard">You can use the <samp class="listingcharacter listingcharacter">process</samp> object to read the versions of the Node.js platform. <samp class="listingcharacter listingcharacter">process.version</samp> returns the version of Node.js itself. <samp class="listingcharacter listingcharacter">process.versions</samp> also contains the version information<a class="indexanchor" id="i04_95"/> of additional libraries, such as <samp class="listingcharacter listingcharacter">libuv</samp>, <samp class="listingcharacter listingcharacter">zlib</samp>, <samp class="listingcharacter listingcharacter">openssl</samp>, or the V8 engine. In <span class="crossreference "><a href="04_002.html#f4.3">Figure 4.3</a></span>, you can see the output of these versions.</p>
+                <div class="imagebox figure-type"><a href="img-f4.3.html" id="f4.3"><img alt="Output of Node.js Versions" id="img-f4.3" src="bilderklein/klein04_003.png"/></a></div>
+                <p class="caption "><b>Figure 4.3</b>    
+            Output of Node.js Versions</p>
+                <p class="standard"><a id="p118"/>With the <samp class="listingcharacter listingcharacter">process</samp> object, you can also actively manipulate the current process. For example, you can change the user under which the current process is running via <samp class="listingcharacter listingcharacter">process.setuid</samp>. To do that, however, you need the permission to change the user; otherwise, you’ll receive an error message. You can obtain the currently set user ID by using the <samp class="listingcharacter listingcharacter">process.getuid</samp> method. Similar to the user ID<a class="indexanchor" id="i04_96"/>, you can also use the two methods, <samp class="listingcharacter listingcharacter">process.setgid</samp> and <samp class="listingcharacter listingcharacter">process.getgid</samp>, with the group ID<a class="indexanchor" id="i04_97"/>.</p>
+                <p class="standard">The object exported through the <samp class="listingcharacter listingcharacter">process</samp> module also represents an <samp class="listingcharacter listingcharacter">EventEmitter</samp>. This means that in certain situations, the module triggers events that you can subscribe to. <span class="crossreference "><a href="04_002.html#t4.5">Table 4.5</a></span> contains an overview of the events<a class="indexanchor" id="i04_98"/> with a short description of each.</p>
+                <table class="standardtable" id="t4.5">
+                    <thead>
+                        <tr>
+                            <th class="tablehead tablecell_first top_border_cell">
+                                <p class="standard first-item last-item">Event</p>
+                            </th>
+                            <th class="tablehead tablecell_last top_border_cell">
+                                <p class="standard first-item last-item">Description</p>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="tablecell tablecell_first top_border_cell">
+                                <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">beforeExit</samp></p>
+                            </td>
+                            <td class="tablecell tablecell_last top_border_cell">
+                                <p class="standard first-item last-item">This event is triggered when the event loop has no further work, causing the application to be terminated.</p>
+                            </td>
+                        </tr>
+                        <tr class="light">
+                            <td class="tablecell tablecell_first">
+                                <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">disconnect</samp></p>
+                            </td>
+                            <td class="tablecell tablecell_last">
+                                <p class="standard first-item last-item">This event is triggered when the communication channel between a parent and its child process is interrupted.</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tablecell tablecell_first">
+                                <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">exit</samp></p>
+                            </td>
+                            <td class="tablecell tablecell_last">
+                                <p class="standard first-item last-item">This event is triggered when the process is about to finish.</p>
+                            </td>
+                        </tr>
+                        <tr class="light">
+                            <td class="tablecell tablecell_first">
+                                <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">message</samp></p>
+                            </td>
+                            <td class="tablecell tablecell_last">
+                                <p class="standard first-item last-item">You can create child processes via the <samp class="listingcharacter listingcharacter">child_process</samp> module. You can communicate between the individual processes via messages. As soon as a process receives a message, the <samp class="listingcharacter listingcharacter">message</samp> event is triggered.</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tablecell tablecell_first">
+                                <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">multipleResolves</samp></p>
+                            </td>
+                            <td class="tablecell tablecell_last">
+                                <p class="standard first-item last-item">This event is triggered when a promise has been resolved or rejected more than once, or when it has been resolved again after a reject or rejected again after a resolve. The triggering of this event is an indicator of potential error sources in the application.</p>
+                            </td>
+                        </tr>
+                        <tr class="light">
+                            <td class="tablecell tablecell_first">
+                                <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">rejectionHandled</samp></p>
+                            </td>
+                            <td class="tablecell tablecell_last">
+                                <p class="standard first-item last-item">This event is triggered if a promise is rejected and this is intercepted by a handler function.</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tablecell tablecell_first">
+                                <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">uncaughtException</samp></p>
+                            </td>
+                            <td class="tablecell tablecell_last">
+                                <p class="standard first-item last-item">If an exception is launched in your application, it usually causes the process to terminate. By handling this event, you can manipulate the default behavior.</p>
+                            </td>
+                        </tr>
+                        <tr class="light">
+                            <td class="tablecell tablecell_first">
+                                <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">unhandledRejection</samp></p>
+                            </td>
+                            <td class="tablecell tablecell_last">
+                                <p class="standard first-item last-item">This event acts similarly to the <samp class="listingcharacter listingcharacter">rejectionHandled</samp> event, except that it’s triggered for promises that don’t have rejection handlers.</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tablecell tablecell_first">
+                                <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">warning</samp></p>
+                            </td>
+                            <td class="tablecell tablecell_last">
+                                <p class="standard first-item last-item">This event is triggered when a warning is launched in your application.</p>
+                            </td>
+                        </tr>
+                        <tr class="light">
+                            <td class="tablecell tablecell_first">
+                                <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">worker</samp></p>
+                            </td>
+                            <td class="tablecell tablecell_last">
+                                <p class="standard first-item last-item">This event is triggered after a worker process has been created. The argument you get is a reference to the created worker process in the event handler function.</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="caption "><b>Table 4.5</b>    
+            Events of the “process” Module</p>
+                <p class="standard"><a id="p119"/>When dealing with asynchronicity<a class="indexanchor" id="i04_99"/> in the context of promises<a class="indexanchor" id="i04_100"/>, one of these events is particularly helpful. The <samp class="listingcharacter listingcharacter">unhandledRejection</samp> event is triggered when a promise failure isn’t handled in your application. <span class="crossreference "><a href="04_002.html#l4.14">Listing 4.14</a></span> contains a code example for this.</p>
+                <div class="listing " id="l4.14"><pre>process<span class="schwarz">.on(</span><span class="hellblau">'unhandledRejection'</span><span class="schwarz">,</span><span class="schwarz"> </span><span class="schwarz">(</span><span class="schwarz">error</span><span class="schwarz">)</span><span class="schwarz"> </span><span class="dunkelblau">=&gt;</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>  <span class="magenta">console</span><span class="schwarz">.error(</span><span class="hellblau">'unhandledRejection'</span><span class="schwarz">);</span><span class="gruen"> // Output: unhandledRejection</span><span class="schwarz"><br/></span>  <span class="magenta">console</span><span class="schwarz">.error(</span><span class="schwarz">error</span><span class="schwarz">);</span><span class="schwarz">               </span><span class="gruen"> // Output: Whoops, an Error occurred</span><span class="schwarz"><br/></span><span class="schwarz">});</span><span class="schwarz"><br/></span> <br/><span class="rot">function</span><span class="schwarz"> </span><span class="schwarz">withPromise()</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>  <span class="rot">return</span><span class="schwarz"> Promise</span><span class="schwarz">.reject(</span><span class="hellblau">'Whoops, an Error occurred'</span><span class="schwarz">);</span><span class="schwarz"><br/></span><span class="schwarz">}</span><span class="schwarz"><br/></span> <br/><span class="schwarz">withPromise().then(()</span><span class="schwarz"> </span><span class="dunkelblau">=&gt;</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>  <span class="magenta">console</span><span class="schwarz">.log(</span><span class="hellblau">'Promise resolved'</span><span class="schwarz">);</span><span class="schwarz"><br/></span><span class="schwarz">});</span><span class="schwarz"> </span></pre></div>
+                <p class="caption "><b>Listing 4.14</b>    
+            Unhandled Promise Rejection</p>
+            
+            
+                <h4 class="t4" id="h4.2.4.11">queueMicrotask<a class="indexanchor" id="i04_101"/></h4>
+                <p class="standard">Asynchronicity is ubiquitous in JavaScript, and thus also in Node.js. <span class="crossreference "><a href="16_001.html#h16">Chapter 16</a></span> describes these aspects of implementing JavaScript applications in great detail. At this point, we want to give you an outlook on the topic and the context of the execution sequence. There are different types of asynchroncity in Node.js. These mainly concern the order of execution. One of the core components of Node.js is the event loop, which is responsible for registering and executing event handlers. The individual runs of the event loop are divided into different phases, as demonstrated in <span class="crossreference "><a href="04_002.html#l4.15">Listing 4.15</a></span>.</p>
+                <div class="listing " id="l4.15"><pre><span class="schwarz">setTimeout(()</span><span class="schwarz"> </span><span class="dunkelblau">=&gt;</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>  <span class="magenta">console</span><span class="schwarz">.log(</span><span class="hellblau">'setTimeout'</span><span class="schwarz">);</span><span class="schwarz"><br/></span><span class="schwarz">},</span><span class="schwarz"> </span><span class="schwarz">0);</span><span class="schwarz"><br/></span>Promise<span class="schwarz">.resolve().then(()</span><span class="schwarz"> </span><span class="dunkelblau">=&gt;</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>  <span class="magenta">console</span><span class="schwarz">.log(</span><span class="hellblau">'Promise'</span><span class="schwarz">);</span><span class="schwarz"><br/></span><span class="schwarz">});</span><span class="schwarz"><br/></span><span class="schwarz">queueMicrotask(()</span><span class="schwarz"> </span><span class="dunkelblau">=&gt;</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>  <span class="magenta">console</span><span class="schwarz">.log(</span><span class="hellblau">'queueMicrotask'</span><span class="schwarz">);</span><span class="schwarz"><br/></span><span class="schwarz">});</span><span class="schwarz"><br/></span>process<span class="schwarz">.nextTick(()</span><span class="schwarz"> </span><span class="dunkelblau">=&gt;</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>  <span class="magenta">console</span><span class="schwarz">.log(</span><span class="hellblau">'nextTick'</span><span class="schwarz">);</span><span class="schwarz"><br/></span><span class="schwarz">});</span><span class="schwarz"><br/></span> <span class="gruen"><br/></span>// Output:<br/>// nextTick<br/><a id="p120"/>// Promise<br/>// queueMicrotask<br/>// setTimeout<span class="schwarz"> </span></pre></div>
+                <p class="caption "><b>Listing 4.15</b>    
+            Asynchronous Operations in Node.js</p>
+                <p class="standard">In <span class="crossreference "><a href="04_002.html#l4.15">Listing 4.15</a></span>, you can see that the output doesn’t correspond to the order of registration of the respective callback functions. The <samp class="listingcharacter listingcharacter">process.nextTick</samp> method is the smallest unit you can use. To be precise, it’s not part of the event loop, but it’s executed between the different phases of the event loop. Node.js first executes the microtasks—these include directly resolved promises as well as callback functions that you register with the <samp class="listingcharacter listingcharacter">queueMicrotask</samp> function. Then the asynchronous tasks are executed, which you can register for example with the timing functions, <samp class="listingcharacter listingcharacter">setImmediate</samp>, <samp class="listingcharacter listingcharacter">setTimeout</samp>, or <samp class="listingcharacter listingcharacter">setInterval</samp>.</p>
+            
+            
+                <h4 class="t4" id="h4.2.4.12">TextEncoder<a class="indexanchor" id="i04_102"/> and TextDecoder<a class="indexanchor" id="i04_103"/></h4>
+                <p class="standard">The <samp class="listingcharacter listingcharacter">TextEncoder</samp> and <samp class="listingcharacter listingcharacter">TextDecoder</samp> classes are intended for working with <samp class="listingcharacter listingcharacter">TypedArrays</samp><a class="indexanchor" id="i04_104"/> in JavaScript. These are data structures that work with binary raw data. The instances of the Node.js buffer class are also instances of <samp class="listingcharacter listingcharacter">Uint8Array</samp><a class="indexanchor" id="i04_105"/> and <samp class="listingcharacter listingcharacter">TypedArray</samp>. There are minor incompatibilities between the buffer and <samp class="listingcharacter listingcharacter">TypedArray</samp> classes, but in general both behave in a very similar way and are used to exchange data within an application. In <span class="crossreference "><a href="04_002.html#l4.16">Listing 4.16</a></span>, you can see how you can convert a string into a <samp class="listingcharacter listingcharacter">Uint8Array</samp> and then decode it again.</p>
+                <div class="listing " id="l4.16"><pre><span class="rot">const</span><span class="schwarz"> textEncoder </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="rot">new </span><span class="schwarz">TextEncoder();</span><span class="schwarz"><br/></span><span class="rot">const</span><span class="schwarz"> encodedString </span><span class="dunkelblau">=</span><span class="schwarz"> textEncoder</span><span class="schwarz">.encode(</span><span class="hellblau">'Hello World'</span><span class="schwarz">);</span><span class="schwarz"><br/></span><span class="magenta">console</span><span class="schwarz">.log(</span><span class="schwarz">encodedString</span><span class="schwarz">);</span><span class="gruen"> // Output: Uint8Array(11) [72,101,108,108,</span><span class="schwarz"><br/></span>                           <span class="gruen"> // 111,32,87,111,114,108,100]</span><span class="schwarz"><br/></span> <br/><span class="rot">const</span><span class="schwarz"> textDecoder </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="rot">new </span><span class="schwarz">TextDecoder();</span><span class="schwarz"><br/></span><span class="rot">const</span><span class="schwarz"> decodedString </span><span class="dunkelblau">=</span><span class="schwarz"> textDecoder</span><span class="schwarz">.decode(</span><span class="schwarz">encodedString</span><span class="schwarz">);</span><span class="schwarz"><br/></span><span class="magenta">console</span><span class="schwarz">.log(</span><span class="schwarz">decodedString</span><span class="schwarz">);</span><span class="gruen"> // Output: Hello World</span><span class="schwarz"> </span></pre></div>
+                <p class="caption "><b>Listing 4.16</b>    
+            Using TextEncoder and TextDecoder</p>
+            
+            
+                <h4 class="t4" id="h4.2.4.13">URL and URLSearchParams</h4>
+                <p class="standard">In Node.js, you often deal with URLs, which is why the platform provides you with the <samp class="listingcharacter listingcharacter">URL</samp><a class="indexanchor" id="i04_106"/> class as well as <samp class="listingcharacter listingcharacter">URLSearchParams</samp> globally (see <span class="crossreference "><a href="04_002.html#l4.17">Listing 4.17</a></span>), so you don’t have to load them separately.</p>
+                <div class="listing " id="l4.17"><pre><span class="rot">const</span><span class="schwarz"> url </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="rot">new </span><span class="schwarz">URL(</span><span class="hellblau">'/dist/latest-v16.x/docs/api/'</span><span class="schwarz">,</span><span class="schwarz"> </span><span class="hellblau">'https://nodejs.org'</span><span class="schwarz">);</span><span class="schwarz"><br/></span> <br/><span class="magenta">console</span><span class="schwarz">.log(</span><span class="schwarz">url</span><span class="schwarz">.</span><span class="schwarz">href</span><span class="schwarz">);</span><span class="gruen"> // Output: https://nodejs.org/dist/</span><span class="schwarz"><br/></span>                      <span class="gruen"> // latest-v16.x/docs/api/</span><span class="schwarz"><br/></span> <br/><span class="rot"><a id="p121"/>const</span><span class="schwarz"> searchParams </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="rot">new </span><span class="schwarz">URLSearchParams();</span><span class="schwarz"><br/></span>searchParams<span class="schwarz">.set(</span><span class="hellblau">'name'</span><span class="schwarz">,</span><span class="schwarz"> </span><span class="hellblau">'john'</span><span class="schwarz">);</span><span class="schwarz"><br/></span>searchParams<span class="schwarz">.set(</span><span class="hellblau">'age'</span><span class="schwarz">,</span><span class="schwarz"> </span><span class="schwarz">42);</span><span class="schwarz"><br/></span><span class="magenta">console</span><span class="schwarz">.log(</span><span class="schwarz">searchParams</span><span class="schwarz">.toString());</span><span class="gruen"> // Output: name=john&amp;age=42</span><span class="schwarz"> </span></pre></div>
+                <p class="caption "><b>Listing 4.17</b>    
+            Working with URLs in Node.js</p>
+                <p class="standard">The <samp class="listingcharacter listingcharacter">URL</samp> class represents the various aspects of a URL, such as the protocol, host name, or path. You can use the <samp class="listingcharacter listingcharacter">URLSearchParams</samp> class either implicitly along with a <samp class="listingcharacter listingcharacter">URL</samp> instance and the <samp class="listingcharacter listingcharacter">searchParams</samp> property, or explicitly as a standalone instance.</p>
+            
+            
+                <h4 class="t4" id="h4.2.4.14">WebAssembly<a class="indexanchor" id="i04_107"/></h4>
+                <p class="standard">The WebAssembly object controls access to the WebAssembly interfaces of the V8 engine. Using this interface, you can work with WebAssembly within your Node.js application and, for example, outsource performance-critical components.</p>
+            
+        
+    </div><p class="signatur"/>
+                    </body>
+                </html>

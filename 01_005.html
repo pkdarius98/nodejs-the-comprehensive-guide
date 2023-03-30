@@ -1,0 +1,40 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+                    
+        <head><meta content="application/xhtml+xml; charset=utf-8" http-equiv="Content-Type"/>
+            <meta content="application/xhtml+xml; charset=utf-8" name="content-type"/>
+            <meta content="Basic Principles" name="title"/>
+            <meta content="Sebastian Springer" name="author"/>
+            <meta content="Rheinwerk Publishing" name="publisher"/>
+            <meta content="© 2022 by Rheinwerk Publishing Inc., Boston (MA)" name="copyright"/>
+            <meta content="Node.js - The Comprehensive Guide - Basic Principles" name="description"/>
+            <meta content="en" name="language"/>
+            <title>Basic Principles</title>
+            <link href="common/main.css" rel="stylesheet" type="text/css"/>
+<meta content="urn:uuid:e0000000-0000-0000-0000-000029756394" name="Adept.expected.resource"/>
+        </head>
+    
+
+
+                    <body class="office_us type_kapitel">
+                        <div id="main">
+        <h2 class="t2" id="h1.5">1.5    Areas of Use<a class="indexanchor" id="i01_67"/> for Node.js</h2>
+        <p class="standard">From a simple command-line tool<a class="indexanchor" id="i01_68"/> to an application server<a class="indexanchor" id="i01_69"/> for web applications running on a cluster with numerous nodes, Node.js can be used anywhere. The use of a technology strongly depends on the problem to be solved, personal preferences, and the developers’ level of knowledge. For this reason, not only should you know the key features of Node.js, but you should also have a feel for working with the platform. You can only fulfill the second point if you either have the opportunity to join an existing <a id="p41"/>Node.js project or gain the experience in the best case with smaller projects that you implement.</p>
+        <p class="standard">But let’s now turn to the most important framework data:</p>
+        <ul>
+            <li>
+                <p class="standard first-item last-item"><span class="bold">Pure JavaScript</span><a class="indexanchor" id="i01_70"/><br/>When working with Node.js, you don’t have to learn a new language dialect because you can fall back on the JavaScript language core. Standardized and well-documented interfaces are available for accessing system resources. However, as an alternative to JavaScript, you can also write your Node.js application in TypeScript, translate the source code to JavaScript, and run it with Node.js. You’ll find more information about this topic in <span class="crossreference "><a href="13_001.html#h13">Chapter 13</a></span>.</p>
+            </li>
+            <li>
+                <p class="standard first-item last-item"><span class="bold">Optimized engine</span><a class="indexanchor" id="i01_71"/><br/>Node.js is based on Google’s V8 JavaScript engine. Here, you benefit above all from the constant further development of the engine, where the latest language features are supported already after a very short time.</p>
+            </li>
+            <li>
+                <p class="standard first-item last-item"><span class="bold">Nonblocking I/O</span><a class="indexanchor" id="i01_72"/><br/>All operations that don’t take place directly in Node.js don’t block the execution of your application. The principle of Node.js is that everything the platform doesn’t have to do directly is outsourced to the operating system, other applications, or other systems. This gives the application the ability to respond to additional requests or to process tasks in parallel. Once the processing of a task is complete, the Node.js process receives feedback and can process the information further.</p>
+            </li>
+            <li>
+                <p class="standard first-item last-item"><span class="bold">Single-threaded</span><a class="indexanchor" id="i01_73"/><br/>A typical Node.js application runs in a single process. For a long time, there hasn’t been any multithreading, and concurrency was initially only provided for in the form of the nonblocking I/O already described. Thus, all the code you write yourself potentially blocks your application. For this reason, you should pay attention to resource-saving development. If it still becomes necessary to process tasks in parallel, Node.js offers you solutions for this in the form of the <samp class="listingcharacter listingcharacter">child_process</samp> module, which enables you to create your own child processes.</p>
+            </li>
+        </ul>
+        <p class="standard">To develop your application in the best possible way, you should have at least a rough overview of the components and how they work. The most important of these components is the V8 engine.</p>
+    </div><p class="signatur"/>
+                    </body>
+                </html>

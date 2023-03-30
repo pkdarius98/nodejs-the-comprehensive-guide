@@ -1,0 +1,43 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+                    
+        <head><meta content="application/xhtml+xml; charset=utf-8" http-equiv="Content-Type"/>
+            <meta content="application/xhtml+xml; charset=utf-8" name="content-type"/>
+            <meta content="Microservices with Node.js" name="title"/>
+            <meta content="Sebastian Springer" name="author"/>
+            <meta content="Rheinwerk Publishing" name="publisher"/>
+            <meta content="© 2022 by Rheinwerk Publishing Inc., Boston (MA)" name="copyright"/>
+            <meta content="Node.js - The Comprehensive Guide - Microservices with Node.js" name="description"/>
+            <meta content="en" name="language"/>
+            <title>Microservices with Node.js</title>
+            <link href="common/main.css" rel="stylesheet" type="text/css"/>
+<meta content="urn:uuid:e0000000-0000-0000-0000-000029756394" name="Adept.expected.resource"/>
+        </head>
+    
+
+
+                    <body class="office_us type_kapitel">
+                        <div id="main">
+        <h2 class="t2" id="h27.2">27.2    Architecture<a class="indexanchor" id="i27_13"/></h2>
+        <p class="standard">The internal structure of a microservice doesn’t play any major role in the overall application. Most of the time, the services are manageable in scope, so the structuring capabilities of Node.js are sufficient. What’s more important in this context are the interfaces to the outside world. The connection to the database is abstracted by the database driver<a class="indexanchor" id="i27_14"/> and, if necessary, an object-relational mapping (ORM)<a class="indexanchor" id="i27_15"/>. For common databases, you can connect to both a local and remote database. Microservices are often delivered in containers<a class="indexanchor" id="i27_16"/>. You can pass the connection information to them using environment variables. You can also use service discovery mechanisms such as Consul<a class="indexanchor" id="i27_17"/>. A client library allows you to register your services with the Consul server and query it for specific services.</p>
+        <p class="standard">Access to shared resources such as the logger is usually abstracted via an additional library. Again, the logger’s target URL must be passed either via a configuration or via service discovery<a class="indexanchor" id="i27_18"/>. One of the most significant issues in microservice architecture is the communication between services.</p>
+        
+            <h3 class="t3" id="h27.2.1">27.2.1    Communication between Individual Services</h3>
+            <p class="standard">Because the individual services are usually implemented via their own containers, communication must take place via a standard protocol such as HTTP. With regard to <a id="p757"/>the communication, you can follow different strategies depending on how strong you want the coupling between the two entities to be.</p>
+            
+                <h4 class="t4" id="h27.2.1.1">Synchronous Communication between Microservices<a class="indexanchor" id="i27_19"/></h4>
+                <p class="standard">The classic communication approach is referred to as synchronous communication. The client requests the microservice, usually registers a callback function, and waits for the response. The service processes the request and ultimately writes a response to the client. This type of communication is characteristic of web services. In <span class="crossreference "><a href="10_001.html#h10">Chapter 10</a></span>, you implemented a representational state transfer (REST) server with Express. You could use this server in a modified version as a synchronous microservice. The term synchronous is somewhat misleading here because it still is asynchronous. However, the client has to wait for the response. The degree of coupling between client and service is relatively tight in this case<a class="indexanchor" id="i27_20"/>. If the service crashes, the connection gets terminated, and the request is considered unsuccessful. One advantage of this type of communication is that service implementation is comparatively simple because numerous frameworks and libraries exist.</p>
+            
+            
+                <h4 class="t4" id="h27.2.1.2">Asynchronous Communication between Microservices<a class="indexanchor" id="i27_21"/></h4>
+                <p class="standard">With asynchronous communication between microservices, client and service are more decoupled. A message queue is used for this purpose, in which the messages are stored. The implementation of the communication follows the publish-subscribe pattern<a class="indexanchor" id="i27_22"/>. A producer generates a message and passes it to the message queue<a class="indexanchor" id="i27_23"/> where various consumers are listening. <span class="crossreference "><a href="27_002.html#f27.3">Figure 27.3</a></span> shows the relationship between producer, message queue, and consumer.</p>
+                <div class="imagebox figure-type"><a href="img-f27.3.html" id="f27.3"><img alt="Message Queue" id="img-f27.3" src="bilderklein/klein27_003.png"/></a></div>
+                <p class="caption "><b>Figure 27.3</b>    
+            Message Queue</p>
+                <p class="standard">The consumer waits for messages in the message queue and processes them as they arrive. The message queue is able to buffer messages so that the consumer is relieved.</p>
+                <p class="standard">The asynchronous communication allows <span class="italic">fire and forget</span><a class="indexanchor" id="i27_24"/>, which means that a client sends the message and doesn’t wait for a response because it can rely on infrastructure safeguards to ensure that the message will be processed in any case. However, in a microservice architecture, asynchronous communication often requires a return channel as well. If you implement the user service with asynchronous communication via RabbitMQ<a class="indexanchor" id="i27_25"/>, creating, modifying, and deleting requests are easily possible via the queue. For read requests, the client generates a message containing the details of <a id="p758"/>records that must be read and passes the message to the message queue. The service, which in this case takes on the role of the consumer<a class="indexanchor" id="i27_26"/>, receives the message, reads the requested data from the database, and can also define additional rules or perform transformations on the data. The service then formulates a message with the read data and passes it to the message queue. The roles are now reversed. The client receives the message from the message queue and can process the received data.</p>
+                <p class="standard">In the following sections, you’ll first set up the infrastructure for your microservice application and then implement a synchronous and an asynchronous service, which you’ll merge into a central application programming interface (API) gateway.</p>
+            
+        
+    </div><p class="signatur"/>
+                    </body>
+                </html>

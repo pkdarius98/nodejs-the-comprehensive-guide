@@ -1,0 +1,264 @@
+table.standardtable {
+  border-collapse: collapse;
+  border-right-style: hidden;
+  border-left-style: hidden;
+}
+table.standardtable td, table.standardtable th {
+  border-width: 1px;
+  border-style: solid;
+}
+
+table.standardtable tr.light td.tablecell {
+  background-color: white;
+}
+
+.chaptercolor_blau div.box h6.boxheading {
+  color: black;
+}
+.chaptercolor_blau h1.t0, .chaptercolor_blau h1.t1, .chaptercolor_blau h2.t2, .chaptercolor_blau h3.t3,
+.chaptercolor_blau span.h4-heading-style,
+.chaptercolor_blau h1.content1,
+.chaptercolor_blau p.acronym,
+.chaptercolor_blau div.step-list-item p span.counter,
+.chaptercolor_blau p.step-list-superscription {
+  color: #3a93b4;
+}
+.chaptercolor_blau .box_standard,
+.chaptercolor_blau .box {
+  border-color: #3a93b4;
+}
+.chaptercolor_blau p.acronym {
+  border-bottom-color: #3a93b4;
+}
+.chaptercolor_blau thead,
+.chaptercolor_blau .tablehead,
+.chaptercolor_blau tr.tablehead td.tablecell,
+.chaptercolor_blau table.standardtable td.tablehead {
+  background-color: #3a93b4;
+}
+.chaptercolor_blau div.box_standard,
+.chaptercolor_blau table.standardtable td {
+  background-color: #d7e7ef;
+}
+.chaptercolor_blau table tr.light td.tablecell {
+  background-color: #e7eef1;
+}
+.chaptercolor_blau table tr.light td.tablecell.tablehead {
+  background-color: #3a93b4;
+}
+.chaptercolor_blau div.box table td, .chaptercolor_blau div.box table th, .chaptercolor_blau div.section_exkurs table td, .chaptercolor_blau div.section_exkurs table th, .chaptercolor_blau div.section_praxistipp table td, .chaptercolor_blau div.section_praxistipp table th {
+  border-color: #3a93b4;
+}
+.chaptercolor_blau div.box table tr.light td.tablecell, .chaptercolor_blau div.section_exkurs table tr.light td.tablecell, .chaptercolor_blau div.section_praxistipp table tr.light td.tablecell {
+  background-color: white;
+}
+.chaptercolor_blau table.standardtable {
+  border-color: #3a93b4;
+}
+.chaptercolor_blau table.standardtable thead,
+.chaptercolor_blau table.standardtable .tablehead,
+.chaptercolor_blau table.standardtable tr.tablehead td.tablecell {
+  color: black;
+  background-color: #d7e7ef;
+}
+.chaptercolor_blau table.standardtable th, .chaptercolor_blau table.standardtable td {
+  border-color: #3a93b4;
+}
+.chaptercolor_blau table.standardtable td {
+  background-color: white;
+}
+.chaptercolor_blau span.callout, .chaptercolor_blau span.calloutTS {
+  color: #3a93b4;
+}
+
+.chaptercolor_orange div.box h6.boxheading {
+  color: black;
+}
+.chaptercolor_orange h1.t0, .chaptercolor_orange h1.t1, .chaptercolor_orange h2.t2, .chaptercolor_orange h3.t3,
+.chaptercolor_orange span.h4-heading-style,
+.chaptercolor_orange h1.content1,
+.chaptercolor_orange p.acronym,
+.chaptercolor_orange div.step-list-item p span.counter,
+.chaptercolor_orange p.step-list-superscription {
+  color: #f39160;
+}
+.chaptercolor_orange .box_standard,
+.chaptercolor_orange .box {
+  border-color: #f39160;
+}
+.chaptercolor_orange p.acronym {
+  border-bottom-color: #f39160;
+}
+.chaptercolor_orange thead,
+.chaptercolor_orange .tablehead,
+.chaptercolor_orange tr.tablehead td.tablecell,
+.chaptercolor_orange table.standardtable td.tablehead {
+  background-color: #f39160;
+}
+.chaptercolor_orange div.box_standard,
+.chaptercolor_orange table.standardtable td {
+  background-color: #fde9dd;
+}
+.chaptercolor_orange table tr.light td.tablecell {
+  background-color: #fef3ed;
+}
+.chaptercolor_orange table tr.light td.tablecell.tablehead {
+  background-color: #f39160;
+}
+.chaptercolor_orange div.box table td, .chaptercolor_orange div.box table th, .chaptercolor_orange div.section_exkurs table td, .chaptercolor_orange div.section_exkurs table th, .chaptercolor_orange div.section_praxistipp table td, .chaptercolor_orange div.section_praxistipp table th {
+  border-color: #f39160;
+}
+.chaptercolor_orange div.box table tr.light td.tablecell, .chaptercolor_orange div.section_exkurs table tr.light td.tablecell, .chaptercolor_orange div.section_praxistipp table tr.light td.tablecell {
+  background-color: white;
+}
+.chaptercolor_orange table.standardtable {
+  border-color: #f39160;
+}
+.chaptercolor_orange table.standardtable thead,
+.chaptercolor_orange table.standardtable .tablehead,
+.chaptercolor_orange table.standardtable tr.tablehead td.tablecell {
+  color: black;
+  background-color: #fde9dd;
+}
+.chaptercolor_orange table.standardtable th, .chaptercolor_orange table.standardtable td {
+  border-color: #f39160;
+}
+.chaptercolor_orange table.standardtable td {
+  background-color: white;
+}
+.chaptercolor_orange span.callout, .chaptercolor_orange span.calloutTS {
+  color: #f39160;
+}
+
+.chaptercolor_gruen div.box h6.boxheading {
+  color: black;
+}
+.chaptercolor_gruen h1.t0, .chaptercolor_gruen h1.t1, .chaptercolor_gruen h2.t2, .chaptercolor_gruen h3.t3,
+.chaptercolor_gruen span.h4-heading-style,
+.chaptercolor_gruen h1.content1,
+.chaptercolor_gruen p.acronym,
+.chaptercolor_gruen div.step-list-item p span.counter,
+.chaptercolor_gruen p.step-list-superscription {
+  color: #64ac81;
+}
+.chaptercolor_gruen .box_standard,
+.chaptercolor_gruen .box {
+  border-color: #64ac81;
+}
+.chaptercolor_gruen p.acronym {
+  border-bottom-color: #64ac81;
+}
+.chaptercolor_gruen thead,
+.chaptercolor_gruen .tablehead,
+.chaptercolor_gruen tr.tablehead td.tablecell,
+.chaptercolor_gruen table.standardtable td.tablehead {
+  background-color: #64ac81;
+}
+.chaptercolor_gruen div.box_standard,
+.chaptercolor_gruen table.standardtable td {
+  background-color: #dfede4;
+}
+.chaptercolor_gruen table tr.light td.tablecell {
+  background-color: #eef6f1;
+}
+.chaptercolor_gruen table tr.light td.tablecell.tablehead {
+  background-color: #64ac81;
+}
+.chaptercolor_gruen div.box table td, .chaptercolor_gruen div.box table th, .chaptercolor_gruen div.section_exkurs table td, .chaptercolor_gruen div.section_exkurs table th, .chaptercolor_gruen div.section_praxistipp table td, .chaptercolor_gruen div.section_praxistipp table th {
+  border-color: #64ac81;
+}
+.chaptercolor_gruen div.box table tr.light td.tablecell, .chaptercolor_gruen div.section_exkurs table tr.light td.tablecell, .chaptercolor_gruen div.section_praxistipp table tr.light td.tablecell {
+  background-color: white;
+}
+.chaptercolor_gruen table.standardtable {
+  border-color: #64ac81;
+}
+.chaptercolor_gruen table.standardtable thead,
+.chaptercolor_gruen table.standardtable .tablehead,
+.chaptercolor_gruen table.standardtable tr.tablehead td.tablecell {
+  color: black;
+  background-color: #dfede4;
+}
+.chaptercolor_gruen table.standardtable th, .chaptercolor_gruen table.standardtable td {
+  border-color: #64ac81;
+}
+.chaptercolor_gruen table.standardtable td {
+  background-color: white;
+}
+.chaptercolor_gruen span.callout, .chaptercolor_gruen span.calloutTS {
+  color: #64ac81;
+}
+
+.chaptercolor_tuerkis div.box h6.boxheading {
+  color: black;
+}
+.chaptercolor_tuerkis h1.t0, .chaptercolor_tuerkis h1.t1, .chaptercolor_tuerkis h2.t2, .chaptercolor_tuerkis h3.t3,
+.chaptercolor_tuerkis span.h4-heading-style,
+.chaptercolor_tuerkis h1.content1,
+.chaptercolor_tuerkis p.acronym,
+.chaptercolor_tuerkis div.step-list-item p span.counter,
+.chaptercolor_tuerkis p.step-list-superscription {
+  color: #49b9cc;
+}
+.chaptercolor_tuerkis .box_standard,
+.chaptercolor_tuerkis .box {
+  border-color: #49b9cc;
+}
+.chaptercolor_tuerkis p.acronym {
+  border-bottom-color: #49b9cc;
+}
+.chaptercolor_tuerkis thead,
+.chaptercolor_tuerkis .tablehead,
+.chaptercolor_tuerkis tr.tablehead td.tablecell,
+.chaptercolor_tuerkis table.standardtable td.tablehead {
+  background-color: #49b9cc;
+}
+.chaptercolor_tuerkis div.box_standard,
+.chaptercolor_tuerkis table.standardtable td {
+  background-color: #d6f1f3;
+}
+.chaptercolor_tuerkis table tr.light td.tablecell {
+  background-color: #d6f1f3;
+}
+.chaptercolor_tuerkis table tr.light td.tablecell.tablehead {
+  background-color: #49b9cc;
+}
+.chaptercolor_tuerkis div.box table td, .chaptercolor_tuerkis div.box table th, .chaptercolor_tuerkis div.section_exkurs table td, .chaptercolor_tuerkis div.section_exkurs table th, .chaptercolor_tuerkis div.section_praxistipp table td, .chaptercolor_tuerkis div.section_praxistipp table th {
+  border-color: #49b9cc;
+}
+.chaptercolor_tuerkis div.box table tr.light td.tablecell, .chaptercolor_tuerkis div.section_exkurs table tr.light td.tablecell, .chaptercolor_tuerkis div.section_praxistipp table tr.light td.tablecell {
+  background-color: white;
+}
+.chaptercolor_tuerkis table.standardtable {
+  border-color: #49b9cc;
+}
+.chaptercolor_tuerkis table.standardtable thead,
+.chaptercolor_tuerkis table.standardtable .tablehead,
+.chaptercolor_tuerkis table.standardtable tr.tablehead td.tablecell {
+  color: black;
+  background-color: #d6f1f3;
+}
+.chaptercolor_tuerkis table.standardtable th, .chaptercolor_tuerkis table.standardtable td {
+  border-color: #49b9cc;
+}
+.chaptercolor_tuerkis table.standardtable td {
+  background-color: white;
+}
+.chaptercolor_tuerkis span.callout, .chaptercolor_tuerkis span.calloutTS {
+  color: #49b9cc;
+}
+
+body h3.t3.step-list-heading {
+  color: black;
+}
+body p.step-list-superscription {
+  color: #f33d18;
+}
+body table.step-list-table td.step-list-counter {
+  color: #f33d18;
+  min-width: 1.8em;
+}
+body table.step-list-table td.step-list-counter p {
+  font-size: 140%;
+  margin-top: -7px;
+}

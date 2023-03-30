@@ -1,0 +1,258 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+                    
+        <head><meta content="application/xhtml+xml; charset=utf-8" http-equiv="Content-Type"/>
+            <meta content="application/xhtml+xml; charset=utf-8" name="content-type"/>
+            <meta content="Asynchronous Programming" name="title"/>
+            <meta content="Sebastian Springer" name="author"/>
+            <meta content="Rheinwerk Publishing" name="publisher"/>
+            <meta content="© 2022 by Rheinwerk Publishing Inc., Boston (MA)" name="copyright"/>
+            <meta content="Node.js - The Comprehensive Guide - Asynchronous Programming" name="description"/>
+            <meta content="en" name="language"/>
+            <title>Asynchronous Programming</title>
+            <link href="common/main.css" rel="stylesheet" type="text/css"/>
+<meta content="urn:uuid:e0000000-0000-0000-0000-000029756394" name="Adept.expected.resource"/>
+        </head>
+    
+
+
+                    <body class="office_us type_kapitel">
+                        <div id="main">
+        <h2 class="t2" id="h16.4">16.4    The cluster<a class="indexanchor" id="i16_65"/> Module</h2>
+        <p class="standard">In general, applications based on Node.js run in a thread. However, with the methods of the <samp class="listingcharacter listingcharacter">child_process</samp> module, you’re able to run worker processes and swap out parts of your application from the main thread. A similar approach is taken by the <samp class="listingcharacter listingcharacter">cluster</samp> module<a id="p497"/> of the Node.js platform. This module is based on the functionality of the <samp class="listingcharacter listingcharacter">child_process</samp> module to create worker processes<a class="indexanchor" id="i16_66"/>. This module enables a kind of load balancing for Node.js applications. You can use it to start multiple types of HTTP servers<a class="indexanchor" id="i16_67"/> or Transmission Control Protocol (TCP) servers<a class="indexanchor" id="i16_68"/> on systems with multiple processor cores. These run in separate processes, enabling a better utilization of available resources.</p>
+        <p class="standard">The entry point into this process pool is the main process. This process provides for the creation and control of worker processes. The main process also manages the handlers for the requests. If the <samp class="listingcharacter listingcharacter">listen</samp> method is called in a worker process, the arguments are passed to the main process. This process then checks if a handle with this configuration already exists. If so, the object representing the handle is returned to the worker process. If no handle exists yet, the main process creates it and returns the newly created object to the worker process.</p>
+        <p class="standard">As soon as requests start coming in, they are routed to the relevant process. If several processes are bound to the requested combination of address and port, the operating system takes care of distributing the requests to the corresponding processes. In this case, the operating system takes over the responsibility for load balancing<a class="indexanchor" id="i16_69"/>. As a result, you don’t have to worry about this task, nor is the Node.js platform responsible for it.</p>
+        <p class="standard">Not only are the worker processes independent of each other, they also know nothing about each other. They have no way to communicate with each other. The processes also don’t share a common memory area<a class="indexanchor" id="i16_70"/>. Communication<a class="indexanchor" id="i16_71"/> can only take place via the main process. This process contains references to the individual worker processes.</p>
+        
+            <h3 class="t3" id="h16.4.1">16.4.1    Main Process<a class="indexanchor" id="i16_72"/></h3>
+            <p class="standard">The main process represents the core of the <samp class="listingcharacter listingcharacter">cluster</samp> module. Before you can use the functionalities of this module, you must first instantiate the main process. You create and configure the main process using the <samp class="listingcharacter listingcharacter">setupPrimary</samp><a class="indexanchor" id="i16_73"/> method. You can pass an object containing the configuration to this method when you call it. Ten properties of the configuration object are available to you to manipulate the behavior of the main process. The properties<a class="indexanchor" id="i16_74"/> and their respective meanings are listed in <span class="crossreference "><a href="16_004.html#t16.4">Table 16.4</a></span>.</p>
+            <table class="standardtable" id="t16.4">
+                <thead>
+                    <tr>
+                        <th class="tablehead tablecell_first top_border_cell">
+                            <p class="standard first-item last-item">Characteristic</p>
+                        </th>
+                        <th class="tablehead tablecell_middle top_border_cell">
+                            <p class="standard first-item last-item">Default Value</p>
+                        </th>
+                        <th class="tablehead tablecell_last top_border_cell">
+                            <p class="standard first-item last-item">Description</p>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="tablecell tablecell_first top_border_cell">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">execArgv</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_middle top_border_cell">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">process.execArgv</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last top_border_cell">
+                            <p class="standard first-item last-item">List of arguments passed to the node process.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">exec</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_middle">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">process.argv(1)</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Name of the file to be run as a worker process.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">args</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_middle">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">process.argv.slice(2)</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Arguments to be passed to the worker process.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">cwd</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_middle">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">undefined</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">The current working directory of the process. The worker process inherits this information from the main process by default.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter"><a id="p498"/>serialization</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_middle">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">false</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Specifies how messages are serialized between processes.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">silent</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_middle">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">false</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">If this property is set to <samp class="listingcharacter listingcharacter">true</samp>, the standard output of the main process isn’t used.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">uid</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_middle">
+                            <p class="standard first-item last-item">—</p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">User identity of the process.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">gid</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_middle">
+                            <p class="standard first-item last-item">—</p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Group identity of the process.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">inspectPort</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_middle">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">process.debugPort</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Inspector port of the worker process.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">windowsHide</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_middle">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">false</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Hides the console window that is normally created on a Windows system for the worker process.</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="caption "><b>Table 16.4</b>    
+            Configuration Options for the Main Process</p>
+            <p class="standard">The settings you make via <samp class="listingcharacter listingcharacter">setupPrimary</samp> are stored in the <samp class="listingcharacter listingcharacter">settings</samp> property of the <samp class="listingcharacter listingcharacter">cluster</samp> object. However, you should always make changes to the settings using the <samp class="listingcharacter listingcharacter">setupPrimary</samp> method instead of editing the <samp class="listingcharacter listingcharacter">settings</samp> property directly. The <samp class="listingcharacter listingcharacter">setupPrimary</samp> method ensures that the <samp class="listingcharacter listingcharacter">settings</samp> properties are set correctly and prevents further changes. Note that you can call the <samp class="listingcharacter listingcharacter">setupPrimary</samp> method only once. On the second call, changes to the settings won’t have any effect. Thus, calling this method multiple times won’t have any consequences for your application. You can only call this method in the context of the main process and not from a worker process<a class="indexanchor" id="i16_75"/>.</p>
+            <p class="standard">If you don’t want to adjust the default settings, you don’t need to call the <samp class="listingcharacter listingcharacter">setupPrimary</samp> method. As soon as you create a worker process via the <samp class="listingcharacter listingcharacter">fork</samp> method, the <samp class="listingcharacter listingcharacter">setupPrimary</samp> method is called automatically. Once <samp class="listingcharacter listingcharacter">fork</samp> has been called, you’ll no longer be able to make any changes to the settings of your main process.</p>
+            <p class="standard">If you want to manage the source code of the main process and the worker processes in one file, the <samp class="listingcharacter listingcharacter">cluster</samp> module provides you with the <samp class="listingcharacter listingcharacter">isPrimary</samp><a class="indexanchor" id="i16_76"/> and <samp class="listingcharacter listingcharacter">isWorker</samp><a class="indexanchor" id="i16_77"/> properties as an option to check which context within your application you’re currently working in. Internally, this functionality accesses the <samp class="listingcharacter listingcharacter">NODE_UNIQUE_ID</samp> property of <samp class="listingcharacter listingcharacter">process.env</samp>. This property is used by the <samp class="listingcharacter listingcharacter">cluster</samp> module to assign a unique identification number to a worker process. If you’re in the main process, the property has the value <samp class="listingcharacter listingcharacter">undefined</samp>. Once a child process is created, it’s assigned a unique identification number<a class="indexanchor" id="i16_78"/>.</p>
+            <p class="standard">Like many other components of the Node.js platform, the <samp class="listingcharacter listingcharacter">cluster</samp> module is also an event-driven component, meaning different operations trigger certain events when the module is being used. The first event you come across is the <samp class="listingcharacter listingcharacter">setup</samp> event. It’s triggered as soon as you initialize the main process via the <samp class="listingcharacter listingcharacter">setupPrimary</samp> method. This is done either explicitly by calling the method or implicitly by calling <samp class="listingcharacter listingcharacter">fork</samp><a class="indexanchor" id="i16_79"/>. In both cases, <a id="p499"/>however, the <samp class="listingcharacter listingcharacter">setup</samp> event is triggered. The callback function you can bind to this event doesn’t receive an argument.</p>
+            <p class="standard">The next step in using the <samp class="listingcharacter listingcharacter">cluster</samp> module is to create worker processes through the <samp class="listingcharacter listingcharacter">fork</samp> method. Calling this method results in a <samp class="listingcharacter listingcharacter">fork</samp> event. Inside the callback function, you can access the worker process via the argument this function receives.</p>
+            <p class="standard">As soon as the worker process is launched, the <samp class="listingcharacter listingcharacter">online</samp> event is triggered on the <samp class="listingcharacter listingcharacter">cluster</samp> object. Again, you get access to the worker process within the callback function via the argument.</p>
+            <p class="standard">The <samp class="listingcharacter listingcharacter">cluster</samp> module specializes in load balancing<a class="indexanchor" id="i16_80"/> between multiple server processes<a class="indexanchor" id="i16_81"/>. For both the Net server and the HTTP server, you bind your server to a port and a socket, respectively, by calling the <samp class="listingcharacter listingcharacter">listen</samp> method. As soon as you call this method in your worker process, the <samp class="listingcharacter listingcharacter">listening</samp> event<a class="indexanchor" id="i16_82"/> is triggered on the <samp class="listingcharacter listingcharacter">cluster</samp> object and you can respond to it accordingly in the main process. In addition to the object representing the worker process, this method receives the address to which the server of the worker process is bound as a second argument.</p>
+            <p class="standard">The last two events are triggered when the worker process is terminated. The <samp class="listingcharacter listingcharacter">disconnect</samp> event signals that the communication link<a class="indexanchor" id="i16_83"/> between the main and worker processes has been terminated, so there is no longer any possibility of interaction. This event is normally triggered as an effect of calling the <samp class="listingcharacter listingcharacter">disconnect</samp> or <samp class="listingcharacter listingcharacter">destroy</samp> methods on the worker process. The <samp class="listingcharacter listingcharacter">disconnect</samp> event also gets triggered when the worker process is terminated from outside, for example, by the <samp class="listingcharacter listingcharacter">kill</samp> command of the operating system. The only argument available within the callback function that you can bind to this event is the object representation of the worker process.</p>
+            <p class="standard">The second event that gets triggered when a worker process is terminated is the <samp class="listingcharacter listingcharacter">exit</samp> event. This event indicates to the main process that one of the worker processes has been terminated. It’s normally triggered after the <samp class="listingcharacter listingcharacter">disconnect</samp> event. In the callback function of this event, two other arguments are available in addition to the object for the worker process that was terminated. The second argument is a number specifying the exit code of the worker process. The third and last argument is the name of the signal that caused the termination of the worker process, for example, <samp class="listingcharacter listingcharacter">SIGHUP</samp>.</p>
+            <p class="standard"><span class="crossreference "><a href="16_004.html#t16.5">Table 16.5</a></span> briefly summarizes again for you the events available in connection with the <samp class="listingcharacter listingcharacter">cluster</samp> module.</p>
+            <table class="standardtable" id="t16.5">
+                <thead>
+                    <tr>
+                        <th class="tablehead tablecell_first top_border_cell">
+                            <p class="standard first-item last-item">Event</p>
+                        </th>
+                        <th class="tablehead tablecell_last top_border_cell">
+                            <p class="standard first-item last-item">Description</p>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="tablecell tablecell_first top_border_cell">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">online</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last top_border_cell">
+                            <p class="standard first-item last-item">The worker process reports its readiness to the <samp class="listingcharacter listingcharacter">online</samp> event.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">listening</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">As soon as the <samp class="listingcharacter listingcharacter">listen</samp> method is called within the worker process, the <samp class="listingcharacter listingcharacter">listening</samp> event is executed.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">disconnect</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Once the communication links between the main and worker processes are terminated, you’ll receive the <samp class="listingcharacter listingcharacter">disconnect</samp> event.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter"><a id="p500"/>exit</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">This event signals that a worker has been terminated.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">error</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">An <samp class="listingcharacter listingcharacter">error</samp> event gets triggered when a worker process couldn’t be created, the process couldn’t be terminated, or the sending of messages failed.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">message</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">This event is triggered when a message has been sent to the process.</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="caption "><b>Table 16.5</b>    
+            Overview of Cluster Events</p>
+            <p class="standard">Within the main process, you can use three methods. You already learned how to use the first method, <samp class="listingcharacter listingcharacter">setupPrimary</samp>, to configure the general behavior of the main process. You already know the <samp class="listingcharacter listingcharacter">fork</samp> method from the <samp class="listingcharacter listingcharacter">child_process</samp> module. In the <samp class="listingcharacter listingcharacter">cluster</samp> module, this method is used to start the worker processes. The example in <span class="crossreference "><a href="16_004.html#l16.14">Listing 16.14</a></span> illustrates the use of the different methods.</p>
+            <div class="listing " id="l16.14"><pre><span class="rot">import</span><span class="schwarz"> cluster </span><span class="rot">from</span><span class="schwarz"> </span><span class="hellblau">'cluster'</span><span class="schwarz">;</span><span class="schwarz"><br/></span><span class="rot">import</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"> createServer </span><span class="schwarz">}</span><span class="schwarz"> </span><span class="rot">from</span><span class="schwarz"> </span><span class="hellblau">'http'</span><span class="schwarz">;</span><span class="schwarz"><br/></span> <br/><span class="rot">const</span><span class="schwarz"> timeout </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="schwarz">30000;</span><span class="schwarz"><br/></span> <br/><span class="rot">if</span><span class="schwarz"> </span><span class="schwarz">(</span><span class="schwarz">cluster</span><span class="schwarz">.</span><span class="schwarz">isPrimary</span><span class="schwarz">)</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>  cluster<span class="schwarz">.setupPrimary({</span><span class="schwarz">silent</span><span class="schwarz">:</span><span class="schwarz"> </span><span class="rot">true</span><span class="schwarz">});</span><span class="gruen"> // no logs from worker</span><span class="schwarz"><br/></span> <br/>  <span class="schwarz">setTimeout(</span><span class="schwarz">cluster</span><span class="schwarz">.</span><span class="schwarz">disconnect</span><span class="schwarz">,</span><span class="schwarz"> timeout</span><span class="schwarz">);</span><span class="schwarz"><br/></span> <br/>  cluster<span class="schwarz">.on(</span><span class="hellblau">'exit'</span><span class="schwarz">,</span><span class="schwarz"> </span><span class="rot">function</span><span class="schwarz"> </span><span class="schwarz">()</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>    <span class="magenta">console</span><span class="schwarz">.log(</span><span class="violett">`Workers were terminated after ${timeout}ms`</span><span class="schwarz">);</span><span class="schwarz"><br/></span>  <span class="schwarz">});</span><span class="schwarz"><br/></span> <br/>  cluster<span class="schwarz">.fork();</span><span class="schwarz"><br/></span>  cluster<span class="schwarz">.fork();</span><span class="schwarz"><br/></span><span class="schwarz">}</span><span class="schwarz"><br/></span> <br/><span class="rot">if</span><span class="schwarz"> </span><span class="schwarz">(</span><span class="schwarz">cluster</span><span class="schwarz">.</span><span class="schwarz">isWorker</span><span class="schwarz">)</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>  <span class="magenta">console</span><span class="schwarz">.log(</span><span class="violett">`Worker ${cluster.worker.id} started`</span><span class="schwarz">);</span><span class="schwarz"><br/></span>  <span class="schwarz">createServer((</span><span class="schwarz">req</span><span class="schwarz">,</span><span class="schwarz"> res</span><span class="schwarz">)</span><span class="schwarz"> </span><span class="dunkelblau">=&gt;</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>    <span class="magenta">console</span><span class="schwarz">.log(</span><span class="violett">`Worker ${cluster.worker.id} has received a request`</span><span class="schwarz">);</span><span class="schwarz"><br/></span>    res<span class="schwarz">.end(</span><span class="violett">`Worker ${cluster.worker.id} xxx`</span><span class="schwarz">);</span><span class="schwarz"><br/></span>  <span class="schwarz">}).listen(</span><span class="hellblau">'8080'</span><span class="schwarz">);</span><span class="schwarz"><br/></span><span class="schwarz">}</span><span class="schwarz"> </span></pre></div>
+            <p class="caption "><b>Listing 16.14</b>    
+            The “cluster” Module in Use</p>
+            <p class="standard"><a id="p501"/>Using the source code from the example, you create two child processes, both listening on port <samp class="listingcharacter listingcharacter">8080</samp>. This works because the main process in the default configuration accepts the incoming connections<a class="indexanchor" id="i16_84"/> and forwards them to the child processes. Alternatively, it’s possible for the main process to pass the connection to the child process and for the child process to accept the incoming connection.</p>
+            <p class="standard">All three methods, that is, <samp class="listingcharacter listingcharacter">setupPrimary</samp>, <samp class="listingcharacter listingcharacter">fork</samp>, and <samp class="listingcharacter listingcharacter">disconnect</samp>, can only be run in the main process. If you call one of these three methods from a worker process, this results in an error and the termination of the worker process. To avoid this problem, you can use the <samp class="listingcharacter listingcharacter">isPrimary</samp> and <samp class="listingcharacter listingcharacter">isWorker</samp> properties, as shown in <span class="crossreference "><a href="16_004.html#l16.14">Listing 16.14</a></span>.</p>
+        
+        
+            <h3 class="t3" id="h16.4.2">16.4.2    Worker Processes<a class="indexanchor" id="i16_85"/></h3>
+            <p class="standard">Using the <samp class="listingcharacter listingcharacter">fork</samp> method, you can create any number of worker processes from within the main process. These workers are represented within your application by objects that provide various properties, methods, and events for interacting with the processes.</p>
+            <p class="standard">But before you start looking at worker objects<a class="indexanchor" id="i16_86"/>, you should know how to obtain them. In this context, you have several options: If you’re in the main process, you can access the different workers via the <samp class="listingcharacter listingcharacter">cluster.workers</samp> property. The <samp class="listingcharacter listingcharacter">workers</samp> object contains references to all worker processes. The keys of the object are the IDs of the respective worker processes, while the values are the object representations of the worker processes. With this structure, you can find out how many worker processes have currently been started and also control the individual workers. Another way to access the workers from the main process is to bind callback functions to various events of the worker objects, such as the <samp class="listingcharacter listingcharacter">online</samp> event<a class="indexanchor" id="i16_87"/>, for example. Again, you get access to the worker objects in the form of arguments. From the worker process, you can access the object of the current worker via <samp class="listingcharacter listingcharacter">cluster.worker</samp>. It’s not possible to influence the other workers here.</p>
+            <p class="standard">Each worker process has a unique identifier<a class="indexanchor" id="i16_88"/>. You can read it using the <samp class="listingcharacter listingcharacter">id</samp> property of the worker process. More information about the corresponding worker process is provided by the <samp class="listingcharacter listingcharacter">process</samp> property. Like the <samp class="listingcharacter listingcharacter">fork</samp> method, this property illustrates the basis of the <samp class="listingcharacter listingcharacter">cluster</samp> module. The basis for creating worker processes is the <samp class="listingcharacter listingcharacter">fork</samp> method of the <samp class="listingcharacter listingcharacter">child_process</samp> module. Thus, the object stored in the <samp class="listingcharacter listingcharacter">process</samp> property of the worker process also has the <samp class="listingcharacter listingcharacter">ChildProcess</samp> type. For example, you can use this object to access the worker’s process ID<a class="indexanchor" id="i16_89"/> via <samp class="listingcharacter listingcharacter">cluster.worker.process.pid</samp>. The last property available to you as part of the worker process is named <samp class="listingcharacter listingcharacter">exitedAfterDisconnect</samp>. Typically, this property has the value <samp class="listingcharacter listingcharacter">undefined</samp>. However, it’s set to <samp class="listingcharacter listingcharacter">true</samp> as soon as the worker is in the process of termination; that is, either <samp class="listingcharacter listingcharacter">disconnect</samp> or <samp class="listingcharacter listingcharacter">destroy</samp><a class="indexanchor" id="i16_90"/> has been called.</p>
+            <p class="standard">The methods of the worker object form the interface<a class="indexanchor" id="i16_91"/> through which you can interact with the worker process. The example in <span class="crossreference "><a href="16_004.html#l16.15">Listing 16.15</a></span> illustrates how you can use the <samp class="listingcharacter listingcharacter"><a id="p502"/>send</samp> method to send messages<a class="indexanchor" id="i16_92"/> between main and worker processes. As you can also see in this example, communication works both ways.</p>
+            <div class="listing " id="l16.15"><pre><span class="rot">import</span><span class="schwarz"> cluster </span><span class="rot">from</span><span class="schwarz"> </span><span class="hellblau">'cluster'</span><span class="schwarz">;</span><span class="schwarz"><br/></span><span class="rot">import</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"> createServer </span><span class="schwarz">}</span><span class="schwarz"> </span><span class="rot">from</span><span class="schwarz"> </span><span class="hellblau">'http'</span><span class="schwarz">;</span><span class="schwarz"><br/></span> <br/><span class="rot">if</span><span class="schwarz"> </span><span class="schwarz">(</span><span class="schwarz">cluster</span><span class="schwarz">.</span><span class="schwarz">isPrimary</span><span class="schwarz">)</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>  cluster<span class="schwarz">.fork();</span><span class="schwarz"><br/></span>  cluster<span class="schwarz">.fork();</span><span class="schwarz"><br/></span> <br/>  <span class="bold"><span class="schwarz"/><samp class="listingcharacter listingcharacter">cluster.on(<span class="hellblau">'listening'</span><span class="schwarz">, (worker) </span><span class="dunkelblau">=&gt;</span><span class="schwarz"> {</span><br/>    <span class="magenta">console</span><span class="schwarz">.log(</span><span class="violett">`Worker ${worker.id} ready`</span><span class="schwarz">);</span><br/> <br/>    setTimeout(() <span class="dunkelblau">=&gt;</span><span class="schwarz"> {</span><br/>      worker.send(<span class="hellblau">'Hello Primary'</span><span class="schwarz">);</span><br/>    }, 2000);<br/>  });<br/> <br/>  <span class="rot">for</span><span class="schwarz"> (</span><span class="rot">let</span><span class="schwarz"> i </span><span class="rot">in</span><span class="schwarz"> cluster.workers) {</span><br/>    cluster.workers[i].on(<br/>      <span class="hellblau">'message'</span><span class="schwarz">,</span><br/>      <span class="rot">function</span><span class="schwarz"> (i, msg) {</span><br/>        <span class="magenta">console</span><span class="schwarz">.log(</span><span class="violett">`Worker ${i} =&gt; Primary: ${msg}`</span><span class="schwarz">);</span><br/>      }.bind(<span class="rot">this</span><span class="schwarz">, i),</span><br/>    );<br/>  }</samp></span><br/>} <span class="rot">else</span><span class="schwarz"> {</span><br/>  createServer((req, res) <span class="dunkelblau">=&gt;</span><span class="schwarz"> {</span><br/>    res.end(<span class="hellblau">'Hello Client'</span><span class="schwarz">);</span><br/>  }).listen(<span class="hellblau">'8080'</span><span class="schwarz">);</span><br/> <br/>  <span class="bold"><samp class="listingcharacter listingcharacter">cluster.worker.on(<span class="hellblau">'message'</span><span class="schwarz">, (msg) </span><span class="dunkelblau">=&gt;</span><span class="schwarz"> {</span><br/>    <span class="magenta">console</span><span class="schwarz">.log(</span><span class="violett">`Primary =&gt; Worker ${cluster.worker.id}: ${msg}`</span><span class="schwarz">);</span><br/>  });<br/> <br/>  cluster.worker.send(<span class="hellblau">'Hello Primary'</span><span class="schwarz">);</span></samp></span><br/>} <span class="schwarz"/></pre></div>
+            <p class="caption "><b>Listing 16.15</b>    
+            Communication between the Main and Worker Processes</p>
+            <p class="standard">Once the worker process has been launched, it sends a message with the content <samp class="listingcharacter listingcharacter">Hello Primary</samp> to the main process via its own <samp class="listingcharacter listingcharacter">send</samp> method. This in turn binds callback functions to the <samp class="listingcharacter listingcharacter">message</samp> events<a class="indexanchor" id="i16_93"/> of the various worker processes in a <samp class="listingcharacter listingcharacter">for</samp> loop to be able to react to their messages. As soon as the message is received by the main process, it’s output to the console with some additional information. For its part, the main process <a id="p503"/>binds a callback function to the <samp class="listingcharacter listingcharacter">listening</samp> event<a class="indexanchor" id="i16_94"/> of the cluster. When the <samp class="listingcharacter listingcharacter">listen</samp> method is called in a worker process, the main process is notified and issues a corresponding message on the console. Within this callback function, a time-out is set to two seconds. After its expiration, a message is sent to the worker process. The worker process has also registered a callback function to the <samp class="listingcharacter listingcharacter">message</samp> event and can thus handle and emit the message from the main process.</p>
+            <p class="standard">In addition to the possibility of sending messages, two other methods of terminating the worker process are available in connection with worker processes. You already know the first method—<samp class="listingcharacter listingcharacter">disconnect</samp>—from the main process. In the main process, this method does nothing more than call the <samp class="listingcharacter listingcharacter">disconnect</samp> method of each worker process, in addition to some cleanup work<a class="indexanchor" id="i16_95"/>. Once you’ve called the <samp class="listingcharacter listingcharacter">disconnect</samp> method, the worker won’t accept any more incoming connections. If there are still connections to clients, however, they are first served before the worker process is terminated.</p>
+            <p class="standard">The <samp class="listingcharacter listingcharacter">destroy</samp> method enables you to terminate a worker process. Its form depends on the location from where you call the method. From the main process, the <samp class="listingcharacter listingcharacter">process.kill</samp> method is executed. If you’re in the context of the worker process, <samp class="listingcharacter listingcharacter">process.exit</samp> is executed. However, in both cases, the <samp class="listingcharacter listingcharacter">exitedAfterDisconnect</samp> property is set to <samp class="listingcharacter listingcharacter">true</samp> so that you can determine whether a process was terminated by <samp class="listingcharacter listingcharacter">destroy</samp> or a system error.</p>
+            <p class="standard">In addition, there are various events available in the worker process that help you to respond to the occurrence of various situations. In the lifecycle of a worker<a class="indexanchor" id="i16_96"/>, the different events occur chronologically. The existence of the worker process starts with the <samp class="listingcharacter listingcharacter">online</samp> event. This event is triggered as soon as the worker changes to the online status. Within the callback function, you have access to the object representing the worker via the argument of this function.</p>
+            <p class="standard">The next event that occurs in connection with a worker process is the <samp class="listingcharacter listingcharacter">listening</samp> event. Like the cluster event of the same name, it’s triggered as soon as the <samp class="listingcharacter listingcharacter">listen</samp> method is called within the worker process and the process status changes from <samp class="listingcharacter listingcharacter">online</samp> to <samp class="listingcharacter listingcharacter">listening</samp>. An object representing the address to which the worker is bound is available as an argument in the callback function.</p>
+            <p class="standard">During the runtime of the worker process, you can send messages between the main and the worker processes. You’ve already learned about the corresponding <samp class="listingcharacter listingcharacter">message</samp> event. The only argument the callback function receives is the message that was sent.</p>
+            <p class="standard">At the end of the existence of a worker process there are again two events. The <samp class="listingcharacter listingcharacter">disconnect</samp> event is triggered as soon as the worker process has disconnected its communication links to the outside world, thus initiating the end of the worker. This is accompanied by a change of the process status to <samp class="listingcharacter listingcharacter">disconnected</samp>. Finally, the <samp class="listingcharacter listingcharacter">exit</samp> event<a class="indexanchor" id="i16_97"/> indicates that the worker process is finished. Using the exit code and signal name arguments, you can determine the circumstances of the process termination. The exit code is a number that you can manipulate via the <samp class="listingcharacter listingcharacter">process.exit</samp> method. Normally, a <samp class="listingcharacter listingcharacter">0</samp> means that the process was completed successfully and without errors. The second argument—the signal <a id="p504"/>name—is a character string that bears the name of the signal used to terminate the process. Both arguments don’t have a value in every case.</p>
+            <p class="standard">With the capabilities presented here, you can develop server applications in Node.js that don’t run in just one process. Instead, you can fork any number of worker processes, which in turn take care of processing client requests. The worker processes can be bound to the same resources such as a TCP port<a class="indexanchor" id="i16_98"/> or Unix socket<a class="indexanchor" id="i16_99"/>. In this case, the operating system takes care of load balancing between the processes so that the best possible utilization is achieved. The advantage of this implementation is that neither you nor the Node.js platform are responsible for distributing requests evenly across the different worker processes.</p>
+        
+    </div><p class="signatur"/>
+                    </body>
+                </html>

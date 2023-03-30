@@ -1,0 +1,46 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+                    
+        <head><meta content="application/xhtml+xml; charset=utf-8" http-equiv="Content-Type"/>
+            <meta content="application/xhtml+xml; charset=utf-8" name="content-type"/>
+            <meta content="Microservices with Node.js" name="title"/>
+            <meta content="Sebastian Springer" name="author"/>
+            <meta content="Rheinwerk Publishing" name="publisher"/>
+            <meta content="© 2022 by Rheinwerk Publishing Inc., Boston (MA)" name="copyright"/>
+            <meta content="Node.js - The Comprehensive Guide - Microservices with Node.js" name="description"/>
+            <meta content="en" name="language"/>
+            <title>Microservices with Node.js</title>
+            <link href="common/main.css" rel="stylesheet" type="text/css"/>
+<meta content="urn:uuid:e0000000-0000-0000-0000-000029756394" name="Adept.expected.resource"/>
+        </head>
+    
+
+
+                    <body class="office_us type_kapitel">
+                        <div id="main"><h1 class="t1" id="h27">27    <a id="p753"/>Microservices with Node.js</h1><p class="introductorynote indent_chapter_double">The hardest thing about an idea is not having it but recognizing if it is good.<br/>—Chris Howard</p><p class="standard">There<a class="indexanchor" id="i27_00"/> are various architectural approaches for the implementation of web applications. One of these approaches is called microservice architecture<a class="indexanchor" id="i27_01"/>. This means that your application doesn’t consist of one large, tightly coupled piece of source code, but is composed of several specialized microservices. This type of architecture has its pros and cons. The most important thing for you to know is when you should use microservices. In this chapter, you’ll get an insight into the development of such microservices with Node.js. In doing so, we’ll introduce you to different approaches to communication, and you’ll develop a small application that consists of two microservices.</p>
+        <h2 class="t2" id="h27.1">27.1    Basic Principles</h2>
+        <p class="standard">When it comes to the architecture of a web application<a class="indexanchor" id="i27_02"/>, you quickly come across two different architectural approaches: the microservice architecture and the monolithic architecture. Both forms have their reason for existing, and both have their strengths and weaknesses. </p>
+        <p class="standard">With Node.js, you can implement your application in both forms, although the monolithic architecture is better suited for small, simple applications, while the microservice architecture should be used more for complex and large applications.</p>
+        
+            <h3 class="t3" id="h27.1.1">27.1.1    Monolithic Architecture<a class="indexanchor" id="i27_03"/></h3>
+            <p class="standard">A monolithic application doesn’t automatically indicate that such an application is outdated, unmaintainable, and inflexible. Rather, a monolithic architecture means that it’s an application with a defined application core that has a more or less tight coupling<a class="indexanchor" id="i27_04"/> between its individual parts. In such an application, you use the module system as usual and divide the application into logical units. Communication with the outside world, that is, with other systems, a database, and the client, can be abstracted via an adapter layer<a class="indexanchor" id="i27_05"/>. This type of application is delivered as a package.</p>
+            <p class="standard"><a id="p754"/>The big advantage of monolithic applications is that they incur relatively little overhead. Communication between the individual modules is subject to hardly any restrictions, unless you define conventions in the development team. Extensions can thus be integrated relatively easily.</p>
+            <p class="standard">This type of architecture turns into a drawback when the application grows and the interfaces aren’t properly maintained. Then the data streams become increasingly nontransparent, and errors start creeping in.</p>
+            <p class="standard">Based on the movie database example, which you already know from the chapters about the web server, <span class="crossreference "><a href="27_001.html#f27.1">Figure 27.1</a></span> shows what such a monolithic architecture can look like. The initiative in communication originates from the client, which makes a request to the application. A central authentication service ensures that the user is allowed to access the requested resource. The core of the application is divided into several specialized modules<a class="indexanchor" id="i27_06"/> such as the user and the movie module. These in turn communicate with the application’s database, which is divided into different tables.</p>
+            <div class="imagebox figure-type"><a href="img-f27.1.html" id="f27.1"><img alt="Monolithic Architecture" id="img-f27.1" src="bilderklein/klein27_001.png"/></a></div>
+            <p class="caption "><b>Figure 27.1</b>    
+            Monolithic Architecture</p>
+        
+        
+            <h3 class="t3" id="h27.1.2">27.1.2    <a id="p755"/>Microservice Architecture<a class="indexanchor" id="i27_07"/></h3>
+            <p class="standard">Unlike monolithic architecture, microservice architecture doesn’t have one core of the application. Instead, the application consists of a set of loosely coupled<a class="indexanchor" id="i27_08"/> services. These services can only be addressed via defined interfaces<a class="indexanchor" id="i27_09"/>. Communication usually takes place via a standardized protocol so that the services can also be located on different systems.</p>
+            <p class="standard">The advantages resulting from this form of architecture are manifold. For example, you can develop the individual microservices of an application independently of each other. Only the interface definition must be known to all participants. This goes so far that the services can even be run on different systems and implemented in different programming languages, frameworks, and libraries.</p>
+            <p class="standard">If the services are independent<a class="indexanchor" id="i27_10"/> of each other, they can also be scaled separately. For example, let’s suppose you had a user service and a movie service. The movie service delivers a list of movies that is requested very often. In a microservice architecture, you can start a second or third instance of the service to better serve the increasing number of requests. The user service remains unaffected and can continue to operate on only one instance. Once the load peak is over, you can also scale down the movie service again.</p>
+            <p class="standard">The aforementioned benefits<a class="indexanchor" id="i27_11"/> of microservices arise because the individual services are independent of each other—which leads to the question of how you properly slice the technicality of an application so that you can separate out multiple microservices. A good rule of thumb here is that you should look for self-contained specialties and make the microservices not too big, but not too small either. In the example of the movie database, user management is a separate service. It’s responsible for creating, reading, editing, and deleting users. This service can be requested directly by the client or by other services of the application. Another service is the movie service. This service takes care of all aspects of the movies in the application. If user data is needed, the movie service requests it from the user service.</p>
+            <p class="standard">In <span class="crossreference "><a href="27_001.html#f27.2">Figure 27.2</a></span>, you can see the architecture of the application you’re going to build in this chapter. As mentioned, the two microservices are independent of each other, but they can communicate<a class="indexanchor" id="i27_12"/> via interfaces. Shared functionality, such as a logger that you can use to record error messages, is also swapped out to separate microservices. A principle that goes hand in hand with microservices scalability is that the application must be designed in such a way that services can be easily started and stopped. Ideally, a microservice shouldn’t have its own state. A state is recorded in an underlying database. As you can also see in the figure, each microservice has its own database. This in turn serves the requirement for independence of services. This also allows you to use the correct database for each service. For example, you can store the user data in a MongoDB database and the movie data in a MySQL database.</p>
+            <div class="imagebox figure-type"><a href="img-f27.2.html" id="f27.2"><img alt="Microservice Architecture" id="img-f27.2" src="bilderklein/klein27_002.png"/></a></div>
+            <p class="caption "><b>Figure 27.2</b>    
+            <a id="p756"/>Microservice Architecture</p>
+        
+    </div><p class="signatur"/>
+                    </body>
+                </html>

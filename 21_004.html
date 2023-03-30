@@ -1,0 +1,43 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+                    
+        <head><meta content="application/xhtml+xml; charset=utf-8" http-equiv="Content-Type"/>
+            <meta content="application/xhtml+xml; charset=utf-8" name="content-type"/>
+            <meta content="Package Manager" name="title"/>
+            <meta content="Sebastian Springer" name="author"/>
+            <meta content="Rheinwerk Publishing" name="publisher"/>
+            <meta content="© 2022 by Rheinwerk Publishing Inc., Boston (MA)" name="copyright"/>
+            <meta content="Node.js - The Comprehensive Guide - Package Manager" name="description"/>
+            <meta content="en" name="language"/>
+            <title>Package Manager</title>
+            <link href="common/main.css" rel="stylesheet" type="text/css"/>
+<meta content="urn:uuid:e0000000-0000-0000-0000-000029756394" name="Adept.expected.resource"/>
+        </head>
+    
+
+
+                    <body class="office_us type_kapitel">
+                        <div id="main">
+        <h2 class="t2" id="h21.4">21.4    Yarn<a class="indexanchor" id="i21_98"/></h2>
+        <p class="standard">Yarn was Facebook’s answer to a number of npm’s problems. Following are the core features of Yarn:</p>
+        <ul>
+            <li>
+                <p class="standard first-item last-item"><span class="bold">Ultra fast</span><a class="indexanchor" id="i21_99"/><br/>Yarn has a package cache. This means a package only needs to be downloaded once. Each subsequent installation will then use the package from the local cache. In addition, Yarn is able to parallelize downloads of packages, thus further speeding up the installation process.</p>
+            </li>
+            <li>
+                <p class="standard first-item last-item"><span class="bold">Mega secure</span><a class="indexanchor" id="i21_100"/><br/>Yarn contains a <span class="italic">yarn.lock</span> file that stores the checksums of the installed packages. These checksums are used to ensure the integrity of the installation.</p>
+            </li>
+            <li>
+                <p class="standard first-item last-item"><span class="bold">Super reliable</span><a class="indexanchor" id="i21_101"/><br/>Not only does the <span class="italic">yarn.lock</span><a class="indexanchor" id="i21_102"/> file serve the purpose of ensuring the integrity of the installation, it also makes sure that the installation of the dependencies will produce the same result on any given system. The <span class="italic">yarn.lock</span> file records all dependencies and their dependencies with their exact version numbers.</p>
+            </li>
+        </ul>
+        <p class="standard">The package manager website can be found at <span class="url"><a href="https://yarnpkg.com/">https://yarnpkg.com/</a></span>. Depending on the operating system, Yarn is installed<a class="indexanchor" id="i21_103"/> either via Homebrew on macOS, via an installer on Windows, or via the package manager of the various Linux distributions.</p>
+        <p class="standard">Most of these features will look familiar to you from npm, and for good reason. Yarn’s core features address the biggest problems previous versions of npm had encountered. <a id="p638"/>The developers of Yarn didn’t intend to develop a completely new package manager, but to solve the problems of npm, and these solutions were so good that the developers of npm adopted them. As a result, in the past releases of npm, the caching mechanism was improved, and the <span class="italic">package-lock.json</span> file was introduced, which has the same function as the <span class="italic">yarn.lock</span><a class="indexanchor" id="i21_104"/> file.</p>
+        <p class="standard">The APIs of <samp class="listingcharacter listingcharacter">yarn</samp> and <samp class="listingcharacter listingcharacter">npm</samp> are similar. The biggest difference is that with Yarn, you install packages using the <samp class="listingcharacter listingcharacter">yarn add</samp> command instead of <samp class="listingcharacter listingcharacter">npm install</samp>. Both tools use the <span class="italic">package.json</span> file<a class="indexanchor" id="i21_105"/> as the central configuration file. Like npm, Yarn stores the installed packages in a flat hierarchy in the <span class="italic">node_modules</span> directory<a class="indexanchor" id="i21_106"/>. Yarn also allows you to install all the packages that are available for npm.</p>
+        <p class="standard">A very interesting feature of Yarn is Plug’n’Play<a class="indexanchor" id="i21_107"/>. By deploying it, Yarn avoids the slowest step in installing packages, which is unpacking and copying the sources to the local <span class="italic">node_modules</span> directory. Plug’n’Play generates a <span class="italic">.pnp.js</span> file that signals the application where to resolve the requested packages. To enable <span class="italic">pnp</span><a class="indexanchor" id="i21_108"/>, you just need to add an <samp class="listingcharacter listingcharacter">installConfig</samp> field to your <span class="italic">package.json</span> file. <span class="crossreference "><a href="21_004.html#l21.28">Listing 21.28</a></span> shows the exact configuration.</p>
+        <div class="listing " id="l21.28"><pre><span class="schwarz">{</span><span class="schwarz"><br/></span>  <span class="schwarz">...</span><span class="schwarz"><br/></span>  <span class="hellblau">"installConfig"</span><span class="schwarz">:</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>    <span class="hellblau">"pnp"</span><span class="schwarz">:</span><span class="schwarz"> </span><span class="rot">true</span><span class="schwarz"><br/></span>  <span class="schwarz">}</span><span class="schwarz"><br/></span><span class="schwarz">}</span><span class="schwarz"> </span></pre></div>
+        <p class="caption "><b>Listing 21.28</b>    
+            Enabling the Plug’n’Play Feature of Yarn</p>
+        <p class="standard">The development of Yarn in version 1 was frozen in minor version 22, so the package manager no longer contains any functional extensions in that version. The further major versions represent a break with the previous development. Especially in the early days of the second version, there were some problems that made it difficult for the new version to get started. Breaking changes between versions includes stricter package limits that prevent implicit dependencies from being used. In addition, Yarn 2 is supposed to come with even more Plug’n’Play and zero installs. With zero installs, Yarn turns its back on the previous approach, where dependencies weren’t part of the actual source code, and includes all installed packages in the application’s source code.</p>
+    </div><p class="signatur"/>
+                    </body>
+                </html>

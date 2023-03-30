@@ -1,0 +1,70 @@
+h1.content1 {
+  border: none;
+  color: black;
+  background-color: #bce2d4;
+  padding: 0.1em;
+}
+
+p.acronym {
+  color: #2da980;
+  border-color: #2da980;
+}
+
+h1#extra-toc, h1.t1, h2.t2, h2.t2.intro, h3.t3, h3.t3.intro, h4.t4, h4.t4.intro, h5.t5, h5.t5.intro, div.box h6.boxheading {
+  color: black;
+}
+
+p.subtitle {
+  margin-top: -3em;
+}
+
+p.introductorynote, p.introductorynote.indent_chapter_single {
+  margin: 1.33em 0 1em;
+}
+
+div.box_standard {
+  border-top-color: #2da980;
+}
+
+div.box_standard {
+  background-color: #ddf0e9;
+  margin-top: 1em;
+  padding: 0.35em 0.5em 0.67em;
+}
+
+h6.boxheading {
+  margin-top: 0.25em;
+}
+
+h2.content2 {
+  font-weight: bold;
+}
+
+div.listing_big {
+  background-color: #ddf0e9;
+  margin-top: 1em;
+  padding: 0.35em 0.5em 0.35em;
+}
+div.listing_big, div.listing_big pre, div.listing_big pre > * {
+  font-size: 125%;
+}
+
+span.rot {
+  color: #2da980;
+}
+
+table.standardtable td.tablecell {
+  background-color: #ddf0e9;
+}
+table.standardtable thead,
+table.standardtable .tablehead,
+table.standardtable td.tablehead,
+table.standardtable tr.tablehead td.tablecell {
+  color: black;
+  background-color: #7dc7ad;
+}
+
+p.question {
+  text-align: left;
+  font-weight: bold;
+}

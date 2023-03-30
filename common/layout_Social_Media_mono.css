@@ -1,0 +1,113 @@
+table.standardtable {
+  border-collapse: collapse;
+  border-right-style: hidden;
+  border-left-style: hidden;
+}
+table.standardtable td, table.standardtable th {
+  border-width: 1px;
+  border-style: solid;
+}
+
+table.standardtable thead th.tablehead {
+  border-top-width: thick;
+}
+
+/*
+Section to extract the color values by the PHP function.
+
+placeholder-color dark: #d7e519
+placeholder-color medium40: #ebf743
+placeholder-color medium25: #f2fa84
+placeholder-color light: #fafdb6
+*/
+.chaptercolor_mono div.box h6.boxheading {
+  color: black;
+}
+.chaptercolor_mono h1.t0, .chaptercolor_mono h1.t1, .chaptercolor_mono h2.t2, .chaptercolor_mono h3.t3,
+.chaptercolor_mono span.h4-heading-style,
+.chaptercolor_mono h1.content1,
+.chaptercolor_mono p.acronym,
+.chaptercolor_mono div.step-list-item p span.counter,
+.chaptercolor_mono p.step-list-superscription {
+  color: #d7e519;
+}
+.chaptercolor_mono .box_standard,
+.chaptercolor_mono .box {
+  border-color: #d7e519;
+}
+.chaptercolor_mono p.acronym {
+  border-bottom-color: #d7e519;
+}
+.chaptercolor_mono thead,
+.chaptercolor_mono .tablehead,
+.chaptercolor_mono tr.tablehead td.tablecell,
+.chaptercolor_mono table.standardtable td.tablehead {
+  background-color: #d7e519;
+}
+.chaptercolor_mono div.box_standard,
+.chaptercolor_mono table.standardtable td {
+  background-color: #ebf743;
+}
+.chaptercolor_mono table tr.light td.tablecell {
+  background-color: #fafdb6;
+}
+.chaptercolor_mono table tr.light td.tablecell.tablehead {
+  background-color: #d7e519;
+}
+.chaptercolor_mono div.box table td, .chaptercolor_mono div.box table th, .chaptercolor_mono div.section_exkurs table td, .chaptercolor_mono div.section_exkurs table th, .chaptercolor_mono div.section_praxistipp table td, .chaptercolor_mono div.section_praxistipp table th {
+  border-color: #d7e519;
+}
+.chaptercolor_mono div.box table tr.light td.tablecell, .chaptercolor_mono div.section_exkurs table tr.light td.tablecell, .chaptercolor_mono div.section_praxistipp table tr.light td.tablecell {
+  background-color: white;
+}
+.chaptercolor_mono table.standardtable {
+  border-color: #d7e519;
+}
+.chaptercolor_mono table.standardtable thead,
+.chaptercolor_mono table.standardtable .tablehead,
+.chaptercolor_mono table.standardtable tr.tablehead td.tablecell {
+  color: black;
+  background-color: #ebf743;
+}
+.chaptercolor_mono table.standardtable th, .chaptercolor_mono table.standardtable td {
+  border-color: #d7e519;
+}
+.chaptercolor_mono table.standardtable td {
+  background-color: white;
+}
+.chaptercolor_mono table.standardtable thead,
+.chaptercolor_mono table.standardtable .tablehead,
+.chaptercolor_mono table.standardtable td.tablehead,
+.chaptercolor_mono table.standardtable tr.tablehead td.tablecell {
+  color: black;
+  background-color: #ebf743;
+}
+.chaptercolor_mono table.standardtable th, .chaptercolor_mono table.standardtable td {
+  border-color: #d7e519;
+}
+.chaptercolor_mono table.standardtable tr.light td,
+.chaptercolor_mono table.standardtable td {
+  background-color: #fafdb6;
+}
+.chaptercolor_mono h1.content1 {
+  color: #d7e519;
+  border: none;
+  background-color: #f2fa84;
+  padding: 0.1em 0.33em;
+  font-weight: bold;
+}
+.chaptercolor_mono div.box_standard {
+  background-color: #f2fa84;
+}
+.chaptercolor_mono div.box_example_special {
+  background-color: #fafdb6;
+  border: none;
+  padding-top: 0.66em;
+}
+.chaptercolor_mono div.box_example_special span.box_icon {
+  display: none;
+}
+
+cm #YWqWWW {
+font-size: 100%;
+}

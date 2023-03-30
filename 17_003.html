@@ -1,0 +1,40 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+                    
+        <head><meta content="application/xhtml+xml; charset=utf-8" http-equiv="Content-Type"/>
+            <meta content="application/xhtml+xml; charset=utf-8" name="content-type"/>
+            <meta content="RxJS" name="title"/>
+            <meta content="Sebastian Springer" name="author"/>
+            <meta content="Rheinwerk Publishing" name="publisher"/>
+            <meta content="© 2022 by Rheinwerk Publishing Inc., Boston (MA)" name="copyright"/>
+            <meta content="Node.js - The Comprehensive Guide - RxJS" name="description"/>
+            <meta content="en" name="language"/>
+            <title>RxJS</title>
+            <link href="common/main.css" rel="stylesheet" type="text/css"/>
+<meta content="urn:uuid:e0000000-0000-0000-0000-000029756394" name="Adept.expected.resource"/>
+        </head>
+    
+
+
+                    <body class="office_us type_kapitel">
+                        <div id="main">
+        <h2 class="t2" id="h17.3">17.3    Subjects<a class="indexanchor" id="i17_95"/></h2>
+        <p class="standard">Subjects represent a special type of observable in RxJS. One of their most important features is that you can subscribe to a subject multiple times<a class="indexanchor" id="i17_96"/>, whereas with the observable, you can only do that once, as shown in <span class="crossreference "><a href="17_003.html#l17.28">Listing 17.28</a></span>.</p>
+        <div class="listing " id="l17.28"><pre><span class="rot"><a id="p541"/>import</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"> Observable</span><span class="schwarz">,</span><span class="schwarz"> Subject </span><span class="schwarz">}</span><span class="schwarz"> </span><span class="rot">from</span><span class="schwarz"> </span><span class="hellblau">'rxjs'</span><span class="schwarz">;</span><span class="schwarz"><br/></span> <br/><span class="rot">const</span><span class="schwarz"> observable </span><span class="dunkelblau">=</span><span class="schwarz"> Observable</span><span class="schwarz">.create((</span><span class="schwarz">observer</span><span class="schwarz">)</span><span class="schwarz"> </span><span class="dunkelblau">=&gt;</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>  <span class="schwarz">setTimeout(()</span><span class="schwarz"> </span><span class="dunkelblau">=&gt;</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>    observer<span class="schwarz">.next(</span><span class="schwarz">Math</span><span class="schwarz">.random());</span><span class="schwarz"><br/></span>  <span class="schwarz">},</span><span class="schwarz"> </span><span class="schwarz">1000);</span><span class="schwarz"><br/></span><span class="schwarz">});</span><span class="schwarz"><br/></span> <br/>observable<span class="schwarz">.subscribe((</span><span class="schwarz">data</span><span class="schwarz">)</span><span class="schwarz"> </span><span class="dunkelblau">=&gt;</span><span class="schwarz"> </span><span class="magenta">console</span><span class="schwarz">.log(</span><span class="hellblau">'Observer 1: '</span><span class="schwarz">,</span><span class="schwarz"> data</span><span class="schwarz">));</span><span class="schwarz"><br/></span>observable<span class="schwarz">.subscribe((</span><span class="schwarz">data</span><span class="schwarz">)</span><span class="schwarz"> </span><span class="dunkelblau">=&gt;</span><span class="schwarz"> </span><span class="magenta">console</span><span class="schwarz">.log(</span><span class="hellblau">'Observer 2: '</span><span class="schwarz">,</span><span class="schwarz"> data</span><span class="schwarz">));</span><span class="schwarz"><br/></span> <br/><span class="bold"><span class="schwarz"/><samp class="listingcharacter listingcharacter"><span class="rot">const</span><span class="schwarz"> subject </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="rot">new </span><span class="schwarz">Subject();</span><br/> </samp></span><br/>subject.subscribe((data) <span class="dunkelblau">=&gt;</span><span class="schwarz"> </span><span class="magenta">console</span><span class="schwarz">.log(</span><span class="hellblau">'Subject observer 1:'</span><span class="schwarz">, data));</span><br/>subject.subscribe((data) <span class="dunkelblau">=&gt;</span><span class="schwarz"> </span><span class="magenta">console</span><span class="schwarz">.log(</span><span class="hellblau">'Subject observer 2:'</span><span class="schwarz">, data));</span><br/> <br/>subject.next(Math.random());<br/> <span class="gruen"><br/></span>/* Output:<br/>Subject observer 1: 0.17259172861374394<br/>Subject observer 2: 0.17259172861374394<br/>Observer 1:  0.12258583815002866<br/>Observer 2:  0.08073784778403792<br/>*/<span class="schwarz"> </span><span class="schwarz"/></pre></div>
+        <p class="caption "><b>Listing 17.28</b>    
+            Difference between Observable and Subject</p>
+        <p class="standard">When you run the source code, you’ll notice that the observers of the subject always get the same values, but the observers of the observable get different values. This is because the observables don’t support multicasting. Another difference is that you can pass values to a subject from outside. The <samp class="listingcharacter listingcharacter">asObservable</samp> method of a subject enables you to have a subject create an observable. This is particularly useful if you want to prohibit unauthorized write accesses to your subject. In this case, you create a protected scope where your subject resides, and the observable is exported to the outside.</p>
+        <p class="standard">In addition to the <samp class="listingcharacter listingcharacter">subject</samp> class, there are other types of subjects, each with their own special features:</p>
+        <ul>
+            <li>
+                <p class="standard first-item last-item"><span class="bold"><samp class="listingcharacter listingcharacter">BehaviorSubject</samp></span><a class="indexanchor" id="i17_97"/><samp class="listingcharacter listingcharacter"><br/></samp>The <samp class="listingcharacter listingcharacter">BehaviorSubject</samp> memorizes the last output data package and returns it as the initial value for each new subscription.</p>
+            </li>
+            <li>
+                <p class="standard first-item last-item"><span class="bold"><samp class="listingcharacter listingcharacter">ReplaySubject</samp></span><a class="indexanchor" id="i17_98"/><samp class="listingcharacter listingcharacter"><br/></samp>You can assign the <samp class="listingcharacter listingcharacter">ReplaySubject</samp> the size of the buffer when creating it. This figure indicates how many data packages can be stored. For example, if you enter “5” here, the last five data packages will be saved and output with each new subscription.</p>
+            </li>
+            <li>
+                <p class="standard first-item last-item"><span class="bold"><samp class="listingcharacter listingcharacter"><a id="p542"/>AsyncSubject</samp></span><a class="indexanchor" id="i17_99"/><samp class="listingcharacter listingcharacter"><br/></samp>The <samp class="listingcharacter listingcharacter">AsyncSubject</samp> returns only its last value. For this purpose, you must run the <samp class="listingcharacter listingcharacter">complete</samp> method after the last <samp class="listingcharacter listingcharacter">next</samp>. Until this happens, none of the observers will be notified.</p>
+            </li>
+        </ul>
+    </div><p class="signatur"/>
+                    </body>
+                </html>

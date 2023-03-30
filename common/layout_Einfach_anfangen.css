@@ -1,0 +1,46 @@
+h3.t3, p.acronym, p.standard span.authorname {
+  color: #9a5a3c;
+}
+
+h1.content1, p.acronym {
+  border-color: #9a5a3c;
+}
+
+h1.content1, h1.t1, h2.t2, h4.t4, h5.t5, div.box h6.boxheading {
+  color: black;
+}
+
+h3.t3 {
+  float: left;
+  margin-top: 0.67em;
+  margin-right: 0.5em;
+}
+
+div.imagebox {
+  text-align: center;
+}
+
+p.introductorynote {
+  font-style: normal;
+}
+
+blockquote, blockquote > p {
+  color: #9a5a3c;
+  font-style: normal;
+  font-size: larger;
+}
+
+div.section_schrittliste_einfach_anfangen {
+  border-left: 0.5em solid #9a5a3c;
+  padding-left: 1em;
+}
+div.section_schrittliste_einfach_anfangen ul {
+  list-style-type: none;
+}
+div.section_schrittliste_einfach_anfangen ul li {
+  margin-left: 0;
+  margin-top: 1.34em;
+}
+div.section_schrittliste_einfach_anfangen ul li span.bold {
+  color: #9a5a3c;
+}

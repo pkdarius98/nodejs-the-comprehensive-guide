@@ -1,0 +1,372 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+                    
+        <head><meta content="application/xhtml+xml; charset=utf-8" http-equiv="Content-Type"/>
+            <meta content="application/xhtml+xml; charset=utf-8" name="content-type"/>
+            <meta content="Web Applications with Nest" name="title"/>
+            <meta content="Sebastian Springer" name="author"/>
+            <meta content="Rheinwerk Publishing" name="publisher"/>
+            <meta content="© 2022 by Rheinwerk Publishing Inc., Boston (MA)" name="copyright"/>
+            <meta content="Node.js - The Comprehensive Guide - Web Applications with Nest" name="description"/>
+            <meta content="en" name="language"/>
+            <title>Web Applications with Nest</title>
+            <link href="common/main.css" rel="stylesheet" type="text/css"/>
+<meta content="urn:uuid:e0000000-0000-0000-0000-000029756394" name="Adept.expected.resource"/>
+        </head>
+    
+
+
+                    <body class="office_us type_kapitel">
+                        <div id="main">
+        <h2 class="t2" id="h14.2">14.2    Nest Command-Line Interface<a class="indexanchor" id="i14_20"/></h2>
+        <p class="standard">Nest follows the concept of Express at its core, providing routing and a middleware system<a class="indexanchor" id="i14_21"/>, but it extends these principles with numerous other features and patterns. In the documentation, the developers of the framework state that they were inspired by Angular<a class="indexanchor" id="i14_22"/>, which is a frontend framework. If you already have experience developing Angular applications, many patterns in Nest app development will look familiar to you. One of the concepts the developers have adopted from Nest is also the Nest CLI, which is based on the Angular CLI and provides you with a tool for developing your application.</p>
+        <p class="standard">With <samp class="listingcharacter listingcharacter">nest new</samp>, you already got to know the first command of the Nest CLI that enables you to initialize your application. But the CLI provides a number of other features on top of that.</p>
+        <p class="standard">With the <samp class="listingcharacter listingcharacter">--help</samp><a class="indexanchor" id="i14_23"/> or <samp class="listingcharacter listingcharacter">-h</samp> option, you get an overview of the available options on the command line. The <samp class="listingcharacter listingcharacter">--version</samp><a class="indexanchor" id="i14_24"/> option and its short form <samp class="listingcharacter listingcharacter">-v</samp> show the currently used version number of the Nest CLI. A <samp class="listingcharacter listingcharacter">nest</samp> CLI command<a class="indexanchor" id="i14_25"/> usually consists of several parts: <samp class="listingcharacter listingcharacter">nest &lt;command&gt; &lt;options&gt; &lt;arguments&gt;</samp>.</p>
+        <p class="standard">Details about a particular command can be obtained by calling the command followed by the <samp class="listingcharacter listingcharacter">--help</samp> option, for example, <samp class="listingcharacter listingcharacter">nest new --help</samp>.</p>
+        
+            <h3 class="t3" id="h14.2.1">14.2.1    Commands for Operating and Running the Application<a class="indexanchor" id="i14_26"/><a class="indexanchor" id="i14_27"/></h3>
+            <p class="standard">Unlike a classic Express app, which is written in JavaScript and can be run directly, Nest has a build process<a class="indexanchor" id="i14_28"/>. The reason is that a Nest application is usually written in TypeScript and therefore the source code must first be compiled into JavaScript. You can start your application using the <samp class="listingcharacter listingcharacter">nest start</samp><a class="indexanchor" id="i14_29"/> command. This process creates a local directory named <span class="italic">dist</span><a class="indexanchor" id="i14_30"/> that contains the built source code of the application. This is then executed as a Node.js process. The <samp class="listingcharacter listingcharacter">start</samp> command supports different variants stored as scripts in the <span class="italic">package.json</span> file. For example, <samp class="listingcharacter listingcharacter">npm run start:dev</samp> runs the <samp class="listingcharacter listingcharacter">nest start</samp> command <a id="p417"/>with the <samp class="listingcharacter listingcharacter">--watch</samp><a class="indexanchor" id="i14_31"/> option, putting Nest into a watch mode where the process is automatically restarted when changes are made to files in the application. The <samp class="listingcharacter listingcharacter">start:debug</samp> script adds the <samp class="listingcharacter listingcharacter">--debug</samp> option in addition to <samp class="listingcharacter listingcharacter">--watch</samp> to debug the application with the Node.js debugger.</p>
+            <div class="box box_standard">
+                <h6 class="boxheading">Note</h6>
+                <p class="standard first last">You can also decouple building the application from launching it by running <samp class="listingcharacter listingcharacter">nest build</samp> or <samp class="listingcharacter listingcharacter">npm run build</samp>. This will create a newly built version of your application in the <span class="italic">dist</span> directory. You can then run your application using the <span class="italic">main.js</span> file in the <span class="italic">dist</span> directory, or you can use the <samp class="listingcharacter listingcharacter">npm run start:prod</samp> command.</p>
+            </div>
+            <p class="standard">The <samp class="listingcharacter listingcharacter">info</samp> command<a class="indexanchor" id="i14_32"/> allows you to display a range of information about your current environment. This includes the version numbers of the operating system and Node.js or npm. You’ll also see which Nest CLI version is currently in use and, if you run the command in a directory containing a Nest application, the versions of the various Nest packages.</p>
+            <p class="standard">In addition to these commands, there are two more commands for managing your application—<samp class="listingcharacter listingcharacter">update</samp><a class="indexanchor" id="i14_33"/> and <samp class="listingcharacter listingcharacter">add</samp><a class="indexanchor" id="i14_34"/>. The <samp class="listingcharacter listingcharacter">update</samp> command updates the Nest dependencies, and the <samp class="listingcharacter listingcharacter">add</samp> command lets you add additional libraries to your application. <span class="crossreference "><a href="14_002.html#t14.1">Table 14.1</a></span> contains an overview of the available commands<a class="indexanchor" id="i14_35"/>.</p>
+            <table class="standardtable" id="t14.1">
+                <thead>
+                    <tr>
+                        <th class="tablehead tablecell_first top_border_cell">
+                            <p class="standard first-item last-item">Command</p>
+                        </th>
+                        <th class="tablehead tablecell_middle top_border_cell">
+                            <p class="standard first-item last-item">Short Form</p>
+                        </th>
+                        <th class="tablehead tablecell_last top_border_cell">
+                            <p class="standard first-item last-item">Description</p>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="tablecell tablecell_first top_border_cell">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">nest new [options] [name]</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_middle top_border_cell">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">n</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last top_border_cell">
+                            <p class="standard first-item last-item">Creates a new Nest application</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">nest build [options] [app]</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_middle">
+                            <p class="standard first-item last-item">—</p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Builds the Nest application</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">nest start [options] [app]</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_middle">
+                            <p class="standard first-item last-item">—</p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Runs the Nest application</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">nest info</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_middle">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">i</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Outputs version information</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">nest update [options]</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_middle">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">u</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Updates the Nest dependencies</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">nest add [options] [library]</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_middle">
+                            <p class="standard first-item last-item">—</p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Adds a new library to the application</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">nest generate [options] [schematic] [name] [path]</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_middle">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">g</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Creates a new Nest element, that is, a structure such as a module, a controller, or a provider</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="caption "><b>Table 14.1</b>    
+            Overview of Nest CLI Commands</p>
+            <p class="standard">We haven’t yet looked at the command you may need most often during the development of your application, namely, the <samp class="listingcharacter listingcharacter">generate</samp> command, which is used to generate structures. The next section describes how this tool can support you.</p>
+        
+        
+            <h3 class="t3" id="h14.2.2">14.2.2    <a id="p418"/>Creating Structures in the Application<a class="indexanchor" id="i14_36"/></h3>
+            <p class="standard">No matter if it’s about modules, controllers, or services, the basic structure is always the same per category. Especially for larger applications, you may need to create a lot of these structures. This is exactly where the <samp class="listingcharacter listingcharacter">generate</samp> command comes in and generates these structures for you. This process includes the creation of files and directories as well as the generation of the corresponding TypeScript framework. <span class="crossreference "><a href="14_002.html#t14.2">Table 14.2</a></span> contains an overview of the capabilities of the <samp class="listingcharacter listingcharacter">generate</samp> command. We’ll look at some of the listed commands in more detail later as we implement the sample application.</p>
+            <table class="standardtable" id="t14.2">
+                <thead>
+                    <tr>
+                        <th class="tablehead tablecell_first top_border_cell">
+                            <p class="standard first-item last-item">Name</p>
+                        </th>
+                        <th class="tablehead tablecell_middle top_border_cell">
+                            <p class="standard first-item last-item">Short Form</p>
+                        </th>
+                        <th class="tablehead tablecell_last top_border_cell">
+                            <p class="standard first-item last-item">Description</p>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="tablecell tablecell_first top_border_cell">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">application</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_middle top_border_cell">
+                            <p class="standard first-item last-item">—</p>
+                        </td>
+                        <td class="tablecell tablecell_last top_border_cell">
+                            <p class="standard first-item last-item">Creates a new application workspace</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">class</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_middle">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">cl</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Creates a new TypeScript class</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">configuration</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_middle">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">config</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Creates a new CLI configuration</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">controller</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_middle">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">co</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Creates a new controller</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">decorator</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_middle">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">d</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Creates the basic framework for a custom decorator</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">filter</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_middle">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">f</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Creates a filter</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">gateway</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_middle">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">ga</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Creates a new gateway</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">guard</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_middle">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">gu</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Creates the structure for a new guard</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">interceptor</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_middle">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">in</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Creates an interceptor</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">interface</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_middle">
+                            <p class="standard first-item last-item">—</p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Generates a new TypeScript interface</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">middleware</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_middle">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">mi</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Creates a middleware component</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">module</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_middle">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">mo</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Creates a new module</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">pipe</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_middle">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">pi</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Creates a pipe</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">provider</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_middle">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">pr</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Creates a provider</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">resolver</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_middle">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">r</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Creates a resolver</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">service</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_middle">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">s</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Creates a service</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">library</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_middle">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">lib</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Generates a new library in the monorepo</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">sub-app</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_middle">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">app</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Creates a new application in the monorepo</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">resource</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_middle">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">res</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Creates a new create, read, update, delete (CRUD) resource</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="caption "><b>Table 14.2</b>    
+            Schematics for the “nest generate” Command</p>
+            <p class="standard">As you can see from schematics<a class="indexanchor" id="i14_37"/>, such as <samp class="listingcharacter listingcharacter">library</samp> or <samp class="listingcharacter listingcharacter">sub-app</samp>, in addition to the standard mode, Nest also supports a monorepo<a class="indexanchor" id="i14_38"/> mode where you can divide your application into <a id="p419"/>several smaller applications and manage them within a larger monorepo. In the following sections, you’ll get to know the basics of Nest using the standard mode. Once you’re familiar with these basics, you can start implementing even large-scale applications with Nest. For more information on how to organize your application into a monorepo, you should refer to the Nest documentation at <span class="url"><a href="https://docs.nestjs.com/cli/monorepo">https://docs.nestjs.com/cli/monorepo</a></span>.</p>
+            <div class="box box_standard">
+                <h6 class="boxheading">Monorepo</h6>
+                <p class="standard first">A <span class="italic">monorepo</span> is a source code repository that doesn’t contain just one project, such as a frontend or a backend, which is usually the case, but it has several projects. The concept behind monorepos is that the source code of a project, which consists of several largely independent components, is managed in a single repository. The term “project” is deliberately kept very vague in this case. It can be an application but also the entire source code of a company. For example, a very well-known company that uses the monorepo approach is Google.</p>
+                <p class="standard last">A great advantage of monorepos is that all the components that belong to the project are managed together. If you check out the repository, you’ll always have a consistent state of the entire system. This eliminates the need for manual synchronization across multiple repositories. On the other hand, managing a large monorepo can also cause increased overhead and that’s just due to the sheer size of the repository.</p>
+            </div>
+        
+    </div><p class="signatur"/>
+                    </body>
+                </html>

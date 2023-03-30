@@ -1,0 +1,179 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+                    
+        <head><meta content="application/xhtml+xml; charset=utf-8" http-equiv="Content-Type"/>
+            <meta content="application/xhtml+xml; charset=utf-8" name="content-type"/>
+            <meta content="Testing" name="title"/>
+            <meta content="Sebastian Springer" name="author"/>
+            <meta content="Rheinwerk Publishing" name="publisher"/>
+            <meta content="© 2022 by Rheinwerk Publishing Inc., Boston (MA)" name="copyright"/>
+            <meta content="Node.js - The Comprehensive Guide - Testing" name="description"/>
+            <meta content="en" name="language"/>
+            <title>Testing</title>
+            <link href="common/main.css" rel="stylesheet" type="text/css"/>
+<meta content="urn:uuid:e0000000-0000-0000-0000-000029756394" name="Adept.expected.resource"/>
+        </head>
+    
+
+
+                    <body class="office_us type_kapitel">
+                        <div id="main">
+        <h2 class="t2" id="h23.2">23.2    <a id="p658"/>Assertion Testing<a class="indexanchor" id="i23_21"/></h2>
+        <p class="standard">The name of the <samp class="listingcharacter listingcharacter">assert</samp> module<a class="indexanchor" id="i23_22"/> is derived from the assertions. These are the methods provided by your testing framework to check if a value meets your expectations. First, <span class="crossreference "><a href="23_002.html#l23.2">Listing 23.2</a></span> shows a simple example of a unit test created with the means of the <samp class="listingcharacter listingcharacter">assert</samp> module.</p>
+        <div class="listing " id="l23.2"><pre><span class="rot">import</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"> strictEqual </span><span class="schwarz">}</span><span class="schwarz"> </span><span class="rot">from</span><span class="schwarz"> </span><span class="hellblau">'assert'</span><span class="schwarz">;</span><span class="schwarz"><br/></span> <br/><span class="rot">const</span><span class="schwarz"> myBuffer </span><span class="dunkelblau">=</span><span class="schwarz"> Buffer</span><span class="schwarz">.from(</span><span class="hellblau">'Hello World'</span><span class="schwarz">);</span><span class="schwarz"><br/></span> <br/><span class="rot">const</span><span class="schwarz"> result </span><span class="dunkelblau">=</span><span class="schwarz"> myBuffer</span><span class="schwarz">.toString();</span><span class="schwarz"><br/></span> <br/><span class="schwarz">strictEqual(</span><span class="schwarz">result</span><span class="schwarz">,</span><span class="schwarz"> </span><span class="hellblau">'Hello World'</span><span class="schwarz">);</span><span class="schwarz"> </span></pre></div>
+        <p class="caption "><b>Listing 23.2</b>    
+            Example of a Unit Test with the “assert” Module (buffer.js)</p>
+        <p class="standard">At the start of the test, you import the <samp class="listingcharacter listingcharacter">strictEqual</samp><a class="indexanchor" id="i23_23"/> function from the <samp class="listingcharacter listingcharacter">assert</samp> module. This type of <samp class="listingcharacter listingcharacter">import</samp> statement isn’t directly related to the test, but represents necessary preparatory work. The first step of the AAA test (arrange) consists of creating the <samp class="listingcharacter listingcharacter">buffer</samp> object. In this step, you provide the basis for your test. The next step (act) consists of a simple function call. Here you run the <samp class="listingcharacter listingcharacter">toString</samp> method of the <samp class="listingcharacter listingcharacter">buffer</samp> object and assign the result to a variable. Finally, at the end of the test, in the last step (assert), you use the <samp class="listingcharacter listingcharacter">strictEqual</samp> method of the <samp class="listingcharacter listingcharacter">assert</samp> module to check whether the return value of the <samp class="listingcharacter listingcharacter">toString</samp> method actually matches the <samp class="listingcharacter listingcharacter">Hello World</samp> value.</p>
+        <p class="standard">The test is now complete, and you can run it. For this purpose, you save it in a file named <span class="italic">buffer.js</span> and run it on the command line, as shown in <span class="crossreference "><a href="23_002.html#l23.3">Listing 23.3</a></span>.<a class="indexanchor" id="i23_24"/></p>
+        <div class="listing " id="l23.3"><pre>$ node buffer<span class="schwarz">.</span><span class="schwarz">js </span></pre></div>
+        <p class="caption "><b>Listing 23.3</b>    
+            Running an Assert Test</p>
+        <p class="standard">As with the Node.js tests, don’t be surprised if you don’t get any output<a class="indexanchor" id="i23_25"/>. As long as the tests run successfully, you won’t receive any output about the progress. Things are different if you modify the test slightly so that it fails, for example, if you write the string <samp class="listingcharacter listingcharacter">Hello Sun</samp> instead of <samp class="listingcharacter listingcharacter">Hello World</samp> in the last line of the test, as shown in <span class="crossreference "><a href="23_002.html#l23.4">Listing 23.4</a></span>.</p>
+        <div class="listing " id="l23.4"><pre><span class="rot">import</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"> strictEqual </span><span class="schwarz">}</span><span class="schwarz"> </span><span class="rot">from</span><span class="schwarz"> </span><span class="hellblau">'assert'</span><span class="schwarz">;</span><span class="schwarz"><br/></span> <br/><span class="rot">const</span><span class="schwarz"> myBuffer </span><span class="dunkelblau">=</span><span class="schwarz"> Buffer</span><span class="schwarz">.from(</span><span class="hellblau">'Hello World'</span><span class="schwarz">);</span><span class="schwarz"><br/></span> <br/><span class="rot">const</span><span class="schwarz"> result </span><span class="dunkelblau">=</span><span class="schwarz"> myBuffer</span><span class="schwarz">.toString();</span><span class="schwarz"><br/></span> <br/><span class="schwarz">strictEqual(</span><span class="schwarz">result</span><span class="schwarz">,</span><span class="schwarz"> </span><span class="hellblau">'Hello Sun'</span><span class="schwarz">);</span><span class="schwarz"> </span></pre></div>
+        <p class="caption "><b>Listing 23.4</b>    
+            Faulty Unit Test (buffer.js)</p>
+        <p class="standard"><a id="p659"/>If you run this test on the command line, you’ll get the output shown in <span class="crossreference "><a href="23_002.html#l23.5">Listing 23.5</a></span>.<a class="indexanchor" id="i23_26"/></p>
+        <div class="listing " id="l23.5"><pre>$ <span class="bold"><samp class="listingcharacter listingcharacter">node buffer.js<br/></samp></span><br/>node:internal/process/esm_loader:74<br/>    internalBinding('errors').triggerUncaughtException(<br/>                              ^<br/><br/>AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:<br/>+ actual - expected<br/><br/>+ 'Hello World'<br/>- 'Hello Sun'<br/>         ^<br/>    at file:///srv/node/buffer.js:7:1<br/>    at ModuleJob.run (node:internal/modules/esm/module_job:175:25)<br/>    at async Loader.import (node:internal/modules/esm/loader:178:24)<br/>    at async Object.loadESM (node:internal/process/esm_loader:68:5)<br/>    at async handleMainPromise (node:internal/modules/run_main:63:12) { <img alt="inline image" class="inline_image" src="bilder/umbruchpfeil.png"/><br/>      generatedMessage: true,<br/>  code: 'ERR_ASSERTION',<br/>  actual: 'Hello World',<br/>  expected: 'Hello Sun',<br/>  operator: 'strictEqual'<br/>} </pre></div>
+        <p class="caption "><b>Listing 23.5</b>    
+            Failed Test</p>
+        <p class="standard">In case of a failed test, the <samp class="listingcharacter listingcharacter">assert</samp> module ensures that an <samp class="listingcharacter listingcharacter">AssertionError</samp> type error gets triggered. The string containing the error object provides conclusions about the reason for the failure. You should note that the execution of the test stops at the first occurrence of an error, unless you catch the error in a <samp class="listingcharacter listingcharacter">try-catch</samp> block<a class="indexanchor" id="i23_27"/>. For example, it can happen that not only one test is faulty due to a change in the source code, but several, and you don’t notice this until you’ve repaired the first test.</p>
+        <p class="standard">As previously mentioned, the <samp class="listingcharacter listingcharacter">assert</samp> module has a number of assertion functions<a class="indexanchor" id="i23_28"/>. Some of the most important ones are listed in <span class="crossreference "><a href="23_002.html#t23.1">Table 23.1</a></span>.</p>
+        <table class="standardtable" id="t23.1">
+            <thead>
+                <tr>
+                    <th class="tablehead tablecell_first top_border_cell">
+                        <p class="standard first-item last-item">Assertion</p>
+                    </th>
+                    <th class="tablehead tablecell_last top_border_cell">
+                        <p class="standard first-item last-item">Description</p>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="tablecell tablecell_first top_border_cell">
+                        <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">fail([message])</samp></p>
+                    </td>
+                    <td class="tablecell tablecell_last top_border_cell">
+                        <p class="standard first-item last-item">Throws a bug and issues <samp class="listingcharacter listingcharacter">message</samp>.</p>
+                    </td>
+                </tr>
+                <tr class="light">
+                    <td class="tablecell tablecell_first">
+                        <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">ok(value, [message])</samp></p>
+                    </td>
+                    <td class="tablecell tablecell_last">
+                        <p class="standard first-item last-item">Checks whether the passed value is true. The check isn’t type-safe, so even the value <samp class="listingcharacter listingcharacter">1</samp> is true, for example.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tablecell tablecell_first">
+                        <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter"><a id="p660"/>equal(actual, expected,<br/>[message])</samp></p>
+                    </td>
+                    <td class="tablecell tablecell_last">
+                        <p class="standard first-item last-item">This function checks if the two values are equal. This comparison uses the <samp class="listingcharacter listingcharacter">==</samp> operator.</p>
+                    </td>
+                </tr>
+                <tr class="light">
+                    <td class="tablecell tablecell_first">
+                        <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">strictEqual(actual, expected[, message])</samp></p>
+                    </td>
+                    <td class="tablecell tablecell_last">
+                        <p class="standard first-item last-item">Checks for strict equality between both passed values.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tablecell tablecell_first">
+                        <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">deepEqual(actual,<br/>expected, [message])</samp></p>
+                    </td>
+                    <td class="tablecell tablecell_last">
+                        <p class="standard first-item last-item">Checks if complex structures such as objects are identical. This is a legacy function that should no longer be used.</p>
+                    </td>
+                </tr>
+                <tr class="light">
+                    <td class="tablecell tablecell_first">
+                        <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">deepStrictEqual(actual,<br/>expected, [message])</samp></p>
+                    </td>
+                    <td class="tablecell tablecell_last">
+                        <p class="standard first-item last-item">This is the alias for <samp class="listingcharacter listingcharacter">deepEqual</samp>, which shouldn’t be used now.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tablecell tablecell_first">
+                        <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">throws(block, [error],<br/>[message])</samp></p>
+                    </td>
+                    <td class="tablecell tablecell_last">
+                        <p class="standard first-item last-item">This function expects an error to be triggered in the passed code block. If that’s not the case, the script will fail.</p>
+                    </td>
+                </tr>
+                <tr class="light">
+                    <td class="tablecell tablecell_first">
+                        <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">ifError(value)</samp></p>
+                    </td>
+                    <td class="tablecell tablecell_last">
+                        <p class="standard first-item last-item">Calling this assertion function fails if the passed value is <samp class="listingcharacter listingcharacter">true</samp>.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tablecell tablecell_first">
+                        <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">match(string, regexp[, message])</samp></p>
+                    </td>
+                    <td class="tablecell tablecell_last">
+                        <p class="standard first-item last-item">Checks whether a regular expression matches a passed string.</p>
+                    </td>
+                </tr>
+                <tr class="light">
+                    <td class="tablecell tablecell_first">
+                        <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">rejects(asyncFn[, error][, message])</samp></p>
+                    </td>
+                    <td class="tablecell tablecell_last">
+                        <p class="standard first-item last-item">Waits until the passed <samp class="listingcharacter listingcharacter">async</samp> function or the passed promise has been resolved and checks whether the promise has been rejected.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="caption "><b>Table 23.1</b>    
+            Assertion Methods of the “assert” Module</p>
+        <p class="standard">You can pass a mostly optional message to all assertion methods except the <samp class="listingcharacter listingcharacter">ifError</samp> method. This string is displayed instead of the default message when the error is output due to a failure of the test.</p>
+        <div class="box box_standard">
+            <h6 class="boxheading">Strict Mode<a class="indexanchor" id="i23_29"/></h6>
+            <p class="standard first">In the strict mode of the <samp class="listingcharacter listingcharacter">assert</samp> module, the nonstrict functions behave like their strict counterparts. You can enable the strict mode by either using the <samp class="listingcharacter listingcharacter">strict</samp> object from the <samp class="listingcharacter listingcharacter">assert</samp> module directly or by importing the assertion functions from <samp class="listingcharacter listingcharacter">assert/strict</samp>.</p>
+            <p class="standard">In the context of comparison methods, strict means that the <samp class="listingcharacter listingcharacter">===</samp> operator is used for comparison purposes, thus avoiding the typecasting<a class="indexanchor" id="i23_30"/> of JavaScript.</p>
+            <p class="standard last">Whenever <samp class="listingcharacter listingcharacter">equal</samp> or <samp class="listingcharacter listingcharacter">deepEqual</samp> is mentioned in the following sections, we’re referring to the strict variant.</p>
+        </div>
+        <p class="standard">For you to avoid having to awkwardly negate certain expressions first, there are already negated versions available for the <samp class="listingcharacter listingcharacter">equal</samp> and <samp class="listingcharacter listingcharacter">deepEqual</samp> methods. For this purpose, the <a id="p661"/>names of the methods are simply prefixed with a <samp class="listingcharacter listingcharacter">not</samp>. For example, the counterpart to <samp class="listingcharacter listingcharacter">strictEqual</samp> is <samp class="listingcharacter listingcharacter">notStrictEqual</samp>. This method tests the inequality using the <samp class="listingcharacter listingcharacter">!==</samp> operator. The negation of the <samp class="listingcharacter listingcharacter">throws</samp> method doesn’t conform to this schema, however, as its name is <samp class="listingcharacter listingcharacter">doesNotThrow</samp>. But its effect is similar to that of the other methods. It ensures that the test fails if an error is thrown in the passed code block.</p>
+        
+            <h3 class="t3" id="h23.2.1">23.2.1    Exceptions<a class="indexanchor" id="i23_31"/></h3>
+            <p class="standard">In your unit tests, you should not only cover the <span class="italic">happy case</span>, that is, the success case, but also check for failures. In this context, the <samp class="listingcharacter listingcharacter">throws</samp> method is useful because it ensures that a function throws an exception under certain circumstances. However, it should be noted here that you must pass a function object to the <samp class="listingcharacter listingcharacter">throws</samp> method and not the return value of the function. If you called the function directly, the thrown exception would cause the test to be aborted and marked as failed. The <samp class="listingcharacter listingcharacter">throws</samp> method<a class="indexanchor" id="i23_32"/> ensures that the exception is caught and checked so that the test can be completed successfully.</p>
+            <p class="standard">The source code in <span class="crossreference "><a href="23_002.html#l23.6">Listing 23.6</a></span> contains a function called <samp class="listingcharacter listingcharacter">add</samp> that throws an <samp class="listingcharacter listingcharacter">error</samp><a class="indexanchor" id="i23_33"/> type exception if one of the two arguments passed isn’t a number.</p>
+            <div class="listing " id="l23.6"><pre><span class="rot">export</span><span class="schwarz"> </span><span class="rot">default</span><span class="schwarz"> </span><span class="rot">function</span><span class="schwarz"> </span><span class="schwarz">add(</span><span class="schwarz">a</span><span class="schwarz">,</span><span class="schwarz"> b</span><span class="schwarz">)</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>  <span class="rot">if</span><span class="schwarz"> </span><span class="schwarz">(</span><span class="rot">typeof</span><span class="schwarz"> a </span><span class="dunkelblau">!==</span><span class="schwarz"> </span><span class="hellblau">'number'</span><span class="schwarz"> </span><span class="dunkelblau">||</span><span class="schwarz"> </span><span class="rot">typeof</span><span class="schwarz"> b </span><span class="dunkelblau">!==</span><span class="schwarz"> </span><span class="hellblau">'number'</span><span class="schwarz">)</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>    <span class="rot">throw</span><span class="schwarz"> </span><span class="rot">new </span><span class="schwarz">Error(</span><span class="hellblau">'Please use numbers only'</span><span class="schwarz">);</span><span class="schwarz"><br/></span>  <span class="schwarz">}</span><span class="schwarz"><br/></span>  <span class="rot">return</span><span class="schwarz"> a </span><span class="dunkelblau">+</span><span class="schwarz"> b</span><span class="schwarz">;</span><span class="schwarz"><br/></span><span class="schwarz">}</span><span class="schwarz"> </span></pre></div>
+            <p class="caption "><b>Listing 23.6</b>    
+            Function That Throws an Exception (add.js)</p>
+            <p class="standard">The test you can use to test this exception is shown in <span class="crossreference "><a href="23_002.html#l23.7">Listing 23.7</a></span>.</p>
+            <div class="listing " id="l23.7"><pre><span class="rot">import</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"> throws </span><span class="schwarz">}</span><span class="schwarz"> </span><span class="rot">from</span><span class="schwarz"> </span><span class="hellblau">'assert'</span><span class="schwarz">;</span><span class="schwarz"><br/></span><span class="rot">import</span><span class="schwarz"> add </span><span class="rot">from</span><span class="schwarz"> </span><span class="hellblau">'./add.js'</span><span class="schwarz">;</span><span class="schwarz"><br/></span> <br/><span class="schwarz">throws(()</span><span class="schwarz"> </span><span class="dunkelblau">=&gt;</span><span class="schwarz"> </span><span class="schwarz">add(</span><span class="hellblau">'1'</span><span class="schwarz">,</span><span class="schwarz"> </span><span class="schwarz">2),</span><span class="schwarz"> Error</span><span class="schwarz">);</span><span class="schwarz"> </span></pre></div>
+            <p class="caption "><b>Listing 23.7</b>    
+            Exception Testing (add.test.js)</p>
+            <p class="standard">You save in a file named <span class="italic">add.test.js</span>. It’s based on the assumption that you’ve saved the source code from <span class="crossreference "><a href="23_002.html#l23.6">Listing 23.6</a></span> in a file named <span class="italic">add.js</span> in the same directory. So, in this case, you need to load both the <samp class="listingcharacter listingcharacter">assert</samp> module and the code to be tested. After that, you can run the test. Make sure that the <samp class="listingcharacter listingcharacter">add</samp> function isn’t called directly but is encapsulated in an arrow function. The <samp class="listingcharacter listingcharacter">throws</samp> method then handles the call of the function. You then run the test using the <samp class="listingcharacter listingcharacter">node add.test.js</samp> command.</p>
+        
+        
+            <h3 class="t3" id="h23.2.2">23.2.2    <a id="p662"/>Testing Promises<a class="indexanchor" id="i23_34"/></h3>
+            <p class="standard">Due to the trend of moving away from asynchronous operations with callbacks toward promises and async functions<a class="indexanchor" id="i23_35"/>, you must also be able to test such functions. <span class="crossreference "><a href="23_002.html#l23.8">Listing 23.8</a></span> shows an asynchronous function that returns either a successful or a failed promise depending on the first parameter. The second parameter enables you to pass a message.</p>
+            <div class="listing " id="l23.8"><pre><span class="rot">export</span><span class="schwarz"> </span><span class="rot">default</span><span class="schwarz"> </span><span class="rot">function</span><span class="schwarz"> </span><span class="schwarz">(</span><span class="schwarz">success</span><span class="schwarz">,</span><span class="schwarz"> message</span><span class="schwarz">)</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>  <span class="rot">if</span><span class="schwarz"> </span><span class="schwarz">(</span><span class="schwarz">success</span><span class="schwarz">)</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>    <span class="rot">return</span><span class="schwarz"> Promise</span><span class="schwarz">.resolve(</span><span class="schwarz">message</span><span class="schwarz">);</span><span class="schwarz"><br/></span>  <span class="schwarz">}</span><span class="schwarz"> </span><span class="rot">else</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>    <span class="rot">return</span><span class="schwarz"> Promise</span><span class="schwarz">.reject(</span><span class="schwarz">message</span><span class="schwarz">);</span><span class="schwarz"><br/></span>  <span class="schwarz">}</span><span class="schwarz"><br/></span><span class="schwarz">}</span><span class="schwarz"> </span></pre></div>
+            <p class="caption "><b>Listing 23.8</b>    
+            Asynchronous Function (index.js)</p>
+            <p class="standard">The first test case for such a function covers the success case. <span class="crossreference "><a href="23_002.html#l23.9">Listing 23.9</a></span> contains the corresponding source code.</p>
+            <div class="listing " id="l23.9"><pre><span class="rot">import</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"> strictEqual </span><span class="schwarz">}</span><span class="schwarz"> </span><span class="rot">from</span><span class="schwarz"> </span><span class="hellblau">'assert'</span><span class="schwarz">;</span><span class="schwarz"><br/></span><span class="rot">import</span><span class="schwarz"> asyncFunction </span><span class="rot">from</span><span class="schwarz"> </span><span class="hellblau">'./index.js'</span><span class="schwarz">;</span><span class="schwarz"><br/></span> <br/><span class="schwarz">asyncFunction(</span><span class="rot">true</span><span class="schwarz">,</span><span class="schwarz"> </span><span class="hellblau">'Hello World'</span><span class="schwarz">).then((</span><span class="schwarz">data</span><span class="schwarz">)</span><span class="schwarz"> </span><span class="dunkelblau">=&gt;</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>  <span class="schwarz">strictEqual(</span><span class="schwarz">data</span><span class="schwarz">,</span><span class="schwarz"> </span><span class="hellblau">'Hello World'</span><span class="schwarz">);</span><span class="schwarz"><br/></span><span class="schwarz">});</span><span class="schwarz"> </span></pre></div>
+            <p class="caption "><b>Listing 23.9</b>    
+            Testing the Success Case of the Promise (index.test.js)</p>
+            <p class="standard">As an alternative to the variant presented here, in which you perform the check within the <samp class="listingcharacter listingcharacter">then</samp> callback function, you can also use a top-level <samp class="listingcharacter listingcharacter">await</samp>. The modified test is shown in <span class="crossreference "><a href="23_002.html#l23.10">Listing 23.10</a></span>.</p>
+            <div class="listing " id="l23.10"><pre><span class="rot">import</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"> strictEqual </span><span class="schwarz">}</span><span class="schwarz"> </span><span class="rot">from</span><span class="schwarz"> </span><span class="hellblau">'assert'</span><span class="schwarz">;</span><span class="schwarz"><br/></span><span class="rot">import</span><span class="schwarz"> asyncFunction </span><span class="rot">from</span><span class="schwarz"> </span><span class="hellblau">'./index.js'</span><span class="schwarz">;</span><span class="schwarz"><br/></span> <br/><span class="rot">const</span><span class="schwarz"> data </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="rot">await</span><span class="schwarz"> </span><span class="schwarz">asyncFunction(</span><span class="rot">true</span><span class="schwarz">,</span><span class="schwarz"> </span><span class="hellblau">'Hello World'</span><span class="schwarz">);</span><span class="schwarz"><br/></span><span class="schwarz">strictEqual(</span><span class="schwarz">data</span><span class="schwarz">,</span><span class="schwarz"> </span><span class="hellblau">'Hello World'</span><span class="schwarz">);</span><span class="schwarz"> </span></pre></div>
+            <p class="caption "><b>Listing 23.10</b>    
+            Testing the Success Case with “async” . . . “await” (index.test.js)</p>
+            <p class="standard">Since version 10 of Node.js, the <samp class="listingcharacter listingcharacter">assert</samp> module provides the two methods <samp class="listingcharacter listingcharacter">assert.rejects</samp> and <samp class="listingcharacter listingcharacter">assert.doesNotReject</samp> for handling failing promises<a class="indexanchor" id="i23_36"/>. Both work like the <samp class="listingcharacter listingcharacter">assert.throws</samp><a class="indexanchor" id="i23_37"/> and <samp class="listingcharacter listingcharacter">assert.doesNotThrow</samp> methods. Again, you don’t pass the return value, but a function. <span class="crossreference "><a href="23_002.html#l23.11">Listing 23.11</a></span> shows their application in the actual example.</p>
+            <div class="listing " id="l23.11"><pre><span class="rot"><a id="p663"/>import</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"> rejects </span><span class="schwarz">}</span><span class="schwarz"> </span><span class="rot">from</span><span class="schwarz"> </span><span class="hellblau">'assert'</span><span class="schwarz">;</span><span class="schwarz"><br/></span><span class="rot">import</span><span class="schwarz"> asyncFunction </span><span class="rot">from</span><span class="schwarz"> </span><span class="hellblau">'./index.js'</span><span class="schwarz">;</span><span class="schwarz"><br/></span> <br/><span class="schwarz">rejects(()</span><span class="schwarz"> </span><span class="dunkelblau">=&gt;</span><span class="schwarz"> </span><span class="schwarz">asyncFunction(</span><span class="rot">false</span><span class="schwarz">,</span><span class="schwarz"> </span><span class="hellblau">'Fail!'</span><span class="schwarz">));</span><span class="schwarz"> </span></pre></div>
+            <p class="caption "><b>Listing 23.11</b>    
+            Intercepting Failed Promises (index.test.js)</p>
+            <p class="standard">Not only does the <samp class="listingcharacter listingcharacter">assert</samp> module enable you to perform simple comparisons and test individual functions, but also, as the tests of the Node.js platform prove, the <samp class="listingcharacter listingcharacter">assert</samp> module is well suited for testing complex applications. However, the absence of test grouping capabilities and other features expected of a unit test framework makes formulating unit tests a difficult task. For this reason, the following sections describe other frameworks you can use to formulate unit tests for your application.</p>
+        
+    </div><p class="signatur"/>
+                    </body>
+                </html>

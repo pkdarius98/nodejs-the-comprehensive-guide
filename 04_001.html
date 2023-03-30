@@ -1,0 +1,58 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+                    
+        <head><meta content="application/xhtml+xml; charset=utf-8" http-equiv="Content-Type"/>
+            <meta content="application/xhtml+xml; charset=utf-8" name="content-type"/>
+            <meta content="Node.js Modules" name="title"/>
+            <meta content="Sebastian Springer" name="author"/>
+            <meta content="Rheinwerk Publishing" name="publisher"/>
+            <meta content="© 2022 by Rheinwerk Publishing Inc., Boston (MA)" name="copyright"/>
+            <meta content="Node.js - The Comprehensive Guide - Node.js Modules" name="description"/>
+            <meta content="en" name="language"/>
+            <title>Node.js Modules</title>
+            <link href="common/main.css" rel="stylesheet" type="text/css"/>
+<meta content="urn:uuid:e0000000-0000-0000-0000-000029756394" name="Adept.expected.resource"/>
+        </head>
+    
+
+
+                    <body class="office_us type_kapitel">
+                        <div id="main"><h1 class="t1" id="h4">4    <a id="p101"/>Node.js Modules</h1><p class="introductorynote indent_chapter_single">The whole is more than the sum of its parts.<br/>–Aristotle</p><p class="standard">The<a class="indexanchor" id="i04_00"/> structure of Node.js is inspired by the Unix philosophy<a class="indexanchor" id="i04_01"/>. In essence, this philosophy states that software should consist of components<a class="indexanchor" id="i04_02"/> that focus on completing only one specific task. These components work together via interfaces<a class="indexanchor" id="i04_03"/> to form the overall system. This idea runs through the entire structure of Node.js—from the core libraries<a class="indexanchor" id="i04_04"/> to your own application. This chapter is designed to help you understand the Node.js module system and how you can use it when building your applications.</p>
+        <h2 class="t2" id="h4.1">4.1    Modular Structure<a class="indexanchor" id="i04_05"/></h2>
+        <p class="standard">You can compare the structure of Node.js to an onion<a class="indexanchor" id="i04_06"/>. The platform is made up of several layers, each of which serves a specific purpose. <span class="crossreference "><a href="04_001.html#f4.1">Figure 4.1</a></span> illustrates this structure.</p>
+        <div class="imagebox figure-type"><a href="img-f4.1.html" id="f4.1"><img alt="Structure of Node.js" id="img-f4.1" src="bilderklein/klein04_001.png"/></a></div>
+        <p class="caption "><b>Figure 4.1</b>    
+            Structure of Node.js</p>
+        <p class="standard">The core of Node.js is the <span class="italic">V8 engine</span><a class="indexanchor" id="i04_07"/> and some additional libraries such as <samp class="listingcharacter listingcharacter">libuv</samp><a class="indexanchor" id="i04_08"/> or <samp class="listingcharacter listingcharacter">openssl</samp><a class="indexanchor" id="i04_09"/>. This layer represents the execution environment and is written in C++. Most <a id="p102"/>developers working with Node.js don’t come into direct contact with these components.</p>
+        <p class="standard">The layer that surrounds the core of the platform is referred to as <span class="italic">node bindings</span><a class="indexanchor" id="i04_10"/> and represents the transition between C++ and JavaScript. This part of the platform makes it possible that parts of Node.js itself are implemented in JavaScript and can also be used directly when you implement applications.</p>
+        <p class="standard">The final layer of the actual Node.js platform—the <span class="italic">standard library</span><a class="indexanchor" id="i04_11"/>—consists of the core modules. With this interface, you work directly in the development of your applications. The task of the core modules is to give you access to the interfaces of your system, so that you can access the file system or the network, for example. Besides modularization<a class="indexanchor" id="i04_12"/>, another goal of Node.js developers is to keep the platform relatively small, o Node.js is just a tool that provides the basic functionality for your application. You have to take care of everything else yourself, which means, for example, you would have to implement access to a database<a class="indexanchor" id="i04_13"/> or the WebSocket<a class="indexanchor" id="i04_14"/> protocol yourself. But this contradicts the philosophy of Node.js, which envisions many small and reusable components. For this reason, package managers exist for Node.js—most notably Node Package Manager (npm), which is very closely tied to the platform.</p>
+        <p class="standard">The package managers or the external packages form another layer in the Node.js architecture and provide you with almost all conceivable modules you need when implementing an application. In the broadest sense of the word, a <span class="italic">module</span> is a library in Node.js that can be loaded via the module system and then used in an application. A <span class="italic">package</span> consists of one or more modules that have been combined into one package. This package can then be installed via a package manager. The range of available packages extends from auxiliary libraries such as <span class="italic">lodash</span><a class="indexanchor" id="i04_15"/> and database drivers to complete application frameworks or content management systems (CMSs). And if you don’t find the package you need, you can always write and publish it yourself. See <span class="crossreference "><a href="21_001.html#h21">Chapter 21</a></span> to learn how to do that.</p>
+        <p class="standard">Finally, the last layer is your own application. Here, you should also take a modular approach. This means that your application consists of many small self-contained parts that interact with each other via defined interfaces.</p>
+        <p class="standard"><span class="crossreference "><a href="04_001.html#f4.2">Figure 4.2</a></span> contains an example for the structuring of an application. You should pay particular attention to the meaningful naming of directories and files, which makes it much easier to find source code.</p>
+        <div class="box box_standard">
+            <h6 class="boxheading">Application Structure</h6>
+            <p class="standard first"><span class="italic">Modularization</span><a class="indexanchor" id="i04_16"/> is the key to a maintainable and extensible application. However, this doesn’t mean that every Node.js application has to be a composite of microservices<a class="indexanchor" id="i04_17"/>. Instead, you should choose an appropriate architectural form for each problem. A monolith<a class="indexanchor" id="i04_18"/> with a modular structure can also be a valid solution strategy for a clearly defined problem.</p>
+            <p class="standard"><a id="p103"/>When modularizing, you should make sure that each module is in its own file and contains only a manageable number of functions or exactly one concrete object or class. You should also make sure that the content of a module is always thematically very similar and solves only one very specific task at a time. Give your module structures meaningful names that are consistent across your entire application. You can then further arrange the individual files in a directory structure<a class="indexanchor" id="i04_19"/>, where a directory should again contain modules from the same theme.</p>
+            <p class="standard last">To keep an application organized, you shouldn’t place too many files in a single directory. As a safe guideline, you can use 7–10 files per directory. If there are more, you should create subdirectories.</p>
+        </div>
+        <div class="imagebox figure-type"><a href="img-f4.2.html" id="f4.2"><img alt="Structure of an Application" id="img-f4.2" src="bilderklein/klein04_002.png"/></a></div>
+        <p class="caption "><b>Figure 4.2</b>    
+            Structure of an Application</p>
+        <p class="standard">Modularization in software development has some decisive advantages:</p>
+        <ul>
+            <li>
+                <p class="standard first-item last-item">Reusability<a class="indexanchor" id="i04_20"/> of subcomponents</p>
+            </li>
+            <li>
+                <p class="standard first-item last-item">Better testability<a class="indexanchor" id="i04_21"/> due to small, self-contained components</p>
+            </li>
+            <li>
+                <p class="standard first-item last-item">Parallelizability<a class="indexanchor" id="i04_22"/> during development due to the independence of the components</p>
+            </li>
+            <li>
+                <p class="standard first-item last-item">Interchangeability<a class="indexanchor" id="i04_23"/> of individual components through defined interfaces</p>
+            </li>
+        </ul>
+        <p class="standard">At the core of Node.js, the modular design allows developers to continuously modernize the platform by marking individual features or modules as deprecated or adding new modules. The following sections describe which modules make up this core.</p>
+    </div><p class="signatur"/>
+                    </body>
+                </html>

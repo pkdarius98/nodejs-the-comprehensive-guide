@@ -1,0 +1,109 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+                    
+        <head><meta content="application/xhtml+xml; charset=utf-8" http-equiv="Content-Type"/>
+            <meta content="application/xhtml+xml; charset=utf-8" name="content-type"/>
+            <meta content="Quality Assurance" name="title"/>
+            <meta content="Sebastian Springer" name="author"/>
+            <meta content="Rheinwerk Publishing" name="publisher"/>
+            <meta content="© 2022 by Rheinwerk Publishing Inc., Boston (MA)" name="copyright"/>
+            <meta content="Node.js - The Comprehensive Guide - Quality Assurance" name="description"/>
+            <meta content="en" name="language"/>
+            <title>Quality Assurance</title>
+            <link href="common/main.css" rel="stylesheet" type="text/css"/>
+<meta content="urn:uuid:e0000000-0000-0000-0000-000029756394" name="Adept.expected.resource"/>
+        </head>
+    
+
+
+                    <body class="office_us type_kapitel">
+                        <div id="main">
+        <h2 class="t2" id="h22.4">22.4    Programming Mistake Detector: Copy/Paste Detector<a class="indexanchor" id="i22_37"/></h2>
+        <p class="standard">Besides ESLint, there are many other programs that deal with various aspects of static code analysis in JavaScript. One of these tools is Programming Mistake Detector (PMD), which originates from the Java world and is also entirely implemented in Java. PMD provides a collection of tools for application quality assurance. Among other things, a Copy/Paste Detector (CPD)<a class="indexanchor" id="i22_38"/> is included. The purpose of this module is to find duplicates<a class="indexanchor" id="i22_39"/> in the source code.</p>
+        <p class="standard"><a id="p650"/>Duplicates in the source code pose a significant problem with regard to the maintainability and extensibility of an application. If source code is copied within an application and pasted elsewhere, the same source code must be maintained multiple times. This becomes especially relevant when errors occur in this source code and then need to be fixed in all places where the code was inserted. The same applies to extensions: If a code block is improved or further developed, this must also be done in all places where this block is used.</p>
+        <p class="standard">This problem exists not only in Java applications, but in all programming languages. Consequently, the existing infrastructure offered by PMD includes CPD, which was extended to handle JavaScript code as well.</p>
+        <p class="standard">The basis for using PMD CPD is the sample code shown in <span class="crossreference "><a href="22_004.html#l22.9">Listing 22.9</a></span>. By saving this code in a file named <span class="italic">cpd.js</span>, you can apply CPD to it afterwards.</p>
+        <div class="listing " id="l22.9"><pre><span class="rot">function</span><span class="schwarz"> </span><span class="schwarz">duplicate1(</span><span class="schwarz">input</span><span class="schwarz">)</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>  <span class="rot">let</span><span class="schwarz"> output </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="hellblau">''</span><span class="schwarz">;</span><span class="schwarz"><br/></span>  <span class="rot">for</span><span class="schwarz"> </span><span class="schwarz">(</span><span class="rot">let</span><span class="schwarz"> i </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="schwarz">0;</span><span class="schwarz"> i </span><span class="dunkelblau">&lt;</span><span class="schwarz"> </span><span class="schwarz">10;</span><span class="schwarz"> i</span><span class="dunkelblau">++</span><span class="schwarz">)</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>    output <span class="dunkelblau">+=</span><span class="schwarz"> input</span><span class="schwarz">;</span><span class="schwarz"><br/></span>  <span class="schwarz">}</span><span class="schwarz"><br/></span>  <span class="rot">return</span><span class="schwarz"> output</span><span class="schwarz">;</span><span class="schwarz"><br/></span><span class="schwarz">}</span><span class="schwarz"><br/></span><br/><span class="rot">function</span><span class="schwarz"> </span><span class="schwarz">duplicate2(</span><span class="schwarz">input</span><span class="schwarz">)</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>  <span class="rot">let</span><span class="schwarz"> output </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="hellblau">''</span><span class="schwarz">;</span><span class="schwarz"><br/></span>  <span class="rot">for</span><span class="schwarz"> </span><span class="schwarz">(</span><span class="rot">let</span><span class="schwarz"> i </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="schwarz">0;</span><span class="schwarz"> i </span><span class="dunkelblau">&lt;</span><span class="schwarz"> </span><span class="schwarz">10;</span><span class="schwarz"> i</span><span class="dunkelblau">++</span><span class="schwarz">)</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>    output <span class="dunkelblau">+=</span><span class="schwarz"> input</span><span class="schwarz">;</span><span class="schwarz"><br/></span>  <span class="schwarz">}</span><span class="schwarz"><br/></span>  <span class="rot">return</span><span class="schwarz"> output</span><span class="schwarz">;</span><span class="schwarz"><br/></span><span class="schwarz">}</span><span class="schwarz"> </span></pre></div>
+        <p class="caption "><b>Listing 22.9</b>    
+            Source Code with Duplicates</p>
+        <p class="standard">The source code in <span class="crossreference "><a href="22_004.html#l22.9">Listing 22.9</a></span> doesn’t pose a problem because both functions are named differently but implement the same logic.</p>
+        
+            <h3 class="t3" id="h22.4.1">22.4.1    Installation<a class="indexanchor" id="i22_40"/></h3>
+            <p class="standard">In the next step, you need PMD, the platform that provides you with CPD, among other things. You can get the application from <span class="url"><a href="https://pmd.github.io/">https://pmd.github.io/</a></span>. <span class="crossreference "><a href="22_004.html#l22.10">Listing 22.10</a></span> shows the relevant steps to install it on a Unix system.</p>
+            <div class="listing " id="l22.10"><pre>$ cd opt<br/>$ wget https://github.com/pmd/pmd/releases/download/pmd_releases%2F6.38.0/pmd-bin-6.38.0.zip<br/><a id="p651"/>$ unzip pmd-bin-6.38.0.zip<br/>$ mv pmd-bin-6.38.0 pmd </pre></div>
+            <p class="caption "><b>Listing 22.10</b>    
+            Installing PMD</p>
+        
+        
+            <h3 class="t3" id="h22.4.2">22.4.2    Execution<a class="indexanchor" id="i22_41"/></h3>
+            <p class="standard">Once you’ve unpacked the archive, you can use the tool. You don’t need to run any installation routine or anything like that. The <span class="italic">bin</span> directory of PMD contains the <span class="italic">run.sh</span> file for Unix-based systems or different <span class="italic">.bat</span> files for Windows, respectively. If you now run PMD using the command specified in <span class="crossreference "><a href="22_004.html#l22.11">Listing 22.11</a></span> in the directory where your JavaScript source code is located, the code will be checked for duplicates.</p>
+            <div class="listing " id="l22.11"><pre>$ /opt/pmd/bin/run.sh cpd --files . --minimum-tokens 4 --encoding utf8 <br/>--language ecmascript </pre></div>
+            <p class="caption "><b>Listing 22.11</b>    
+            Running the CPD</p>
+            <p class="standard"><span class="crossreference "><a href="22_004.html#l22.11">Listing 22.11</a></span> is based on the assumption that you’ve installed PMD under <span class="italic">/opt</span>. If you’ve unpacked the archive elsewhere, you must modify the path accordingly.</p>
+            <p class="standard"><span class="crossreference "><a href="22_004.html#t22.1">Table 22.1</a></span> contains descriptions for the individual options.</p>
+            <table class="standardtable" id="t22.1">
+                <thead>
+                    <tr>
+                        <th class="tablehead tablecell_first top_border_cell">
+                            <p class="standard first-item last-item">Option</p>
+                        </th>
+                        <th class="tablehead tablecell_last top_border_cell">
+                            <p class="standard first-item last-item">Description</p>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="tablecell tablecell_first top_border_cell">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">cpd</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last top_border_cell">
+                            <p class="standard first-item last-item">Application of the PMD platform to be run</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">--files</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Files to be checked</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">--minimum-tokens</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Minimum number of language tokens that must match</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">--encoding</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Character encoding of the source code</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">--language</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Programming language in which the source code is available</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="caption "><b>Table 22.1</b>    
+            Command-Line Options for PMD</p>
+            <p class="standard">The output you get from this command is shown in <span class="crossreference "><a href="22_004.html#l22.12">Listing 22.12</a></span>.</p>
+            <div class="listing " id="l22.12"><pre>$ <span class="bold"><samp class="listingcharacter listingcharacter">/opt/pmd/bin/run.sh cpd --files . --minimum-tokens 4 --encoding utf8 <br/>--language ecmascript</samp></span><br/>Found a 7 line (33 tokens) duplication in the following files: <br/>Starting at line 1 of /srv/node/cpd.js<br/>Starting at line 9 of /srv/node/cpd.js<br/><br/>function duplicate1(input) {<br/>  let output = '';<br/>  for (let i = 0; i &lt; 10; i++) {<br/>    output += input;<br/><a id="p652"/>  }<br/>  return output;<br/>} </pre></div>
+            <p class="caption "><b>Listing 22.12</b>    
+            CPD Output</p>
+            <p class="standard">However, CPD not only enables you to find duplicates within a file but also find duplicate code blocks across different files. To achieve this, the files just need to be located in the path you specified via the <samp class="listingcharacter listingcharacter">--files</samp> option.</p>
+            <p class="standard">The tools presented here are used for automated quality assurance of applications.</p>
+        
+    </div><p class="signatur"/>
+                    </body>
+                </html>

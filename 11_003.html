@@ -1,0 +1,34 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+                    
+        <head><meta content="application/xhtml+xml; charset=utf-8" http-equiv="Content-Type"/>
+            <meta content="application/xhtml+xml; charset=utf-8" name="content-type"/>
+            <meta content="GraphQL" name="title"/>
+            <meta content="Sebastian Springer" name="author"/>
+            <meta content="Rheinwerk Publishing" name="publisher"/>
+            <meta content="© 2022 by Rheinwerk Publishing Inc., Boston (MA)" name="copyright"/>
+            <meta content="Node.js - The Comprehensive Guide - GraphQL" name="description"/>
+            <meta content="en" name="language"/>
+            <title>GraphQL</title>
+            <link href="common/main.css" rel="stylesheet" type="text/css"/>
+<meta content="urn:uuid:e0000000-0000-0000-0000-000029756394" name="Adept.expected.resource"/>
+        </head>
+    
+
+
+                    <body class="office_us type_kapitel">
+                        <div id="main">
+        <h2 class="t2" id="h11.3">11.3    GraphiQL<a class="indexanchor" id="i11_16"/></h2>
+        <p class="standard">GraphQL is a query language that uses HTTP as a transport layer, so it’s on the same level as REST, for example. This means you can address a GraphQL interface like the one you just implemented using a very ordinary HTTP client. For example, you can query your new interface from the command line using the code shown in <span class="crossreference "><a href="11_003.html#l11.4">Listing 11.4</a></span>.</p>
+        <div class="listing " id="l11.4"><pre>$ <span class="bold"><samp class="listingcharacter listingcharacter">curl <br/>  -X POST <br/>  -H "Content-Type: application/json" <br/>  --data '{"query": "{ greet }"}' <br/>  http://localhost:8080/graphql<br/> </samp></span><br/>{"data":{"greet":"Hello GraphQL"}} </pre></div>
+        <p class="caption "><b>Listing 11.4</b>    
+            Querying the GraphQL Interface with cURL</p>
+        <p class="standard">The query is an HTTP POST request with the <samp class="listingcharacter listingcharacter">content type</samp> header <samp class="listingcharacter listingcharacter">application/json</samp>. As the message body, you send the data, in this case, a JavaScript Object Notation (JSON) structure with the <samp class="listingcharacter listingcharacter">query</samp> property containing the character string <samp class="listingcharacter listingcharacter">{ greet }</samp>, that is, the actual query. You then send everything to <span class="italic">http://localhost:8080/graphql</span> and receive a corresponding response from the interface.</p>
+        <p class="standard"><a id="p342"/>Querying a GraphQL interface from the command line isn’t very elegant and quickly gets confusing, especially with more advanced interfaces. And this is where the <samp class="listingcharacter listingcharacter">graphiql</samp> property comes into play, which you’ve set to <samp class="listingcharacter listingcharacter">true</samp> in <span class="crossreference "><a href="11_002.html#l11.2">Listing 11.2</a></span>. This property activates the GraphiQL tool—a graphical interface for GraphQL. When you open <span class="italic">http://localhost:8080/graphql</span> in your browser, you can use GraphiQL directly. <span class="crossreference "><a href="11_003.html#f11.1">Figure 11.1</a></span> shows the GraphiQL interface.</p>
+        <div class="imagebox figure-type"><a href="img-f11.1.html" id="f11.1"><img alt="GraphiQL View" id="img-f11.1" src="bilderklein/klein11_001.png"/></a></div>
+        <p class="caption "><b>Figure 11.1</b>    
+            GraphiQL View</p>
+        <p class="standard">GraphiQL is divided into two sections. On the left, you can formulate your queries, and on the right, you can see the result. In this case, you’ve entered the string <samp class="listingcharacter listingcharacter">{ greet }</samp> as the query and get back the structure with <samp class="listingcharacter listingcharacter">Hello GraphQL</samp>.</p>
+        <p class="standard">Now it’s time to merge the data from the application and the GraphQL interface.</p>
+    </div><p class="signatur"/>
+                    </body>
+                </html>

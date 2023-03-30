@@ -1,0 +1,323 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+                    
+        <head><meta content="application/xhtml+xml; charset=utf-8" http-equiv="Content-Type"/>
+            <meta content="application/xhtml+xml; charset=utf-8" name="content-type"/>
+            <meta content="Streams" name="title"/>
+            <meta content="Sebastian Springer" name="author"/>
+            <meta content="Rheinwerk Publishing" name="publisher"/>
+            <meta content="© 2022 by Rheinwerk Publishing Inc., Boston (MA)" name="copyright"/>
+            <meta content="Node.js - The Comprehensive Guide - Streams" name="description"/>
+            <meta content="en" name="language"/>
+            <title>Streams</title>
+            <link href="common/main.css" rel="stylesheet" type="text/css"/>
+<meta content="urn:uuid:e0000000-0000-0000-0000-000029756394" name="Adept.expected.resource"/>
+        </head>
+    
+
+
+                    <body class="office_us type_kapitel">
+                        <div id="main">
+        <h2 class="t2" id="h18.2">18.2    Readable Streams<a class="indexanchor" id="i18_19"/></h2>
+        <p class="standard">A readable stream is the starting point in a stream chain<a class="indexanchor" id="i18_20"/>, that is, it represents the data source. A readable stream is a wrapper around an input that is placed around the data source to stream from it.</p>
+        <p class="standard">Such stream wrappers already exist for numerous data sources. Node.js has some prebuilt internal stream implementations<a class="indexanchor" id="i18_21"/>, for example, for the file system or the network. In addition, numerous third-party providers offer a streaming API for their services that allows you to stream data records from a database or send information over a stream using the WebSocket protocol.</p>
+        <p class="standard">Finally, Node.js provides prebuilt classes that allow you to develop your own streams in just a few steps. The advantage here is that the platform takes care of the framework implementation, and you can focus on the implementation specific to your case.</p>
+        
+            <h3 class="t3" id="h18.2.1">18.2.1    Creating a Readable Stream<a class="indexanchor" id="i18_22"/></h3>
+            <p class="standard">The simplest variant of a readable stream will serve as the basis for the following consideration: reading data from the file system<a class="indexanchor" id="i18_23"/>. This means you open the file, and Node.js provides you with a wrapper to process the content as a stream. <span class="crossreference "><a href="18_002.html#l18.2">Listing 18.2</a></span> contains the corresponding source code.</p>
+            <div class="listing " id="l18.2"><pre><span class="rot"><a id="p549"/>import</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"> createReadStream </span><span class="schwarz">}</span><span class="schwarz"> </span><span class="rot">from</span><span class="schwarz"> </span><span class="hellblau">'fs'</span><span class="schwarz">;</span><span class="schwarz"><br/></span> <br/><span class="rot">const</span><span class="schwarz"> options </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>  encoding<span class="schwarz">:</span><span class="schwarz"> </span><span class="hellblau">'utf8'</span><span class="schwarz">,</span><span class="schwarz"><br/></span><span class="schwarz">};</span><span class="schwarz"><br/></span> <br/><span class="rot">const</span><span class="schwarz"> readStream </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="schwarz">createReadStream(</span><span class="hellblau">'input.txt'</span><span class="schwarz">,</span><span class="schwarz"> options</span><span class="schwarz">);</span><span class="schwarz"><br/></span> <br/>readStream<span class="schwarz">.on(</span><span class="hellblau">'readable'</span><span class="schwarz">,</span><span class="schwarz"> </span><span class="schwarz">()</span><span class="schwarz"> </span><span class="dunkelblau">=&gt;</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>  <span class="rot">const</span><span class="schwarz"> data </span><span class="dunkelblau">=</span><span class="schwarz"> readStream</span><span class="schwarz">.read();</span><span class="schwarz"><br/></span>  <span class="rot">if</span><span class="schwarz"> </span><span class="schwarz">(</span><span class="schwarz">data</span><span class="schwarz">)</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>    <span class="magenta">console</span><span class="schwarz">.log(</span><span class="schwarz">data</span><span class="schwarz">);</span><span class="schwarz"><br/></span>  <span class="schwarz">}</span><span class="schwarz"><br/></span><span class="schwarz">});</span><span class="schwarz"> </span></pre></div>
+            <p class="caption "><b>Listing 18.2</b>    
+            Readable Stream in the File System</p>
+            <p class="standard">When reading information from a file, you should keep in mind that a stream doesn’t know anything about word separators, punctuation, or paragraphs. Streams use packages of a fixed size. In the default case of readable streams in the file system, this is 64 KB<a class="indexanchor" id="i18_24"/>. If this value doesn’t fit your application, you can overwrite it with the <samp class="listingcharacter listingcharacter">highWaterMark</samp><a class="indexanchor" id="i18_25"/> option and adjust it accordingly.</p>
+            <p class="standard">When creating the readable stream, all you need is the name of the file you want to read and an optional configuration object that affects the stream. When you use file system streams, it’s important to specify the encoding. If you don’t specify anything here, <samp class="listingcharacter listingcharacter">buffer</samp> objects will be used. These are excellent for further processing within the application, but not when it comes to displaying the information that has been read. To solve this problem, you can either use the <samp class="listingcharacter listingcharacter">toString</samp> method<a class="indexanchor" id="i18_26"/> of the <samp class="listingcharacter listingcharacter">buffer</samp> object or directly specify the encoding when creating the stream.</p>
+            <p class="standard">For the example in <span class="crossreference "><a href="18_002.html#l18.2">Listing 18.2</a></span> to work, you need a text file whose contents can be read. In this case, you should name the file <span class="italic">input.txt</span> and set any text as content.</p>
+            <p class="standard">The actual work with the stream starts with registering a callback function on the <samp class="listingcharacter listingcharacter">readable</samp> event<a class="indexanchor" id="i18_27"/>. This event signals that data on the stream is ready to be read. Once the data is available, you can consume it by calling the <samp class="listingcharacter listingcharacter">read</samp> method<a class="indexanchor" id="i18_28"/>. In this variant of the streams, it isn’t possible to bind several parallel read operations to one stream, but we’ll describe that later. Inside the handler function for the <samp class="listingcharacter listingcharacter">readable</samp> event, you also check whether there is data in the data package. If you didn’t perform this check, the script would give you the value <samp class="listingcharacter listingcharacter">null</samp> in addition to the contents of the file. This is because the last call of the <samp class="listingcharacter listingcharacter">read</samp> method returns <samp class="listingcharacter listingcharacter">null</samp>, signaling that there is no more data in the stream.</p>
+            <p class="standard">Based on this example, you’ll now learn more about the readable stream interfaces of Node.js step by step.</p>
+        
+        
+            <h3 class="t3" id="h18.2.2">18.2.2    <a id="p550"/>Readable Stream Interface<a class="indexanchor" id="i18_29"/></h3>
+            <p class="standard">The readable streams of Node.js can do much more than just stream content from files to the console. Using a set of methods and events, you can manipulate the behavior of the stream and intervene at different points in the lifecycle<a class="indexanchor" id="i18_30"/> of the readable stream. <span class="crossreference "><a href="18_002.html#f18.2">Figure 18.2</a></span> summarizes the most important events and methods and shows at which point they are used.</p>
+            <div class="imagebox figure-type"><a href="img-f18.2.html" id="f18.2"><img alt="Events and Methods in the Readable Stream" id="img-f18.2" src="bilderklein/klein18_002.png"/></a></div>
+            <p class="caption "><b>Figure 18.2</b>    
+            Events and Methods in the Readable Stream</p>
+        
+        
+            <h3 class="t3" id="h18.2.3">18.2.3    Events of a Readable Stream<a class="indexanchor" id="i18_31"/></h3>
+            <p class="standard">In Node.js, events are asynchronous, which means the event handlers are registered and executed at a later time. For this reason, it almost doesn’t matter at which point in your source code you register the handlers<a class="indexanchor" id="i18_32"/>. The only important thing is that you’ve already registered the stream at this point. Otherwise, you should establish a convention for your project about when and in what order event handling should occur. <span class="crossreference "><a href="18_002.html#t18.1">Table 18.1</a></span> provides an overview of the standard events<a class="indexanchor" id="i18_33"/> of a readable stream.</p>
+            <table class="standardtable" id="t18.1">
+                <thead>
+                    <tr>
+                        <th class="tablehead tablecell_first top_border_cell">
+                            <p class="standard first-item last-item">Event</p>
+                        </th>
+                        <th class="tablehead tablecell_last top_border_cell">
+                            <p class="standard first-item last-item">Description</p>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="tablecell tablecell_first top_border_cell">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">readable</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last top_border_cell">
+                            <p class="standard first-item last-item">The stream contains data that can be read.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">data</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">This consumes data via the stream as soon as it’s available.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">close</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">The stream has been closed, and no further data can be received.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">error</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">An error occurred.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">end</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">This event is triggered when no more data can be consumed from the stream.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">pause</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">The <samp class="listingcharacter listingcharacter">pause</samp> method of the stream triggers this event.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter"><a id="p551"/>resume</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">This event is the counterpart of the <samp class="listingcharacter listingcharacter">pause</samp> event. The <samp class="listingcharacter listingcharacter">resume</samp> event is triggered by the <samp class="listingcharacter listingcharacter">resume</samp> method.</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="caption "><b>Table 18.1</b>    
+            Events of Readable Streams</p>
+            <p class="standard">We’ll describe the difference between the <samp class="listingcharacter listingcharacter">readable</samp> and <samp class="listingcharacter listingcharacter">data</samp> events later when we talk about the different modes of a readable stream. At this point, you only need to know that a stream operates in paused mode<a class="indexanchor" id="i18_34"/> by default, and the data is consumed with a combination of a listener on the <samp class="listingcharacter listingcharacter">readable</samp> event and a call of the <samp class="listingcharacter listingcharacter">read</samp> method. A listener on the <samp class="listingcharacter listingcharacter">data</samp> event puts the stream into flowing mode<a class="indexanchor" id="i18_35"/>.</p>
+            <p class="standard">You can use the <samp class="listingcharacter listingcharacter">close</samp> event to respond to the termination of the stream connection. This usually happens when a communication stream from the other side or a file descriptor has been closed. <span class="crossreference "><a href="18_002.html#l18.3">Listing 18.3</a></span> shows how to handle the <samp class="listingcharacter listingcharacter">close</samp> event in the context of the original example from <span class="crossreference "><a href="18_002.html#l18.2">Listing 18.2</a></span>.</p>
+            <div class="listing " id="l18.3"><pre><span class="rot">import</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"> createReadStream </span><span class="schwarz">}</span><span class="schwarz"> </span><span class="rot">from</span><span class="schwarz"> </span><span class="hellblau">'fs'</span><span class="schwarz">;</span><span class="schwarz"><br/></span> <br/><span class="rot">const</span><span class="schwarz"> options </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>  encoding<span class="schwarz">:</span><span class="schwarz"> </span><span class="hellblau">'utf8'</span><span class="schwarz">,</span><span class="schwarz"><br/></span><span class="schwarz">};</span><span class="schwarz"><br/></span> <br/><span class="rot">const</span><span class="schwarz"> readStream </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="schwarz">createReadStream(</span><span class="hellblau">'input.txt'</span><span class="schwarz">,</span><span class="schwarz"> options</span><span class="schwarz">);</span><span class="schwarz"><br/></span> <br/>readStream<span class="schwarz">.on(</span><span class="hellblau">'readable'</span><span class="schwarz">,</span><span class="schwarz"> </span><span class="schwarz">()</span><span class="schwarz"> </span><span class="dunkelblau">=&gt;</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>  <span class="rot">const</span><span class="schwarz"> data </span><span class="dunkelblau">=</span><span class="schwarz"> readStream</span><span class="schwarz">.read();</span><span class="schwarz"><br/></span>  <span class="rot">if</span><span class="schwarz"> </span><span class="schwarz">(</span><span class="schwarz">data</span><span class="schwarz">)</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>    <span class="magenta">console</span><span class="schwarz">.log(</span><span class="schwarz">data</span><span class="schwarz">);</span><span class="schwarz"><br/></span>  <span class="schwarz">}</span><span class="schwarz"><br/></span><span class="schwarz">});</span><span class="schwarz"><br/></span> <br/><span class="bold"><span class="schwarz"/><samp class="listingcharacter listingcharacter">readStream.on(<span class="hellblau">'close'</span><span class="schwarz">, () </span><span class="dunkelblau">=&gt;</span><span class="schwarz"> {</span><br/>  <span class="magenta">console</span><span class="schwarz">.log(</span><span class="hellblau">'The stream has been closed'</span><span class="schwarz">);</span><br/>});</samp></span> <span class="schwarz"/></pre></div>
+            <p class="caption "><b>Listing 18.3</b>    
+            Handling the “close” Event of a Readable Stream</p>
+            <p class="standard">The result of executing this example is first the content of the text file and at the end a line with the text <samp class="listingcharacter listingcharacter">The stream has been closed</samp>.</p>
+            <p class="standard">In addition to handling the success case, you should always provide routines for error handling to keep your application as robust as possible.</p>
+        
+        
+            <h3 class="t3" id="h18.2.4">18.2.4    <a id="p552"/>Error Handling<a class="indexanchor" id="i18_36"/> in Readable Streams</h3>
+            <p class="standard">In the development process, you usually have the environment well under your control so that few to no errors occur. For this reason, error handling is also neglected quite often. However, dealing with errors is essential for a stable and reliable application. For the example with the readable stream from the file system, this means that the application must be able to respond correspondingly, for example, if the file doesn’t exist or you don’t have the permission to read it. If you don’t register a callback on the <samp class="listingcharacter listingcharacter">error</samp> event<a class="indexanchor" id="i18_37"/>, an exception will be triggered, which, if not caught, will result in the immediate termination of your application. <span class="crossreference "><a href="18_002.html#l18.4">Listing 18.4</a></span> contains the source code for rudimentary error handling in the sample code.</p>
+            <div class="listing " id="l18.4"><pre><span class="rot">import</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"> createReadStream </span><span class="schwarz">}</span><span class="schwarz"> </span><span class="rot">from</span><span class="schwarz"> </span><span class="hellblau">'fs'</span><span class="schwarz">;</span><span class="schwarz"><br/></span> <br/><span class="rot">const</span><span class="schwarz"> options </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>  encoding<span class="schwarz">:</span><span class="schwarz"> </span><span class="hellblau">'utf8'</span><span class="schwarz">,</span><span class="schwarz"><br/></span><span class="schwarz">};</span><span class="schwarz"><br/></span> <br/><span class="rot">const</span><span class="schwarz"> readStream </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="schwarz">createReadStream(</span><span class="hellblau">'gibt-es-nicht.txt'</span><span class="schwarz">,</span><span class="schwarz"> options</span><span class="schwarz">);</span><span class="schwarz"><br/></span> <br/>readStream<span class="schwarz">.on(</span><span class="hellblau">'readable'</span><span class="schwarz">,</span><span class="schwarz"> </span><span class="schwarz">()</span><span class="schwarz"> </span><span class="dunkelblau">=&gt;</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>  <span class="rot">const</span><span class="schwarz"> data </span><span class="dunkelblau">=</span><span class="schwarz"> readStream</span><span class="schwarz">.read();</span><span class="schwarz"><br/></span>  <span class="rot">if</span><span class="schwarz"> </span><span class="schwarz">(</span><span class="schwarz">data</span><span class="schwarz">)</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>    <span class="magenta">console</span><span class="schwarz">.log(</span><span class="schwarz">data</span><span class="schwarz">);</span><span class="schwarz"><br/></span>  <span class="schwarz">}</span><span class="schwarz"><br/></span><span class="schwarz">});</span><span class="schwarz"><br/></span> <br/>readStream<span class="schwarz">.on(</span><span class="hellblau">'close'</span><span class="schwarz">,</span><span class="schwarz"> </span><span class="schwarz">()</span><span class="schwarz"> </span><span class="dunkelblau">=&gt;</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>  <span class="magenta">console</span><span class="schwarz">.log(</span><span class="hellblau">'The stream has been closed'</span><span class="schwarz">);</span><span class="schwarz"><br/></span><span class="schwarz">});</span><span class="schwarz"><br/></span> <br/>readStream<span class="schwarz">.on(</span><span class="hellblau">'error'</span><span class="schwarz">,</span><span class="schwarz"> </span><span class="schwarz">(</span><span class="schwarz">e</span><span class="schwarz">)</span><span class="schwarz"> </span><span class="dunkelblau">=&gt;</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>  <span class="magenta">console</span><span class="schwarz">.error(</span><span class="hellblau">'An error has occurred: '</span><span class="schwarz">,</span><span class="schwarz"> e</span><span class="schwarz">);</span><span class="schwarz"><br/></span><span class="schwarz">});</span><span class="schwarz"> </span></pre></div>
+            <p class="caption "><b>Listing 18.4</b>    
+            Error Handling in Readable Streams</p>
+            <p class="standard">Handling errors in this case has two advantages at the same time for you. First, your application won’t be terminated by the uncaught exception, and you’ll receive additional information about the error that occurred via the error object in the callback function. In the case of the example where the file to be read doesn’t exist, the error message indicates the fact.</p>
+            <p class="standard">In addition to the events just introduced, you can also access some methods for controlling the readable stream.</p>
+        
+        
+            <h3 class="t3" id="h18.2.5">18.2.5    <a id="p553"/>Methods<a class="indexanchor" id="i18_38"/></h3>
+            <p class="standard">In addition to the <samp class="listingcharacter listingcharacter">read</samp> method, there are a few other helpful methods you can draw on when dealing with streams. <span class="crossreference "><a href="18_002.html#t18.2">Table 18.2</a></span> summarizes the most important ones for you.</p>
+            <table class="standardtable" id="t18.2">
+                <thead>
+                    <tr>
+                        <th class="tablehead tablecell_first top_border_cell">
+                            <p class="standard first-item last-item">Method</p>
+                        </th>
+                        <th class="tablehead tablecell_last top_border_cell">
+                            <p class="standard first-item last-item">Description</p>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="tablecell tablecell_first top_border_cell">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">read([size])</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last top_border_cell">
+                            <p class="standard first-item last-item">Reads data from a stream.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">setEncoding(encoding)</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Sets the encoding; strings are used instead of <samp class="listingcharacter listingcharacter">buffer</samp> objects.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">pause()</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Pauses the data flow of a stream.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">resume()</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Resumes the data flow of a paused stream.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">isPaused()</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Indicates whether the stream is currently paused.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">pipe(destination[, options])</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Forwards the output to a writable stream.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">unpipe([destination])</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Stops the forwarding of a stream.</p>
+                        </td>
+                    </tr>
+                    <tr class="light">
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">unshift(chunk)</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Puts an already consumed data record back on the stream.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tablecell tablecell_first">
+                            <p class="standard first-item last-item"><samp class="listingcharacter listingcharacter">wrap(stream)</samp></p>
+                        </td>
+                        <td class="tablecell tablecell_last">
+                            <p class="standard first-item last-item">Encloses an older generation stream for full compatibility.</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="caption "><b>Table 18.2</b>    
+            Most Important Readable Stream Methods</p>
+            <p class="standard">Both the piping concept and the different operation modes of readable streams under Node.js need further explanation, as these are core concepts of the stream API that serves as a basis for many other features.</p>
+        
+        
+            <h3 class="t3" id="h18.2.6">18.2.6    Piping</h3>
+            <p class="standard"><a class="indexanchor" id="i18_39"/><a class="indexanchor" id="i18_40"/>You’ve already learned about the concept of chained streams. In Node.js, such a chain of streams is implemented using the <samp class="listingcharacter listingcharacter">pipe</samp> method of a readable stream. This method redirects the output of a readable stream to the input of a writable stream. <span class="crossreference "><a href="18_002.html#l18.5">Listing 18.5</a></span> introduces a very simple pipeline.</p>
+            <div class="listing " id="l18.5"><pre><span class="rot">import</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"> createReadStream</span><span class="schwarz">,</span><span class="schwarz"> createWriteStream </span><span class="schwarz">}</span><span class="schwarz"> </span><span class="rot">from</span><span class="schwarz"> </span><span class="hellblau">'fs'</span><span class="schwarz">;</span><span class="schwarz"><br/></span> <br/><span class="rot">const</span><span class="schwarz"> read </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="schwarz">createReadStream(</span><span class="hellblau">'input.txt'</span><span class="schwarz">);</span><span class="schwarz"><br/></span><span class="rot">const</span><span class="schwarz"> write </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="schwarz">createWriteStream(</span><span class="hellblau">'output.txt'</span><span class="schwarz">);</span><span class="schwarz"><br/></span> <br/>read<span class="schwarz">.pipe(</span><span class="schwarz">write</span><span class="schwarz">);</span><span class="schwarz"> </span></pre></div>
+            <p class="caption "><b>Listing 18.5</b>    
+            Stream Pipeline</p>
+            <p class="standard"><a id="p554"/>The code in <span class="crossreference "><a href="18_002.html#l18.5">Listing 18.5</a></span> copies the <span class="italic">input.txt</span> file into the <span class="italic">output.txt</span> file. In this example, you first create a readable stream using the <samp class="listingcharacter listingcharacter">createReadStream</samp> function of the <samp class="listingcharacter listingcharacter">fs</samp> module. Then you use the <samp class="listingcharacter listingcharacter">createWriteStream</samp> function to generate a writable stream into which the information gets written. The connection of both streams is then established via the <samp class="listingcharacter listingcharacter">pipe</samp> method. This example shows quite clearly how the implementation and instantiation of the individual streams can be separated from their concatenation, which eventually results in easily readable source code, especially if you think of a longer chain of streams with many intermediate steps at this point. Another advantage is that, in this case, you can insert simple debugging statements between the instantiation and the use of the respective streams, if you’re looking for an error.</p>
+            <p class="standard">The second important concept besides piping involves the different modes in which readable streams can be operated.</p>
+        
+        
+            <h3 class="t3" id="h18.2.7">18.2.7    Readable Stream Modes<a class="indexanchor" id="i18_41"/></h3>
+            <p class="standard">The current readable streams of Node.js provide two modes you can switch between at runtime of your application:</p>
+            <ul>
+                <li>
+                    <p class="standard first-item last-item"><a class="indexanchor" id="i18_42"/><span class="bold">Paused mode (pull streams)</span><a class="indexanchor" id="i18_43"/><br/>The data is actively consumed by calling the <samp class="listingcharacter listingcharacter">read</samp> method. This is the default mode of a readable stream.</p>
+                </li>
+                <li>
+                    <p class="standard first-item last-item"><a class="indexanchor" id="i18_44"/><span class="bold">Flowing mode (push streams)</span><a class="indexanchor" id="i18_45"/><br/>In this variant, the data is pushed from the data source to the stream, and no consideration is given to consumers.</p>
+                </li>
+            </ul>
+            <p class="standard">If you run a readable stream with the combination of <samp class="listingcharacter listingcharacter">readable</samp> event and <samp class="listingcharacter listingcharacter">read</samp> method shown in <span class="crossreference "><a href="18_002.html#l18.2">Listing 18.2</a></span>, the stream is in paused mode. This way, you can control the data flow by calling the <samp class="listingcharacter listingcharacter">read</samp> method.</p>
+        
+        
+            <h3 class="t3" id="h18.2.8">18.2.8    Switching to Flowing Mode<a class="indexanchor" id="i18_46"/></h3>
+            <p class="standard">You can switch from paused mode to flowing mode in three different ways:</p>
+            <ul>
+                <li>
+                    <p class="standard first-item last-item"><span class="bold"><samp class="listingcharacter listingcharacter">data</samp></span> <span class="bold">event</span><br/>Once you register a listener for the <samp class="listingcharacter listingcharacter">data</samp> event, the stream is set to flowing mode.</p>
+                </li>
+                <li>
+                    <p class="standard first-item last-item"><span class="bold"><samp class="listingcharacter listingcharacter">resume</samp></span> <span class="bold">method</span><br/>Calling the <samp class="listingcharacter listingcharacter">resume</samp> method also results in the data flow being determined by the data source.</p>
+                </li>
+                <li>
+                    <p class="standard first-item last-item"><span class="bold"><samp class="listingcharacter listingcharacter">pipe</samp></span> <span class="bold">method</span><br/>In addition, if your readable stream is a data source for a stream pipeline, it will be put into flowing mode.</p>
+                </li>
+            </ul>
+        
+        
+            <h3 class="t3" id="h18.2.9">18.2.9    <a id="p555"/>Switching to the Paused Mode<a class="indexanchor" id="i18_47"/></h3>
+            <p class="standard">If your stream is currently in flowing mode, and you want to return to paused mode, you basically only need to undo the actions you used when you put the stream into flowing mode. You have the following options:</p>
+            <ul>
+                <li>
+                    <p class="standard first-item last-item"><span class="bold"><samp class="listingcharacter listingcharacter">pause</samp></span><br/>You can explicitly put the stream into paused mode by calling the <samp class="listingcharacter listingcharacter">pause</samp> method.</p>
+                </li>
+                <li>
+                    <p class="standard first-item last-item"><span class="bold"><samp class="listingcharacter listingcharacter">removeAllListeners</samp></span><span class="bold">, </span><span class="bold"><samp class="listingcharacter listingcharacter">unpipe<br/></samp></span>Alternatively, you can deregister the existing event listeners of the <samp class="listingcharacter listingcharacter">data</samp> event via the <samp class="listingcharacter listingcharacter">removeAllListeners('data')</samp> call. Moreover, if your readable stream is in a pipeline, you must use the <samp class="listingcharacter listingcharacter">unpipe</samp> method to remove the stream from the pipeline.</p>
+                </li>
+            </ul>
+            <div class="box box_standard">
+                <h6 class="boxheading">Warning!</h6>
+                <p class="standard first last">The paused mode<a class="indexanchor" id="i18_48"/> has one important drawback: you can’t attach multiple consumers concurrently to one readable stream. Calling the <samp class="listingcharacter listingcharacter">read</samp> method consumes the data from the stream and removes it at the same time. This means if you register an event handler twice on the <samp class="listingcharacter listingcharacter">readable</samp> event and call the <samp class="listingcharacter listingcharacter">read</samp> method within it, you’ll receive different data packages each time. If you want to connect two consumers to one readable stream, this only works via flowing mode by registering multiple listeners for the <samp class="listingcharacter listingcharacter">data</samp> event.</p>
+            </div>
+            <p class="standard">Now you know how you can handle readable streams and control the data flow. For your own application, the existing readable streams from the internal node modules or installed Node Package Manager (npm) packages are often not sufficient, so you have to implement a readable stream yourself.</p>
+        
+        
+            <h3 class="t3" id="h18.2.10">18.2.10    Custom Readable Streams<a class="indexanchor" id="i18_49"/></h3>
+            <p class="standard">The readable stream implementations of Node.js are derived from a central base class from the <samp class="listingcharacter listingcharacter">stream</samp> module. The Node.js platform already provides the framework implementation of a readable stream with this base class, so you only need to take care of specializing the stream. For your source code, this means you only need to implement one method, and then you can already use the stream. <span class="crossreference "><a href="18_002.html#l18.6">Listing 18.6</a></span> shows the simplest variant of implementing a readable stream.</p>
+            <div class="listing " id="l18.6"><pre><span class="rot">import</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"> Readable </span><span class="schwarz">}</span><span class="schwarz"> </span><span class="rot">from</span><span class="schwarz"> </span><span class="hellblau">'stream'</span><span class="schwarz">;</span><span class="schwarz"><br/></span> <br/><span class="rot">class ReadStream</span><span class="schwarz"> </span><span class="rot">extends Readable</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>  <span class="schwarz">_read()</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>    <span class="rot">this</span><span class="schwarz">.push(</span><span class="hellblau">'Hello World'</span><span class="schwarz">);</span><span class="schwarz"><br/></span>  <span class="schwarz">}</span><span class="schwarz"><br/></span><span class="schwarz">}</span><span class="schwarz"> </span></pre></div>
+            <p class="caption "><b>Listing 18.6</b>    
+            Implementing a Readable Stream</p>
+            <p class="standard"><a id="p556"/>The <samp class="listingcharacter listingcharacter">readable</samp> class of the <samp class="listingcharacter listingcharacter">stream</samp> module is an ordinary JavaScript class. This means you can use the <samp class="listingcharacter listingcharacter">readable</samp> class as a base class in your own class definition and derive data from it using <samp class="listingcharacter listingcharacter">extend</samp>. You can consider the <samp class="listingcharacter listingcharacter">readable</samp> class in the broadest sense as an abstract class you can’t use directly, but must first derive data from it. In your own implementation, you only need to implement the <samp class="listingcharacter listingcharacter">_read</samp> method. The basic version of this method, which you inherit from <samp class="listingcharacter listingcharacter">readable</samp>, triggers an exception, making it impossible to be used directly. This is a common technique to simulate abstract classes<a class="indexanchor" id="i18_50"/> in JavaScript and force the overriding of methods in derived classes.</p>
+            <p class="standard">To write a new data record to the stream, you can use the push method of the object.</p>
+        
+        
+            <h3 class="t3" id="h18.2.11">18.2.11    Example of a Readable Stream<a class="indexanchor" id="i18_51"/></h3>
+            <p class="standard">The example shown in <span class="crossreference "><a href="18_002.html#l18.6">Listing 18.6</a></span> is quite far from reality. A realistic implementation is, in most cases, much more extensive, if only because a readable stream should produce more than just one data record.</p>
+            <p class="standard">So, to give you an idea of how you can use readable streams in your application, here is a somewhat larger example (see <span class="crossreference "><a href="18_002.html#l18.7">Listing 18.7</a></span>). The goal in this case is to stream temperature readings. A measured value consists of a date and a temperature value. For this example, the values are randomly generated and limited to a maximum of 10 values generated at random intervals of up to five seconds. In a production environment, such values can of course originate from a measuring device or another system that is addressed via a driver or a socket.</p>
+            <div class="listing " id="l18.7"><pre><span class="rot">import</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"> Readable </span><span class="schwarz">}</span><span class="schwarz"> </span><span class="rot">from</span><span class="schwarz"> </span><span class="hellblau">'stream'</span><span class="schwarz">;</span><span class="schwarz"><br/></span> <br/><span class="rot">class TemperatureReader</span><span class="schwarz"> </span><span class="rot">extends Readable</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>  <span class="schwarz">constructor(</span><span class="schwarz">opt </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"> objectMode</span><span class="schwarz">:</span><span class="schwarz"> </span><span class="rot">true</span><span class="schwarz"> </span><span class="schwarz">})</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>    <span class="schwarz">super(</span><span class="schwarz">opt</span><span class="schwarz">);</span><span class="schwarz"><br/></span>    <span class="rot">this</span><span class="schwarz">.</span><span class="schwarz">items </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="schwarz">0;</span><span class="schwarz"><br/></span>    <span class="rot">this</span><span class="schwarz">.</span><span class="schwarz">maxItems </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="schwarz">10;</span><span class="schwarz"><br/></span>  <span class="schwarz">}</span><span class="schwarz"><br/></span>  <span class="schwarz">_read()</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>    <span class="rot">this</span><span class="schwarz">.emitValue();</span><span class="schwarz"><br/></span>  <span class="schwarz">}</span><span class="schwarz"><br/></span> <br/>  <span class="schwarz">emitValue()</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>    <span class="schwarz">setTimeout(()</span><span class="schwarz"> </span><span class="dunkelblau">=&gt;</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>      <span class="rot">if</span><span class="schwarz"> </span><span class="schwarz">(</span><span class="rot">this</span><span class="schwarz">.</span><span class="schwarz">items</span><span class="dunkelblau">++</span><span class="schwarz"> </span><span class="dunkelblau">&lt;</span><span class="schwarz"> </span><span class="rot">this</span><span class="schwarz">.</span><span class="schwarz">maxItems</span><span class="schwarz">)</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>        <span class="rot">this</span><span class="schwarz">.push(</span><span class="rot">this</span><span class="schwarz">.createValue());</span><span class="schwarz"><br/></span>      <span class="schwarz">}</span><span class="schwarz"> </span><span class="rot">else</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>        <span class="rot">this</span><span class="schwarz">.push(</span><span class="rot">null</span><span class="schwarz">);</span><span class="schwarz"><br/></span>      <span class="schwarz">}</span><span class="schwarz"><br/></span>    <span class="schwarz">},</span><span class="schwarz"> Math</span><span class="schwarz">.floor(</span><span class="schwarz">Math</span><span class="schwarz">.random()</span><span class="schwarz"> </span><span class="dunkelblau">*</span><span class="schwarz"> </span><span class="schwarz">5)</span><span class="schwarz"> </span><span class="dunkelblau">*</span><span class="schwarz"> </span><span class="schwarz">1000);</span><span class="schwarz"><br/></span><a id="p557"/>  <span class="schwarz">}</span><span class="schwarz"><br/></span>  <span class="schwarz">createValue()</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>    <span class="rot">return</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>      date<span class="schwarz">:</span><span class="schwarz"> </span><span class="rot">new </span><span class="schwarz">Date(),</span><span class="schwarz"><br/></span>      temp<span class="schwarz">:</span><span class="schwarz"> </span><span class="violett">`${Math.floor(Math.random() * 1000 - 273)}°C`</span><span class="schwarz">,</span><span class="schwarz"><br/></span>    <span class="schwarz">};</span><span class="schwarz"><br/></span>  <span class="schwarz">}</span><span class="schwarz"><br/></span><span class="schwarz">}</span><span class="schwarz"><br/></span> <br/><span class="rot">const</span><span class="schwarz"> tr </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="rot">new </span><span class="schwarz">TemperatureReader();</span><span class="schwarz"><br/></span>tr<span class="schwarz">.on(</span><span class="hellblau">'readable'</span><span class="schwarz">,</span><span class="schwarz"> </span><span class="rot">function</span><span class="schwarz"> </span><span class="schwarz">()</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>  <span class="rot">let</span><span class="schwarz"> </span><span class="magenta">value</span><span class="schwarz">;</span><span class="schwarz"><br/></span>  <span class="rot">while</span><span class="schwarz"> </span><span class="schwarz">(</span><span class="rot">null</span><span class="schwarz"> </span><span class="dunkelblau">!==</span><span class="schwarz"> </span><span class="schwarz">(</span><span class="magenta">value</span><span class="schwarz"> </span><span class="dunkelblau">=</span><span class="schwarz"> tr</span><span class="schwarz">.read()))</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>    <span class="magenta">console</span><span class="schwarz">.log(</span><span class="schwarz">JSON</span><span class="schwarz">.stringify(</span><span class="magenta">value</span><span class="schwarz">));</span><span class="schwarz"><br/></span>  <span class="schwarz">}</span><span class="schwarz"><br/></span><span class="schwarz">});</span><span class="schwarz"> </span></pre></div>
+            <p class="caption "><b>Listing 18.7</b>    
+            Readable Stream in a Real-Life Example</p>
+            <p class="standard">The structure of the class follows the same schema as in the previous example. In contrast, some properties are set here in the constructor for controlling the stream at a later time. Additionally, optional configuration options are passed to the parent constructor, while the object mode of the stream gets enabled.</p>
+            <p class="standard">By calling the <samp class="listingcharacter listingcharacter">emitValue</samp> method, the <samp class="listingcharacter listingcharacter">_read</samp> method makes sure that a value is published after a random period of time if the maximum number of values hasn’t yet been exceeded. Once the maximum is reached, <samp class="listingcharacter listingcharacter">null</samp> is sent, and thus the stream gets closed. The <samp class="listingcharacter listingcharacter">createValue</samp> method ensures that an object is created that represents a measured value. This way, each method has exactly one task, and the source code remains easily readable.</p>
+            <p class="standard">To use the stream, you first generate an instance. On this object, you register a handler for the <samp class="listingcharacter listingcharacter">readable</samp> event, as you did in the case of the file system streams. Inside this callback function, you can then consume the data of the stream via the <samp class="listingcharacter listingcharacter">read</samp> method. However, a simple call of the method doesn’t provide the expected result because several data records may exist per <samp class="listingcharacter listingcharacter">readable</samp> event. This means you must call the <samp class="listingcharacter listingcharacter">read</samp> method as many times as necessary until it returns the value <samp class="listingcharacter listingcharacter">null</samp>. As you can see, the asynchronous nature of the data generation doesn’t matter in this case, and the stream can handle it without any problems.</p>
+            <p class="standard">When you run the example on the command line, you get a result like the one shown in <span class="crossreference "><a href="18_002.html#l18.8">Listing 18.8</a></span>.</p>
+            <div class="listing " id="l18.8"><pre>{"date":"2018-04-25T11:19:34.084Z","temp":"718°C"}<br/>{"date":"2018-04-25T11:19:35.090Z","temp":"-96°C"}<br/>{"date":"2018-04-25T11:19:38.091Z","temp":"327°C"}<br/><a id="p558"/>{"date":"2018-04-25T11:19:38.093Z","temp":"114°C"}<br/>{"date":"2018-04-25T11:19:38.094Z","temp":"549°C"}<br/>{"date":"2018-04-25T11:19:38.095Z","temp":"540°C"}<br/>{"date":"2018-04-25T11:19:39.098Z","temp":"429°C"}<br/>{"date":"2018-04-25T11:19:39.100Z","temp":"49°C"}<br/>{"date":"2018-04-25T11:19:42.102Z","temp":"557°C"}<br/>{"date":"2018-04-25T11:19:42.104Z","temp":"635°C"} </pre></div>
+            <p class="caption "><b>Listing 18.8</b>    
+            Result from the Readable Stream</p>
+            <div class="box box_standard">
+                <h6 class="boxheading">Object Mode<a class="indexanchor" id="i18_52"/></h6>
+                <p class="standard first">In Node.js, streams use <samp class="listingcharacter listingcharacter">buffer</samp> objects or character strings. However, if you use streams in your application, it’s often impractical to first convert all objects to character strings and then write them into a stream. For further use, you must then convert the string representation back into an object. To do so, you can use the object mode. You can turn it on or off as an option when creating a stream. In <span class="crossreference "><a href="18_002.html#l18.7">Listing 18.7</a></span>, you’ve already seen how the object mode can be used in a concrete example.</p>
+                <p class="standard">When reading from a stream in object mode, the size specified when calling the <samp class="listingcharacter listingcharacter">read</samp> method is ignored. The same applies to any encoding that’s specified when calling the <samp class="listingcharacter listingcharacter">write</samp> method of a writable stream.</p>
+                <p class="standard last">The object mode can be changed during the existence of the stream, but this isn’t recommended. In a transform stream, the object mode for read and write access can be set separately using the <samp class="listingcharacter listingcharacter">readableObjectMode</samp> and <samp class="listingcharacter listingcharacter">writableObjectMode</samp> options, respectively. The core modules of Node.js, which are based on streams, don’t use the object mode.</p>
+            </div>
+            <p class="standard">For the default implementation of readable streams in Node.js, developers have provided another simplification that allows for a very concise and comprehensible implementation.</p>
+        
+        
+            <h3 class="t3" id="h18.2.12">18.2.12    Readable Shortcut<a class="indexanchor" id="i18_53"/></h3>
+            <p class="standard">The Node.js platform provides shortcuts for a wide variety of use cases that saves a lot of writing for you as a developer. <span class="crossreference "><a href="18_002.html#l18.9">Listing 18.9</a></span> shows how you can create a simple readable stream in short notation.</p>
+            <div class="listing " id="l18.9"><pre><span class="rot">import</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"> Readable </span><span class="schwarz">}</span><span class="schwarz"> </span><span class="rot">from</span><span class="schwarz"> </span><span class="hellblau">'stream'</span><span class="schwarz">;</span><span class="schwarz"><br/></span> <br/><span class="rot">const</span><span class="schwarz"> readable </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="rot">new </span><span class="schwarz">Readable({</span><span class="schwarz"><br/></span>  objectMode<span class="schwarz">:</span><span class="schwarz"> </span><span class="rot">true</span><span class="schwarz">,</span><span class="schwarz"><br/></span> <br/>  <span class="schwarz">read()</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>    <span class="rot">this</span><span class="schwarz">.emitValue();</span><span class="schwarz"><br/></span><a id="p559"/>  <span class="schwarz">},</span><span class="schwarz"><br/></span><span class="schwarz">});</span><span class="schwarz"><br/></span>readable<span class="schwarz">.</span><span class="schwarz">items </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="schwarz">0;</span><span class="schwarz"><br/></span>readable<span class="schwarz">.</span><span class="schwarz">maxItems </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="schwarz">10;</span><span class="schwarz"><br/></span>readable<span class="schwarz">.</span><span class="schwarz">emitValue </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="schwarz">()</span><span class="schwarz"> </span><span class="dunkelblau">=&gt;</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>  <span class="schwarz">setTimeout(()</span><span class="schwarz"> </span><span class="dunkelblau">=&gt;</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>    <span class="rot">if</span><span class="schwarz"> </span><span class="schwarz">(</span><span class="schwarz">readable</span><span class="schwarz">.</span><span class="schwarz">items</span><span class="dunkelblau">++</span><span class="schwarz"> </span><span class="dunkelblau">&lt;</span><span class="schwarz"> readable</span><span class="schwarz">.</span><span class="schwarz">maxItems</span><span class="schwarz">)</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>      readable<span class="schwarz">.push(</span><span class="schwarz">readable</span><span class="schwarz">.createValue());</span><span class="schwarz"><br/></span>    <span class="schwarz">}</span><span class="schwarz"> </span><span class="rot">else</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>      readable<span class="schwarz">.push(</span><span class="rot">null</span><span class="schwarz">);</span><span class="schwarz"><br/></span>    <span class="schwarz">}</span><span class="schwarz"><br/></span>  <span class="schwarz">},</span><span class="schwarz"> Math</span><span class="schwarz">.floor(</span><span class="schwarz">Math</span><span class="schwarz">.random()</span><span class="schwarz"> </span><span class="dunkelblau">*</span><span class="schwarz"> </span><span class="schwarz">5)</span><span class="schwarz"> </span><span class="dunkelblau">*</span><span class="schwarz"> </span><span class="schwarz">1000);</span><span class="schwarz"><br/></span><span class="schwarz">};</span><span class="schwarz"><br/></span>readable<span class="schwarz">.</span><span class="schwarz">createValue </span><span class="dunkelblau">=</span><span class="schwarz"> </span><span class="schwarz">()</span><span class="schwarz"> </span><span class="dunkelblau">=&gt;</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>  <span class="rot">return</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>    date<span class="schwarz">:</span><span class="schwarz"> </span><span class="rot">new </span><span class="schwarz">Date(),</span><span class="schwarz"><br/></span>    temp<span class="schwarz">:</span><span class="schwarz"> </span><span class="violett">`${Math.floor(Math.random() * 1000 - 273)}°C`</span><span class="schwarz">,</span><span class="schwarz"><br/></span>  <span class="schwarz">};</span><span class="schwarz"><br/></span><span class="schwarz">};</span><span class="schwarz"><br/></span>readable<span class="schwarz">.on(</span><span class="hellblau">'readable'</span><span class="schwarz">,</span><span class="schwarz"> </span><span class="rot">function</span><span class="schwarz"> </span><span class="schwarz">()</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>  <span class="rot">let</span><span class="schwarz"> </span><span class="magenta">value</span><span class="schwarz">;</span><span class="schwarz"><br/></span>  <span class="rot">while</span><span class="schwarz"> </span><span class="schwarz">(</span><span class="rot">null</span><span class="schwarz"> </span><span class="dunkelblau">!==</span><span class="schwarz"> </span><span class="schwarz">(</span><span class="magenta">value</span><span class="schwarz"> </span><span class="dunkelblau">=</span><span class="schwarz"> readable</span><span class="schwarz">.read()))</span><span class="schwarz"> </span><span class="schwarz">{</span><span class="schwarz"><br/></span>    <span class="magenta">console</span><span class="schwarz">.log(</span><span class="schwarz">JSON</span><span class="schwarz">.stringify(</span><span class="magenta">value</span><span class="schwarz">));</span><span class="schwarz"><br/></span>  <span class="schwarz">}</span><span class="schwarz"><br/></span><span class="schwarz">});</span><span class="schwarz"> </span></pre></div>
+            <p class="caption "><b>Listing 18.9</b>    
+            Readable Streams in Short Notation</p>
+            <p class="standard">As you can see in <span class="crossreference "><a href="18_002.html#l18.9">Listing 18.9</a></span>, the constructor of a readable stream accepts an object as an argument. Here, in addition to the usual options such as object mode, you can also set the <samp class="listingcharacter listingcharacter">read</samp> property and assign a function to it. This is then used as the implementation of the <samp class="listingcharacter listingcharacter">_read</samp> method. So, the source code from <span class="crossreference "><a href="18_002.html#l18.9">Listing 18.9</a></span> generally works like the one from <span class="crossreference "><a href="18_002.html#l18.7">Listing 18.7</a></span>, but without the intermediate step of its own class. The disadvantage of this method is that the properties of the passed object are ignored, so you have to add all properties and methods afterwards; as a matter of fact, the shortcut is only useful for very simple implementations.</p>
+        
+    </div><p class="signatur"/>
+                    </body>
+                </html>

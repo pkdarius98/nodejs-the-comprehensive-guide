@@ -1,0 +1,166 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+                    
+        <head><meta content="application/xhtml+xml; charset=utf-8" http-equiv="Content-Type"/>
+            <meta content="application/xhtml+xml; charset=utf-8" name="content-type"/>
+            <meta content="Scalability and Deployment" name="title"/>
+            <meta content="Sebastian Springer" name="author"/>
+            <meta content="Rheinwerk Publishing" name="publisher"/>
+            <meta content="© 2022 by Rheinwerk Publishing Inc., Boston (MA)" name="copyright"/>
+            <meta content="Node.js - The Comprehensive Guide - Scalability and Deployment" name="description"/>
+            <meta content="en" name="language"/>
+            <title>Scalability and Deployment</title>
+            <link href="common/main.css" rel="stylesheet" type="text/css"/>
+<meta content="urn:uuid:e0000000-0000-0000-0000-000029756394" name="Adept.expected.resource"/>
+        </head>
+    
+
+
+                    <body class="office_us type_kapitel">
+                        <div id="main">
+        <h2 class="t2" id="h25.4">25.4    <a id="p730"/>pm2: Process Management<a class="indexanchor" id="i25_85"/></h2>
+        <p class="standard">Another useful tool for managing Node.js applications is the <samp class="listingcharacter listingcharacter">pm2</samp> process manager. You can install this utility via npm using the <samp class="listingcharacter listingcharacter">npm install -g pm2</samp> command. The main features of the process manager are as follows:</p>
+        <ul>
+            <li>
+                <p class="standard first-item last-item">Creation of lists of processes controlled by <samp class="listingcharacter listingcharacter">pm2</samp></p>
+            </li>
+            <li>
+                <p class="standard first-item last-item">Process monitoring</p>
+            </li>
+            <li>
+                <p class="standard first-item last-item">Process scaling</p>
+            </li>
+            <li>
+                <p class="standard first-item last-item">Reloading processes without downtime</p>
+            </li>
+        </ul>
+        <p class="standard">To start an application with <samp class="listingcharacter listingcharacter">pm2</samp>, you can use the <samp class="listingcharacter listingcharacter">start</samp> command. For example, if your application is stored in the <span class="italic">app.js</span> file, you can start it via the <samp class="listingcharacter listingcharacter">pm2 start app.js -i 1</samp> command. This command line ensures that exactly one instance of this application is booted.</p>
+        <p class="standard"><samp class="listingcharacter listingcharacter">pm2 list</samp> allows you to obtain a list of processes that were started with <samp class="listingcharacter listingcharacter">pm2</samp>. <span class="crossreference "><a href="25_004.html#t25.1">Table 25.1</a></span> contains an example of such a process list.</p>
+        <p class="standard">Let’s assume you now expect a higher load on the application you just started. In that case, you can use <samp class="listingcharacter listingcharacter">pm2</samp> to boot additional instances of the application. These will then be operated in cluster mode<a class="indexanchor" id="i25_86"/> and share the TCP port. You can boot an additional instance via the <samp class="listingcharacter listingcharacter">pm2 scale index 2</samp> command. Thus, you now have a total of two instances of the application. If you specify a <samp class="listingcharacter listingcharacter">1</samp> instead of <samp class="listingcharacter listingcharacter">2</samp>, you’ll reduce the number of instances again.</p>
+        <table class="standardtable" id="t25.1">
+            <thead>
+                <tr>
+                    <th class="tablehead tablecell_first top_border_cell">
+                        <p class="standard first-item last-item">ID</p>
+                    </th>
+                    <th class="tablehead tablecell_middle top_border_cell">
+                        <p class="standard first-item last-item">Name</p>
+                    </th>
+                    <th class="tablehead tablecell_middle top_border_cell">
+                        <p class="standard first-item last-item">Mode</p>
+                    </th>
+                    <th class="tablehead tablecell_middle top_border_cell">
+                        <p class="standard first-item last-item"><img alt="inline image" class="inline_image" src="bilder/counter-clockwise-arrow.png"/></p>
+                    </th>
+                    <th class="tablehead tablecell_middle top_border_cell">
+                        <p class="standard first-item last-item">Status</p>
+                    </th>
+                    <th class="tablehead tablecell_middle top_border_cell">
+                        <p class="standard first-item last-item">CPU</p>
+                    </th>
+                    <th class="tablehead tablecell_last top_border_cell">
+                        <p class="standard first-item last-item">Memory</p>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="tablecell tablecell_first top_border_cell">
+                        <p class="standard first-item last-item">0</p>
+                    </td>
+                    <td class="tablecell tablecell_middle top_border_cell">
+                        <p class="standard first-item last-item">app</p>
+                    </td>
+                    <td class="tablecell tablecell_middle top_border_cell">
+                        <p class="standard first-item last-item">cluster</p>
+                    </td>
+                    <td class="tablecell tablecell_middle top_border_cell">
+                        <p class="standard first-item last-item">0</p>
+                    </td>
+                    <td class="tablecell tablecell_middle top_border_cell">
+                        <p class="standard first-item last-item">online</p>
+                    </td>
+                    <td class="tablecell tablecell_middle top_border_cell">
+                        <p class="standard first-item last-item">0 %</p>
+                    </td>
+                    <td class="tablecell tablecell_last top_border_cell">
+                        <p class="standard first-item last-item">37.7 MB</p>
+                    </td>
+                </tr>
+                <tr class="light">
+                    <td class="tablecell tablecell_first">
+                        <p class="standard first-item last-item">1</p>
+                    </td>
+                    <td class="tablecell tablecell_middle">
+                        <p class="standard first-item last-item">app</p>
+                    </td>
+                    <td class="tablecell tablecell_middle">
+                        <p class="standard first-item last-item">cluster</p>
+                    </td>
+                    <td class="tablecell tablecell_middle">
+                        <p class="standard first-item last-item">0</p>
+                    </td>
+                    <td class="tablecell tablecell_middle">
+                        <p class="standard first-item last-item">online</p>
+                    </td>
+                    <td class="tablecell tablecell_middle">
+                        <p class="standard first-item last-item">0 %</p>
+                    </td>
+                    <td class="tablecell tablecell_last">
+                        <p class="standard first-item last-item">37.7 MB</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tablecell tablecell_first">
+                        <p class="standard first-item last-item">2</p>
+                    </td>
+                    <td class="tablecell tablecell_middle">
+                        <p class="standard first-item last-item">app</p>
+                    </td>
+                    <td class="tablecell tablecell_middle">
+                        <p class="standard first-item last-item">cluster</p>
+                    </td>
+                    <td class="tablecell tablecell_middle">
+                        <p class="standard first-item last-item">0</p>
+                    </td>
+                    <td class="tablecell tablecell_middle">
+                        <p class="standard first-item last-item">online</p>
+                    </td>
+                    <td class="tablecell tablecell_middle">
+                        <p class="standard first-item last-item">0 %</p>
+                    </td>
+                    <td class="tablecell tablecell_last">
+                        <p class="standard first-item last-item">38.0 MB</p>
+                    </td>
+                </tr>
+                <tr class="light">
+                    <td class="tablecell tablecell_first">
+                        <p class="standard first-item last-item">3</p>
+                    </td>
+                    <td class="tablecell tablecell_middle">
+                        <p class="standard first-item last-item">app</p>
+                    </td>
+                    <td class="tablecell tablecell_middle">
+                        <p class="standard first-item last-item">cluster</p>
+                    </td>
+                    <td class="tablecell tablecell_middle">
+                        <p class="standard first-item last-item">0</p>
+                    </td>
+                    <td class="tablecell tablecell_middle">
+                        <p class="standard first-item last-item">online</p>
+                    </td>
+                    <td class="tablecell tablecell_middle">
+                        <p class="standard first-item last-item">0 %</p>
+                    </td>
+                    <td class="tablecell tablecell_last">
+                        <p class="standard first-item last-item">37.1 MB</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="caption "><b>Table 25.1</b>    
+            Process List of “pm2”</p>
+        <p class="standard">The <samp class="listingcharacter listingcharacter">pm2 monit</samp> command allows you to track the memory consumption and CPU utilization of the processes in real time.</p>
+        <p class="standard">The features shown here represent only a small part of the capabilities of <samp class="listingcharacter listingcharacter">pm2</samp>. You can find more information on the website of the project at <span class="url"><a href="http://pm2.keymetrics.io/">http://pm2.keymetrics.io/</a></span>.</p>
+    </div><p class="signatur"/>
+                    </body>
+                </html>

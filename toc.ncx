@@ -1,0 +1,3537 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ncx
+  PUBLIC "-//NISO//DTD ncx 2005-1//EN" "http://www.daisy.org/z3986/2005/ncx-2005-1.dtd">
+<ncx xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1" xml:lang="de-DE">
+   <head>
+      <meta name="dtb:uid" content="978-1-4932-2293-3"/>
+      <meta name="dc:title" content="Sebastian Springer Node.js"/>
+      <meta name="dtb:depth" content="2"/>
+   </head>
+   <docTitle>
+      <text>Table of Contents</text>
+   </docTitle>
+   <navMap>
+      <navPoint id="d39e2" playOrder="1">
+         <navLabel>
+            <text>Dear Reader</text>
+         </navLabel>
+         <content src="dear_reader.html"/>
+      </navPoint>
+      <navPoint id="d39e7" playOrder="2">
+         <navLabel>
+            <text>Notes on Usage</text>
+         </navLabel>
+         <content src="notes.html"/>
+      </navPoint>
+      <navPoint id="d39e12" playOrder="3">
+         <navLabel>
+            <text>Table of Contents</text>
+         </navLabel>
+         <content src="toc.html"/>
+      </navPoint>
+      <navPoint id="d39e22" playOrder="4">
+         <navLabel>
+            <text>  Preface</text>
+         </navLabel>
+         <content src="00_001.html"/>
+         <navPoint id="d39e27" playOrder="5">
+            <navLabel>
+               <text>  Structure of the Book</text>
+            </navLabel>
+            <content src="00_001.html#h0.1.1"/>
+         </navPoint>
+         <navPoint id="d39e32" playOrder="6">
+            <navLabel>
+               <text>  Downloading the Code Samples</text>
+            </navLabel>
+            <content src="00_001.html#h0.1.2"/>
+         </navPoint>
+         <navPoint id="d39e37" playOrder="7">
+            <navLabel>
+               <text>  Acknowledgments</text>
+            </navLabel>
+            <content src="00_001.html#h0.1.3"/>
+         </navPoint>
+      </navPoint>
+      <navPoint id="d39e42" playOrder="8">
+         <navLabel>
+            <text>1   Basic Principles</text>
+         </navLabel>
+         <content src="01_001.html"/>
+         <navPoint id="d39e47" playOrder="9">
+            <navLabel>
+               <text>1.1   The Story of Node.js</text>
+            </navLabel>
+            <content src="01_001.html#h1.1"/>
+            <navPoint id="d39e52" playOrder="10">
+               <navLabel>
+                  <text>1.1.1   Origins</text>
+               </navLabel>
+               <content src="01_001.html#h1.1.1"/>
+            </navPoint>
+            <navPoint id="d39e58" playOrder="11">
+               <navLabel>
+                  <text>1.1.2   Birth of Node.js</text>
+               </navLabel>
+               <content src="01_001.html#h1.1.2"/>
+            </navPoint>
+            <navPoint id="d39e63" playOrder="12">
+               <navLabel>
+                  <text>1.1.3   Breakthrough of Node.js</text>
+               </navLabel>
+               <content src="01_001.html#h1.1.3"/>
+            </navPoint>
+            <navPoint id="d39e68" playOrder="13">
+               <navLabel>
+                  <text>1.1.4   Node.js Conquers Windows</text>
+               </navLabel>
+               <content src="01_001.html#h1.1.4"/>
+            </navPoint>
+            <navPoint id="d39e73" playOrder="14">
+               <navLabel>
+                  <text>1.1.5   io.js: The Fork of Node.js</text>
+               </navLabel>
+               <content src="01_001.html#h1.1.5"/>
+            </navPoint>
+            <navPoint id="d39e78" playOrder="15">
+               <navLabel>
+                  <text>1.1.6   Node.js Reunited</text>
+               </navLabel>
+               <content src="01_001.html#h1.1.6"/>
+            </navPoint>
+            <navPoint id="d39e83" playOrder="16">
+               <navLabel>
+                  <text>1.1.7   Deno: A New Star in the JavaScript Sky</text>
+               </navLabel>
+               <content src="01_001.html#h1.1.7"/>
+            </navPoint>
+            <navPoint id="d39e88" playOrder="17">
+               <navLabel>
+                  <text>1.1.8   OpenJS Foundation</text>
+               </navLabel>
+               <content src="01_001.html#h1.1.8"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e93" playOrder="18">
+            <navLabel>
+               <text>1.2   Organization of Node.js</text>
+            </navLabel>
+            <content src="01_002.html#h1.2"/>
+            <navPoint id="d39e98" playOrder="19">
+               <navLabel>
+                  <text>1.2.1   Technical Steering Committee</text>
+               </navLabel>
+               <content src="01_002.html#h1.2.1"/>
+            </navPoint>
+            <navPoint id="d39e103" playOrder="20">
+               <navLabel>
+                  <text>1.2.2   Collaborators</text>
+               </navLabel>
+               <content src="01_002.html#h1.2.2"/>
+            </navPoint>
+            <navPoint id="d39e108" playOrder="21">
+               <navLabel>
+                  <text>1.2.3   Community Committee</text>
+               </navLabel>
+               <content src="01_002.html#h1.2.3"/>
+            </navPoint>
+            <navPoint id="d39e114" playOrder="22">
+               <navLabel>
+                  <text>1.2.4   Work Groups</text>
+               </navLabel>
+               <content src="01_002.html#h1.2.4"/>
+            </navPoint>
+            <navPoint id="d39e119" playOrder="23">
+               <navLabel>
+                  <text>1.2.5   OpenJS Foundation</text>
+               </navLabel>
+               <content src="01_002.html#h1.2.5"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e124" playOrder="24">
+            <navLabel>
+               <text>1.3   Versioning of Node.js</text>
+            </navLabel>
+            <content src="01_003.html#h1.3"/>
+            <navPoint id="d39e129" playOrder="25">
+               <navLabel>
+                  <text>1.3.1   Long-Term Support Releases</text>
+               </navLabel>
+               <content src="01_003.html#h1.3.1"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e134" playOrder="26">
+            <navLabel>
+               <text>1.4   Benefits of Node.js</text>
+            </navLabel>
+            <content src="01_004.html#h1.4"/>
+         </navPoint>
+         <navPoint id="d39e139" playOrder="27">
+            <navLabel>
+               <text>1.5   Areas of Use for Node.js</text>
+            </navLabel>
+            <content src="01_005.html#h1.5"/>
+         </navPoint>
+         <navPoint id="d39e144" playOrder="28">
+            <navLabel>
+               <text>1.6   The Core: V8 Engine</text>
+            </navLabel>
+            <content src="01_006.html#h1.6"/>
+            <navPoint id="d39e149" playOrder="29">
+               <navLabel>
+                  <text>1.6.1   Memory Model</text>
+               </navLabel>
+               <content src="01_006.html#h1.6.1"/>
+            </navPoint>
+            <navPoint id="d39e154" playOrder="30">
+               <navLabel>
+                  <text>1.6.2   Accessing Properties</text>
+               </navLabel>
+               <content src="01_006.html#h1.6.2"/>
+            </navPoint>
+            <navPoint id="d39e159" playOrder="31">
+               <navLabel>
+                  <text>1.6.3   Machine Code Generation</text>
+               </navLabel>
+               <content src="01_006.html#h1.6.3"/>
+            </navPoint>
+            <navPoint id="d39e164" playOrder="32">
+               <navLabel>
+                  <text>1.6.4   Garbage Collection</text>
+               </navLabel>
+               <content src="01_006.html#h1.6.4"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e170" playOrder="33">
+            <navLabel>
+               <text>1.7   Libraries around the Engine</text>
+            </navLabel>
+            <content src="01_007.html#h1.7"/>
+            <navPoint id="d39e175" playOrder="34">
+               <navLabel>
+                  <text>1.7.1   Event Loop</text>
+               </navLabel>
+               <content src="01_007.html#h1.7.1"/>
+            </navPoint>
+            <navPoint id="d39e180" playOrder="35">
+               <navLabel>
+                  <text>1.7.2   Input and Output</text>
+               </navLabel>
+               <content src="01_007.html#h1.7.2"/>
+            </navPoint>
+            <navPoint id="d39e185" playOrder="36">
+               <navLabel>
+                  <text>1.7.3   libuv</text>
+               </navLabel>
+               <content src="01_007.html#h1.7.3"/>
+            </navPoint>
+            <navPoint id="d39e190" playOrder="37">
+               <navLabel>
+                  <text>1.7.4   Domain Name System</text>
+               </navLabel>
+               <content src="01_007.html#h1.7.4"/>
+            </navPoint>
+            <navPoint id="d39e195" playOrder="38">
+               <navLabel>
+                  <text>1.7.5   Crypto</text>
+               </navLabel>
+               <content src="01_007.html#h1.7.5"/>
+            </navPoint>
+            <navPoint id="d39e200" playOrder="39">
+               <navLabel>
+                  <text>1.7.6   Zlib</text>
+               </navLabel>
+               <content src="01_007.html#h1.7.6"/>
+            </navPoint>
+            <navPoint id="d39e205" playOrder="40">
+               <navLabel>
+                  <text>1.7.7   HTTP Parser</text>
+               </navLabel>
+               <content src="01_007.html#h1.7.7"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e210" playOrder="41">
+            <navLabel>
+               <text>1.8   Summary</text>
+            </navLabel>
+            <content src="01_008.html#h1.8"/>
+         </navPoint>
+      </navPoint>
+      <navPoint id="d39e215" playOrder="42">
+         <navLabel>
+            <text>2   Installation</text>
+         </navLabel>
+         <content src="02_001.html"/>
+         <navPoint id="d39e220" playOrder="43">
+            <navLabel>
+               <text>2.1   Installing Packages</text>
+            </navLabel>
+            <content src="02_001.html#h2.1"/>
+            <navPoint id="d39e226" playOrder="44">
+               <navLabel>
+                  <text>2.1.1   Linux</text>
+               </navLabel>
+               <content src="02_001.html#h2.1.1"/>
+            </navPoint>
+            <navPoint id="d39e231" playOrder="45">
+               <navLabel>
+                  <text>2.1.2   Windows</text>
+               </navLabel>
+               <content src="02_001.html#h2.1.2"/>
+            </navPoint>
+            <navPoint id="d39e236" playOrder="46">
+               <navLabel>
+                  <text>2.1.3   macOS</text>
+               </navLabel>
+               <content src="02_001.html#h2.1.3"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e241" playOrder="47">
+            <navLabel>
+               <text>2.2   Compiling and Installing</text>
+            </navLabel>
+            <content src="02_002.html#h2.2"/>
+         </navPoint>
+         <navPoint id="d39e246" playOrder="48">
+            <navLabel>
+               <text>2.3   Node Version Manager</text>
+            </navLabel>
+            <content src="02_003.html#h2.3"/>
+         </navPoint>
+         <navPoint id="d39e251" playOrder="49">
+            <navLabel>
+               <text>2.4   Node and Docker</text>
+            </navLabel>
+            <content src="02_004.html#h2.4"/>
+         </navPoint>
+         <navPoint id="d39e256" playOrder="50">
+            <navLabel>
+               <text>2.5   Summary</text>
+            </navLabel>
+            <content src="02_005.html#h2.5"/>
+         </navPoint>
+      </navPoint>
+      <navPoint id="d39e261" playOrder="51">
+         <navLabel>
+            <text>3   Developing Your First Application</text>
+         </navLabel>
+         <content src="03_001.html"/>
+         <navPoint id="d39e266" playOrder="52">
+            <navLabel>
+               <text>3.1   Interactive Mode</text>
+            </navLabel>
+            <content src="03_001.html#h3.1"/>
+            <navPoint id="d39e271" playOrder="53">
+               <navLabel>
+                  <text>3.1.1   General Use</text>
+               </navLabel>
+               <content src="03_001.html#h3.1.1"/>
+            </navPoint>
+            <navPoint id="d39e276" playOrder="54">
+               <navLabel>
+                  <text>3.1.2   Other REPL Commands</text>
+               </navLabel>
+               <content src="03_001.html#h3.1.2"/>
+            </navPoint>
+            <navPoint id="d39e282" playOrder="55">
+               <navLabel>
+                  <text>3.1.3   Saving and Loading in the REPL</text>
+               </navLabel>
+               <content src="03_001.html#h3.1.3"/>
+            </navPoint>
+            <navPoint id="d39e287" playOrder="56">
+               <navLabel>
+                  <text>3.1.4   Context of the REPL</text>
+               </navLabel>
+               <content src="03_001.html#h3.1.4"/>
+            </navPoint>
+            <navPoint id="d39e292" playOrder="57">
+               <navLabel>
+                  <text>3.1.5   REPL History</text>
+               </navLabel>
+               <content src="03_001.html#h3.1.5"/>
+            </navPoint>
+            <navPoint id="d39e297" playOrder="58">
+               <navLabel>
+                  <text>3.1.6   REPL Mode</text>
+               </navLabel>
+               <content src="03_001.html#h3.1.6"/>
+            </navPoint>
+            <navPoint id="d39e302" playOrder="59">
+               <navLabel>
+                  <text>3.1.7   Searching in the REPL</text>
+               </navLabel>
+               <content src="03_001.html#h3.1.7"/>
+            </navPoint>
+            <navPoint id="d39e307" playOrder="60">
+               <navLabel>
+                  <text>3.1.8   Asynchronous Operations in the REPL</text>
+               </navLabel>
+               <content src="03_001.html#h3.1.8"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e312" playOrder="61">
+            <navLabel>
+               <text>3.2   The First Application</text>
+            </navLabel>
+            <content src="03_002.html#h3.2"/>
+            <navPoint id="d39e317" playOrder="62">
+               <navLabel>
+                  <text>3.2.1   Web Server in Node.js</text>
+               </navLabel>
+               <content src="03_002.html#h3.2.1"/>
+            </navPoint>
+            <navPoint id="d39e322" playOrder="63">
+               <navLabel>
+                  <text>3.2.2   Extending the Web Server</text>
+               </navLabel>
+               <content src="03_002.html#h3.2.2"/>
+            </navPoint>
+            <navPoint id="d39e327" playOrder="64">
+               <navLabel>
+                  <text>3.2.3   Creating an HTML Response</text>
+               </navLabel>
+               <content src="03_002.html#h3.2.3"/>
+            </navPoint>
+            <navPoint id="d39e332" playOrder="65">
+               <navLabel>
+                  <text>3.2.4   Generating Dynamic Responses</text>
+               </navLabel>
+               <content src="03_002.html#h3.2.4"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e338" playOrder="66">
+            <navLabel>
+               <text>3.3   Debugging Node.js Applications</text>
+            </navLabel>
+            <content src="03_003.html#h3.3"/>
+            <navPoint id="d39e343" playOrder="67">
+               <navLabel>
+                  <text>3.3.1   Navigating in the Debugger</text>
+               </navLabel>
+               <content src="03_003.html#h3.3.1"/>
+            </navPoint>
+            <navPoint id="d39e348" playOrder="68">
+               <navLabel>
+                  <text>3.3.2   Information in the Debugger</text>
+               </navLabel>
+               <content src="03_003.html#h3.3.2"/>
+            </navPoint>
+            <navPoint id="d39e353" playOrder="69">
+               <navLabel>
+                  <text>3.3.3   Breakpoints</text>
+               </navLabel>
+               <content src="03_003.html#h3.3.3"/>
+            </navPoint>
+            <navPoint id="d39e358" playOrder="70">
+               <navLabel>
+                  <text>3.3.4   Debugging with Chrome Developer Tools</text>
+               </navLabel>
+               <content src="03_003.html#h3.3.4"/>
+            </navPoint>
+            <navPoint id="d39e363" playOrder="71">
+               <navLabel>
+                  <text>3.3.5   Debugging in the Development Environment</text>
+               </navLabel>
+               <content src="03_003.html#h3.3.5"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e368" playOrder="72">
+            <navLabel>
+               <text>3.4   nodemon Development Tool</text>
+            </navLabel>
+            <content src="03_004.html#h3.4"/>
+         </navPoint>
+         <navPoint id="d39e373" playOrder="73">
+            <navLabel>
+               <text>3.5   Summary</text>
+            </navLabel>
+            <content src="03_005.html#h3.5"/>
+         </navPoint>
+      </navPoint>
+      <navPoint id="d39e378" playOrder="74">
+         <navLabel>
+            <text>4   Node.js Modules</text>
+         </navLabel>
+         <content src="04_001.html"/>
+         <navPoint id="d39e383" playOrder="75">
+            <navLabel>
+               <text>4.1   Modular Structure</text>
+            </navLabel>
+            <content src="04_001.html#h4.1"/>
+         </navPoint>
+         <navPoint id="d39e388" playOrder="76">
+            <navLabel>
+               <text>4.2   Core Modules</text>
+            </navLabel>
+            <content src="04_002.html#h4.2"/>
+            <navPoint id="d39e394" playOrder="77">
+               <navLabel>
+                  <text>4.2.1   Stability</text>
+               </navLabel>
+               <content src="04_002.html#h4.2.1"/>
+            </navPoint>
+            <navPoint id="d39e399" playOrder="78">
+               <navLabel>
+                  <text>4.2.2   List of Core Modules</text>
+               </navLabel>
+               <content src="04_002.html#h4.2.2"/>
+            </navPoint>
+            <navPoint id="d39e404" playOrder="79">
+               <navLabel>
+                  <text>4.2.3   Loading Core Modules</text>
+               </navLabel>
+               <content src="04_002.html#h4.2.3"/>
+            </navPoint>
+            <navPoint id="d39e409" playOrder="80">
+               <navLabel>
+                  <text>4.2.4   Global Objects</text>
+               </navLabel>
+               <content src="04_002.html#h4.2.4"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e414" playOrder="81">
+            <navLabel>
+               <text>4.3   JavaScript Module Systems</text>
+            </navLabel>
+            <content src="04_003.html#h4.3"/>
+            <navPoint id="d39e419" playOrder="82">
+               <navLabel>
+                  <text>4.3.1   CommonJS</text>
+               </navLabel>
+               <content src="04_003.html#h4.3.1"/>
+            </navPoint>
+            <navPoint id="d39e424" playOrder="83">
+               <navLabel>
+                  <text>4.3.2   ECMAScript Modules</text>
+               </navLabel>
+               <content src="04_003.html#h4.3.2"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e429" playOrder="84">
+            <navLabel>
+               <text>4.4   Creating and Using Your Own Modules</text>
+            </navLabel>
+            <content src="04_004.html#h4.4"/>
+            <navPoint id="d39e434" playOrder="85">
+               <navLabel>
+                  <text>4.4.1   Modules in Node.js: CommonJS</text>
+               </navLabel>
+               <content src="04_004.html#h4.4.1"/>
+            </navPoint>
+            <navPoint id="d39e439" playOrder="86">
+               <navLabel>
+                  <text>4.4.2   Custom Node.js Modules</text>
+               </navLabel>
+               <content src="04_004.html#h4.4.2"/>
+            </navPoint>
+            <navPoint id="d39e444" playOrder="87">
+               <navLabel>
+                  <text>4.4.3   Modules in Node.js: ECMAScript</text>
+               </navLabel>
+               <content src="04_004.html#h4.4.3"/>
+            </navPoint>
+            <navPoint id="d39e450" playOrder="88">
+               <navLabel>
+                  <text>4.4.4   Exporting Different Types of Data</text>
+               </navLabel>
+               <content src="04_004.html#h4.4.4"/>
+            </navPoint>
+            <navPoint id="d39e455" playOrder="89">
+               <navLabel>
+                  <text>4.4.5   The modules Module</text>
+               </navLabel>
+               <content src="04_004.html#h4.4.5"/>
+            </navPoint>
+            <navPoint id="d39e460" playOrder="90">
+               <navLabel>
+                  <text>4.4.6   Module Loader</text>
+               </navLabel>
+               <content src="04_004.html#h4.4.6"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e465" playOrder="91">
+            <navLabel>
+               <text>4.5   Summary</text>
+            </navLabel>
+            <content src="04_005.html#h4.5"/>
+         </navPoint>
+      </navPoint>
+      <navPoint id="d39e470" playOrder="92">
+         <navLabel>
+            <text>5   HTTP</text>
+         </navLabel>
+         <content src="05_001.html"/>
+         <navPoint id="d39e475" playOrder="93">
+            <navLabel>
+               <text>5.1   Web Server</text>
+            </navLabel>
+            <content src="05_001.html#h5.1"/>
+            <navPoint id="d39e480" playOrder="94">
+               <navLabel>
+                  <text>5.1.1   Server Object</text>
+               </navLabel>
+               <content src="05_001.html#h5.1.1"/>
+            </navPoint>
+            <navPoint id="d39e485" playOrder="95">
+               <navLabel>
+                  <text>5.1.2   Server Events</text>
+               </navLabel>
+               <content src="05_001.html#h5.1.2"/>
+            </navPoint>
+            <navPoint id="d39e490" playOrder="96">
+               <navLabel>
+                  <text>5.1.3   Request Object</text>
+               </navLabel>
+               <content src="05_001.html#h5.1.3"/>
+            </navPoint>
+            <navPoint id="d39e495" playOrder="97">
+               <navLabel>
+                  <text>5.1.4   Handling the Request Body (Update)</text>
+               </navLabel>
+               <content src="05_001.html#h5.1.4"/>
+            </navPoint>
+            <navPoint id="d39e500" playOrder="98">
+               <navLabel>
+                  <text>5.1.5   Delivering Static Content</text>
+               </navLabel>
+               <content src="05_001.html#h5.1.5"/>
+            </navPoint>
+            <navPoint id="d39e506" playOrder="99">
+               <navLabel>
+                  <text>5.1.6   File Upload</text>
+               </navLabel>
+               <content src="05_001.html#h5.1.6"/>
+            </navPoint>
+            <navPoint id="d39e511" playOrder="100">
+               <navLabel>
+                  <text>5.1.7   Fine-Tuning the Frontend</text>
+               </navLabel>
+               <content src="05_001.html#h5.1.7"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e516" playOrder="101">
+            <navLabel>
+               <text>5.2   Node.js as HTTP Client</text>
+            </navLabel>
+            <content src="05_002.html#h5.2"/>
+            <navPoint id="d39e521" playOrder="102">
+               <navLabel>
+                  <text>5.2.1   Requests with the http Module</text>
+               </navLabel>
+               <content src="05_002.html#h5.2.1"/>
+            </navPoint>
+            <navPoint id="d39e526" playOrder="103">
+               <navLabel>
+                  <text>5.2.2   The request Package</text>
+               </navLabel>
+               <content src="05_002.html#h5.2.2"/>
+            </navPoint>
+            <navPoint id="d39e531" playOrder="104">
+               <navLabel>
+                  <text>5.2.3   HTML Parser</text>
+               </navLabel>
+               <content src="05_002.html#h5.2.3"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e536" playOrder="105">
+            <navLabel>
+               <text>5.3   Secure Communication with HTTPS</text>
+            </navLabel>
+            <content src="05_003.html#h5.3"/>
+            <navPoint id="d39e541" playOrder="106">
+               <navLabel>
+                  <text>5.3.1   Creating Certificates</text>
+               </navLabel>
+               <content src="05_003.html#h5.3.1"/>
+            </navPoint>
+            <navPoint id="d39e546" playOrder="107">
+               <navLabel>
+                  <text>5.3.2   Using HTTPS in the Web Server</text>
+               </navLabel>
+               <content src="05_003.html#h5.3.2"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e551" playOrder="108">
+            <navLabel>
+               <text>5.4   HTTP/2</text>
+            </navLabel>
+            <content src="05_004.html#h5.4"/>
+            <navPoint id="d39e556" playOrder="109">
+               <navLabel>
+                  <text>5.4.1   HTTP/2 Server</text>
+               </navLabel>
+               <content src="05_004.html#h5.4.1"/>
+            </navPoint>
+            <navPoint id="d39e562" playOrder="110">
+               <navLabel>
+                  <text>5.4.2   HTTP/2 Client</text>
+               </navLabel>
+               <content src="05_004.html#h5.4.2"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e567" playOrder="111">
+            <navLabel>
+               <text>5.5   Summary</text>
+            </navLabel>
+            <content src="05_005.html#h5.5"/>
+         </navPoint>
+      </navPoint>
+      <navPoint id="d39e572" playOrder="112">
+         <navLabel>
+            <text>6   Express</text>
+         </navLabel>
+         <content src="06_001.html"/>
+         <navPoint id="d39e577" playOrder="113">
+            <navLabel>
+               <text>6.1   Structure</text>
+            </navLabel>
+            <content src="06_001.html#h6.1"/>
+         </navPoint>
+         <navPoint id="d39e582" playOrder="114">
+            <navLabel>
+               <text>6.2   Installation</text>
+            </navLabel>
+            <content src="06_002.html#h6.2"/>
+         </navPoint>
+         <navPoint id="d39e587" playOrder="115">
+            <navLabel>
+               <text>6.3   Basic Principles</text>
+            </navLabel>
+            <content src="06_003.html#h6.3"/>
+            <navPoint id="d39e592" playOrder="116">
+               <navLabel>
+                  <text>6.3.1   Request</text>
+               </navLabel>
+               <content src="06_003.html#h6.3.1"/>
+            </navPoint>
+            <navPoint id="d39e597" playOrder="117">
+               <navLabel>
+                  <text>6.3.2   Response</text>
+               </navLabel>
+               <content src="06_003.html#h6.3.2"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e602" playOrder="118">
+            <navLabel>
+               <text>6.4   Setup</text>
+            </navLabel>
+            <content src="06_004.html#h6.4"/>
+            <navPoint id="d39e607" playOrder="119">
+               <navLabel>
+                  <text>6.4.1   Structure of an Application</text>
+               </navLabel>
+               <content src="06_004.html#h6.4.1"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e612" playOrder="120">
+            <navLabel>
+               <text>6.5   Movie Database</text>
+            </navLabel>
+            <content src="06_005.html#h6.5"/>
+            <navPoint id="d39e618" playOrder="121">
+               <navLabel>
+                  <text>6.5.1   Routing</text>
+               </navLabel>
+               <content src="06_005.html#h6.5.1"/>
+            </navPoint>
+            <navPoint id="d39e623" playOrder="122">
+               <navLabel>
+                  <text>6.5.2   Controller</text>
+               </navLabel>
+               <content src="06_005.html#h6.5.2"/>
+            </navPoint>
+            <navPoint id="d39e628" playOrder="123">
+               <navLabel>
+                  <text>6.5.3   Model</text>
+               </navLabel>
+               <content src="06_005.html#h6.5.3"/>
+            </navPoint>
+            <navPoint id="d39e633" playOrder="124">
+               <navLabel>
+                  <text>6.5.4   View</text>
+               </navLabel>
+               <content src="06_005.html#h6.5.4"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e638" playOrder="125">
+            <navLabel>
+               <text>6.6   Middleware</text>
+            </navLabel>
+            <content src="06_006.html#h6.6"/>
+            <navPoint id="d39e643" playOrder="126">
+               <navLabel>
+                  <text>6.6.1   Custom Middleware</text>
+               </navLabel>
+               <content src="06_006.html#h6.6.1"/>
+            </navPoint>
+            <navPoint id="d39e648" playOrder="127">
+               <navLabel>
+                  <text>6.6.2   Morgan: Logging Middleware for Express</text>
+               </navLabel>
+               <content src="06_006.html#h6.6.2"/>
+            </navPoint>
+            <navPoint id="d39e653" playOrder="128">
+               <navLabel>
+                  <text>6.6.3   Delivering Static Content</text>
+               </navLabel>
+               <content src="06_006.html#h6.6.3"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e658" playOrder="129">
+            <navLabel>
+               <text>6.7   Extended Routing: Deleting Data Records</text>
+            </navLabel>
+            <content src="06_007.html#h6.7"/>
+         </navPoint>
+         <navPoint id="d39e663" playOrder="130">
+            <navLabel>
+               <text>6.8   Creating and Editing Data Records: Body Parser</text>
+            </navLabel>
+            <content src="06_008.html#h6.8"/>
+            <navPoint id="d39e668" playOrder="131">
+               <navLabel>
+                  <text>6.8.1   Handling Form Input: Body Parser</text>
+               </navLabel>
+               <content src="06_008.html#h6.8.1"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e674" playOrder="132">
+            <navLabel>
+               <text>6.9   Express 5</text>
+            </navLabel>
+            <content src="06_009.html#h6.9"/>
+         </navPoint>
+         <navPoint id="d39e679" playOrder="133">
+            <navLabel>
+               <text>6.10   HTTPS and HTTP/2</text>
+            </navLabel>
+            <content src="06_010.html#h6.10"/>
+            <navPoint id="d39e684" playOrder="134">
+               <navLabel>
+                  <text>6.10.1   HTTPS</text>
+               </navLabel>
+               <content src="06_010.html#h6.10.1"/>
+            </navPoint>
+            <navPoint id="d39e689" playOrder="135">
+               <navLabel>
+                  <text>6.10.2   HTTP/2</text>
+               </navLabel>
+               <content src="06_010.html#h6.10.2"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e694" playOrder="136">
+            <navLabel>
+               <text>6.11   Summary</text>
+            </navLabel>
+            <content src="06_011.html#h6.11"/>
+         </navPoint>
+      </navPoint>
+      <navPoint id="d39e699" playOrder="137">
+         <navLabel>
+            <text>7   Template Engines</text>
+         </navLabel>
+         <content src="07_001.html"/>
+         <navPoint id="d39e704" playOrder="138">
+            <navLabel>
+               <text>7.1   Custom Template Engine</text>
+            </navLabel>
+            <content src="07_001.html#h7.1"/>
+         </navPoint>
+         <navPoint id="d39e709" playOrder="139">
+            <navLabel>
+               <text>7.2   Template Engines in Practice: Pug</text>
+            </navLabel>
+            <content src="07_002.html#h7.2"/>
+            <navPoint id="d39e714" playOrder="140">
+               <navLabel>
+                  <text>7.2.1   Installation</text>
+               </navLabel>
+               <content src="07_002.html#h7.2.1"/>
+            </navPoint>
+            <navPoint id="d39e719" playOrder="141">
+               <navLabel>
+                  <text>7.2.2   Pug and Express: Integration</text>
+               </navLabel>
+               <content src="07_002.html#h7.2.2"/>
+            </navPoint>
+            <navPoint id="d39e724" playOrder="142">
+               <navLabel>
+                  <text>7.2.3   Variables in Pug</text>
+               </navLabel>
+               <content src="07_002.html#h7.2.3"/>
+            </navPoint>
+            <navPoint id="d39e730" playOrder="143">
+               <navLabel>
+                  <text>7.2.4   Specific Features of Pug</text>
+               </navLabel>
+               <content src="07_002.html#h7.2.4"/>
+            </navPoint>
+            <navPoint id="d39e735" playOrder="144">
+               <navLabel>
+                  <text>7.2.5   Conditions and Loops</text>
+               </navLabel>
+               <content src="07_002.html#h7.2.5"/>
+            </navPoint>
+            <navPoint id="d39e740" playOrder="145">
+               <navLabel>
+                  <text>7.2.6   Extends and Includes</text>
+               </navLabel>
+               <content src="07_002.html#h7.2.6"/>
+            </navPoint>
+            <navPoint id="d39e745" playOrder="146">
+               <navLabel>
+                  <text>7.2.7   Mixins</text>
+               </navLabel>
+               <content src="07_002.html#h7.2.7"/>
+            </navPoint>
+            <navPoint id="d39e750" playOrder="147">
+               <navLabel>
+                  <text>7.2.8   Using Pug without Express</text>
+               </navLabel>
+               <content src="07_002.html#h7.2.8"/>
+            </navPoint>
+            <navPoint id="d39e755" playOrder="148">
+               <navLabel>
+                  <text>7.2.9   Compiling</text>
+               </navLabel>
+               <content src="07_002.html#h7.2.9"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e760" playOrder="149">
+            <navLabel>
+               <text>7.3   Handlebars</text>
+            </navLabel>
+            <content src="07_003.html#h7.3"/>
+            <navPoint id="d39e765" playOrder="150">
+               <navLabel>
+                  <text>7.3.1   Installation</text>
+               </navLabel>
+               <content src="07_003.html#h7.3.1"/>
+            </navPoint>
+            <navPoint id="d39e770" playOrder="151">
+               <navLabel>
+                  <text>7.3.2   Integration with Express</text>
+               </navLabel>
+               <content src="07_003.html#h7.3.2"/>
+            </navPoint>
+            <navPoint id="d39e775" playOrder="152">
+               <navLabel>
+                  <text>7.3.3   Conditions and Loops</text>
+               </navLabel>
+               <content src="07_003.html#h7.3.3"/>
+            </navPoint>
+            <navPoint id="d39e780" playOrder="153">
+               <navLabel>
+                  <text>7.3.4   Partials</text>
+               </navLabel>
+               <content src="07_003.html#h7.3.4"/>
+            </navPoint>
+            <navPoint id="d39e786" playOrder="154">
+               <navLabel>
+                  <text>7.3.5   Custom Helpers</text>
+               </navLabel>
+               <content src="07_003.html#h7.3.5"/>
+            </navPoint>
+            <navPoint id="d39e791" playOrder="155">
+               <navLabel>
+                  <text>7.3.6   Handlebars without Express</text>
+               </navLabel>
+               <content src="07_003.html#h7.3.6"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e796" playOrder="156">
+            <navLabel>
+               <text>7.4   Summary</text>
+            </navLabel>
+            <content src="07_004.html#h7.4"/>
+         </navPoint>
+      </navPoint>
+      <navPoint id="d39e801" playOrder="157">
+         <navLabel>
+            <text>8   Connecting Databases</text>
+         </navLabel>
+         <content src="08_001.html"/>
+         <navPoint id="d39e806" playOrder="158">
+            <navLabel>
+               <text>8.1   Node.js and Relational Databases</text>
+            </navLabel>
+            <content src="08_001.html#h8.1"/>
+            <navPoint id="d39e811" playOrder="159">
+               <navLabel>
+                  <text>8.1.1   MySQL</text>
+               </navLabel>
+               <content src="08_001.html#h8.1.1"/>
+            </navPoint>
+            <navPoint id="d39e816" playOrder="160">
+               <navLabel>
+                  <text>8.1.2   SQLite</text>
+               </navLabel>
+               <content src="08_001.html#h8.1.2"/>
+            </navPoint>
+            <navPoint id="d39e821" playOrder="161">
+               <navLabel>
+                  <text>8.1.3   Object-Relational Mapping</text>
+               </navLabel>
+               <content src="08_001.html#h8.1.3"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e826" playOrder="162">
+            <navLabel>
+               <text>8.2   Node.js and Nonrelational Databases</text>
+            </navLabel>
+            <content src="08_002.html#h8.2"/>
+            <navPoint id="d39e831" playOrder="163">
+               <navLabel>
+                  <text>8.2.1   Redis</text>
+               </navLabel>
+               <content src="08_002.html#h8.2.1"/>
+            </navPoint>
+            <navPoint id="d39e836" playOrder="164">
+               <navLabel>
+                  <text>8.2.2   MongoDB</text>
+               </navLabel>
+               <content src="08_002.html#h8.2.2"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e842" playOrder="165">
+            <navLabel>
+               <text>8.3   Summary</text>
+            </navLabel>
+            <content src="08_003.html#h8.3"/>
+         </navPoint>
+      </navPoint>
+      <navPoint id="d39e847" playOrder="166">
+         <navLabel>
+            <text>9   Authentication and Session Handling</text>
+         </navLabel>
+         <content src="09_001.html"/>
+         <navPoint id="d39e852" playOrder="167">
+            <navLabel>
+               <text>9.1   Passport</text>
+            </navLabel>
+            <content src="09_001.html#h9.1"/>
+         </navPoint>
+         <navPoint id="d39e857" playOrder="168">
+            <navLabel>
+               <text>9.2   Setup and Configuration</text>
+            </navLabel>
+            <content src="09_002.html#h9.2"/>
+            <navPoint id="d39e862" playOrder="169">
+               <navLabel>
+                  <text>9.2.1   Installation</text>
+               </navLabel>
+               <content src="09_002.html#h9.2.1"/>
+            </navPoint>
+            <navPoint id="d39e867" playOrder="170">
+               <navLabel>
+                  <text>9.2.2   Configuration</text>
+               </navLabel>
+               <content src="09_002.html#h9.2.2"/>
+            </navPoint>
+            <navPoint id="d39e872" playOrder="171">
+               <navLabel>
+                  <text>9.2.3   Strategy Configuration</text>
+               </navLabel>
+               <content src="09_002.html#h9.2.3"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e877" playOrder="172">
+            <navLabel>
+               <text>9.3   Logging In to the Application</text>
+            </navLabel>
+            <content src="09_003.html#h9.3"/>
+            <navPoint id="d39e882" playOrder="173">
+               <navLabel>
+                  <text>9.3.1   Login Form</text>
+               </navLabel>
+               <content src="09_003.html#h9.3.1"/>
+            </navPoint>
+            <navPoint id="d39e887" playOrder="174">
+               <navLabel>
+                  <text>9.3.2   Securing Resources</text>
+               </navLabel>
+               <content src="09_003.html#h9.3.2"/>
+            </navPoint>
+            <navPoint id="d39e892" playOrder="175">
+               <navLabel>
+                  <text>9.3.3   Logging Out</text>
+               </navLabel>
+               <content src="09_003.html#h9.3.3"/>
+            </navPoint>
+            <navPoint id="d39e898" playOrder="176">
+               <navLabel>
+                  <text>9.3.4   Connecting to the Database</text>
+               </navLabel>
+               <content src="09_003.html#h9.3.4"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e903" playOrder="177">
+            <navLabel>
+               <text>9.4   Accessing Resources</text>
+            </navLabel>
+            <content src="09_004.html#h9.4"/>
+            <navPoint id="d39e908" playOrder="178">
+               <navLabel>
+                  <text>9.4.1   Access Restriction</text>
+               </navLabel>
+               <content src="09_004.html#h9.4.1"/>
+            </navPoint>
+            <navPoint id="d39e913" playOrder="179">
+               <navLabel>
+                  <text>9.4.2   Submitting Ratings</text>
+               </navLabel>
+               <content src="09_004.html#h9.4.2"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e918" playOrder="180">
+            <navLabel>
+               <text>9.5   Summary</text>
+            </navLabel>
+            <content src="09_005.html#h9.5"/>
+         </navPoint>
+      </navPoint>
+      <navPoint id="d39e923" playOrder="181">
+         <navLabel>
+            <text>10   REST Server</text>
+         </navLabel>
+         <content src="10_001.html"/>
+         <navPoint id="d39e928" playOrder="182">
+            <navLabel>
+               <text>10.1   Introduction to REST and Usage in Web Applications</text>
+            </navLabel>
+            <content src="10_001.html#h10.1"/>
+         </navPoint>
+         <navPoint id="d39e933" playOrder="183">
+            <navLabel>
+               <text>10.2   Accessing the Application</text>
+            </navLabel>
+            <content src="10_002.html#h10.2"/>
+            <navPoint id="d39e938" playOrder="184">
+               <navLabel>
+                  <text>10.2.1   Postman</text>
+               </navLabel>
+               <content src="10_002.html#h10.2.1"/>
+            </navPoint>
+            <navPoint id="d39e943" playOrder="185">
+               <navLabel>
+                  <text>10.2.2   cURL</text>
+               </navLabel>
+               <content src="10_002.html#h10.2.2"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e948" playOrder="186">
+            <navLabel>
+               <text>10.3   Adaptations to the Application Structure</text>
+            </navLabel>
+            <content src="10_003.html#h10.3"/>
+         </navPoint>
+         <navPoint id="d39e954" playOrder="187">
+            <navLabel>
+               <text>10.4   Read Requests</text>
+            </navLabel>
+            <content src="10_004.html#h10.4"/>
+            <navPoint id="d39e959" playOrder="188">
+               <navLabel>
+                  <text>10.4.1   Reading All Data Records of a Resource</text>
+               </navLabel>
+               <content src="10_004.html#h10.4.1"/>
+            </navPoint>
+            <navPoint id="d39e964" playOrder="189">
+               <navLabel>
+                  <text>10.4.2   Accessing a Data Record</text>
+               </navLabel>
+               <content src="10_004.html#h10.4.2"/>
+            </navPoint>
+            <navPoint id="d39e969" playOrder="190">
+               <navLabel>
+                  <text>10.4.3   Error Handling</text>
+               </navLabel>
+               <content src="10_004.html#h10.4.3"/>
+            </navPoint>
+            <navPoint id="d39e974" playOrder="191">
+               <navLabel>
+                  <text>10.4.4   Sorting the List</text>
+               </navLabel>
+               <content src="10_004.html#h10.4.4"/>
+            </navPoint>
+            <navPoint id="d39e979" playOrder="192">
+               <navLabel>
+                  <text>10.4.5   Controlling the Output Format</text>
+               </navLabel>
+               <content src="10_004.html#h10.4.5"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e984" playOrder="193">
+            <navLabel>
+               <text>10.5   Write Requests</text>
+            </navLabel>
+            <content src="10_005.html#h10.5"/>
+            <navPoint id="d39e989" playOrder="194">
+               <navLabel>
+                  <text>10.5.1   POST: Creating New Data Records</text>
+               </navLabel>
+               <content src="10_005.html#h10.5.1"/>
+            </navPoint>
+            <navPoint id="d39e994" playOrder="195">
+               <navLabel>
+                  <text>10.5.2   PUT: Modifying Existing Data Records</text>
+               </navLabel>
+               <content src="10_005.html#h10.5.2"/>
+            </navPoint>
+            <navPoint id="d39e999" playOrder="196">
+               <navLabel>
+                  <text>10.5.3   DELETE: Deleting Data Records</text>
+               </navLabel>
+               <content src="10_005.html#h10.5.3"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e1004" playOrder="197">
+            <navLabel>
+               <text>10.6   Authentication via JWTs</text>
+            </navLabel>
+            <content src="10_006.html#h10.6"/>
+            <navPoint id="d39e1010" playOrder="198">
+               <navLabel>
+                  <text>10.6.1   Login</text>
+               </navLabel>
+               <content src="10_006.html#h10.6.1"/>
+            </navPoint>
+            <navPoint id="d39e1015" playOrder="199">
+               <navLabel>
+                  <text>10.6.2   Safeguarding Resources</text>
+               </navLabel>
+               <content src="10_006.html#h10.6.2"/>
+            </navPoint>
+            <navPoint id="d39e1020" playOrder="200">
+               <navLabel>
+                  <text>10.6.3   Accessing User Information in the Token</text>
+               </navLabel>
+               <content src="10_006.html#h10.6.3"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e1025" playOrder="201">
+            <navLabel>
+               <text>10.7   OpenAPI Specification: Documentation with Swagger</text>
+            </navLabel>
+            <content src="10_007.html#h10.7"/>
+         </navPoint>
+         <navPoint id="d39e1030" playOrder="202">
+            <navLabel>
+               <text>10.8   Validation</text>
+            </navLabel>
+            <content src="10_008.html#h10.8"/>
+            <navPoint id="d39e1035" playOrder="203">
+               <navLabel>
+                  <text>10.8.1   Installation and First Validation</text>
+               </navLabel>
+               <content src="10_008.html#h10.8.1"/>
+            </navPoint>
+            <navPoint id="d39e1040" playOrder="204">
+               <navLabel>
+                  <text>10.8.2   Checking Requests with a Validation Schema</text>
+               </navLabel>
+               <content src="10_008.html#h10.8.2"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e1045" playOrder="205">
+            <navLabel>
+               <text>10.9   Summary</text>
+            </navLabel>
+            <content src="10_009.html#h10.9"/>
+         </navPoint>
+      </navPoint>
+      <navPoint id="d39e1050" playOrder="206">
+         <navLabel>
+            <text>11   GraphQL</text>
+         </navLabel>
+         <content src="11_001.html"/>
+         <navPoint id="d39e1055" playOrder="207">
+            <navLabel>
+               <text>11.1   GraphQL Libraries</text>
+            </navLabel>
+            <content src="11_001.html#h11.1"/>
+         </navPoint>
+         <navPoint id="d39e1060" playOrder="208">
+            <navLabel>
+               <text>11.2   Integration with Express</text>
+            </navLabel>
+            <content src="11_002.html#h11.2"/>
+         </navPoint>
+         <navPoint id="d39e1066" playOrder="209">
+            <navLabel>
+               <text>11.3   GraphiQL</text>
+            </navLabel>
+            <content src="11_003.html#h11.3"/>
+         </navPoint>
+         <navPoint id="d39e1071" playOrder="210">
+            <navLabel>
+               <text>11.4   Reading Data via the Interface</text>
+            </navLabel>
+            <content src="11_004.html#h11.4"/>
+            <navPoint id="d39e1076" playOrder="211">
+               <navLabel>
+                  <text>11.4.1   Parameterizing Queries</text>
+               </navLabel>
+               <content src="11_004.html#h11.4.1"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e1081" playOrder="212">
+            <navLabel>
+               <text>11.5   Write Accesses to the GraphQL Interface</text>
+            </navLabel>
+            <content src="11_005.html#h11.5"/>
+            <navPoint id="d39e1086" playOrder="213">
+               <navLabel>
+                  <text>11.5.1   Creating New Data Records</text>
+               </navLabel>
+               <content src="11_005.html#h11.5.1"/>
+            </navPoint>
+            <navPoint id="d39e1091" playOrder="214">
+               <navLabel>
+                  <text>11.5.2   Updating and Deleting Data Records</text>
+               </navLabel>
+               <content src="11_005.html#h11.5.2"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e1096" playOrder="215">
+            <navLabel>
+               <text>11.6   Authentication for the GraphQL Interface</text>
+            </navLabel>
+            <content src="11_006.html#h11.6"/>
+         </navPoint>
+         <navPoint id="d39e1101" playOrder="216">
+            <navLabel>
+               <text>11.7   Summary</text>
+            </navLabel>
+            <content src="11_007.html#h11.7"/>
+         </navPoint>
+      </navPoint>
+      <navPoint id="d39e1106" playOrder="217">
+         <navLabel>
+            <text>12   Real-Time Web Applications</text>
+         </navLabel>
+         <content src="12_001.html"/>
+         <navPoint id="d39e1111" playOrder="218">
+            <navLabel>
+               <text>12.1   The Sample Application</text>
+            </navLabel>
+            <content src="12_001.html#h12.1"/>
+         </navPoint>
+         <navPoint id="d39e1116" playOrder="219">
+            <navLabel>
+               <text>12.2   Setup</text>
+            </navLabel>
+            <content src="12_002.html#h12.2"/>
+         </navPoint>
+         <navPoint id="d39e1122" playOrder="220">
+            <navLabel>
+               <text>12.3   WebSockets</text>
+            </navLabel>
+            <content src="12_003.html#h12.3"/>
+            <navPoint id="d39e1127" playOrder="221">
+               <navLabel>
+                  <text>12.3.1   The Server Side</text>
+               </navLabel>
+               <content src="12_003.html#h12.3.1"/>
+            </navPoint>
+            <navPoint id="d39e1132" playOrder="222">
+               <navLabel>
+                  <text>12.3.2   The Client Side</text>
+               </navLabel>
+               <content src="12_003.html#h12.3.2"/>
+            </navPoint>
+            <navPoint id="d39e1137" playOrder="223">
+               <navLabel>
+                  <text>12.3.3   User List</text>
+               </navLabel>
+               <content src="12_003.html#h12.3.3"/>
+            </navPoint>
+            <navPoint id="d39e1142" playOrder="224">
+               <navLabel>
+                  <text>12.3.4   Logout</text>
+               </navLabel>
+               <content src="12_003.html#h12.3.4"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e1147" playOrder="225">
+            <navLabel>
+               <text>12.4   Socket.IO</text>
+            </navLabel>
+            <content src="12_004.html#h12.4"/>
+            <navPoint id="d39e1152" playOrder="226">
+               <navLabel>
+                  <text>12.4.1   Installation and Integration</text>
+               </navLabel>
+               <content src="12_004.html#h12.4.1"/>
+            </navPoint>
+            <navPoint id="d39e1157" playOrder="227">
+               <navLabel>
+                  <text>12.4.2   Socket.IO API</text>
+               </navLabel>
+               <content src="12_004.html#h12.4.2"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e1162" playOrder="228">
+            <navLabel>
+               <text>12.5   Summary</text>
+            </navLabel>
+            <content src="12_005.html#h12.5"/>
+         </navPoint>
+      </navPoint>
+      <navPoint id="d39e1167" playOrder="229">
+         <navLabel>
+            <text>13   Type-Safe Applications in Node.js</text>
+         </navLabel>
+         <content src="13_001.html"/>
+         <navPoint id="d39e1172" playOrder="230">
+            <navLabel>
+               <text>13.1   Type Systems for Node.js</text>
+            </navLabel>
+            <content src="13_001.html#h13.1"/>
+            <navPoint id="d39e1178" playOrder="231">
+               <navLabel>
+                  <text>13.1.1   Flow</text>
+               </navLabel>
+               <content src="13_001.html#h13.1.1"/>
+            </navPoint>
+            <navPoint id="d39e1183" playOrder="232">
+               <navLabel>
+                  <text>13.1.2   TypeScript</text>
+               </navLabel>
+               <content src="13_001.html#h13.1.2"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e1188" playOrder="233">
+            <navLabel>
+               <text>13.2   Tools and Configuration</text>
+            </navLabel>
+            <content src="13_002.html#h13.2"/>
+            <navPoint id="d39e1193" playOrder="234">
+               <navLabel>
+                  <text>13.2.1   Configuring the TypeScript Compiler</text>
+               </navLabel>
+               <content src="13_002.html#h13.2.1"/>
+            </navPoint>
+            <navPoint id="d39e1198" playOrder="235">
+               <navLabel>
+                  <text>13.2.2   Integration into the Development Environment</text>
+               </navLabel>
+               <content src="13_002.html#h13.2.2"/>
+            </navPoint>
+            <navPoint id="d39e1203" playOrder="236">
+               <navLabel>
+                  <text>13.2.3   ESLint</text>
+               </navLabel>
+               <content src="13_002.html#h13.2.3"/>
+            </navPoint>
+            <navPoint id="d39e1208" playOrder="237">
+               <navLabel>
+                  <text>13.2.4   ts-node</text>
+               </navLabel>
+               <content src="13_002.html#h13.2.4"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e1213" playOrder="238">
+            <navLabel>
+               <text>13.3   Basic Principles</text>
+            </navLabel>
+            <content src="13_003.html#h13.3"/>
+            <navPoint id="d39e1218" playOrder="239">
+               <navLabel>
+                  <text>13.3.1   Data Types</text>
+               </navLabel>
+               <content src="13_003.html#h13.3.1"/>
+            </navPoint>
+            <navPoint id="d39e1223" playOrder="240">
+               <navLabel>
+                  <text>13.3.2   Functions</text>
+               </navLabel>
+               <content src="13_003.html#h13.3.2"/>
+            </navPoint>
+            <navPoint id="d39e1228" playOrder="241">
+               <navLabel>
+                  <text>13.3.3   Modules</text>
+               </navLabel>
+               <content src="13_003.html#h13.3.3"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e1234" playOrder="242">
+            <navLabel>
+               <text>13.4   Classes</text>
+            </navLabel>
+            <content src="13_004.html#h13.4"/>
+            <navPoint id="d39e1239" playOrder="243">
+               <navLabel>
+                  <text>13.4.1   Methods</text>
+               </navLabel>
+               <content src="13_004.html#h13.4.1"/>
+            </navPoint>
+            <navPoint id="d39e1244" playOrder="244">
+               <navLabel>
+                  <text>13.4.2   Access Modifiers</text>
+               </navLabel>
+               <content src="13_004.html#h13.4.2"/>
+            </navPoint>
+            <navPoint id="d39e1249" playOrder="245">
+               <navLabel>
+                  <text>13.4.3   Inheritance</text>
+               </navLabel>
+               <content src="13_004.html#h13.4.3"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e1254" playOrder="246">
+            <navLabel>
+               <text>13.5   Interfaces</text>
+            </navLabel>
+            <content src="13_005.html#h13.5"/>
+         </navPoint>
+         <navPoint id="d39e1259" playOrder="247">
+            <navLabel>
+               <text>13.6   Type Aliases in TypeScript</text>
+            </navLabel>
+            <content src="13_006.html#h13.6"/>
+         </navPoint>
+         <navPoint id="d39e1264" playOrder="248">
+            <navLabel>
+               <text>13.7   Generics</text>
+            </navLabel>
+            <content src="13_007.html#h13.7"/>
+         </navPoint>
+         <navPoint id="d39e1269" playOrder="249">
+            <navLabel>
+               <text>13.8   TypeScript in Use in a Node.js Application</text>
+            </navLabel>
+            <content src="13_008.html#h13.8"/>
+            <navPoint id="d39e1274" playOrder="250">
+               <navLabel>
+                  <text>13.8.1   Type Definitions</text>
+               </navLabel>
+               <content src="13_008.html#h13.8.1"/>
+            </navPoint>
+            <navPoint id="d39e1279" playOrder="251">
+               <navLabel>
+                  <text>13.8.2   Creating Custom Type Definitions</text>
+               </navLabel>
+               <content src="13_008.html#h13.8.2"/>
+            </navPoint>
+            <navPoint id="d39e1284" playOrder="252">
+               <navLabel>
+                  <text>13.8.3   Sample Express Application</text>
+               </navLabel>
+               <content src="13_008.html#h13.8.3"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e1290" playOrder="253">
+            <navLabel>
+               <text>13.9   Summary</text>
+            </navLabel>
+            <content src="13_009.html#h13.9"/>
+         </navPoint>
+      </navPoint>
+      <navPoint id="d39e1295" playOrder="254">
+         <navLabel>
+            <text>14   Web Applications with Nest</text>
+         </navLabel>
+         <content src="14_001.html"/>
+         <navPoint id="d39e1300" playOrder="255">
+            <navLabel>
+               <text>14.1   Installation and Getting Started with Nest</text>
+            </navLabel>
+            <content src="14_001.html#h14.1"/>
+         </navPoint>
+         <navPoint id="d39e1305" playOrder="256">
+            <navLabel>
+               <text>14.2   Nest Command-Line Interface</text>
+            </navLabel>
+            <content src="14_002.html#h14.2"/>
+            <navPoint id="d39e1310" playOrder="257">
+               <navLabel>
+                  <text>14.2.1   Commands for Operating and Running the Application</text>
+               </navLabel>
+               <content src="14_002.html#h14.2.1"/>
+            </navPoint>
+            <navPoint id="d39e1315" playOrder="258">
+               <navLabel>
+                  <text>14.2.2   Creating Structures in the Application</text>
+               </navLabel>
+               <content src="14_002.html#h14.2.2"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e1320" playOrder="259">
+            <navLabel>
+               <text>14.3   Structure of the Application</text>
+            </navLabel>
+            <content src="14_003.html#h14.3"/>
+            <navPoint id="d39e1325" playOrder="260">
+               <navLabel>
+                  <text>14.3.1   Root Directory with the Configuration Files</text>
+               </navLabel>
+               <content src="14_003.html#h14.3.1"/>
+            </navPoint>
+            <navPoint id="d39e1330" playOrder="261">
+               <navLabel>
+                  <text>14.3.2   src Directory: Core of the Application</text>
+               </navLabel>
+               <content src="14_003.html#h14.3.2"/>
+            </navPoint>
+            <navPoint id="d39e1335" playOrder="262">
+               <navLabel>
+                  <text>14.3.3   Other Directories of the Application</text>
+               </navLabel>
+               <content src="14_003.html#h14.3.3"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e1340" playOrder="263">
+            <navLabel>
+               <text>14.4   Modules: Logical Units in the Source Code</text>
+            </navLabel>
+            <content src="14_004.html#h14.4"/>
+            <navPoint id="d39e1346" playOrder="264">
+               <navLabel>
+                  <text>14.4.1   Creating Modules</text>
+               </navLabel>
+               <content src="14_004.html#h14.4.1"/>
+            </navPoint>
+            <navPoint id="d39e1351" playOrder="265">
+               <navLabel>
+                  <text>14.4.2   Module Decorator</text>
+               </navLabel>
+               <content src="14_004.html#h14.4.2"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e1356" playOrder="266">
+            <navLabel>
+               <text>14.5   Controllers: Endpoints of an Application</text>
+            </navLabel>
+            <content src="14_005.html#h14.5"/>
+            <navPoint id="d39e1361" playOrder="267">
+               <navLabel>
+                  <text>14.5.1   Creating a Controller</text>
+               </navLabel>
+               <content src="14_005.html#h14.5.1"/>
+            </navPoint>
+            <navPoint id="d39e1366" playOrder="268">
+               <navLabel>
+                  <text>14.5.2   Implementing a Controller</text>
+               </navLabel>
+               <content src="14_005.html#h14.5.2"/>
+            </navPoint>
+            <navPoint id="d39e1371" playOrder="269">
+               <navLabel>
+                  <text>14.5.3   Integrating and Checking the Controller</text>
+               </navLabel>
+               <content src="14_005.html#h14.5.3"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e1376" playOrder="270">
+            <navLabel>
+               <text>14.6   Providers: Business Logic of the Application</text>
+            </navLabel>
+            <content src="14_006.html#h14.6"/>
+            <navPoint id="d39e1381" playOrder="271">
+               <navLabel>
+                  <text>14.6.1   Creating and Including a Service</text>
+               </navLabel>
+               <content src="14_006.html#h14.6.1"/>
+            </navPoint>
+            <navPoint id="d39e1386" playOrder="272">
+               <navLabel>
+                  <text>14.6.2   Implementing the Service</text>
+               </navLabel>
+               <content src="14_006.html#h14.6.2"/>
+            </navPoint>
+            <navPoint id="d39e1391" playOrder="273">
+               <navLabel>
+                  <text>14.6.3   Integrating the Service via Nest’s Dependency Injection</text>
+               </navLabel>
+               <content src="14_006.html#h14.6.3"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e1396" playOrder="274">
+            <navLabel>
+               <text>14.7   Accessing Databases</text>
+            </navLabel>
+            <content src="14_007.html#h14.7"/>
+            <navPoint id="d39e1402" playOrder="275">
+               <navLabel>
+                  <text>14.7.1   Setup and Installation</text>
+               </navLabel>
+               <content src="14_007.html#h14.7.1"/>
+            </navPoint>
+            <navPoint id="d39e1407" playOrder="276">
+               <navLabel>
+                  <text>14.7.2   Accessing the Database</text>
+               </navLabel>
+               <content src="14_007.html#h14.7.2"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e1412" playOrder="277">
+            <navLabel>
+               <text>14.8   Documenting the Endpoints with OpenAPI</text>
+            </navLabel>
+            <content src="14_008.html#h14.8"/>
+         </navPoint>
+         <navPoint id="d39e1417" playOrder="278">
+            <navLabel>
+               <text>14.9   Authentication</text>
+            </navLabel>
+            <content src="14_009.html#h14.9"/>
+            <navPoint id="d39e1422" playOrder="279">
+               <navLabel>
+                  <text>14.9.1   Setup</text>
+               </navLabel>
+               <content src="14_009.html#h14.9.1"/>
+            </navPoint>
+            <navPoint id="d39e1427" playOrder="280">
+               <navLabel>
+                  <text>14.9.2   Authentication Service</text>
+               </navLabel>
+               <content src="14_009.html#h14.9.2"/>
+            </navPoint>
+            <navPoint id="d39e1432" playOrder="281">
+               <navLabel>
+                  <text>14.9.3   Login Controller: Endpoint for User Login</text>
+               </navLabel>
+               <content src="14_009.html#h14.9.3"/>
+            </navPoint>
+            <navPoint id="d39e1437" playOrder="282">
+               <navLabel>
+                  <text>14.9.4   Protecting Routes</text>
+               </navLabel>
+               <content src="14_009.html#h14.9.4"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e1442" playOrder="283">
+            <navLabel>
+               <text>14.10   Outlook: Testing in Nest</text>
+            </navLabel>
+            <content src="14_010.html#h14.10"/>
+         </navPoint>
+         <navPoint id="d39e1447" playOrder="284">
+            <navLabel>
+               <text>14.11   Summary</text>
+            </navLabel>
+            <content src="14_011.html#h14.11"/>
+         </navPoint>
+      </navPoint>
+      <navPoint id="d39e1452" playOrder="285">
+         <navLabel>
+            <text>15   Node on the Command Line</text>
+         </navLabel>
+         <content src="15_001.html"/>
+         <navPoint id="d39e1458" playOrder="286">
+            <navLabel>
+               <text>15.1   Basic Principles</text>
+            </navLabel>
+            <content src="15_001.html#h15.1"/>
+            <navPoint id="d39e1463" playOrder="287">
+               <navLabel>
+                  <text>15.1.1   Structure</text>
+               </navLabel>
+               <content src="15_001.html#h15.1.1"/>
+            </navPoint>
+            <navPoint id="d39e1468" playOrder="288">
+               <navLabel>
+                  <text>15.1.2   Executability</text>
+               </navLabel>
+               <content src="15_001.html#h15.1.2"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e1473" playOrder="289">
+            <navLabel>
+               <text>15.2   Structure of a Command-Line Application</text>
+            </navLabel>
+            <content src="15_002.html#h15.2"/>
+            <navPoint id="d39e1478" playOrder="290">
+               <navLabel>
+                  <text>15.2.1   File and Directory Structure</text>
+               </navLabel>
+               <content src="15_002.html#h15.2.1"/>
+            </navPoint>
+            <navPoint id="d39e1483" playOrder="291">
+               <navLabel>
+                  <text>15.2.2   Package Definition</text>
+               </navLabel>
+               <content src="15_002.html#h15.2.2"/>
+            </navPoint>
+            <navPoint id="d39e1488" playOrder="292">
+               <navLabel>
+                  <text>15.2.3   Math Trainer Application</text>
+               </navLabel>
+               <content src="15_002.html#h15.2.3"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e1493" playOrder="293">
+            <navLabel>
+               <text>15.3   Accessing Input and Output</text>
+            </navLabel>
+            <content src="15_003.html#h15.3"/>
+            <navPoint id="d39e1498" playOrder="294">
+               <navLabel>
+                  <text>15.3.1   Output</text>
+               </navLabel>
+               <content src="15_003.html#h15.3.1"/>
+            </navPoint>
+            <navPoint id="d39e1503" playOrder="295">
+               <navLabel>
+                  <text>15.3.2   Input</text>
+               </navLabel>
+               <content src="15_003.html#h15.3.2"/>
+            </navPoint>
+            <navPoint id="d39e1508" playOrder="296">
+               <navLabel>
+                  <text>15.3.3   User Interaction with the readline Module</text>
+               </navLabel>
+               <content src="15_003.html#h15.3.3"/>
+            </navPoint>
+            <navPoint id="d39e1514" playOrder="297">
+               <navLabel>
+                  <text>15.3.4   Options and Arguments</text>
+               </navLabel>
+               <content src="15_003.html#h15.3.4"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e1519" playOrder="298">
+            <navLabel>
+               <text>15.4   Tools</text>
+            </navLabel>
+            <content src="15_004.html#h15.4"/>
+            <navPoint id="d39e1524" playOrder="299">
+               <navLabel>
+                  <text>15.4.1   Commander</text>
+               </navLabel>
+               <content src="15_004.html#h15.4.1"/>
+            </navPoint>
+            <navPoint id="d39e1529" playOrder="300">
+               <navLabel>
+                  <text>15.4.2   Chalk</text>
+               </navLabel>
+               <content src="15_004.html#h15.4.2"/>
+            </navPoint>
+            <navPoint id="d39e1534" playOrder="301">
+               <navLabel>
+                  <text>15.4.3   node-emoji</text>
+               </navLabel>
+               <content src="15_004.html#h15.4.3"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e1539" playOrder="302">
+            <navLabel>
+               <text>15.5   Signals</text>
+            </navLabel>
+            <content src="15_005.html#h15.5"/>
+         </navPoint>
+         <navPoint id="d39e1544" playOrder="303">
+            <navLabel>
+               <text>15.6   Exit Codes</text>
+            </navLabel>
+            <content src="15_006.html#h15.6"/>
+         </navPoint>
+         <navPoint id="d39e1549" playOrder="304">
+            <navLabel>
+               <text>15.7   Summary</text>
+            </navLabel>
+            <content src="15_007.html#h15.7"/>
+         </navPoint>
+      </navPoint>
+      <navPoint id="d39e1554" playOrder="305">
+         <navLabel>
+            <text>16   Asynchronous Programming</text>
+         </navLabel>
+         <content src="16_001.html"/>
+         <navPoint id="d39e1559" playOrder="306">
+            <navLabel>
+               <text>16.1   Basic Principles of Asynchronous Programming</text>
+            </navLabel>
+            <content src="16_001.html#h16.1"/>
+            <navPoint id="d39e1564" playOrder="307">
+               <navLabel>
+                  <text>16.1.1   The child_process Module</text>
+               </navLabel>
+               <content src="16_001.html#h16.1.1"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e1570" playOrder="308">
+            <navLabel>
+               <text>16.2   Running External Commands Asynchronously</text>
+            </navLabel>
+            <content src="16_002.html#h16.2"/>
+            <navPoint id="d39e1575" playOrder="309">
+               <navLabel>
+                  <text>16.2.1   The exec Method</text>
+               </navLabel>
+               <content src="16_002.html#h16.2.1"/>
+            </navPoint>
+            <navPoint id="d39e1580" playOrder="310">
+               <navLabel>
+                  <text>16.2.2   The spawn Method</text>
+               </navLabel>
+               <content src="16_002.html#h16.2.2"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e1585" playOrder="311">
+            <navLabel>
+               <text>16.3   Creating Node.js Child Processes with fork Method</text>
+            </navLabel>
+            <content src="16_003.html#h16.3"/>
+         </navPoint>
+         <navPoint id="d39e1590" playOrder="312">
+            <navLabel>
+               <text>16.4   The cluster Module</text>
+            </navLabel>
+            <content src="16_004.html#h16.4"/>
+            <navPoint id="d39e1595" playOrder="313">
+               <navLabel>
+                  <text>16.4.1   Main Process</text>
+               </navLabel>
+               <content src="16_004.html#h16.4.1"/>
+            </navPoint>
+            <navPoint id="d39e1600" playOrder="314">
+               <navLabel>
+                  <text>16.4.2   Worker Processes</text>
+               </navLabel>
+               <content src="16_004.html#h16.4.2"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e1605" playOrder="315">
+            <navLabel>
+               <text>16.5   Worker Threads</text>
+            </navLabel>
+            <content src="16_005.html#h16.5"/>
+            <navPoint id="d39e1610" playOrder="316">
+               <navLabel>
+                  <text>16.5.1   Shared Memory in the worker_threads Module</text>
+               </navLabel>
+               <content src="16_005.html#h16.5.1"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e1615" playOrder="317">
+            <navLabel>
+               <text>16.6   Promises in Node.js</text>
+            </navLabel>
+            <content src="16_006.html#h16.6"/>
+            <navPoint id="d39e1620" playOrder="318">
+               <navLabel>
+                  <text>16.6.1   Using util.promisify to Use Promises Where None Actually Exist</text>
+               </navLabel>
+               <content src="16_006.html#h16.6.1"/>
+            </navPoint>
+            <navPoint id="d39e1626" playOrder="319">
+               <navLabel>
+                  <text>16.6.2   Concatenating Promises</text>
+               </navLabel>
+               <content src="16_006.html#h16.6.2"/>
+            </navPoint>
+            <navPoint id="d39e1631" playOrder="320">
+               <navLabel>
+                  <text>16.6.3   Multiple Parallel Operations with Promise.all</text>
+               </navLabel>
+               <content src="16_006.html#h16.6.3"/>
+            </navPoint>
+            <navPoint id="d39e1636" playOrder="321">
+               <navLabel>
+                  <text>16.6.4   Fastest Asynchronous Operation with Promise.race</text>
+               </navLabel>
+               <content src="16_006.html#h16.6.4"/>
+            </navPoint>
+            <navPoint id="d39e1641" playOrder="322">
+               <navLabel>
+                  <text>16.6.5   Overview of the Promise Functions</text>
+               </navLabel>
+               <content src="16_006.html#h16.6.5"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e1646" playOrder="323">
+            <navLabel>
+               <text>16.7   Async Functions</text>
+            </navLabel>
+            <content src="16_007.html#h16.7"/>
+            <navPoint id="d39e1651" playOrder="324">
+               <navLabel>
+                  <text>16.7.1   Top-Level Await</text>
+               </navLabel>
+               <content src="16_007.html#h16.7.1"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e1656" playOrder="325">
+            <navLabel>
+               <text>16.8   Summary</text>
+            </navLabel>
+            <content src="16_008.html#h16.8"/>
+         </navPoint>
+      </navPoint>
+      <navPoint id="d39e1661" playOrder="326">
+         <navLabel>
+            <text>17   RxJS</text>
+         </navLabel>
+         <content src="17_001.html"/>
+         <navPoint id="d39e1666" playOrder="327">
+            <navLabel>
+               <text>17.1   Basic Principles</text>
+            </navLabel>
+            <content src="17_001.html#h17.1"/>
+            <navPoint id="d39e1671" playOrder="328">
+               <navLabel>
+                  <text>17.1.1   Installation and Integration</text>
+               </navLabel>
+               <content src="17_001.html#h17.1.1"/>
+            </navPoint>
+            <navPoint id="d39e1676" playOrder="329">
+               <navLabel>
+                  <text>17.1.2   Observable</text>
+               </navLabel>
+               <content src="17_001.html#h17.1.2"/>
+            </navPoint>
+            <navPoint id="d39e1682" playOrder="330">
+               <navLabel>
+                  <text>17.1.3   Observer</text>
+               </navLabel>
+               <content src="17_001.html#h17.1.3"/>
+            </navPoint>
+            <navPoint id="d39e1687" playOrder="331">
+               <navLabel>
+                  <text>17.1.4   Operator</text>
+               </navLabel>
+               <content src="17_001.html#h17.1.4"/>
+            </navPoint>
+            <navPoint id="d39e1692" playOrder="332">
+               <navLabel>
+                  <text>17.1.5   Example of RxJS in Node.js</text>
+               </navLabel>
+               <content src="17_001.html#h17.1.5"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e1697" playOrder="333">
+            <navLabel>
+               <text>17.2   Operators</text>
+            </navLabel>
+            <content src="17_002.html#h17.2"/>
+            <navPoint id="d39e1702" playOrder="334">
+               <navLabel>
+                  <text>17.2.1   Creation Operators</text>
+               </navLabel>
+               <content src="17_002.html#h17.2.1"/>
+            </navPoint>
+            <navPoint id="d39e1707" playOrder="335">
+               <navLabel>
+                  <text>17.2.2   Transformation Operators</text>
+               </navLabel>
+               <content src="17_002.html#h17.2.2"/>
+            </navPoint>
+            <navPoint id="d39e1712" playOrder="336">
+               <navLabel>
+                  <text>17.2.3   Filtering Operators</text>
+               </navLabel>
+               <content src="17_002.html#h17.2.3"/>
+            </navPoint>
+            <navPoint id="d39e1717" playOrder="337">
+               <navLabel>
+                  <text>17.2.4   Join Operators</text>
+               </navLabel>
+               <content src="17_002.html#h17.2.4"/>
+            </navPoint>
+            <navPoint id="d39e1722" playOrder="338">
+               <navLabel>
+                  <text>17.2.5   Error Handling Operators</text>
+               </navLabel>
+               <content src="17_002.html#h17.2.5"/>
+            </navPoint>
+            <navPoint id="d39e1727" playOrder="339">
+               <navLabel>
+                  <text>17.2.6   Utility Operators</text>
+               </navLabel>
+               <content src="17_002.html#h17.2.6"/>
+            </navPoint>
+            <navPoint id="d39e1732" playOrder="340">
+               <navLabel>
+                  <text>17.2.7   Conditional Operators</text>
+               </navLabel>
+               <content src="17_002.html#h17.2.7"/>
+            </navPoint>
+            <navPoint id="d39e1738" playOrder="341">
+               <navLabel>
+                  <text>17.2.8   Connection Operators</text>
+               </navLabel>
+               <content src="17_002.html#h17.2.8"/>
+            </navPoint>
+            <navPoint id="d39e1743" playOrder="342">
+               <navLabel>
+                  <text>17.2.9   Conversion Operators</text>
+               </navLabel>
+               <content src="17_002.html#h17.2.9"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e1748" playOrder="343">
+            <navLabel>
+               <text>17.3   Subjects</text>
+            </navLabel>
+            <content src="17_003.html#h17.3"/>
+         </navPoint>
+         <navPoint id="d39e1753" playOrder="344">
+            <navLabel>
+               <text>17.4   Schedulers</text>
+            </navLabel>
+            <content src="17_004.html#h17.4"/>
+         </navPoint>
+         <navPoint id="d39e1758" playOrder="345">
+            <navLabel>
+               <text>17.5   Summary</text>
+            </navLabel>
+            <content src="17_005.html#h17.5"/>
+         </navPoint>
+      </navPoint>
+      <navPoint id="d39e1763" playOrder="346">
+         <navLabel>
+            <text>18   Streams</text>
+         </navLabel>
+         <content src="18_001.html"/>
+         <navPoint id="d39e1768" playOrder="347">
+            <navLabel>
+               <text>18.1   Introduction</text>
+            </navLabel>
+            <content src="18_001.html#h18.1"/>
+            <navPoint id="d39e1773" playOrder="348">
+               <navLabel>
+                  <text>18.1.1   What Is a Stream?</text>
+               </navLabel>
+               <content src="18_001.html#h18.1.1"/>
+            </navPoint>
+            <navPoint id="d39e1778" playOrder="349">
+               <navLabel>
+                  <text>18.1.2   Stream Usages</text>
+               </navLabel>
+               <content src="18_001.html#h18.1.2"/>
+            </navPoint>
+            <navPoint id="d39e1783" playOrder="350">
+               <navLabel>
+                  <text>18.1.3   Available Streams</text>
+               </navLabel>
+               <content src="18_001.html#h18.1.3"/>
+            </navPoint>
+            <navPoint id="d39e1788" playOrder="351">
+               <navLabel>
+                  <text>18.1.4   Stream Versions in Node.js</text>
+               </navLabel>
+               <content src="18_001.html#h18.1.4"/>
+            </navPoint>
+            <navPoint id="d39e1794" playOrder="352">
+               <navLabel>
+                  <text>18.1.5   Streams Are EventEmitters</text>
+               </navLabel>
+               <content src="18_001.html#h18.1.5"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e1799" playOrder="353">
+            <navLabel>
+               <text>18.2   Readable Streams</text>
+            </navLabel>
+            <content src="18_002.html#h18.2"/>
+            <navPoint id="d39e1804" playOrder="354">
+               <navLabel>
+                  <text>18.2.1   Creating a Readable Stream</text>
+               </navLabel>
+               <content src="18_002.html#h18.2.1"/>
+            </navPoint>
+            <navPoint id="d39e1809" playOrder="355">
+               <navLabel>
+                  <text>18.2.2   Readable Stream Interface</text>
+               </navLabel>
+               <content src="18_002.html#h18.2.2"/>
+            </navPoint>
+            <navPoint id="d39e1814" playOrder="356">
+               <navLabel>
+                  <text>18.2.3   Events of a Readable Stream</text>
+               </navLabel>
+               <content src="18_002.html#h18.2.3"/>
+            </navPoint>
+            <navPoint id="d39e1819" playOrder="357">
+               <navLabel>
+                  <text>18.2.4   Error Handling in Readable Streams</text>
+               </navLabel>
+               <content src="18_002.html#h18.2.4"/>
+            </navPoint>
+            <navPoint id="d39e1824" playOrder="358">
+               <navLabel>
+                  <text>18.2.5   Methods</text>
+               </navLabel>
+               <content src="18_002.html#h18.2.5"/>
+            </navPoint>
+            <navPoint id="d39e1829" playOrder="359">
+               <navLabel>
+                  <text>18.2.6   Piping</text>
+               </navLabel>
+               <content src="18_002.html#h18.2.6"/>
+            </navPoint>
+            <navPoint id="d39e1834" playOrder="360">
+               <navLabel>
+                  <text>18.2.7   Readable Stream Modes</text>
+               </navLabel>
+               <content src="18_002.html#h18.2.7"/>
+            </navPoint>
+            <navPoint id="d39e1839" playOrder="361">
+               <navLabel>
+                  <text>18.2.8   Switching to Flowing Mode</text>
+               </navLabel>
+               <content src="18_002.html#h18.2.8"/>
+            </navPoint>
+            <navPoint id="d39e1844" playOrder="362">
+               <navLabel>
+                  <text>18.2.9   Switching to the Paused Mode</text>
+               </navLabel>
+               <content src="18_002.html#h18.2.9"/>
+            </navPoint>
+            <navPoint id="d39e1850" playOrder="363">
+               <navLabel>
+                  <text>18.2.10   Custom Readable Streams</text>
+               </navLabel>
+               <content src="18_002.html#h18.2.10"/>
+            </navPoint>
+            <navPoint id="d39e1855" playOrder="364">
+               <navLabel>
+                  <text>18.2.11   Example of a Readable Stream</text>
+               </navLabel>
+               <content src="18_002.html#h18.2.11"/>
+            </navPoint>
+            <navPoint id="d39e1860" playOrder="365">
+               <navLabel>
+                  <text>18.2.12   Readable Shortcut</text>
+               </navLabel>
+               <content src="18_002.html#h18.2.12"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e1865" playOrder="366">
+            <navLabel>
+               <text>18.3   Writable Streams</text>
+            </navLabel>
+            <content src="18_003.html#h18.3"/>
+            <navPoint id="d39e1870" playOrder="367">
+               <navLabel>
+                  <text>18.3.1   Creating a Writable Stream</text>
+               </navLabel>
+               <content src="18_003.html#h18.3.1"/>
+            </navPoint>
+            <navPoint id="d39e1875" playOrder="368">
+               <navLabel>
+                  <text>18.3.2   Events</text>
+               </navLabel>
+               <content src="18_003.html#h18.3.2"/>
+            </navPoint>
+            <navPoint id="d39e1880" playOrder="369">
+               <navLabel>
+                  <text>18.3.3   Error Handling in Writable Streams</text>
+               </navLabel>
+               <content src="18_003.html#h18.3.3"/>
+            </navPoint>
+            <navPoint id="d39e1885" playOrder="370">
+               <navLabel>
+                  <text>18.3.4   Methods</text>
+               </navLabel>
+               <content src="18_003.html#h18.3.4"/>
+            </navPoint>
+            <navPoint id="d39e1890" playOrder="371">
+               <navLabel>
+                  <text>18.3.5   Buffering Write Operations</text>
+               </navLabel>
+               <content src="18_003.html#h18.3.5"/>
+            </navPoint>
+            <navPoint id="d39e1895" playOrder="372">
+               <navLabel>
+                  <text>18.3.6   Flow Control</text>
+               </navLabel>
+               <content src="18_003.html#h18.3.6"/>
+            </navPoint>
+            <navPoint id="d39e1900" playOrder="373">
+               <navLabel>
+                  <text>18.3.7   Custom Writable Streams</text>
+               </navLabel>
+               <content src="18_003.html#h18.3.7"/>
+            </navPoint>
+            <navPoint id="d39e1906" playOrder="374">
+               <navLabel>
+                  <text>18.3.8   Writable Shortcut</text>
+               </navLabel>
+               <content src="18_003.html#h18.3.8"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e1911" playOrder="375">
+            <navLabel>
+               <text>18.4   Duplex Streams</text>
+            </navLabel>
+            <content src="18_004.html#h18.4"/>
+            <navPoint id="d39e1916" playOrder="376">
+               <navLabel>
+                  <text>18.4.1   Duplex Streams in Use</text>
+               </navLabel>
+               <content src="18_004.html#h18.4.1"/>
+            </navPoint>
+            <navPoint id="d39e1921" playOrder="377">
+               <navLabel>
+                  <text>18.4.2   Custom Duplex Streams</text>
+               </navLabel>
+               <content src="18_004.html#h18.4.2"/>
+            </navPoint>
+            <navPoint id="d39e1926" playOrder="378">
+               <navLabel>
+                  <text>18.4.3   Duplex Shortcut</text>
+               </navLabel>
+               <content src="18_004.html#h18.4.3"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e1931" playOrder="379">
+            <navLabel>
+               <text>18.5   Transform Streams</text>
+            </navLabel>
+            <content src="18_005.html#h18.5"/>
+            <navPoint id="d39e1936" playOrder="380">
+               <navLabel>
+                  <text>18.5.1   Custom Transform Streams</text>
+               </navLabel>
+               <content src="18_005.html#h18.5.1"/>
+            </navPoint>
+            <navPoint id="d39e1941" playOrder="381">
+               <navLabel>
+                  <text>18.5.2   Transform Shortcut</text>
+               </navLabel>
+               <content src="18_005.html#h18.5.2"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e1946" playOrder="382">
+            <navLabel>
+               <text>18.6   Gulp</text>
+            </navLabel>
+            <content src="18_006.html#h18.6"/>
+            <navPoint id="d39e1951" playOrder="383">
+               <navLabel>
+                  <text>18.6.1   Installation</text>
+               </navLabel>
+               <content src="18_006.html#h18.6.1"/>
+            </navPoint>
+            <navPoint id="d39e1956" playOrder="384">
+               <navLabel>
+                  <text>18.6.2   Example of a Build Process with Gulp</text>
+               </navLabel>
+               <content src="18_006.html#h18.6.2"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e1962" playOrder="385">
+            <navLabel>
+               <text>18.7   Summary</text>
+            </navLabel>
+            <content src="18_007.html#h18.7"/>
+         </navPoint>
+      </navPoint>
+      <navPoint id="d39e1967" playOrder="386">
+         <navLabel>
+            <text>19   Working with Files</text>
+         </navLabel>
+         <content src="19_001.html"/>
+         <navPoint id="d39e1972" playOrder="387">
+            <navLabel>
+               <text>19.1   Synchronous and Asynchronous Functions</text>
+            </navLabel>
+            <content src="19_001.html#h19.1"/>
+         </navPoint>
+         <navPoint id="d39e1977" playOrder="388">
+            <navLabel>
+               <text>19.2   Existence of Files</text>
+            </navLabel>
+            <content src="19_002.html#h19.2"/>
+         </navPoint>
+         <navPoint id="d39e1982" playOrder="389">
+            <navLabel>
+               <text>19.3   Reading Files</text>
+            </navLabel>
+            <content src="19_003.html#h19.3"/>
+            <navPoint id="d39e1987" playOrder="390">
+               <navLabel>
+                  <text>19.3.1   Promise-Based API</text>
+               </navLabel>
+               <content src="19_003.html#h19.3.1"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e1992" playOrder="391">
+            <navLabel>
+               <text>19.4   Error Handling</text>
+            </navLabel>
+            <content src="19_004.html#h19.4"/>
+         </navPoint>
+         <navPoint id="d39e1997" playOrder="392">
+            <navLabel>
+               <text>19.5   Writing to Files</text>
+            </navLabel>
+            <content src="19_005.html#h19.5"/>
+         </navPoint>
+         <navPoint id="d39e2002" playOrder="393">
+            <navLabel>
+               <text>19.6   Directory Operations</text>
+            </navLabel>
+            <content src="19_006.html#h19.6"/>
+         </navPoint>
+         <navPoint id="d39e2007" playOrder="394">
+            <navLabel>
+               <text>19.7   Advanced Operations</text>
+            </navLabel>
+            <content src="19_007.html#h19.7"/>
+            <navPoint id="d39e2012" playOrder="395">
+               <navLabel>
+                  <text>19.7.1   The watch Method</text>
+               </navLabel>
+               <content src="19_007.html#h19.7.1"/>
+            </navPoint>
+            <navPoint id="d39e2018" playOrder="396">
+               <navLabel>
+                  <text>19.7.2   Access Permissions</text>
+               </navLabel>
+               <content src="19_007.html#h19.7.2"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e2023" playOrder="397">
+            <navLabel>
+               <text>19.8   Summary</text>
+            </navLabel>
+            <content src="19_008.html#h19.8"/>
+         </navPoint>
+      </navPoint>
+      <navPoint id="d39e2028" playOrder="398">
+         <navLabel>
+            <text>20   Socket Server</text>
+         </navLabel>
+         <content src="20_001.html"/>
+         <navPoint id="d39e2033" playOrder="399">
+            <navLabel>
+               <text>20.1   Unix Sockets</text>
+            </navLabel>
+            <content src="20_001.html#h20.1"/>
+            <navPoint id="d39e2038" playOrder="400">
+               <navLabel>
+                  <text>20.1.1   Accessing the Socket</text>
+               </navLabel>
+               <content src="20_001.html#h20.1.1"/>
+            </navPoint>
+            <navPoint id="d39e2043" playOrder="401">
+               <navLabel>
+                  <text>20.1.2   Bidirectional Communication</text>
+               </navLabel>
+               <content src="20_001.html#h20.1.2"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e2048" playOrder="402">
+            <navLabel>
+               <text>20.2   Windows Pipes</text>
+            </navLabel>
+            <content src="20_002.html#h20.2"/>
+         </navPoint>
+         <navPoint id="d39e2053" playOrder="403">
+            <navLabel>
+               <text>20.3   TCP Sockets</text>
+            </navLabel>
+            <content src="20_003.html#h20.3"/>
+            <navPoint id="d39e2058" playOrder="404">
+               <navLabel>
+                  <text>20.3.1   Data Transfer</text>
+               </navLabel>
+               <content src="20_003.html#h20.3.1"/>
+            </navPoint>
+            <navPoint id="d39e2063" playOrder="405">
+               <navLabel>
+                  <text>20.3.2   File Transfer</text>
+               </navLabel>
+               <content src="20_003.html#h20.3.2"/>
+            </navPoint>
+            <navPoint id="d39e2068" playOrder="406">
+               <navLabel>
+                  <text>20.3.3   Flow Control</text>
+               </navLabel>
+               <content src="20_003.html#h20.3.3"/>
+            </navPoint>
+            <navPoint id="d39e2074" playOrder="407">
+               <navLabel>
+                  <text>20.3.4   Duplex</text>
+               </navLabel>
+               <content src="20_003.html#h20.3.4"/>
+            </navPoint>
+            <navPoint id="d39e2079" playOrder="408">
+               <navLabel>
+                  <text>20.3.5   Pipe</text>
+               </navLabel>
+               <content src="20_003.html#h20.3.5"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e2084" playOrder="409">
+            <navLabel>
+               <text>20.4   UDP Sockets</text>
+            </navLabel>
+            <content src="20_004.html#h20.4"/>
+            <navPoint id="d39e2089" playOrder="410">
+               <navLabel>
+                  <text>20.4.1   Basic Principles of a UDP Server</text>
+               </navLabel>
+               <content src="20_004.html#h20.4.1"/>
+            </navPoint>
+            <navPoint id="d39e2094" playOrder="411">
+               <navLabel>
+                  <text>20.4.2   Example Illustrating the UDP Server</text>
+               </navLabel>
+               <content src="20_004.html#h20.4.2"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e2099" playOrder="412">
+            <navLabel>
+               <text>20.5   Summary</text>
+            </navLabel>
+            <content src="20_005.html#h20.5"/>
+         </navPoint>
+      </navPoint>
+      <navPoint id="d39e2104" playOrder="413">
+         <navLabel>
+            <text>21   Package Manager</text>
+         </navLabel>
+         <content src="21_001.html"/>
+         <navPoint id="d39e2109" playOrder="414">
+            <navLabel>
+               <text>21.1   Most Common Operations</text>
+            </navLabel>
+            <content src="21_001.html#h21.1"/>
+            <navPoint id="d39e2114" playOrder="415">
+               <navLabel>
+                  <text>21.1.1   Searching Packages</text>
+               </navLabel>
+               <content src="21_001.html#h21.1.1"/>
+            </navPoint>
+            <navPoint id="d39e2119" playOrder="416">
+               <navLabel>
+                  <text>21.1.2   Installing Packages</text>
+               </navLabel>
+               <content src="21_001.html#h21.1.2"/>
+            </navPoint>
+            <navPoint id="d39e2124" playOrder="417">
+               <navLabel>
+                  <text>21.1.3   Viewing Installed Packages</text>
+               </navLabel>
+               <content src="21_001.html#h21.1.3"/>
+            </navPoint>
+            <navPoint id="d39e2130" playOrder="418">
+               <navLabel>
+                  <text>21.1.4   Using Packages</text>
+               </navLabel>
+               <content src="21_001.html#h21.1.4"/>
+            </navPoint>
+            <navPoint id="d39e2135" playOrder="419">
+               <navLabel>
+                  <text>21.1.5   Updating Packages</text>
+               </navLabel>
+               <content src="21_001.html#h21.1.5"/>
+            </navPoint>
+            <navPoint id="d39e2140" playOrder="420">
+               <navLabel>
+                  <text>21.1.6   Removing Packages</text>
+               </navLabel>
+               <content src="21_001.html#h21.1.6"/>
+            </navPoint>
+            <navPoint id="d39e2145" playOrder="421">
+               <navLabel>
+                  <text>21.1.7   Overview of the Most Important Commands</text>
+               </navLabel>
+               <content src="21_001.html#h21.1.7"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e2150" playOrder="422">
+            <navLabel>
+               <text>21.2   Advanced Operations</text>
+            </navLabel>
+            <content src="21_002.html#h21.2"/>
+            <navPoint id="d39e2155" playOrder="423">
+               <navLabel>
+                  <text>21.2.1   Structure of a Module</text>
+               </navLabel>
+               <content src="21_002.html#h21.2.1"/>
+            </navPoint>
+            <navPoint id="d39e2160" playOrder="424">
+               <navLabel>
+                  <text>21.2.2   Creating Custom Packages</text>
+               </navLabel>
+               <content src="21_002.html#h21.2.2"/>
+            </navPoint>
+            <navPoint id="d39e2165" playOrder="425">
+               <navLabel>
+                  <text>21.2.3   Node Package Manager Scripts</text>
+               </navLabel>
+               <content src="21_002.html#h21.2.3"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e2170" playOrder="426">
+            <navLabel>
+               <text>21.3   Tools for Node Package Manager</text>
+            </navLabel>
+            <content src="21_003.html#h21.3"/>
+            <navPoint id="d39e2175" playOrder="427">
+               <navLabel>
+                  <text>21.3.1   Node License Finder</text>
+               </navLabel>
+               <content src="21_003.html#h21.3.1"/>
+            </navPoint>
+            <navPoint id="d39e2180" playOrder="428">
+               <navLabel>
+                  <text>21.3.2   Verdaccio</text>
+               </navLabel>
+               <content src="21_003.html#h21.3.2"/>
+            </navPoint>
+            <navPoint id="d39e2186" playOrder="429">
+               <navLabel>
+                  <text>21.3.3   npm-check-updates</text>
+               </navLabel>
+               <content src="21_003.html#h21.3.3"/>
+            </navPoint>
+            <navPoint id="d39e2191" playOrder="430">
+               <navLabel>
+                  <text>21.3.4   npx</text>
+               </navLabel>
+               <content src="21_003.html#h21.3.4"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e2196" playOrder="431">
+            <navLabel>
+               <text>21.4   Yarn</text>
+            </navLabel>
+            <content src="21_004.html#h21.4"/>
+         </navPoint>
+         <navPoint id="d39e2201" playOrder="432">
+            <navLabel>
+               <text>21.5   Summary</text>
+            </navLabel>
+            <content src="21_005.html#h21.5"/>
+         </navPoint>
+      </navPoint>
+      <navPoint id="d39e2206" playOrder="433">
+         <navLabel>
+            <text>22   Quality Assurance</text>
+         </navLabel>
+         <content src="22_001.html"/>
+         <navPoint id="d39e2211" playOrder="434">
+            <navLabel>
+               <text>22.1   Style Guides</text>
+            </navLabel>
+            <content src="22_001.html#h22.1"/>
+            <navPoint id="d39e2216" playOrder="435">
+               <navLabel>
+                  <text>22.1.1   Airbnb Style Guide</text>
+               </navLabel>
+               <content src="22_001.html#h22.1.1"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e2221" playOrder="436">
+            <navLabel>
+               <text>22.2   Linter</text>
+            </navLabel>
+            <content src="22_002.html#h22.2"/>
+            <navPoint id="d39e2226" playOrder="437">
+               <navLabel>
+                  <text>22.2.1   ESLint</text>
+               </navLabel>
+               <content src="22_002.html#h22.2.1"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e2231" playOrder="438">
+            <navLabel>
+               <text>22.3   Prettier</text>
+            </navLabel>
+            <content src="22_003.html#h22.3"/>
+            <navPoint id="d39e2236" playOrder="439">
+               <navLabel>
+                  <text>22.3.1   Installation</text>
+               </navLabel>
+               <content src="22_003.html#h22.3.1"/>
+            </navPoint>
+            <navPoint id="d39e2242" playOrder="440">
+               <navLabel>
+                  <text>22.3.2   Execution</text>
+               </navLabel>
+               <content src="22_003.html#h22.3.2"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e2247" playOrder="441">
+            <navLabel>
+               <text>22.4   Programming Mistake Detector: Copy/Paste Detector</text>
+            </navLabel>
+            <content src="22_004.html#h22.4"/>
+            <navPoint id="d39e2252" playOrder="442">
+               <navLabel>
+                  <text>22.4.1   Installation</text>
+               </navLabel>
+               <content src="22_004.html#h22.4.1"/>
+            </navPoint>
+            <navPoint id="d39e2257" playOrder="443">
+               <navLabel>
+                  <text>22.4.2   Execution</text>
+               </navLabel>
+               <content src="22_004.html#h22.4.2"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e2262" playOrder="444">
+            <navLabel>
+               <text>22.5   Husky</text>
+            </navLabel>
+            <content src="22_005.html#h22.5"/>
+         </navPoint>
+         <navPoint id="d39e2267" playOrder="445">
+            <navLabel>
+               <text>22.6   Summary</text>
+            </navLabel>
+            <content src="22_006.html#h22.6"/>
+         </navPoint>
+      </navPoint>
+      <navPoint id="d39e2272" playOrder="446">
+         <navLabel>
+            <text>23   Testing</text>
+         </navLabel>
+         <content src="23_001.html"/>
+         <navPoint id="d39e2277" playOrder="447">
+            <navLabel>
+               <text>23.1   Unit Testing</text>
+            </navLabel>
+            <content src="23_001.html#h23.1"/>
+            <navPoint id="d39e2282" playOrder="448">
+               <navLabel>
+                  <text>23.1.1   Directory Structure</text>
+               </navLabel>
+               <content src="23_001.html#h23.1.1"/>
+            </navPoint>
+            <navPoint id="d39e2287" playOrder="449">
+               <navLabel>
+                  <text>23.1.2   Unit Tests and Node.js</text>
+               </navLabel>
+               <content src="23_001.html#h23.1.2"/>
+            </navPoint>
+            <navPoint id="d39e2292" playOrder="450">
+               <navLabel>
+                  <text>23.1.3   Arrange, Act, Assert</text>
+               </navLabel>
+               <content src="23_001.html#h23.1.3"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e2298" playOrder="451">
+            <navLabel>
+               <text>23.2   Assertion Testing</text>
+            </navLabel>
+            <content src="23_002.html#h23.2"/>
+            <navPoint id="d39e2303" playOrder="452">
+               <navLabel>
+                  <text>23.2.1   Exceptions</text>
+               </navLabel>
+               <content src="23_002.html#h23.2.1"/>
+            </navPoint>
+            <navPoint id="d39e2308" playOrder="453">
+               <navLabel>
+                  <text>23.2.2   Testing Promises</text>
+               </navLabel>
+               <content src="23_002.html#h23.2.2"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e2313" playOrder="454">
+            <navLabel>
+               <text>23.3   Jasmine</text>
+            </navLabel>
+            <content src="23_003.html#h23.3"/>
+            <navPoint id="d39e2318" playOrder="455">
+               <navLabel>
+                  <text>23.3.1   Installation</text>
+               </navLabel>
+               <content src="23_003.html#h23.3.1"/>
+            </navPoint>
+            <navPoint id="d39e2323" playOrder="456">
+               <navLabel>
+                  <text>23.3.2   Configuration</text>
+               </navLabel>
+               <content src="23_003.html#h23.3.2"/>
+            </navPoint>
+            <navPoint id="d39e2328" playOrder="457">
+               <navLabel>
+                  <text>23.3.3   Tests in Jasmine</text>
+               </navLabel>
+               <content src="23_003.html#h23.3.3"/>
+            </navPoint>
+            <navPoint id="d39e2333" playOrder="458">
+               <navLabel>
+                  <text>23.3.4   Assertions</text>
+               </navLabel>
+               <content src="23_003.html#h23.3.4"/>
+            </navPoint>
+            <navPoint id="d39e2338" playOrder="459">
+               <navLabel>
+                  <text>23.3.5   Spies</text>
+               </navLabel>
+               <content src="23_003.html#h23.3.5"/>
+            </navPoint>
+            <navPoint id="d39e2343" playOrder="460">
+               <navLabel>
+                  <text>23.3.6   beforeEach and afterEach</text>
+               </navLabel>
+               <content src="23_003.html#h23.3.6"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e2348" playOrder="461">
+            <navLabel>
+               <text>23.4   Jest</text>
+            </navLabel>
+            <content src="23_004.html#h23.4"/>
+            <navPoint id="d39e2354" playOrder="462">
+               <navLabel>
+                  <text>23.4.1   Installation</text>
+               </navLabel>
+               <content src="23_004.html#h23.4.1"/>
+            </navPoint>
+            <navPoint id="d39e2359" playOrder="463">
+               <navLabel>
+                  <text>23.4.2   First Test</text>
+               </navLabel>
+               <content src="23_004.html#h23.4.2"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e2364" playOrder="464">
+            <navLabel>
+               <text>23.5   Practical Example of Unit Tests with Jest</text>
+            </navLabel>
+            <content src="23_005.html#h23.5"/>
+            <navPoint id="d39e2369" playOrder="465">
+               <navLabel>
+                  <text>23.5.1   The Test</text>
+               </navLabel>
+               <content src="23_005.html#h23.5.1"/>
+            </navPoint>
+            <navPoint id="d39e2374" playOrder="466">
+               <navLabel>
+                  <text>23.5.2   Implementation</text>
+               </navLabel>
+               <content src="23_005.html#h23.5.2"/>
+            </navPoint>
+            <navPoint id="d39e2379" playOrder="467">
+               <navLabel>
+                  <text>23.5.3   Triangulation: Second Test</text>
+               </navLabel>
+               <content src="23_005.html#h23.5.3"/>
+            </navPoint>
+            <navPoint id="d39e2384" playOrder="468">
+               <navLabel>
+                  <text>23.5.4   Optimizing the Implementation</text>
+               </navLabel>
+               <content src="23_005.html#h23.5.4"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e2389" playOrder="469">
+            <navLabel>
+               <text>23.6   Dealing with Dependencies: Mocking</text>
+            </navLabel>
+            <content src="23_006.html#h23.6"/>
+         </navPoint>
+         <navPoint id="d39e2394" playOrder="470">
+            <navLabel>
+               <text>23.7   Summary</text>
+            </navLabel>
+            <content src="23_007.html#h23.7"/>
+         </navPoint>
+      </navPoint>
+      <navPoint id="d39e2399" playOrder="471">
+         <navLabel>
+            <text>24   Security</text>
+         </navLabel>
+         <content src="24_001.html"/>
+         <navPoint id="d39e2404" playOrder="472">
+            <navLabel>
+               <text>24.1   Filter Input and Escape Output</text>
+            </navLabel>
+            <content src="24_001.html#h24.1"/>
+            <navPoint id="d39e2410" playOrder="473">
+               <navLabel>
+                  <text>24.1.1   Filter Input</text>
+               </navLabel>
+               <content src="24_001.html#h24.1.1"/>
+            </navPoint>
+            <navPoint id="d39e2415" playOrder="474">
+               <navLabel>
+                  <text>24.1.2   Blacklisting and Whitelisting</text>
+               </navLabel>
+               <content src="24_001.html#h24.1.2"/>
+            </navPoint>
+            <navPoint id="d39e2420" playOrder="475">
+               <navLabel>
+                  <text>24.1.3   Escape Output</text>
+               </navLabel>
+               <content src="24_001.html#h24.1.3"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e2425" playOrder="476">
+            <navLabel>
+               <text>24.2   Protecting the Server</text>
+            </navLabel>
+            <content src="24_002.html#h24.2"/>
+            <navPoint id="d39e2430" playOrder="477">
+               <navLabel>
+                  <text>24.2.1   User Permissions</text>
+               </navLabel>
+               <content src="24_002.html#h24.2.1"/>
+            </navPoint>
+            <navPoint id="d39e2435" playOrder="478">
+               <navLabel>
+                  <text>24.2.2   Problems Caused by the Single-Threaded Approach</text>
+               </navLabel>
+               <content src="24_002.html#h24.2.2"/>
+            </navPoint>
+            <navPoint id="d39e2440" playOrder="479">
+               <navLabel>
+                  <text>24.2.3   Denial-of-Service Attacks</text>
+               </navLabel>
+               <content src="24_002.html#h24.2.3"/>
+            </navPoint>
+            <navPoint id="d39e2445" playOrder="480">
+               <navLabel>
+                  <text>24.2.4   Regular Expressions</text>
+               </navLabel>
+               <content src="24_002.html#h24.2.4"/>
+            </navPoint>
+            <navPoint id="d39e2450" playOrder="481">
+               <navLabel>
+                  <text>24.2.5   HTTP Header</text>
+               </navLabel>
+               <content src="24_002.html#h24.2.5"/>
+            </navPoint>
+            <navPoint id="d39e2455" playOrder="482">
+               <navLabel>
+                  <text>24.2.6   Error Messages</text>
+               </navLabel>
+               <content src="24_002.html#h24.2.6"/>
+            </navPoint>
+            <navPoint id="d39e2460" playOrder="483">
+               <navLabel>
+                  <text>24.2.7   SQL Injections</text>
+               </navLabel>
+               <content src="24_002.html#h24.2.7"/>
+            </navPoint>
+            <navPoint id="d39e2466" playOrder="484">
+               <navLabel>
+                  <text>24.2.8   eval</text>
+               </navLabel>
+               <content src="24_002.html#h24.2.8"/>
+            </navPoint>
+            <navPoint id="d39e2471" playOrder="485">
+               <navLabel>
+                  <text>24.2.9   Method Invocation</text>
+               </navLabel>
+               <content src="24_002.html#h24.2.9"/>
+            </navPoint>
+            <navPoint id="d39e2476" playOrder="486">
+               <navLabel>
+                  <text>24.2.10   Overwriting Built-Ins</text>
+               </navLabel>
+               <content src="24_002.html#h24.2.10"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e2481" playOrder="487">
+            <navLabel>
+               <text>24.3   Node Package Manager Security</text>
+            </navLabel>
+            <content src="24_003.html#h24.3"/>
+            <navPoint id="d39e2486" playOrder="488">
+               <navLabel>
+                  <text>24.3.1   Permissions</text>
+               </navLabel>
+               <content src="24_003.html#h24.3.1"/>
+            </navPoint>
+            <navPoint id="d39e2491" playOrder="489">
+               <navLabel>
+                  <text>24.3.2   Node Security Platform</text>
+               </navLabel>
+               <content src="24_003.html#h24.3.2"/>
+            </navPoint>
+            <navPoint id="d39e2496" playOrder="490">
+               <navLabel>
+                  <text>24.3.3   Quality Aspect</text>
+               </navLabel>
+               <content src="24_003.html#h24.3.3"/>
+            </navPoint>
+            <navPoint id="d39e2501" playOrder="491">
+               <navLabel>
+                  <text>24.3.4   Node Package Manager Scripts</text>
+               </navLabel>
+               <content src="24_003.html#h24.3.4"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e2506" playOrder="492">
+            <navLabel>
+               <text>24.4   Client Protection</text>
+            </navLabel>
+            <content src="24_004.html#h24.4"/>
+            <navPoint id="d39e2511" playOrder="493">
+               <navLabel>
+                  <text>24.4.1   Cross-Site Scripting</text>
+               </navLabel>
+               <content src="24_004.html#h24.4.1"/>
+            </navPoint>
+            <navPoint id="d39e2516" playOrder="494">
+               <navLabel>
+                  <text>24.4.2   Cross-Site Request Forgery</text>
+               </navLabel>
+               <content src="24_004.html#h24.4.2"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e2522" playOrder="495">
+            <navLabel>
+               <text>24.5   Summary</text>
+            </navLabel>
+            <content src="24_005.html#h24.5"/>
+         </navPoint>
+      </navPoint>
+      <navPoint id="d39e2527" playOrder="496">
+         <navLabel>
+            <text>25   Scalability and Deployment</text>
+         </navLabel>
+         <content src="25_001.html"/>
+         <navPoint id="d39e2532" playOrder="497">
+            <navLabel>
+               <text>25.1   Deployment</text>
+            </navLabel>
+            <content src="25_001.html#h25.1"/>
+            <navPoint id="d39e2537" playOrder="498">
+               <navLabel>
+                  <text>25.1.1   Simple Deployment</text>
+               </navLabel>
+               <content src="25_001.html#h25.1.1"/>
+            </navPoint>
+            <navPoint id="d39e2542" playOrder="499">
+               <navLabel>
+                  <text>25.1.2   File Synchronization via rsync</text>
+               </navLabel>
+               <content src="25_001.html#h25.1.2"/>
+            </navPoint>
+            <navPoint id="d39e2547" playOrder="500">
+               <navLabel>
+                  <text>25.1.3   Application as a Service</text>
+               </navLabel>
+               <content src="25_001.html#h25.1.3"/>
+            </navPoint>
+            <navPoint id="d39e2552" playOrder="501">
+               <navLabel>
+                  <text>25.1.4   node_modules in Deployment</text>
+               </navLabel>
+               <content src="25_001.html#h25.1.4"/>
+            </navPoint>
+            <navPoint id="d39e2557" playOrder="502">
+               <navLabel>
+                  <text>25.1.5   Installing Applications Using Node Package Manager</text>
+               </navLabel>
+               <content src="25_001.html#h25.1.5"/>
+            </navPoint>
+            <navPoint id="d39e2562" playOrder="503">
+               <navLabel>
+                  <text>25.1.6   Installing Packages Locally</text>
+               </navLabel>
+               <content src="25_001.html#h25.1.6"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e2567" playOrder="504">
+            <navLabel>
+               <text>25.2   Tool Support</text>
+            </navLabel>
+            <content src="25_002.html#h25.2"/>
+            <navPoint id="d39e2572" playOrder="505">
+               <navLabel>
+                  <text>25.2.1   Grunt</text>
+               </navLabel>
+               <content src="25_002.html#h25.2.1"/>
+            </navPoint>
+            <navPoint id="d39e2578" playOrder="506">
+               <navLabel>
+                  <text>25.2.2   Gulp</text>
+               </navLabel>
+               <content src="25_002.html#h25.2.2"/>
+            </navPoint>
+            <navPoint id="d39e2583" playOrder="507">
+               <navLabel>
+                  <text>25.2.3   Node Package Manager</text>
+               </navLabel>
+               <content src="25_002.html#h25.2.3"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e2588" playOrder="508">
+            <navLabel>
+               <text>25.3   Scaling</text>
+            </navLabel>
+            <content src="25_003.html#h25.3"/>
+            <navPoint id="d39e2593" playOrder="509">
+               <navLabel>
+                  <text>25.3.1   Child Processes</text>
+               </navLabel>
+               <content src="25_003.html#h25.3.1"/>
+            </navPoint>
+            <navPoint id="d39e2598" playOrder="510">
+               <navLabel>
+                  <text>25.3.2   Load Balancer</text>
+               </navLabel>
+               <content src="25_003.html#h25.3.2"/>
+            </navPoint>
+            <navPoint id="d39e2603" playOrder="511">
+               <navLabel>
+                  <text>25.3.3   Node in the Cloud</text>
+               </navLabel>
+               <content src="25_003.html#h25.3.3"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e2608" playOrder="512">
+            <navLabel>
+               <text>25.4   pm2: Process Management</text>
+            </navLabel>
+            <content src="25_004.html#h25.4"/>
+         </navPoint>
+         <navPoint id="d39e2613" playOrder="513">
+            <navLabel>
+               <text>25.5   Docker</text>
+            </navLabel>
+            <content src="25_005.html#h25.5"/>
+            <navPoint id="d39e2618" playOrder="514">
+               <navLabel>
+                  <text>25.5.1   Dockerfile</text>
+               </navLabel>
+               <content src="25_005.html#h25.5.1"/>
+            </navPoint>
+            <navPoint id="d39e2623" playOrder="515">
+               <navLabel>
+                  <text>25.5.2   Starting the Container</text>
+               </navLabel>
+               <content src="25_005.html#h25.5.2"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e2628" playOrder="516">
+            <navLabel>
+               <text>25.6   Summary</text>
+            </navLabel>
+            <content src="25_006.html#h25.6"/>
+         </navPoint>
+      </navPoint>
+      <navPoint id="d39e2634" playOrder="517">
+         <navLabel>
+            <text>26   Performance</text>
+         </navLabel>
+         <content src="26_001.html"/>
+         <navPoint id="d39e2639" playOrder="518">
+            <navLabel>
+               <text>26.1   You Aren’t Gonna Need It</text>
+            </navLabel>
+            <content src="26_001.html#h26.1"/>
+         </navPoint>
+         <navPoint id="d39e2644" playOrder="519">
+            <navLabel>
+               <text>26.2   CPU</text>
+            </navLabel>
+            <content src="26_002.html#h26.2"/>
+            <navPoint id="d39e2649" playOrder="520">
+               <navLabel>
+                  <text>26.2.1   CPU-Blocking Operations</text>
+               </navLabel>
+               <content src="26_002.html#h26.2.1"/>
+            </navPoint>
+            <navPoint id="d39e2654" playOrder="521">
+               <navLabel>
+                  <text>26.2.2   Measuring the CPU Load</text>
+               </navLabel>
+               <content src="26_002.html#h26.2.2"/>
+            </navPoint>
+            <navPoint id="d39e2659" playOrder="522">
+               <navLabel>
+                  <text>26.2.3   CPU Profiling with Chrome DevTools</text>
+               </navLabel>
+               <content src="26_002.html#h26.2.3"/>
+            </navPoint>
+            <navPoint id="d39e2664" playOrder="523">
+               <navLabel>
+                  <text>26.2.4   Alternatives to the Profiler: console.time</text>
+               </navLabel>
+               <content src="26_002.html#h26.2.4"/>
+            </navPoint>
+            <navPoint id="d39e2669" playOrder="524">
+               <navLabel>
+                  <text>26.2.5   Alternatives to the Profiler: Performance-Hooks Interface</text>
+               </navLabel>
+               <content src="26_002.html#h26.2.5"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e2674" playOrder="525">
+            <navLabel>
+               <text>26.3   Memory</text>
+            </navLabel>
+            <content src="26_003.html#h26.3"/>
+            <navPoint id="d39e2679" playOrder="526">
+               <navLabel>
+                  <text>26.3.1   Memory Leaks</text>
+               </navLabel>
+               <content src="26_003.html#h26.3.1"/>
+            </navPoint>
+            <navPoint id="d39e2684" playOrder="527">
+               <navLabel>
+                  <text>26.3.2   Memory Analysis in DevTools</text>
+               </navLabel>
+               <content src="26_003.html#h26.3.2"/>
+            </navPoint>
+            <navPoint id="d39e2690" playOrder="528">
+               <navLabel>
+                  <text>26.3.3   Node.js Memory Statistics</text>
+               </navLabel>
+               <content src="26_003.html#h26.3.3"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e2695" playOrder="529">
+            <navLabel>
+               <text>26.4   Network</text>
+            </navLabel>
+            <content src="26_004.html#h26.4"/>
+         </navPoint>
+         <navPoint id="d39e2700" playOrder="530">
+            <navLabel>
+               <text>26.5   Summary</text>
+            </navLabel>
+            <content src="26_005.html#h26.5"/>
+         </navPoint>
+      </navPoint>
+      <navPoint id="d39e2705" playOrder="531">
+         <navLabel>
+            <text>27   Microservices with Node.js</text>
+         </navLabel>
+         <content src="27_001.html"/>
+         <navPoint id="d39e2710" playOrder="532">
+            <navLabel>
+               <text>27.1   Basic Principles</text>
+            </navLabel>
+            <content src="27_001.html#h27.1"/>
+            <navPoint id="d39e2715" playOrder="533">
+               <navLabel>
+                  <text>27.1.1   Monolithic Architecture</text>
+               </navLabel>
+               <content src="27_001.html#h27.1.1"/>
+            </navPoint>
+            <navPoint id="d39e2720" playOrder="534">
+               <navLabel>
+                  <text>27.1.2   Microservice Architecture</text>
+               </navLabel>
+               <content src="27_001.html#h27.1.2"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e2725" playOrder="535">
+            <navLabel>
+               <text>27.2   Architecture</text>
+            </navLabel>
+            <content src="27_002.html#h27.2"/>
+            <navPoint id="d39e2730" playOrder="536">
+               <navLabel>
+                  <text>27.2.1   Communication between Individual Services</text>
+               </navLabel>
+               <content src="27_002.html#h27.2.1"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e2735" playOrder="537">
+            <navLabel>
+               <text>27.3   Infrastructure</text>
+            </navLabel>
+            <content src="27_003.html#h27.3"/>
+            <navPoint id="d39e2740" playOrder="538">
+               <navLabel>
+                  <text>27.3.1   Docker Compose</text>
+               </navLabel>
+               <content src="27_003.html#h27.3.1"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e2746" playOrder="539">
+            <navLabel>
+               <text>27.4   Asynchronous Microservice with RabbitMQ</text>
+            </navLabel>
+            <content src="27_004.html#h27.4"/>
+            <navPoint id="d39e2751" playOrder="540">
+               <navLabel>
+                  <text>27.4.1   Installation and Setup</text>
+               </navLabel>
+               <content src="27_004.html#h27.4.1"/>
+            </navPoint>
+            <navPoint id="d39e2756" playOrder="541">
+               <navLabel>
+                  <text>27.4.2   Connecting to the RabbitMQ Server</text>
+               </navLabel>
+               <content src="27_004.html#h27.4.2"/>
+            </navPoint>
+            <navPoint id="d39e2761" playOrder="542">
+               <navLabel>
+                  <text>27.4.3   Handling Incoming Messages</text>
+               </navLabel>
+               <content src="27_004.html#h27.4.3"/>
+            </navPoint>
+            <navPoint id="d39e2766" playOrder="543">
+               <navLabel>
+                  <text>27.4.4   Database Connection</text>
+               </navLabel>
+               <content src="27_004.html#h27.4.4"/>
+            </navPoint>
+            <navPoint id="d39e2771" playOrder="544">
+               <navLabel>
+                  <text>27.4.5   Docker Setup</text>
+               </navLabel>
+               <content src="27_004.html#h27.4.5"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e2776" playOrder="545">
+            <navLabel>
+               <text>27.5   API Gateway</text>
+            </navLabel>
+            <content src="27_005.html#h27.5"/>
+            <navPoint id="d39e2781" playOrder="546">
+               <navLabel>
+                  <text>27.5.1   Connecting the User Service</text>
+               </navLabel>
+               <content src="27_005.html#h27.5.1"/>
+            </navPoint>
+            <navPoint id="d39e2786" playOrder="547">
+               <navLabel>
+                  <text>27.5.2   Asynchronous Communication with the User Service</text>
+               </navLabel>
+               <content src="27_005.html#h27.5.2"/>
+            </navPoint>
+            <navPoint id="d39e2791" playOrder="548">
+               <navLabel>
+                  <text>27.5.3   Docker Setup of the API Gateway</text>
+               </navLabel>
+               <content src="27_005.html#h27.5.3"/>
+            </navPoint>
+            <navPoint id="d39e2796" playOrder="549">
+               <navLabel>
+                  <text>27.5.4   Authentication</text>
+               </navLabel>
+               <content src="27_005.html#h27.5.4"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e2802" playOrder="550">
+            <navLabel>
+               <text>27.6   Synchronous Microservice with Express</text>
+            </navLabel>
+            <content src="27_006.html#h27.6"/>
+            <navPoint id="d39e2807" playOrder="551">
+               <navLabel>
+                  <text>27.6.1   Setup</text>
+               </navLabel>
+               <content src="27_006.html#h27.6.1"/>
+            </navPoint>
+            <navPoint id="d39e2812" playOrder="552">
+               <navLabel>
+                  <text>27.6.2   Controller</text>
+               </navLabel>
+               <content src="27_006.html#h27.6.2"/>
+            </navPoint>
+            <navPoint id="d39e2817" playOrder="553">
+               <navLabel>
+                  <text>27.6.3   Model Implementation</text>
+               </navLabel>
+               <content src="27_006.html#h27.6.3"/>
+            </navPoint>
+            <navPoint id="d39e2822" playOrder="554">
+               <navLabel>
+                  <text>27.6.4   Docker Setup</text>
+               </navLabel>
+               <content src="27_006.html#h27.6.4"/>
+            </navPoint>
+            <navPoint id="d39e2827" playOrder="555">
+               <navLabel>
+                  <text>27.6.5   Integration into the API Gateway</text>
+               </navLabel>
+               <content src="27_006.html#h27.6.5"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e2832" playOrder="556">
+            <navLabel>
+               <text>27.7   Summary</text>
+            </navLabel>
+            <content src="27_007.html#h27.7"/>
+         </navPoint>
+      </navPoint>
+      <navPoint id="d39e2837" playOrder="557">
+         <navLabel>
+            <text>28   Deno</text>
+         </navLabel>
+         <content src="28_001.html"/>
+         <navPoint id="d39e2842" playOrder="558">
+            <navLabel>
+               <text>28.1   The Ten Things Ryan Dahl Regrets about Node.js</text>
+            </navLabel>
+            <content src="28_001.html#h28.1"/>
+            <navPoint id="d39e2847" playOrder="559">
+               <navLabel>
+                  <text>28.1.1   Promises</text>
+               </navLabel>
+               <content src="28_001.html#h28.1.1"/>
+            </navPoint>
+            <navPoint id="d39e2852" playOrder="560">
+               <navLabel>
+                  <text>28.1.2   Security</text>
+               </navLabel>
+               <content src="28_001.html#h28.1.2"/>
+            </navPoint>
+            <navPoint id="d39e2858" playOrder="561">
+               <navLabel>
+                  <text>28.1.3   The Generate Your Projects Build System</text>
+               </navLabel>
+               <content src="28_001.html#h28.1.3"/>
+            </navPoint>
+            <navPoint id="d39e2863" playOrder="562">
+               <navLabel>
+                  <text>28.1.4   Package.json</text>
+               </navLabel>
+               <content src="28_001.html#h28.1.4"/>
+            </navPoint>
+            <navPoint id="d39e2868" playOrder="563">
+               <navLabel>
+                  <text>28.1.5   Node_modules</text>
+               </navLabel>
+               <content src="28_001.html#h28.1.5"/>
+            </navPoint>
+            <navPoint id="d39e2873" playOrder="564">
+               <navLabel>
+                  <text>28.1.6   Optional File Extension When Loading Modules</text>
+               </navLabel>
+               <content src="28_001.html#h28.1.6"/>
+            </navPoint>
+            <navPoint id="d39e2878" playOrder="565">
+               <navLabel>
+                  <text>28.1.7   Index.js</text>
+               </navLabel>
+               <content src="28_001.html#h28.1.7"/>
+            </navPoint>
+            <navPoint id="d39e2883" playOrder="566">
+               <navLabel>
+                  <text>28.1.8   What’s Going on Now with Node.js</text>
+               </navLabel>
+               <content src="28_001.html#h28.1.8"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e2888" playOrder="567">
+            <navLabel>
+               <text>28.2   Installing Deno</text>
+            </navLabel>
+            <content src="28_002.html#h28.2"/>
+            <navPoint id="d39e2893" playOrder="568">
+               <navLabel>
+                  <text>28.2.1   Deno Command-Line Interface</text>
+               </navLabel>
+               <content src="28_002.html#h28.2.1"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e2898" playOrder="569">
+            <navLabel>
+               <text>28.3   Execution</text>
+            </navLabel>
+            <content src="28_003.html#h28.3"/>
+            <navPoint id="d39e2903" playOrder="570">
+               <navLabel>
+                  <text>28.3.1   Running a TypeScript Application</text>
+               </navLabel>
+               <content src="28_003.html#h28.3.1"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e2908" playOrder="571">
+            <navLabel>
+               <text>28.4   Handling Files</text>
+            </navLabel>
+            <content src="28_004.html#h28.4"/>
+            <navPoint id="d39e2914" playOrder="572">
+               <navLabel>
+                  <text>28.4.1   The Task: Copying a File</text>
+               </navLabel>
+               <content src="28_004.html#h28.4.1"/>
+            </navPoint>
+            <navPoint id="d39e2919" playOrder="573">
+               <navLabel>
+                  <text>28.4.2   Processing Command-Line Options</text>
+               </navLabel>
+               <content src="28_004.html#h28.4.2"/>
+            </navPoint>
+            <navPoint id="d39e2924" playOrder="574">
+               <navLabel>
+                  <text>28.4.3   Reading Files</text>
+               </navLabel>
+               <content src="28_004.html#h28.4.3"/>
+            </navPoint>
+            <navPoint id="d39e2929" playOrder="575">
+               <navLabel>
+                  <text>28.4.4   Permissions in Deno</text>
+               </navLabel>
+               <content src="28_004.html#h28.4.4"/>
+            </navPoint>
+            <navPoint id="d39e2934" playOrder="576">
+               <navLabel>
+                  <text>28.4.5   readTextFile Function</text>
+               </navLabel>
+               <content src="28_004.html#h28.4.5"/>
+            </navPoint>
+            <navPoint id="d39e2939" playOrder="577">
+               <navLabel>
+                  <text>28.4.6   Writing Files with Deno</text>
+               </navLabel>
+               <content src="28_004.html#h28.4.6"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e2944" playOrder="578">
+            <navLabel>
+               <text>28.5   Web Server with Deno</text>
+            </navLabel>
+            <content src="28_005.html#h28.5"/>
+         </navPoint>
+         <navPoint id="d39e2949" playOrder="579">
+            <navLabel>
+               <text>28.6   Module System</text>
+            </navLabel>
+            <content src="28_006.html#h28.6"/>
+            <navPoint id="d39e2954" playOrder="580">
+               <navLabel>
+                  <text>28.6.1   Loading External Modules into Deno</text>
+               </navLabel>
+               <content src="28_006.html#h28.6.1"/>
+            </navPoint>
+            <navPoint id="d39e2959" playOrder="581">
+               <navLabel>
+                  <text>28.6.2   deno.land/x</text>
+               </navLabel>
+               <content src="28_006.html#h28.6.2"/>
+            </navPoint>
+            <navPoint id="d39e2964" playOrder="582">
+               <navLabel>
+                  <text>28.6.3   Using Node Package Manager Packages</text>
+               </navLabel>
+               <content src="28_006.html#h28.6.3"/>
+            </navPoint>
+         </navPoint>
+         <navPoint id="d39e2970" playOrder="583">
+            <navLabel>
+               <text>28.7   Summary</text>
+            </navLabel>
+            <content src="28_007.html#h28.7"/>
+         </navPoint>
+      </navPoint>
+      <navPoint id="d39e2975" playOrder="584">
+         <navLabel>
+            <text>The Author</text>
+         </navLabel>
+         <content src="A_001.html"/>
+      </navPoint>
+      <navPoint id="d39e2980" playOrder="585">
+         <navLabel>
+            <text>Index</text>
+         </navLabel>
+         <content src="index.html"/>
+      </navPoint>
+      <navPoint id="d39e2985" playOrder="586">
+         <navLabel>
+            <text>Service Pages</text>
+         </navLabel>
+         <content src="service.html"/>
+      </navPoint>
+      <navPoint id="d39e2990" playOrder="587">
+         <navLabel>
+            <text>Legal Notes</text>
+         </navLabel>
+         <content src="legal_notes.html"/>
+      </navPoint>
+   </navMap>
+</ncx>

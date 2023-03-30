@@ -1,0 +1,68 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+                    
+        <head><meta content="application/xhtml+xml; charset=utf-8" http-equiv="Content-Type"/>
+            <meta content="application/xhtml+xml; charset=utf-8" name="content-type"/>
+            <meta content="Express" name="title"/>
+            <meta content="Sebastian Springer" name="author"/>
+            <meta content="Rheinwerk Publishing" name="publisher"/>
+            <meta content="© 2022 by Rheinwerk Publishing Inc., Boston (MA)" name="copyright"/>
+            <meta content="Node.js - The Comprehensive Guide - Express" name="description"/>
+            <meta content="en" name="language"/>
+            <title>Express</title>
+            <link href="common/main.css" rel="stylesheet" type="text/css"/>
+<meta content="urn:uuid:e0000000-0000-0000-0000-000029756394" name="Adept.expected.resource"/>
+        </head>
+    
+
+
+                    <body class="office_us type_kapitel">
+                        <div id="main">
+        <h2 class="t2" id="h6.4">6.4    Setup</h2>
+        <p class="standard">As a general best practice in dealing with Express, it has emerged that an application should be divided into separate components as far as possible, each of which is stored in separate files. Although you create a lot of files with this strategy, depending on the size of your application, you’ll still be able to locate the files quickly due to a well-structured directory hierarchy. A file contains only one component and thus a self-contained unit. For structuring an Express application, a classic model-view-controller (MVC) approach is the best choice.</p>
+        <div class="box box_standard">
+            <h6 class="boxheading">MVC: The Model-View-Controller Pattern</h6>
+            <p class="standard first">The MVC pattern is used to structure applications, especially in web development, where it has become an important standard. This pattern describes where certain parts of an application should be stored and how these parts interact. The name MVC already contains the three components of the pattern:</p>
+            <ul>
+                <li>
+                    <p class="standard first-item last-item"><span class="bold">Model</span><a class="indexanchor" id="i06_20"/><br/>The models of an MVC application are used for data management. Models encapsulate all operations related to the data of your application. This concerns both the <a id="p182"/>creation and the modification or deletion of information. Typically, a model encapsulates database accesses. In addition to the pure data and the associated logic for handling it, models also encapsulate the business logic of your application.</p>
+                </li>
+                <li>
+                    <p class="standard first-item last-item"><span class="bold">View</span><a class="indexanchor" id="i06_21"/><br/>The task of views consists of displaying information. The views of an Express application are mostly HTML templates populated with the dynamic data of your application before delivery to the client. In modern applications that are application programming interface (API) heavy, this aspect of the MVC architecture is increasingly taking a back seat, as templates are rarely rendered, and, instead, JSON objects are often sent from the server to the client.</p>
+                </li>
+                <li>
+                    <p class="standard first-item last-item"><span class="bold">Controller</span><a class="indexanchor" id="i06_22"/><br/>A controller contains the control logic of your application. The controller brings models and views together. You should make sure that your controllers don’t become too large. If the controller contains too much logic, you should outsource it to support functions or models.</p>
+                </li>
+            </ul>
+        </div>
+        <p class="standard">When building your application, it’s critical that you follow a consistent convention when structuring the file and directory hierarchy to maintain maintainability and extensibility over the lifecycle of the application.</p>
+        
+            <h3 class="t3" id="h6.4.1">6.4.1    Structure of an Application<a class="indexanchor" id="i06_23"/></h3>
+            <p class="standard">The choice of directory structure depends very much on the scope of your application. Avoid making the structure unnecessarily complex at the very start because when you start working on an application, you usually don’t know exactly what it will look like in the end. The more complex the structure becomes, the more time-consuming its adjustments become. Start with as flat a hierarchy as possible, and restructure the directories and files as needed. The module system of Node.js and modern development environments support you in this continuous refactoring process by easily moving files and directories and automatically adjusting <samp class="listingcharacter listingcharacter">import</samp> statements. An application usually consists of the following components: models, views, controllers, routers, and helpers.</p>
+            
+                <h4 class="t4" id="h6.4.1.1">Structure for Small Applications<a class="indexanchor" id="i06_24"/></h4>
+                <p class="standard">For very small applications, you should create one file per component and place it in a directory. An example of such a structure is given in <span class="crossreference "><a href="06_004.html#f6.3">Figure 6.3</a></span>.</p>
+                <p class="standard">This structuring approach only works for very manageable applications or small prototypes<a class="indexanchor" id="i06_25"/>. As soon as your project has more than three or four separate endpoints, you should switch to the next larger variant or start with it directly, as migrating the structure in this case will only become unnecessarily time-consuming.</p>
+                <div class="imagebox figure-type"><a href="img-f6.3.html" id="f6.3"><img alt="Directory Structure for Small Applications" id="img-f6.3" src="bilderklein/klein06_003.png"/></a></div>
+                <p class="caption "><b>Figure 6.3</b>    
+            <a id="p183"/>Directory Structure for Small Applications</p>
+            
+            
+                <h4 class="t4" id="h6.4.1.2">Structure for Medium-Sized Applications<a class="indexanchor" id="i06_26"/></h4>
+                <p class="standard">Web applications that have 10 to 15 independent endpoints, that is, separate routes, fit into the category of medium-sized applications. This structuring variant is a good starting point for normal web applications. In this structure, the different components—models, views, and controllers—are stored in separate directories. All structures are located in their own files and are named accordingly. To make it easier to locate the structures in the development environment, it has become best practice to include the type of structure in the file name. For example, a controller that is responsible for the login process of your application is then located in a file named <span class="italic">login.controller.js</span> in the <span class="italic">controllers</span> directory. The structure of such an application could look like the one shown in <span class="crossreference "><a href="06_004.html#f6.4">Figure 6.4</a></span>.</p>
+                <div class="imagebox figure-type"><a href="img-f6.4.html" id="f6.4"><img alt="Structure for Medium-Size Applications" id="img-f6.4" src="bilderklein/klein06_004.png"/></a></div>
+                <p class="caption "><b>Figure 6.4</b>    
+            Structure for Medium-Size Applications</p>
+                <p class="standard"><a id="p184"/>The advantage of this structuring variant is that all structures are stored separately from each other and also within the respective component; for example, in the case of models, a thematic separation takes place at the file level. This decouples the different areas of the application and keeps the number of files per directory low. For small- and medium-sized applications this is a very good approach.</p>
+            
+            
+                <h4 class="t4" id="h6.4.1.3">Structure for Large Applications<a class="indexanchor" id="i06_27"/></h4>
+                <p class="standard">As far as the scope of your application is concerned, you’re hardly limited when using Express. However, when developing the file and directory structure of large-scale applications, you should take an approach that allows you to thematically separate the modules of your application. Such a strategy allows you to develop your application in parallel with several teams and manage the individual modules independently. This also greatly simplifies the localization of code locations. <span class="crossreference "><a href="06_004.html#f6.5">Figure 6.5</a></span> shows an example of such a structure.</p>
+                <div class="imagebox figure-type"><a href="img-f6.5.html" id="f6.5"><img alt="Structure for Extensive Applications" id="img-f6.5" src="bilderklein/klein06_005.png"/></a></div>
+                <p class="caption "><b>Figure 6.5</b>    
+            Structure for Extensive Applications</p>
+                <p class="standard"><a id="p185"/>As you can see in <span class="crossreference "><a href="06_004.html#f6.5">Figure 6.5</a></span>, there are separate directories for each subject area of the application<a class="indexanchor" id="i06_28"/>. The selection and delineation of these areas depend entirely on you and the requirements of your application. Typically, modules are chosen to cover a topic in its entirety. This approach enables clean interfaces to the other parts of the application. The available options here range from logical units within an endpoint to groups of multiple thematically related endpoints. Each module in turn contains subdirectories, each of which contains the module’s models, views, and controllers. In addition, each module defines its own router. Now that you have an overview of the structuring options for your application, you can move on to extending your first sample application in the next step.</p>
+            
+        
+    </div><p class="signatur"/>
+                    </body>
+                </html>
